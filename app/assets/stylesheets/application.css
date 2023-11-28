@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ 
+
+ @import url('tabler-icons.min.css');
+ @import url('template.css');
