@@ -1,0 +1,172 @@
+<%= form_with(model: purch_reqn) do |form| %>
+  <% if purch_reqn.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(purch_reqn.errors.count, "error") %> prohibited this purch_reqn from being saved:</h2>
+
+      <ul>
+        <% purch_reqn.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :app_id, style: "display: block" %>
+    <%= form.text_field :app_id %>
+  </div>
+
+  <div>
+    <%= form.label :number, style: "display: block" %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div>
+    <%= form.label :desc, style: "display: block" %>
+    <%= form.text_area :desc %>
+  </div>
+
+  <div>
+    <%= form.label :created_by_id, style: "display: block" %>
+    <%= form.text_field :created_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by_id, style: "display: block" %>
+    <%= form.text_field :updated_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :current_workflow_instance_id, style: "display: block" %>
+    <%= form.text_field :current_workflow_instance_id %>
+  </div>
+
+  <div>
+    <%= form.label :purch_org_id, style: "display: block" %>
+    <%= form.text_field :purch_org_id %>
+  </div>
+
+  <div>
+    <%= form.label :purch_reqn_type, style: "display: block" %>
+    <%= form.text_field :purch_reqn_type %>
+  </div>
+
+  <div>
+    <%= form.label :contract, style: "display: block" %>
+    <%= form.check_box :contract %>
+  </div>
+
+  <div>
+    <%= form.label :purch_group_id, style: "display: block" %>
+    <%= form.text_field :purch_group_id %>
+  </div>
+
+  <div>
+    <%= form.label :plant_id, style: "display: block" %>
+    <%= form.text_field :plant_id %>
+  </div>
+
+  <div>
+    <%= form.label :cost_center_id, style: "display: block" %>
+    <%= form.text_field :cost_center_id %>
+  </div>
+
+  <div>
+    <%= form.label :fund_source, style: "display: block" %>
+    <%= form.text_field :fund_source %>
+  </div>
+
+  <div>
+    <%= form.label :currency_id, style: "display: block" %>
+    <%= form.text_field :currency_id %>
+  </div>
+
+  <div>
+    <%= form.label :recreate_from_id, style: "display: block" %>
+    <%= form.text_field :recreate_from_id %>
+  </div>
+
+  <div>
+    <%= form.label :contract_title, style: "display: block" %>
+    <%= form.text_field :contract_title %>
+  </div>
+
+  <div>
+    <%= form.label :scope_of_work, style: "display: block" %>
+    <%= form.text_field :scope_of_work %>
+  </div>
+
+  <div>
+    <%= form.label :justification, style: "display: block" %>
+    <%= form.text_field :justification %>
+  </div>
+
+  <div>
+    <%= form.label :budget_soure, style: "display: block" %>
+    <%= form.text_field :budget_soure %>
+  </div>
+
+  <div>
+    <%= form.label :reason, style: "display: block" %>
+    <%= form.text_field :reason %>
+  </div>
+
+  <div>
+    <%= form.label :contract_type, style: "display: block" %>
+    <%= form.text_field :contract_type %>
+  </div>
+
+  <div>
+    <%= form.label :risk_category, style: "display: block" %>
+    <%= form.text_field :risk_category %>
+  </div>
+
+  <div>
+    <%= form.label :explanation, style: "display: block" %>
+    <%= form.text_field :explanation %>
+  </div>
+
+  <div>
+    <%= form.label :previous_contract_number, style: "display: block" %>
+    <%= form.text_field :previous_contract_number %>
+  </div>
+
+  <div>
+    <%= form.label :previous_contract_title, style: "display: block" %>
+    <%= form.text_field :previous_contract_title %>
+  </div>
+
+  <div>
+    <%= form.label :local_of_content, style: "display: block" %>
+    <%= form.text_field :local_of_content %>
+  </div>
+
+  <div>
+    <%= form.label :rejected_at, style: "display: block" %>
+    <%= form.datetime_field :rejected_at %>
+  </div>
+
+  <div>
+    <%= form.label :cancel_remark, style: "display: block" %>
+    <%= form.text_area :cancel_remark %>
+  </div>
+
+  <div>
+    <%= form.label :contract_reference_id, style: "display: block" %>
+    <%= form.text_field :contract_reference_id %>
+  </div>
+
+  <div>
+    <%= form.label :prcmt_id, style: "display: block" %>
+    <%= form.text_field :prcmt_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

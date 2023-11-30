@@ -86,6 +86,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem 'spring'
+
 end
 
 group :test do
@@ -99,3 +100,5 @@ gem 'bootstrap', '~> 5.3'
 gem 'erb-formatter', '~> 0.4.3'
 
 gem "pry", "~> 0.14.2"
+
+gem "draper", "~> 4.0"

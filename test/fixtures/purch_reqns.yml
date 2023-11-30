@@ -1,0 +1,67 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app: one
+  number: MyString
+  desc: MyText
+  created_by: one
+  updated_by: one
+  state: MyString
+  current_workflow_instance: one
+  purch_org: one
+  purch_reqn_type: MyString
+  contract: false
+  purch_group: one
+  plant: one
+  cost_center: one
+  fund_source: MyString
+  currency: one
+  recreate_from: one
+  contract_title: MyString
+  scope_of_work: MyString
+  justification: MyString
+  budget_soure: MyString
+  reason: MyString
+  contract_type: MyString
+  risk_category: MyString
+  explanation: MyString
+  previous_contract_number: MyString
+  previous_contract_title: MyString
+  local_of_content: 9.99
+  rejected_at: 2023-11-29 21:22:30
+  cancel_remark: MyText
+  contract_reference: one
+  prcmt: one
+
+two:
+  app: two
+  number: MyString
+  desc: MyText
+  created_by: two
+  updated_by: two
+  state: MyString
+  current_workflow_instance: two
+  purch_org: two
+  purch_reqn_type: MyString
+  contract: false
+  purch_group: two
+  plant: two
+  cost_center: two
+  fund_source: MyString
+  currency: two
+  recreate_from: two
+  contract_title: MyString
+  scope_of_work: MyString
+  justification: MyString
+  budget_soure: MyString
+  reason: MyString
+  contract_type: MyString
+  risk_category: MyString
+  explanation: MyString
+  previous_contract_number: MyString
+  previous_contract_title: MyString
+  local_of_content: 9.99
+  rejected_at: 2023-11-29 21:22:30
+  cancel_remark: MyText
+  contract_reference: two
+  prcmt: two

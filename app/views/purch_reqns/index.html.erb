@@ -1,0 +1,18 @@
+<% content_for :content do %>
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Purch reqns</h1>
+
+  <div id="purch_reqns">
+    <% @purch_reqns.each do |purch_reqn| %>
+      <%= render purch_reqn %>
+      <p>
+        <%= link_to "Show this purch reqn", purch_reqn %>
+      </p>
+    <% end %>
+  </div>
+
+  <%= link_to "New purch reqn", new_purch_reqn_path %>
+
+<% end %>
+<%= render "layouts/wrapper", sidebar: true %>

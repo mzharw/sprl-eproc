@@ -16,6 +16,10 @@ module SprlEproc
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
 
+    config.hosts << "a2a8-118-99-110-175.ngrok-free.app"
+    config.hosts << "a2a8-118-99-110-175.ngrok-free.app"
+  
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
