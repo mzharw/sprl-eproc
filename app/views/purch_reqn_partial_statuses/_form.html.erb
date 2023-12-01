@@ -1,0 +1,62 @@
+<%= form_with(model: purch_reqn_partial_status) do |form| %>
+  <% if purch_reqn_partial_status.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(purch_reqn_partial_status.errors.count, "error") %> prohibited this purch_reqn_partial_status from being saved:</h2>
+
+      <ul>
+        <% purch_reqn_partial_status.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :app_id, style: "display: block" %>
+    <%= form.text_field :app_id %>
+  </div>
+
+  <div>
+    <%= form.label :purch_reqn_partial_id, style: "display: block" %>
+    <%= form.text_field :purch_reqn_partial_id %>
+  </div>
+
+  <div>
+    <%= form.label :partialable_type, style: "display: block" %>
+    <%= form.text_field :partialable_type %>
+  </div>
+
+  <div>
+    <%= form.label :partialable_id, style: "display: block" %>
+    <%= form.text_field :partialable_id %>
+  </div>
+
+  <div>
+    <%= form.label :partial_itemable_type, style: "display: block" %>
+    <%= form.text_field :partial_itemable_type %>
+  </div>
+
+  <div>
+    <%= form.label :partial_itemable_id, style: "display: block" %>
+    <%= form.text_field :partial_itemable_id %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :created_by_id, style: "display: block" %>
+    <%= form.text_field :created_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by_id, style: "display: block" %>
+    <%= form.text_field :updated_by_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

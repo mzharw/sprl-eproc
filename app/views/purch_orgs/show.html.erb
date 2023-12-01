@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @purch_org %>
+
+<div>
+  <%= link_to "Edit this purch org", edit_purch_org_path(@purch_org) %> |
+  <%= link_to "Back to purch orgs", purch_orgs_path %>
+
+  <%= button_to "Destroy this purch org", @purch_org, method: :delete %>
+</div>

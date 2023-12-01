@@ -18,25 +18,80 @@
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to root_path, class: 'sidebar-link' do %>
+                    <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
                         <span class="hide-menu">Dashboard</span>
                     <% end %>
                 </li>
+
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Procurement</span>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to purch_reqns_path, class: 'sidebar-link' do %>
+                    <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if is_active?('purch_reqns')}" do %>
                         <span>
                             <i class="ti ti-shopping-cart"></i>
                         </span>
                         <span class="hide-menu">Purchase Requisition</span>
                     <% end %>
                 </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Vendor Management</span>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+                        <span>
+                            <i class="ti ti-world"></i>
+                        </span>
+                        <span class="hide-menu">Vendor</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+                        <span>
+                            <i class="ti ti-user-search"></i>
+                        </span>
+                        <span class="hide-menu">Candidates</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+                        <span>
+                            <i class="ti ti-clipboard-list"></i>
+                        </span>
+                        <span class="hide-menu">Applicants</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+                        <span>
+                            <i class="ti ti-forbid"></i>
+                        </span>
+                        <span class="hide-menu">Sanction</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+                        <span>
+                            <i class="ti ti-world-x"></i>
+                        </span>
+                        <span class="hide-menu">Vendor Non-procures</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+                        <span>
+                            <i class="ti ti-user-x"></i>
+                        </span>
+                        <span class="hide-menu">Applicant Non-procures</span>
+                    <% end %>
+                </li>
+                
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

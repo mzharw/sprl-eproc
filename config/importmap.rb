@@ -14,3 +14,4 @@ pin "simplebar" # @6.2.5
 pin "can-use-dom" # @0.1.0
 pin "lodash-es" # @4.17.21
 pin "simplebar-core" # @1.2.4
+pin "@selectize/selectize", to: "@selectize--selectize.js" # @0.15.2

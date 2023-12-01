@@ -4,9 +4,14 @@
     <%= render partial: 'layouts/sidebar' %>
   <% end %>
     <!-- Main wrapper -->
-  <div class="<%= 'body-wrapper' if !!local_assigns[:sidebar] %>">
+  <div class="<%= 'body-wrapper' if !!local_assigns[:sidebar] %>" style="overflow: hidden; height: 100vh; position: relative;">
     <%= render 'layouts/header', full: !!local_assigns[:sidebar] %>
-    <div class="container" style="padding-top: 100px;">
+    <div style="padding: 70px 20px; height: 100%;">
+      <div style="padding: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+        <% if content_for?(:'content_header') %>
+          <%= yield :content_header %>
+        <% end %>
+      </div>
       <% if content_for?(:'content') %>
         <%= yield :content %>
       <% end %>

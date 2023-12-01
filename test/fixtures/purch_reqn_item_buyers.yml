@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app: one
+  purch_reqn_item: one
+  buyer: one
+  created_by: one
+  updated_by: one
+
+two:
+  app: two
+  purch_reqn_item: two
+  buyer: two
+  created_by: two
+  updated_by: two

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app_id: 
+  cost_center_id: MyString
+  ctrl_name: MyString
+  desc: MyText
+  position: MyString
+  payroll_id: MyString
+  valid_to: 2023-11-30
+
+two:
+  app_id: 
+  cost_center_id: MyString
+  ctrl_name: MyString
+  desc: MyText
+  position: MyString
+  payroll_id: MyString
+  valid_to: 2023-11-30

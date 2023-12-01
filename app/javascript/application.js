@@ -4,8 +4,9 @@ import "controllers"
 import "jquery"
 import "popper"
 import "bootstrap"
+import "@selectize/selectize"
 
-$(function () {
+$(document).on("turbo:load", () => {
     // Admin Panel settings
 
     //****************************

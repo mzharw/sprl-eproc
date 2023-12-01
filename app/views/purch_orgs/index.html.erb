@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Purch orgs</h1>
+
+<div id="purch_orgs">
+  <% @purch_orgs.each do |purch_org| %>
+    <%= render purch_org %>
+    <p>
+      <%= link_to "Show this purch org", purch_org %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New purch org", new_purch_org_path %>

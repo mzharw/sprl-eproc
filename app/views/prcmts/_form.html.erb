@@ -1,0 +1,257 @@
+<%= form_with(model: prcmt) do |form| %>
+  <% if prcmt.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(prcmt.errors.count, "error") %> prohibited this prcmt from being saved:</h2>
+
+      <ul>
+        <% prcmt.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :app_id, style: "display: block" %>
+    <%= form.text_field :app_id %>
+  </div>
+
+  <div>
+    <%= form.label :prcmt_type_id, style: "display: block" %>
+    <%= form.text_field :prcmt_type_id %>
+  </div>
+
+  <div>
+    <%= form.label :number, style: "display: block" %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :scope_of_work, style: "display: block" %>
+    <%= form.text_area :scope_of_work %>
+  </div>
+
+  <div>
+    <%= form.label :purch_org_id, style: "display: block" %>
+    <%= form.text_field :purch_org_id %>
+  </div>
+
+  <div>
+    <%= form.label :purch_group_id, style: "display: block" %>
+    <%= form.text_field :purch_group_id %>
+  </div>
+
+  <div>
+    <%= form.label :buyer_id, style: "display: block" %>
+    <%= form.text_field :buyer_id %>
+  </div>
+
+  <div>
+    <%= form.label :prebid_meeting, style: "display: block" %>
+    <%= form.text_field :prebid_meeting %>
+  </div>
+
+  <div>
+    <%= form.label :prequalification, style: "display: block" %>
+    <%= form.check_box :prequalification %>
+  </div>
+
+  <div>
+    <%= form.label :auction, style: "display: block" %>
+    <%= form.check_box :auction %>
+  </div>
+
+  <div>
+    <%= form.label :bid_submission_method, style: "display: block" %>
+    <%= form.text_field :bid_submission_method %>
+  </div>
+
+  <div>
+    <%= form.label :quotation_media, style: "display: block" %>
+    <%= form.text_field :quotation_media %>
+  </div>
+
+  <div>
+    <%= form.label :quotation_validity_days, style: "display: block" %>
+    <%= form.number_field :quotation_validity_days %>
+  </div>
+
+  <div>
+    <%= form.label :eval_method, style: "display: block" %>
+    <%= form.text_field :eval_method %>
+  </div>
+
+  <div>
+    <%= form.label :incoterm_id, style: "display: block" %>
+    <%= form.text_field :incoterm_id %>
+  </div>
+
+  <div>
+    <%= form.label :proposed_delivery_location, style: "display: block" %>
+    <%= form.text_field :proposed_delivery_location %>
+  </div>
+
+  <div>
+    <%= form.label :purch_order_number, style: "display: block" %>
+    <%= form.text_field :purch_order_number %>
+  </div>
+
+  <div>
+    <%= form.label :contract_number, style: "display: block" %>
+    <%= form.text_field :contract_number %>
+  </div>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.text_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :current_workflow_instance_id, style: "display: block" %>
+    <%= form.text_field :current_workflow_instance_id %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :created_at, style: "display: block" %>
+    <%= form.datetime_field :created_at %>
+  </div>
+
+  <div>
+    <%= form.label :updated_at, style: "display: block" %>
+    <%= form.datetime_field :updated_at %>
+  </div>
+
+  <div>
+    <%= form.label :created_by_id, style: "display: block" %>
+    <%= form.text_field :created_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by_id, style: "display: block" %>
+    <%= form.text_field :updated_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :bid_bond, style: "display: block" %>
+    <%= form.check_box :bid_bond %>
+  </div>
+
+  <div>
+    <%= form.label :scope_of_supplies, style: "display: block" %>
+    <%= form.text_field :scope_of_supplies %>
+  </div>
+
+  <div>
+    <%= form.label :announced_at, style: "display: block" %>
+    <%= form.datetime_field :announced_at %>
+  </div>
+
+  <div>
+    <%= form.label :cancelled_at, style: "display: block" %>
+    <%= form.datetime_field :cancelled_at %>
+  </div>
+
+  <div>
+    <%= form.label :finished_at, style: "display: block" %>
+    <%= form.datetime_field :finished_at %>
+  </div>
+
+  <div>
+    <%= form.label :desc, style: "display: block" %>
+    <%= form.text_area :desc %>
+  </div>
+
+  <div>
+    <%= form.label :internal_remark, style: "display: block" %>
+    <%= form.text_area :internal_remark %>
+  </div>
+
+  <div>
+    <%= form.label :candidate_selection_remark, style: "display: block" %>
+    <%= form.text_area :candidate_selection_remark %>
+  </div>
+
+  <div>
+    <%= form.label :finish_remark, style: "display: block" %>
+    <%= form.text_area :finish_remark %>
+  </div>
+
+  <div>
+    <%= form.label :prcmt_phase_evaluation_visibility, style: "display: block" %>
+    <%= form.text_field :prcmt_phase_evaluation_visibility %>
+  </div>
+
+  <div>
+    <%= form.label :cancel_remark, style: "display: block" %>
+    <%= form.text_area :cancel_remark %>
+  </div>
+
+  <div>
+    <%= form.label :aanwijzing_visibility, style: "display: block" %>
+    <%= form.text_field :aanwijzing_visibility %>
+  </div>
+
+  <div>
+    <%= form.label :bid_bond_visibility, style: "display: block" %>
+    <%= form.text_field :bid_bond_visibility %>
+  </div>
+
+  <div>
+    <%= form.label :est_total, style: "display: block" %>
+    <%= form.text_field :est_total %>
+  </div>
+
+  <div>
+    <%= form.label :prcmt_criterion_template_id, style: "display: block" %>
+    <%= form.text_field :prcmt_criterion_template_id %>
+  </div>
+
+  <div>
+    <%= form.label :internal_org_id, style: "display: block" %>
+    <%= form.text_field :internal_org_id %>
+  </div>
+
+  <div>
+    <%= form.label :plant_id, style: "display: block" %>
+    <%= form.text_field :plant_id %>
+  </div>
+
+  <div>
+    <%= form.label :assessment_method, style: "display: block" %>
+    <%= form.text_field :assessment_method %>
+  </div>
+
+  <div>
+    <%= form.label :business_class, style: "display: block" %>
+    <%= form.text_field :business_class %>
+  </div>
+
+  <div>
+    <%= form.label :business_field, style: "display: block" %>
+    <%= form.text_field :business_field %>
+  </div>
+
+  <div>
+    <%= form.label :tkdn_percentage, style: "display: block" %>
+    <%= form.text_field :tkdn_percentage %>
+  </div>
+
+  <div>
+    <%= form.label :tender_location, style: "display: block" %>
+    <%= form.text_field :tender_location %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

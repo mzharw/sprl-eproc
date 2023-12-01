@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app_id: 
+  contact_type_id: 
+  number: MyString
+  country_id: 
+  other_country: MyString
+  province_id: 
+  other_province: MyString
+  district_id: 
+  other_district: MyString
+  sub_district_id: 
+  other_sub_district: MyString
+  village_id: 
+  other_village: MyString
+  postal_address: MyText
+  electronic_address: MyString
+  created_at: 2023-11-30 17:21:02
+  updated_at: 2023-11-30 17:21:02
+  created_by_id: 
+  updated_by_id: 
+  area_code: MyString
+  ext: MyString
+  postal_code: MyString
+
+two:
+  app_id: 
+  contact_type_id: 
+  number: MyString
+  country_id: 
+  other_country: MyString
+  province_id: 
+  other_province: MyString
+  district_id: 
+  other_district: MyString
+  sub_district_id: 
+  other_sub_district: MyString
+  village_id: 
+  other_village: MyString
+  postal_address: MyText
+  electronic_address: MyString
+  created_at: 2023-11-30 17:21:02
+  updated_at: 2023-11-30 17:21:02
+  created_by_id: 
+  updated_by_id: 
+  area_code: MyString
+  ext: MyString
+  postal_code: MyString

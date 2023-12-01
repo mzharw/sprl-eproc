@@ -1,0 +1,42 @@
+<%= form_with(model: purch_org) do |form| %>
+  <% if purch_org.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(purch_org.errors.count, "error") %> prohibited this purch_org from being saved:</h2>
+
+      <ul>
+        <% purch_org.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :app_id, style: "display: block" %>
+    <%= form.text_field :app_id %>
+  </div>
+
+  <div>
+    <%= form.label :party_id, style: "display: block" %>
+    <%= form.text_field :party_id %>
+  </div>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :from_date, style: "display: block" %>
+    <%= form.date_field :from_date %>
+  </div>
+
+  <div>
+    <%= form.label :thru_date, style: "display: block" %>
+    <%= form.date_field :thru_date %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

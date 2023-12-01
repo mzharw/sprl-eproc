@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Purch reqn uncommits</h1>
+
+<div id="purch_reqn_uncommits">
+  <% @purch_reqn_uncommits.each do |purch_reqn_uncommit| %>
+    <%= render purch_reqn_uncommit %>
+    <p>
+      <%= link_to "Show this purch reqn uncommit", purch_reqn_uncommit %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New purch reqn uncommit", new_purch_reqn_uncommit_path %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Measurement units</h1>
+
+<div id="measurement_units">
+  <% @measurement_units.each do |measurement_unit| %>
+    <%= render measurement_unit %>
+    <p>
+      <%= link_to "Show this measurement unit", measurement_unit %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New measurement unit", new_measurement_unit_path %>

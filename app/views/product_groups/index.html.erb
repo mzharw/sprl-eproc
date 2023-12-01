@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Product groups</h1>
+
+<div id="product_groups">
+  <% @product_groups.each do |product_group| %>
+    <%= render product_group %>
+    <p>
+      <%= link_to "Show this product group", product_group %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New product group", new_product_group_path %>

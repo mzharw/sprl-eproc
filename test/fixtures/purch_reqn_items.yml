@@ -1,0 +1,69 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app: one
+  purch_reqn: one
+  number: MyString
+  product_group: one
+  product: one
+  desired_vendor: MyString
+  fixed_vendor: MyString
+  qty: 9.99
+  measurement_unit: one
+  est_unit_price: 9.99
+  price_unit: 1.5
+  est_subtotal: 9.99
+  currency: one
+  requisitioner: MyString
+  expected_delivery_date: 2023-11-30 16:39:37
+  desc: MyText
+  data: 
+  created_by: one
+  updated_by: one
+  processed_qty: 1.5
+  specification: MyText
+  note: MyText
+  deleted_at: 2023-11-30 16:39:37
+  deleted_by: one
+  item_type: MyString
+  wbsproject: one
+  parent: one
+  contract_item_reference: one
+  contract_flag: false
+  purch_reqn_item_noncontract: one
+  commodity_list: 1
+  adjustment_qty: 9.99
+
+two:
+  app: two
+  purch_reqn: two
+  number: MyString
+  product_group: two
+  product: two
+  desired_vendor: MyString
+  fixed_vendor: MyString
+  qty: 9.99
+  measurement_unit: two
+  est_unit_price: 9.99
+  price_unit: 1.5
+  est_subtotal: 9.99
+  currency: two
+  requisitioner: MyString
+  expected_delivery_date: 2023-11-30 16:39:37
+  desc: MyText
+  data: 
+  created_by: two
+  updated_by: two
+  processed_qty: 1.5
+  specification: MyText
+  note: MyText
+  deleted_at: 2023-11-30 16:39:37
+  deleted_by: two
+  item_type: MyString
+  wbsproject: two
+  parent: two
+  contract_item_reference: two
+  contract_flag: false
+  purch_reqn_item_noncontract: two
+  commodity_list: 1
+  adjustment_qty: 9.99

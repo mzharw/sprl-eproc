@@ -1,0 +1,127 @@
+<%= form_with(model: contract_reference) do |form| %>
+  <% if contract_reference.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(contract_reference.errors.count, "error") %> prohibited this contract_reference from being saved:</h2>
+
+      <ul>
+        <% contract_reference.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :app_id, style: "display: block" %>
+    <%= form.text_field :app_id %>
+  </div>
+
+  <div>
+    <%= form.label :contact_type_id, style: "display: block" %>
+    <%= form.text_field :contact_type_id %>
+  </div>
+
+  <div>
+    <%= form.label :number, style: "display: block" %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div>
+    <%= form.label :country_id, style: "display: block" %>
+    <%= form.text_field :country_id %>
+  </div>
+
+  <div>
+    <%= form.label :other_country, style: "display: block" %>
+    <%= form.text_field :other_country %>
+  </div>
+
+  <div>
+    <%= form.label :province_id, style: "display: block" %>
+    <%= form.text_field :province_id %>
+  </div>
+
+  <div>
+    <%= form.label :other_province, style: "display: block" %>
+    <%= form.text_field :other_province %>
+  </div>
+
+  <div>
+    <%= form.label :district_id, style: "display: block" %>
+    <%= form.text_field :district_id %>
+  </div>
+
+  <div>
+    <%= form.label :other_district, style: "display: block" %>
+    <%= form.text_field :other_district %>
+  </div>
+
+  <div>
+    <%= form.label :sub_district_id, style: "display: block" %>
+    <%= form.text_field :sub_district_id %>
+  </div>
+
+  <div>
+    <%= form.label :other_sub_district, style: "display: block" %>
+    <%= form.text_field :other_sub_district %>
+  </div>
+
+  <div>
+    <%= form.label :village_id, style: "display: block" %>
+    <%= form.text_field :village_id %>
+  </div>
+
+  <div>
+    <%= form.label :other_village, style: "display: block" %>
+    <%= form.text_field :other_village %>
+  </div>
+
+  <div>
+    <%= form.label :postal_address, style: "display: block" %>
+    <%= form.text_area :postal_address %>
+  </div>
+
+  <div>
+    <%= form.label :electronic_address, style: "display: block" %>
+    <%= form.text_field :electronic_address %>
+  </div>
+
+  <div>
+    <%= form.label :created_at, style: "display: block" %>
+    <%= form.datetime_field :created_at %>
+  </div>
+
+  <div>
+    <%= form.label :updated_at, style: "display: block" %>
+    <%= form.datetime_field :updated_at %>
+  </div>
+
+  <div>
+    <%= form.label :created_by_id, style: "display: block" %>
+    <%= form.text_field :created_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by_id, style: "display: block" %>
+    <%= form.text_field :updated_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :area_code, style: "display: block" %>
+    <%= form.text_field :area_code %>
+  </div>
+
+  <div>
+    <%= form.label :ext, style: "display: block" %>
+    <%= form.text_field :ext %>
+  </div>
+
+  <div>
+    <%= form.label :postal_code, style: "display: block" %>
+    <%= form.text_field :postal_code %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
