@@ -65,6 +65,6 @@ class PurchReqnCancellationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_reqn_cancellation_params
-      params.require(:purch_reqn_cancellation).permit(:app_id, :purch_reqn_id, :current_workflow_instance_id, :state, :created_by_id, :updated_by_id)
+      params.require(:purch_reqn_cancellation).permit(:app_id, :purch_reqn_id, :current_workflow_instance_id, :state, :created_by, :updated_by_id)
     end
 end

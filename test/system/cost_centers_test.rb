@@ -14,12 +14,14 @@ class CostCentersTest < ApplicationSystemTestCase
     visit cost_centers_url
     click_on "New cost center"
 
-    fill_in "App", with: @cost_center.app_id
     fill_in "Cost center", with: @cost_center.cost_center_id
+    fill_in "Created by", with: @cost_center.created_by
     fill_in "Ctrl name", with: @cost_center.ctrl_name
     fill_in "Desc", with: @cost_center.desc
     fill_in "Payroll", with: @cost_center.payroll_id
     fill_in "Position", with: @cost_center.position
+    fill_in "Purch group", with: @cost_center.purch_group_id
+    fill_in "Updated by", with: @cost_center.updated_by_id
     fill_in "Valid to", with: @cost_center.valid_to
     click_on "Create Cost center"
 
@@ -31,12 +33,14 @@ class CostCentersTest < ApplicationSystemTestCase
     visit cost_center_url(@cost_center)
     click_on "Edit this cost center", match: :first
 
-    fill_in "App", with: @cost_center.app_id
     fill_in "Cost center", with: @cost_center.cost_center_id
+    fill_in "Created by", with: @cost_center.created_by
     fill_in "Ctrl name", with: @cost_center.ctrl_name
     fill_in "Desc", with: @cost_center.desc
     fill_in "Payroll", with: @cost_center.payroll_id
     fill_in "Position", with: @cost_center.position
+    fill_in "Purch group", with: @cost_center.purch_group_id
+    fill_in "Updated by", with: @cost_center.updated_by_id
     fill_in "Valid to", with: @cost_center.valid_to
     click_on "Update Cost center"
 

@@ -1,7 +1,6 @@
 class CreatePlants < ActiveRecord::Migration[7.1]
   def change
-    create_table :plants do |t|
-      t.uuid :app_id
+    create_table :plants, id: :uuid do |t|
       t.uuid :facility_id
       t.string :code
       t.date :from_date

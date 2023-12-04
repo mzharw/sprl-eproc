@@ -65,6 +65,6 @@ class PurchReqnsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_reqn_params
-      params.require(:purch_reqn).permit(:app_id, :number, :desc, :created_by_id, :updated_by_id, :state, :current_workflow_instance_id, :purch_org_id, :purch_reqn_type, :contract, :purch_group_id, :plant_id, :cost_center_id, :fund_source, :currency_id, :recreate_from_id, :contract_title, :scope_of_work, :justification, :budget_soure, :reason, :contract_type, :risk_category, :explanation, :previous_contract_number, :previous_contract_title, :local_of_content, :rejected_at, :cancel_remark, :contract_reference_id, :prcmt_id)
+      params.require(:purch_reqn).permit(:app_id, :number, :desc, :created_by, :updated_by_id, :state, :current_workflow_instance_id, :purch_org_id, :purch_reqn_type, :contract, :purch_group_id, :plant_id, :cost_center_id, :fund_source, :currency_id, :recreate_from_id, :contract_title, :scope_of_work, :justification, :budget_soure, :reason, :contract_type, :risk_category, :explanation, :previous_contract_number, :previous_contract_title, :local_of_content, :rejected_at, :cancel_remark, :contract_reference_id, :prcmt_id)
     end
 end

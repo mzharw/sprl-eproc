@@ -1,10 +1,5 @@
 <div id="<%= dom_id cost_center %>">
   <p>
-    <strong>App:</strong>
-    <%= cost_center.app_id %>
-  </p>
-
-  <p>
     <strong>Cost center:</strong>
     <%= cost_center.cost_center_id %>
   </p>
@@ -32,6 +27,21 @@
   <p>
     <strong>Valid to:</strong>
     <%= cost_center.valid_to %>
+  </p>
+
+  <p>
+    <strong>Created by:</strong>
+    <%= cost_center.created_by %>
+  </p>
+
+  <p>
+    <strong>Updated by:</strong>
+    <%= cost_center.updated_by_id %>
+  </p>
+
+  <p>
+    <strong>Purch group:</strong>
+    <%= cost_center.purch_group_id %>
   </p>
 
 </div>

@@ -19,7 +19,7 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     fill_in "Commodity list", with: @purch_reqn_item.commodity_list
     check "Contract flag" if @purch_reqn_item.contract_flag
     fill_in "Contract item reference", with: @purch_reqn_item.contract_item_reference_id
-    fill_in "Created by", with: @purch_reqn_item.created_by_id
+    fill_in "Created by", with: @purch_reqn_item.created_by
     fill_in "Currency", with: @purch_reqn_item.currency_id
     fill_in "Data", with: @purch_reqn_item.data
     fill_in "Deleted at", with: @purch_reqn_item.deleted_at
@@ -61,7 +61,7 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     fill_in "Commodity list", with: @purch_reqn_item.commodity_list
     check "Contract flag" if @purch_reqn_item.contract_flag
     fill_in "Contract item reference", with: @purch_reqn_item.contract_item_reference_id
-    fill_in "Created by", with: @purch_reqn_item.created_by_id
+    fill_in "Created by", with: @purch_reqn_item.created_by
     fill_in "Currency", with: @purch_reqn_item.currency_id
     fill_in "Data", with: @purch_reqn_item.data
     fill_in "Deleted at", with: @purch_reqn_item.deleted_at

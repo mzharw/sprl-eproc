@@ -22,7 +22,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Contract title", with: @purch_reqn.contract_title
     fill_in "Contract type", with: @purch_reqn.contract_type
     fill_in "Cost center", with: @purch_reqn.cost_center_id
-    fill_in "Created by", with: @purch_reqn.created_by_id
+    fill_in "Created by", with: @purch_reqn.created_by
     fill_in "Currency", with: @purch_reqn.currency_id
     fill_in "Current workflow instance", with: @purch_reqn.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn.desc
@@ -63,7 +63,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Contract title", with: @purch_reqn.contract_title
     fill_in "Contract type", with: @purch_reqn.contract_type
     fill_in "Cost center", with: @purch_reqn.cost_center_id
-    fill_in "Created by", with: @purch_reqn.created_by_id
+    fill_in "Created by", with: @purch_reqn.created_by
     fill_in "Currency", with: @purch_reqn.currency_id
     fill_in "Current workflow instance", with: @purch_reqn.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn.desc

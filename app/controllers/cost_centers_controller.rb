@@ -65,6 +65,6 @@ class CostCentersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cost_center_params
-      params.require(:cost_center).permit(:app_id, :cost_center_id, :ctrl_name, :desc, :position, :payroll_id, :valid_to)
+      params.require(:cost_center).permit(:cost_center_id, :ctrl_name, :desc, :position, :payroll_id, :valid_to, :created_by, :updated_by_id, :purch_group_id)
     end
 end

@@ -1,7 +1,6 @@
 class CreatePurchReqnPartialStatuses < ActiveRecord::Migration[7.1]
   def change
-    create_table :purch_reqn_partial_statuses do |t|
-      t.references :app, null: false
+    create_table :purch_reqn_partial_statuses, id: :uuid  do |t|
       t.references :purch_reqn_partial, null: false
       t.string :partialable_type
       t.references :partialable, null: false

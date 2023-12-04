@@ -15,7 +15,7 @@ class PurchReqnCancellationsTest < ApplicationSystemTestCase
     click_on "New purch reqn cancellation"
 
     fill_in "App", with: @purch_reqn_cancellation.app_id
-    fill_in "Created by", with: @purch_reqn_cancellation.created_by_id
+    fill_in "Created by", with: @purch_reqn_cancellation.created_by
     fill_in "Current workflow instance", with: @purch_reqn_cancellation.current_workflow_instance_id
     fill_in "Purch reqn", with: @purch_reqn_cancellation.purch_reqn_id
     fill_in "State", with: @purch_reqn_cancellation.state
@@ -31,7 +31,7 @@ class PurchReqnCancellationsTest < ApplicationSystemTestCase
     click_on "Edit this purch reqn cancellation", match: :first
 
     fill_in "App", with: @purch_reqn_cancellation.app_id
-    fill_in "Created by", with: @purch_reqn_cancellation.created_by_id
+    fill_in "Created by", with: @purch_reqn_cancellation.created_by
     fill_in "Current workflow instance", with: @purch_reqn_cancellation.current_workflow_instance_id
     fill_in "Purch reqn", with: @purch_reqn_cancellation.purch_reqn_id
     fill_in "State", with: @purch_reqn_cancellation.state

@@ -17,7 +17,7 @@ class PurchReqnLinkTypesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create purch_reqn_link_type" do
     assert_difference("PurchReqnLinkType.count") do
-      post purch_reqn_link_types_url, params: { purch_reqn_link_type: { app_id: @purch_reqn_link_type.app_id, created_by_id: @purch_reqn_link_type.created_by_id, desc: @purch_reqn_link_type.desc, ident_name: @purch_reqn_link_type.ident_name, name: @purch_reqn_link_type.name, system: @purch_reqn_link_type.system, updated_by_id: @purch_reqn_link_type.updated_by_id } }
+      post purch_reqn_link_types_url, params: { purch_reqn_link_type: { app_id: @purch_reqn_link_type.app_id, created_by: @purch_reqn_link_type.created_by, desc: @purch_reqn_link_type.desc, ident_name: @purch_reqn_link_type.ident_name, name: @purch_reqn_link_type.name, system: @purch_reqn_link_type.system, updated_by_id: @purch_reqn_link_type.updated_by_id } }
     end
 
     assert_redirected_to purch_reqn_link_type_url(PurchReqnLinkType.last)
@@ -34,7 +34,7 @@ class PurchReqnLinkTypesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update purch_reqn_link_type" do
-    patch purch_reqn_link_type_url(@purch_reqn_link_type), params: { purch_reqn_link_type: { app_id: @purch_reqn_link_type.app_id, created_by_id: @purch_reqn_link_type.created_by_id, desc: @purch_reqn_link_type.desc, ident_name: @purch_reqn_link_type.ident_name, name: @purch_reqn_link_type.name, system: @purch_reqn_link_type.system, updated_by_id: @purch_reqn_link_type.updated_by_id } }
+    patch purch_reqn_link_type_url(@purch_reqn_link_type), params: { purch_reqn_link_type: { app_id: @purch_reqn_link_type.app_id, created_by: @purch_reqn_link_type.created_by, desc: @purch_reqn_link_type.desc, ident_name: @purch_reqn_link_type.ident_name, name: @purch_reqn_link_type.name, system: @purch_reqn_link_type.system, updated_by_id: @purch_reqn_link_type.updated_by_id } }
     assert_redirected_to purch_reqn_link_type_url(@purch_reqn_link_type)
   end
 

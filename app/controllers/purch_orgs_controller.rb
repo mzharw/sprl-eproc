@@ -3,7 +3,13 @@ class PurchOrgsController < ApplicationController
 
   # GET /purch_orgs or /purch_orgs.json
   def index
-    @purch_orgs = PurchOrg.all
+    query = params[:query] || ''
+    @purch_orgs = PurchOrg.where('lower(code) LIKE ?', "%#{query.downcase}%")
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @purch_orgs }
+    end
   end
 
   # GET /purch_orgs/1 or /purch_orgs/1.json

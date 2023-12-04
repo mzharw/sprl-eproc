@@ -17,7 +17,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "App", with: @product.app_id
     fill_in "Code", with: @product.code
     fill_in "Created at", with: @product.created_at
-    fill_in "Created by", with: @product.created_by_id
+    fill_in "Created by", with: @product.created_by
     fill_in "Desc", with: @product.desc
     fill_in "Measurement unit", with: @product.measurement_unit_id
     fill_in "Name", with: @product.name
@@ -38,7 +38,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "App", with: @product.app_id
     fill_in "Code", with: @product.code
     fill_in "Created at", with: @product.created_at
-    fill_in "Created by", with: @product.created_by_id
+    fill_in "Created by", with: @product.created_by
     fill_in "Desc", with: @product.desc
     fill_in "Measurement unit", with: @product.measurement_unit_id
     fill_in "Name", with: @product.name

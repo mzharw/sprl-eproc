@@ -3,7 +3,13 @@ class PlantsController < ApplicationController
 
   # GET /plants or /plants.json
   def index
-    @plants = Plant.all
+    query = params[:query] || ''
+    @plants = Plant.where('lower(code) LIKE ?', "%#{query.downcase}%")
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @plants }
+    end
   end
 
   # GET /plants/1 or /plants/1.json

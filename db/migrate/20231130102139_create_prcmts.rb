@@ -1,6 +1,6 @@
 class CreatePrcmts < ActiveRecord::Migration[7.1]
   def change
-    create_table :prcmts do |t|
+    create_table :prcmts, id: :uuid do |t|
       t.uuid :app_id
       t.uuid :prcmt_type_id
       t.string :number
@@ -24,7 +24,7 @@ class CreatePrcmts < ActiveRecord::Migration[7.1]
       t.uuid :current_workflow_instance_id
       t.string :state
 
-      t.uuid :created_by_id
+      t.uuid :created_by
       t.uuid :updated_by_id
       t.boolean :bid_bond
       t.jsonb :scope_of_supplies

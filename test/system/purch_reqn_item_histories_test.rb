@@ -15,7 +15,7 @@ class PurchReqnItemHistoriesTest < ApplicationSystemTestCase
     click_on "New purch reqn item history"
 
     fill_in "App", with: @purch_reqn_item_history.app_id
-    fill_in "Created by", with: @purch_reqn_item_history.created_by_id
+    fill_in "Created by", with: @purch_reqn_item_history.created_by
     fill_in "Desc", with: @purch_reqn_item_history.desc
     fill_in "Finished at", with: @purch_reqn_item_history.finished_at
     fill_in "Purch reqn item", with: @purch_reqn_item_history.purch_reqn_item_id
@@ -34,7 +34,7 @@ class PurchReqnItemHistoriesTest < ApplicationSystemTestCase
     click_on "Edit this purch reqn item history", match: :first
 
     fill_in "App", with: @purch_reqn_item_history.app_id
-    fill_in "Created by", with: @purch_reqn_item_history.created_by_id
+    fill_in "Created by", with: @purch_reqn_item_history.created_by
     fill_in "Desc", with: @purch_reqn_item_history.desc
     fill_in "Finished at", with: @purch_reqn_item_history.finished_at
     fill_in "Purch reqn item", with: @purch_reqn_item_history.purch_reqn_item_id

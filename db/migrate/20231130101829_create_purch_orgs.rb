@@ -1,7 +1,6 @@
 class CreatePurchOrgs < ActiveRecord::Migration[7.1]
   def change
-    create_table :purch_orgs do |t|
-      t.uuid :app_id
+    create_table :purch_orgs, id: :uuid do |t|
       t.uuid :party_id
       t.string :code
       t.date :from_date

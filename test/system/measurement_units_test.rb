@@ -16,7 +16,7 @@ class MeasurementUnitsTest < ApplicationSystemTestCase
 
     fill_in "App", with: @measurement_unit.app_id
     fill_in "Created at", with: @measurement_unit.created_at
-    fill_in "Created by", with: @measurement_unit.created_by_id
+    fill_in "Created by", with: @measurement_unit.created_by
     fill_in "Desc", with: @measurement_unit.desc
     fill_in "Dimid", with: @measurement_unit.dimid
     fill_in "Ident name", with: @measurement_unit.ident_name
@@ -36,7 +36,7 @@ class MeasurementUnitsTest < ApplicationSystemTestCase
 
     fill_in "App", with: @measurement_unit.app_id
     fill_in "Created at", with: @measurement_unit.created_at
-    fill_in "Created by", with: @measurement_unit.created_by_id
+    fill_in "Created by", with: @measurement_unit.created_by
     fill_in "Desc", with: @measurement_unit.desc
     fill_in "Dimid", with: @measurement_unit.dimid
     fill_in "Ident name", with: @measurement_unit.ident_name

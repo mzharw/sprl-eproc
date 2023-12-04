@@ -1,0 +1,89 @@
+<div data-controller="selection" data-options-path="<%= options_path %>" data-value="<%= value %>" data-text="<%= text %>" class="selection-wrapper">
+  <div data-action="click->selection#toggleOptions" class="preview-container">
+    <span class="selected-value" data-selection-target="selectedValue"></span>
+    <i class="ti ti-x selection-clear" data-action="click->selection#clearSelection" data-selection-target="clearSelection"></i>
+  </div>
+  <div data-selection-target="optionsContainer" class="options-container shadow ">
+    <span class="ti ti-search selection-search-icon"></span>
+    <%= text_field_tag :selection_search, "", data: { "selection-target": "input", action: "input->selection#filterOptions" }, class: 'form-control selection-search', placeholder: 'Search' %>
+    <%= hidden_field_tag select_name, '', data: { "selection-target": "selectedInput" } %>
+    <div data-selection-target="optionsList" class="options-list"></div>
+  </div>
+</div>
+
+<style>
+  .selection-wrapper {
+    position: relative;
+  }
+
+  .selection-clear {
+    padding: 5px;
+    border-radius: 10px;
+  }
+
+  .selection-clear:hover {
+    background-color: #DFE5EF;
+  }
+
+  .selection-search {
+    cursor: text;
+    padding-left: 35px;
+  }
+
+  .selection-search-icon {
+    position: absolute;
+    transform: translate(10px, 12px);
+  }
+
+  .preview-container {
+    border: var(--bs-border-width) solid #DFE5EF;
+    border-radius: 5px;
+    height: 40px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .options-container {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    margin-top: 5px;
+    padding: 15px;
+    border: var(--bs-border-width) solid #DFE5EF;
+    border-radius: 5px;
+    background-color: white;
+    overflow: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  }
+
+  .options-container.show-options {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .options-list {
+    padding: 10px 0;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .options-list .selection-option.active {
+    background-color: #dfe5ef70;
+  }
+
+  .options-list .selection-option:hover {
+    background-color: #DFE5EF;
+  }
+
+  .options-list .selection-option {
+    cursor: pointer !important;
+    padding: 10px;
+    border-radius: 3px;
+  }
+
+</style>

@@ -18,7 +18,7 @@ one:
   electronic_address: MyString
   created_at: 2023-11-30 17:21:02
   updated_at: 2023-11-30 17:21:02
-  created_by_id: 
+  created_by: 
   updated_by_id: 
   area_code: MyString
   ext: MyString
@@ -42,7 +42,7 @@ two:
   electronic_address: MyString
   created_at: 2023-11-30 17:21:02
   updated_at: 2023-11-30 17:21:02
-  created_by_id: 
+  created_by: 
   updated_by_id: 
   area_code: MyString
   ext: MyString

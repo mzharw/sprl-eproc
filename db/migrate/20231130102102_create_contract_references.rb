@@ -1,6 +1,6 @@
 class CreateContractReferences < ActiveRecord::Migration[7.1]
   def change
-    create_table :contract_references do |t|
+    create_table :contract_references, id: :uuid do |t|
       t.uuid :app_id
       t.uuid :contact_type_id
       t.string :number
@@ -17,7 +17,7 @@ class CreateContractReferences < ActiveRecord::Migration[7.1]
       t.text :postal_address
       t.string :electronic_address
 
-      t.uuid :created_by_id
+      t.uuid :created_by
       t.uuid :updated_by_id
       t.string :area_code
       t.string :ext

@@ -30,7 +30,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Candidate selection remark", with: @prcmt.candidate_selection_remark
     fill_in "Contract number", with: @prcmt.contract_number
     fill_in "Created at", with: @prcmt.created_at
-    fill_in "Created by", with: @prcmt.created_by_id
+    fill_in "Created by", with: @prcmt.created_by
     fill_in "Current workflow instance", with: @prcmt.current_workflow_instance_id
     fill_in "Data", with: @prcmt.data
     fill_in "Desc", with: @prcmt.desc
@@ -88,7 +88,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Candidate selection remark", with: @prcmt.candidate_selection_remark
     fill_in "Contract number", with: @prcmt.contract_number
     fill_in "Created at", with: @prcmt.created_at
-    fill_in "Created by", with: @prcmt.created_by_id
+    fill_in "Created by", with: @prcmt.created_by
     fill_in "Current workflow instance", with: @prcmt.current_workflow_instance_id
     fill_in "Data", with: @prcmt.data
     fill_in "Desc", with: @prcmt.desc

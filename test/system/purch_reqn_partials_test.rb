@@ -15,7 +15,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     click_on "New purch reqn partial"
 
     fill_in "App", with: @purch_reqn_partial.app_id
-    fill_in "Created by", with: @purch_reqn_partial.created_by_id
+    fill_in "Created by", with: @purch_reqn_partial.created_by
     fill_in "Data", with: @purch_reqn_partial.data
     fill_in "Partial itemable", with: @purch_reqn_partial.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial.partial_itemable_type
@@ -36,7 +36,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     click_on "Edit this purch reqn partial", match: :first
 
     fill_in "App", with: @purch_reqn_partial.app_id
-    fill_in "Created by", with: @purch_reqn_partial.created_by_id
+    fill_in "Created by", with: @purch_reqn_partial.created_by
     fill_in "Data", with: @purch_reqn_partial.data
     fill_in "Partial itemable", with: @purch_reqn_partial.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial.partial_itemable_type

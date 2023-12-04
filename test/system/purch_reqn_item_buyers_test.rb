@@ -16,7 +16,7 @@ class PurchReqnItemBuyersTest < ApplicationSystemTestCase
 
     fill_in "App", with: @purch_reqn_item_buyer.app_id
     fill_in "Buyer", with: @purch_reqn_item_buyer.buyer_id
-    fill_in "Created by", with: @purch_reqn_item_buyer.created_by_id
+    fill_in "Created by", with: @purch_reqn_item_buyer.created_by
     fill_in "Purch reqn item", with: @purch_reqn_item_buyer.purch_reqn_item_id
     fill_in "Updated by", with: @purch_reqn_item_buyer.updated_by_id
     click_on "Create Purch reqn item buyer"
@@ -31,7 +31,7 @@ class PurchReqnItemBuyersTest < ApplicationSystemTestCase
 
     fill_in "App", with: @purch_reqn_item_buyer.app_id
     fill_in "Buyer", with: @purch_reqn_item_buyer.buyer_id
-    fill_in "Created by", with: @purch_reqn_item_buyer.created_by_id
+    fill_in "Created by", with: @purch_reqn_item_buyer.created_by
     fill_in "Purch reqn item", with: @purch_reqn_item_buyer.purch_reqn_item_id
     fill_in "Updated by", with: @purch_reqn_item_buyer.updated_by_id
     click_on "Update Purch reqn item buyer"

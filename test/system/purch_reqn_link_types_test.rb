@@ -15,7 +15,7 @@ class PurchReqnLinkTypesTest < ApplicationSystemTestCase
     click_on "New purch reqn link type"
 
     fill_in "App", with: @purch_reqn_link_type.app_id
-    fill_in "Created by", with: @purch_reqn_link_type.created_by_id
+    fill_in "Created by", with: @purch_reqn_link_type.created_by
     fill_in "Desc", with: @purch_reqn_link_type.desc
     fill_in "Ident name", with: @purch_reqn_link_type.ident_name
     fill_in "Name", with: @purch_reqn_link_type.name
@@ -32,7 +32,7 @@ class PurchReqnLinkTypesTest < ApplicationSystemTestCase
     click_on "Edit this purch reqn link type", match: :first
 
     fill_in "App", with: @purch_reqn_link_type.app_id
-    fill_in "Created by", with: @purch_reqn_link_type.created_by_id
+    fill_in "Created by", with: @purch_reqn_link_type.created_by
     fill_in "Desc", with: @purch_reqn_link_type.desc
     fill_in "Ident name", with: @purch_reqn_link_type.ident_name
     fill_in "Name", with: @purch_reqn_link_type.name

@@ -65,6 +65,6 @@ class PurchReqnItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_reqn_item_params
-      params.require(:purch_reqn_item).permit(:app_id, :purch_reqn_id, :number, :product_group_id, :product_id, :desired_vendor, :fixed_vendor, :qty, :measurement_unit_id, :est_unit_price, :price_unit, :est_subtotal, :currency_id, :requisitioner, :expected_delivery_date, :desc, :data, :created_by_id, :updated_by_id, :processed_qty, :specification, :note, :deleted_at, :deleted_by_id, :item_type, :wbsproject_id, :parent_id, :contract_item_reference_id, :contract_flag, :purch_reqn_item_noncontract_id, :commodity_list, :adjustment_qty)
+      params.require(:purch_reqn_item).permit(:app_id, :purch_reqn_id, :number, :product_group_id, :product_id, :desired_vendor, :fixed_vendor, :qty, :measurement_unit_id, :est_unit_price, :price_unit, :est_subtotal, :currency_id, :requisitioner, :expected_delivery_date, :desc, :data, :created_by, :updated_by_id, :processed_qty, :specification, :note, :deleted_at, :deleted_by_id, :item_type, :wbsproject_id, :parent_id, :contract_item_reference_id, :contract_flag, :purch_reqn_item_noncontract_id, :commodity_list, :adjustment_qty)
     end
 end

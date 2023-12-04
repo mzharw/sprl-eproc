@@ -1,19 +1,22 @@
 class CreatePurchReqnPartials < ActiveRecord::Migration[7.1]
   def change
-    create_table :purch_reqn_partials do |t|
-      t.references :app, null: false
-      t.references :purch_reqn_item, null: false
+    create_table :purch_reqn_partials, id: :uuid  do |t|
+      t.uuid :purch_reqn_item, null: false
       t.string :partialable_type
-      t.references :partialable, null: false
+      t.uuid :partialable, null: false
       t.string :partial_itemable_type
-      t.references :partial_itemable, null: false
+      t.uuid :partial_itemable, null: false
       t.float :qty
       t.jsonb :data
       t.string :state
-      t.references :created_by, null: false
-      t.references :updated_by, null: false
+      t.uuid :created_by, null: false
+      t.uuid :updated_by, null: false
 
+      t.datetime :discarded_at
       t.timestamps
     end
+
+    add_index :purch_reqn_partials, :purch_reqn_item
+    add_index :purch_reqn_partials, :discarded_at
   end
 end

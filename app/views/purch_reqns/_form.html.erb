@@ -2,12 +2,14 @@
   <% if purch_reqn.errors.any? %>
     <div style="color: red">
       <h2>
-        <%= pluralize(purch_reqn.errors.count, "error") %> prohibited this purch_reqn from being saved:
+        <%= pluralize(purch_reqn.errors.count, "error" ) %> prohibited this purch_reqn from being saved:
       </h2>
       <ul>
         <% purch_reqn.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
+          <li>
+            <%= error.full_message %>
+          </li>
+          <% end %>
       </ul>
     </div>
   <% end %>
@@ -15,13 +17,13 @@
     <div class="col-md-6">
       <label for="pr-type">PR Type</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="pr-type" id="material">
+        <input class="form-check-input" type="radio" name="purch_reqn_type" id="material" value="MATERIAL">
         <label class="form-check-label" for="material">
           Material
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="pr-type" id="service">
+        <input class="form-check-input" type="radio" name="purch_reqn_type" id="service" value="SERVICE">
         <label class="form-check-label" for="service">
           Service
         </label>
@@ -42,15 +44,24 @@
         </label>
       </div>
     </div>
+    <div class="col-md-6 d-flex flex-column gap-3">
+      <div>
+        <label for="purch_group_id">Purchasing Group</label>
+        <%= selection(:purch_group_id, purch_groups_path, :id , :code) %>
+      </div>
+      <div>
+        <label for="plant_id">Plant</label>
+        <%= selection(:plant_id, plants_path, :id , :code) %>
+      </div>
+      <div>
+        <label for="purch_org_id">Purchasing Organization</label>
+        <%= selection(:purch_org_id, purch_orgs_path, :id , :code) %>
+      </div>
+    </div>
     <div class="col-md-6">
       <label for="pr-type">Description</label>
       <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
     </div>
-    <div class="col-md-6">
-      <label for="pr-type">Description</label>
-      <select name="purchasing_group" id="purchasing_group" class="form-control">
-        <option value="test">SCMP</option>
-      </select>
-    </div>
   </div>
+  <%= submit_tag 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
 <% end %>

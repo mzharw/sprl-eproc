@@ -19,7 +19,7 @@ class ContractReferencesTest < ApplicationSystemTestCase
     fill_in "Contact type", with: @contract_reference.contact_type_id
     fill_in "Country", with: @contract_reference.country_id
     fill_in "Created at", with: @contract_reference.created_at
-    fill_in "Created by", with: @contract_reference.created_by_id
+    fill_in "Created by", with: @contract_reference.created_by
     fill_in "District", with: @contract_reference.district_id
     fill_in "Electronic address", with: @contract_reference.electronic_address
     fill_in "Ext", with: @contract_reference.ext
@@ -51,7 +51,7 @@ class ContractReferencesTest < ApplicationSystemTestCase
     fill_in "Contact type", with: @contract_reference.contact_type_id
     fill_in "Country", with: @contract_reference.country_id
     fill_in "Created at", with: @contract_reference.created_at
-    fill_in "Created by", with: @contract_reference.created_by_id
+    fill_in "Created by", with: @contract_reference.created_by
     fill_in "District", with: @contract_reference.district_id
     fill_in "Electronic address", with: @contract_reference.electronic_address
     fill_in "Ext", with: @contract_reference.ext

@@ -15,7 +15,7 @@ class PurchReqnUncommitsTest < ApplicationSystemTestCase
     click_on "New purch reqn uncommit"
 
     fill_in "App", with: @purch_reqn_uncommit.app_id
-    fill_in "Created by", with: @purch_reqn_uncommit.created_by_id
+    fill_in "Created by", with: @purch_reqn_uncommit.created_by
     fill_in "Current workflow instance", with: @purch_reqn_uncommit.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn_uncommit.desc
     fill_in "Purch reqn", with: @purch_reqn_uncommit.purch_reqn_id
@@ -33,7 +33,7 @@ class PurchReqnUncommitsTest < ApplicationSystemTestCase
     click_on "Edit this purch reqn uncommit", match: :first
 
     fill_in "App", with: @purch_reqn_uncommit.app_id
-    fill_in "Created by", with: @purch_reqn_uncommit.created_by_id
+    fill_in "Created by", with: @purch_reqn_uncommit.created_by
     fill_in "Current workflow instance", with: @purch_reqn_uncommit.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn_uncommit.desc
     fill_in "Purch reqn", with: @purch_reqn_uncommit.purch_reqn_id

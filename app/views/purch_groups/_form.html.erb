@@ -1,247 +1,48 @@
 <%= form_with(model: purch_group) do |form| %>
   <% if purch_group.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(purch_group.errors.count, "error") %> prohibited this purch_group from being saved:</h2>
-
+      <h2>
+        <%= pluralize(purch_group.errors.count, "error" ) %> prohibited this purch_group from being saved:
+      </h2>
       <ul>
         <% purch_group.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li>
+            <%= error.full_message %>
+          </li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :app_id, style: "display: block" %>
-    <%= form.text_field :app_id %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="code">Code</label>
+      <%= form.text_field :code, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="from_date">From Date</label>
+      <%= form.date_field :from_date, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="thru_date">Thru Date</label>
+      <%= form.date_field :thru_date, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="description">Description</label>
+      <%= form.text_area :description, class: 'form-control', rows: 5 %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="party_id">Party</label>
+      <%= selection(:party_id, parties_path, :id, :full_name) %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
   </div>
 
-  <div>
-    <%= form.label :purch_order_type_id, style: "display: block" %>
-    <%= form.text_field :purch_order_type_id %>
-  </div>
-
-  <div>
-    <%= form.label :number, style: "display: block" %>
-    <%= form.text_field :number %>
-  </div>
-
-  <div>
-    <%= form.label :issued_date, style: "display: block" %>
-    <%= form.date_field :issued_date %>
-  </div>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :incoterm_id, style: "display: block" %>
-    <%= form.text_field :incoterm_id %>
-  </div>
-
-  <div>
-    <%= form.label :incoterm_desc, style: "display: block" %>
-    <%= form.text_field :incoterm_desc %>
-  </div>
-
-  <div>
-    <%= form.label :internal_org_id, style: "display: block" %>
-    <%= form.text_field :internal_org_id %>
-  </div>
-
-  <div>
-    <%= form.label :purch_org_id, style: "display: block" %>
-    <%= form.text_field :purch_org_id %>
-  </div>
-
-  <div>
-    <%= form.label :purch_group_id, style: "display: block" %>
-    <%= form.text_field :purch_group_id %>
-  </div>
-
-  <div>
-    <%= form.label :prcmt_id, style: "display: block" %>
-    <%= form.text_field :prcmt_id %>
-  </div>
-
-  <div>
-    <%= form.label :data, style: "display: block" %>
-    <%= form.text_field :data %>
-  </div>
-
-  <div>
-    <%= form.label :state, style: "display: block" %>
-    <%= form.text_field :state %>
-  </div>
-
-  <div>
-    <%= form.label :created_at, style: "display: block" %>
-    <%= form.datetime_field :created_at %>
-  </div>
-
-  <div>
-    <%= form.label :updated_at, style: "display: block" %>
-    <%= form.datetime_field :updated_at %>
-  </div>
-
-  <div>
-    <%= form.label :vendor_id, style: "display: block" %>
-    <%= form.text_field :vendor_id %>
-  </div>
-
-  <div>
-    <%= form.label :referrable_type, style: "display: block" %>
-    <%= form.text_field :referrable_type %>
-  </div>
-
-  <div>
-    <%= form.label :referrable_id, style: "display: block" %>
-    <%= form.text_field :referrable_id %>
-  </div>
-
-  <div>
-    <%= form.label :payment_term_id, style: "display: block" %>
-    <%= form.text_field :payment_term_id %>
-  </div>
-
-  <div>
-    <%= form.label :delivery_location, style: "display: block" %>
-    <%= form.text_field :delivery_location %>
-  </div>
-
-  <div>
-    <%= form.label :current_workflow_instance_id, style: "display: block" %>
-    <%= form.text_field :current_workflow_instance_id %>
-  </div>
-
-  <div>
-    <%= form.label :used_up, style: "display: block" %>
-    <%= form.check_box :used_up %>
-  </div>
-
-  <div>
-    <%= form.label :finished_at, style: "display: block" %>
-    <%= form.datetime_field :finished_at %>
-  </div>
-
-  <div>
-    <%= form.label :discarded_at, style: "display: block" %>
-    <%= form.datetime_field :discarded_at %>
-  </div>
-
-  <div>
-    <%= form.label :finished_by_id, style: "display: block" %>
-    <%= form.text_field :finished_by_id %>
-  </div>
-
-  <div>
-    <%= form.label :length_of_work, style: "display: block" %>
-    <%= form.number_field :length_of_work %>
-  </div>
-
-  <div>
-    <%= form.label :payment_term_number, style: "display: block" %>
-    <%= form.text_field :payment_term_number %>
-  </div>
-
-  <div>
-    <%= form.label :payment_term_desc, style: "display: block" %>
-    <%= form.text_field :payment_term_desc %>
-  </div>
-
-  <div>
-    <%= form.label :po_type, style: "display: block" %>
-    <%= form.text_field :po_type %>
-  </div>
-
-  <div>
-    <%= form.label :contract, style: "display: block" %>
-    <%= form.check_box :contract %>
-  </div>
-
-  <div>
-    <%= form.label :validity_start_date, style: "display: block" %>
-    <%= form.date_field :validity_start_date %>
-  </div>
-
-  <div>
-    <%= form.label :commentcement_date, style: "display: block" %>
-    <%= form.date_field :commentcement_date %>
-  </div>
-
-  <div>
-    <%= form.label :delivery_detail, style: "display: block" %>
-    <%= form.text_area :delivery_detail %>
-  </div>
-
-  <div>
-    <%= form.label :remark, style: "display: block" %>
-    <%= form.text_area :remark %>
-  </div>
-
-  <div>
-    <%= form.label :scope_of_work, style: "display: block" %>
-    <%= form.text_area :scope_of_work %>
-  </div>
-
-  <div>
-    <%= form.label :po_to_amount, style: "display: block" %>
-    <%= form.text_field :po_to_amount %>
-  </div>
-
-  <div>
-    <%= form.label :account_holder, style: "display: block" %>
-    <%= form.text_field :account_holder %>
-  </div>
-
-  <div>
-    <%= form.label :account_number, style: "display: block" %>
-    <%= form.text_field :account_number %>
-  </div>
-
-  <div>
-    <%= form.label :po_signing, style: "display: block" %>
-    <%= form.text_field :po_signing %>
-  </div>
-
-  <div>
-    <%= form.label :tax_policy, style: "display: block" %>
-    <%= form.check_box :tax_policy %>
-  </div>
-
-  <div>
-    <%= form.label :to_currency_id, style: "display: block" %>
-    <%= form.text_field :to_currency_id %>
-  </div>
-
-  <div>
-    <%= form.label :rejected_at, style: "display: block" %>
-    <%= form.date_field :rejected_at %>
-  </div>
-
-  <div>
-    <%= form.label :cost_center_id, style: "display: block" %>
-    <%= form.text_field :cost_center_id %>
-  </div>
-
-  <div>
-    <%= form.label :plant_id, style: "display: block" %>
-    <%= form.text_field :plant_id %>
-  </div>
-
-  <div>
-    <%= form.label :uncommit_remark, style: "display: block" %>
-    <%= form.text_field :uncommit_remark %>
-  </div>
-
-  <div>
-    <%= form.label :is_replicated, style: "display: block" %>
-    <%= form.check_box :is_replicated %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
 <% end %>

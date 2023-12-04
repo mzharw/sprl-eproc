@@ -2,29 +2,24 @@ module Trackable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :creator, class_name: 'User', foreign_key: 'created_by'
-    belongs_to :updater, class_name: 'User', foreign_key: 'updated_by'
+    belongs_to :creator, class_name: 'User', foreign_key: 'created_by', optional: true
+    belongs_to :updater, class_name: 'User', foreign_key: 'updated_by', optional: true
 
-    before_create :assign_created_by
-    before_update :assign_updated_by
+    before_create :set_created_by
+    before_update :set_updated_by
+  end
 
-    validates :creator, presence: true
-    validates :updater, presence: true, on: :update
+  private
 
-    private
+  def set_created_by
+    set_user_id(:created_by)
+  end
 
-    def assign_created_by
-      assign_user(:created_by)
-    end
+  def set_updated_by
+    set_user_id(:updated_by)
+  end
 
-    def assign_updated_by
-      assign_user(:updated_by)
-    end
-
-    def assign_user(attr)
-      return unless respond_to?(:current_user)
-
-      send("#{attr}=", current_user.id)
-    end
+  def set_user_id(attribute)
+    self.send("#{attribute}=", current_user.id) if respond_to?(:current_user)
   end
 end

@@ -15,7 +15,7 @@ class PurchReqnPartialStatusesTest < ApplicationSystemTestCase
     click_on "New purch reqn partial status"
 
     fill_in "App", with: @purch_reqn_partial_status.app_id
-    fill_in "Created by", with: @purch_reqn_partial_status.created_by_id
+    fill_in "Created by", with: @purch_reqn_partial_status.created_by
     fill_in "Partial itemable", with: @purch_reqn_partial_status.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial_status.partial_itemable_type
     fill_in "Partialable", with: @purch_reqn_partial_status.partialable_id
@@ -34,7 +34,7 @@ class PurchReqnPartialStatusesTest < ApplicationSystemTestCase
     click_on "Edit this purch reqn partial status", match: :first
 
     fill_in "App", with: @purch_reqn_partial_status.app_id
-    fill_in "Created by", with: @purch_reqn_partial_status.created_by_id
+    fill_in "Created by", with: @purch_reqn_partial_status.created_by
     fill_in "Partial itemable", with: @purch_reqn_partial_status.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial_status.partial_itemable_type
     fill_in "Partialable", with: @purch_reqn_partial_status.partialable_id

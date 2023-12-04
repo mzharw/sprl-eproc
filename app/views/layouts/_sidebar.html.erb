@@ -28,7 +28,7 @@
 
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Procurement</span>
+                    <span class="hide-menu">Purchase Requisition</span>
                 </li>
                 <li class="sidebar-item">
                     <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if is_active?('purch_reqns')}" do %>
@@ -36,6 +36,22 @@
                             <i class="ti ti-shopping-cart"></i>
                         </span>
                         <span class="hide-menu">Purchase Requisition</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to purch_groups_path, class: "sidebar-link #{'active' if is_active?('purch_groups')}" do %>
+                        <span>
+                            <i class="ti ti-shopping-cart-cog"></i>
+                        </span>
+                        <span class="hide-menu">Purchasing Group</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to purch_orgs_path, class: "sidebar-link #{'active' if is_active?('purch_orgs')}" do %>
+                        <span>
+                            <i class="ti ti-affiliate"></i>
+                        </span>
+                        <span class="hide-menu">Purchasing Organization</span>
                     <% end %>
                 </li>
 
@@ -91,7 +107,27 @@
                         <span class="hide-menu">Applicant Non-procures</span>
                     <% end %>
                 </li>
-                
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Master Data</span>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to parties_path, class: "sidebar-link #{'active' if is_active?('parties')}" do %>
+                        <span>
+                            <i class="ti ti-confetti"></i>
+                        </span>
+                        <span class="hide-menu">Party</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to plants_path, class: "sidebar-link #{'active' if is_active?('plants')}" do %>
+                        <span>
+                            <i class="ti ti-seeding"></i>
+                        </span>
+                        <span class="hide-menu">Plant</span>
+                    <% end %>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

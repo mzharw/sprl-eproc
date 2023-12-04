@@ -102,3 +102,5 @@ gem 'erb-formatter', '~> 0.4.3'
 gem "pry", "~> 0.14.2"
 
 gem "draper", "~> 4.0"
+
+gem "discard", "~> 1.3"

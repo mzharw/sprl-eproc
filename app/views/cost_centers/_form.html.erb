@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :app_id, style: "display: block" %>
-    <%= form.text_field :app_id %>
-  </div>
-
-  <div>
     <%= form.label :cost_center_id, style: "display: block" %>
     <%= form.text_field :cost_center_id %>
   </div>
@@ -44,6 +39,21 @@
   <div>
     <%= form.label :valid_to, style: "display: block" %>
     <%= form.date_field :valid_to %>
+  </div>
+
+  <div>
+    <%= form.label :created_by, style: "display: block" %>
+    <%= form.text_field :created_by %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by_id, style: "display: block" %>
+    <%= form.text_field :updated_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :purch_group_id, style: "display: block" %>
+    <%= form.text_field :purch_group_id %>
   </div>
 
   <div>

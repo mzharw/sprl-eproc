@@ -1,19 +1,23 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app_id: 
   cost_center_id: MyString
   ctrl_name: MyString
   desc: MyText
   position: MyString
   payroll_id: MyString
-  valid_to: 2023-11-30
+  valid_to: 2023-12-04
+  created_by: 
+  updated_by_id: 
+  purch_group_id: 
 
 two:
-  app_id: 
   cost_center_id: MyString
   ctrl_name: MyString
   desc: MyText
   position: MyString
   payroll_id: MyString
-  valid_to: 2023-11-30
+  valid_to: 2023-12-04
+  created_by: 
+  updated_by_id: 
+  purch_group_id: 
