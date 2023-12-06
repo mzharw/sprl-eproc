@@ -1,6 +1,6 @@
 class CreateParties < ActiveRecord::Migration[7.1]
   def change
-    create_table :parties do |t|
+    create_table :parties, id: :uuid do |t|
       t.string :party_type
       t.string :full_name
       t.jsonb :data
@@ -13,5 +13,7 @@ class CreateParties < ActiveRecord::Migration[7.1]
 
     add_index :parties, :party_type
     add_index :parties, :discarded_at
+    add_index :parties, :created_by
+    add_index :parties, :updated_by
   end
 end

@@ -23,9 +23,6 @@ class CreatePrcmts < ActiveRecord::Migration[7.1]
       t.jsonb :data
       t.uuid :current_workflow_instance_id
       t.string :state
-
-      t.uuid :created_by
-      t.uuid :updated_by_id
       t.boolean :bid_bond
       t.jsonb :scope_of_supplies
       t.timestamp :announced_at
@@ -49,7 +46,11 @@ class CreatePrcmts < ActiveRecord::Migration[7.1]
       t.decimal :tkdn_percentage
       t.string :tender_location
 
+      t.uuid :created_by
+      t.uuid :updated_by
       t.timestamps
     end
+    add_index :prcmts, :created_by
+    add_index :prcmts, :updated_by
   end
 end

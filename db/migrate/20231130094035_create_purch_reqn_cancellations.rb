@@ -9,5 +9,7 @@ class CreatePurchReqnCancellations < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+    add_index :purch_reqn_cancellations, :created_by
+    add_index :purch_reqn_cancellations, :updated_by
   end
 end

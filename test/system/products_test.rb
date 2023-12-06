@@ -24,7 +24,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "Product group", with: @product.product_group_id
     fill_in "Product type", with: @product.product_type
     fill_in "Updated at", with: @product.updated_at
-    fill_in "Updated by", with: @product.updated_by_id
+    fill_in "Updated by", with: @product.updated_by
     click_on "Create Product"
 
     assert_text "Product was successfully created"
@@ -45,7 +45,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "Product group", with: @product.product_group_id
     fill_in "Product type", with: @product.product_type
     fill_in "Updated at", with: @product.updated_at
-    fill_in "Updated by", with: @product.updated_by_id
+    fill_in "Updated by", with: @product.updated_by
     click_on "Update Product"
 
     assert_text "Product was successfully updated"

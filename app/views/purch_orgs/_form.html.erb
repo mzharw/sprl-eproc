@@ -1,42 +1,43 @@
-<%= form_with(model: purch_org) do |form| %>
+<%= form_with(model: purch_org, html: { class: 'form-container' }) do |form| %>
   <% if purch_org.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(purch_org.errors.count, "error") %> prohibited this purch_org from being saved:</h2>
-
+      <h2>
+        <%= pluralize(purch_org.errors.count, "error" ) %> prohibited this purchasing organization from being saved:
+      </h2>
       <ul>
         <% purch_org.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li>
+            <%= error.full_message %>
+          </li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :app_id, style: "display: block" %>
-    <%= form.text_field :app_id %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="party_id">Party</label>
+      <%= selection(form, :party_id, parties_path, :id, :full_name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="code">Code</label>
+      <%= form.text_field :code, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="from_date">From Date</label>
+      <%= form.date_field :from_date, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="thru_date">Thru Date</label>
+      <%= form.date_field :thru_date, class: 'form-control' %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
   </div>
 
-  <div>
-    <%= form.label :party_id, style: "display: block" %>
-    <%= form.text_field :party_id %>
-  </div>
-
-  <div>
-    <%= form.label :code, style: "display: block" %>
-    <%= form.text_field :code %>
-  </div>
-
-  <div>
-    <%= form.label :from_date, style: "display: block" %>
-    <%= form.date_field :from_date %>
-  </div>
-
-  <div>
-    <%= form.label :thru_date, style: "display: block" %>
-    <%= form.date_field :thru_date %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
 <% end %>

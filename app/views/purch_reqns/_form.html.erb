@@ -1,4 +1,4 @@
-<%= form_with(model: purch_reqn) do |form| %>
+<%= form_with(model: purch_reqn, html: { class: 'form-container h-100 w-100 overflow-y-scroll' }) do |form| %>
   <% if purch_reqn.errors.any? %>
     <div style="color: red">
       <h2>
@@ -13,55 +13,145 @@
       </ul>
     </div>
   <% end %>
-  <div class="row g-3">
-    <div class="col-md-6">
+  <div class="row g-3 w-50">
+    <div>
       <label for="pr-type">PR Type</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="purch_reqn_type" id="material" value="MATERIAL">
+        <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material' %>
         <label class="form-check-label" for="material">
           Material
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="purch_reqn_type" id="service" value="SERVICE">
+        <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service' %>
         <label class="form-check-label" for="service">
           Service
         </label>
       </div>
     </div>
-    <div class="col-md-6">
+    <div>
       <label for="pr-type">Contact Reference</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="contact-reference" id="yes">
-        <label class="form-check-label" for="yes">
+        <%= form.radio_button :contract, true, class: 'form-check-input', id: 'contract-true' %>
+        <label class="form-check-label" for="contract-true">
           Yes
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="contact-reference" id="no">
-        <label class="form-check-label" for="no">
+        <%= form.radio_button :contract, false, class: 'form-check-input', id: 'contract-false' %>
+        <label class="form-check-label" for="contract-false">
           No
         </label>
       </div>
     </div>
-    <div class="col-md-6 d-flex flex-column gap-3">
+    <div class=" d-flex flex-column gap-3">
       <div>
         <label for="purch_group_id">Purchasing Group</label>
-        <%= selection(:purch_group_id, purch_groups_path, :id , :code) %>
+        <%= selection(form, :purch_group_id, purch_groups_path, :id , :code) %>
       </div>
       <div>
         <label for="plant_id">Plant</label>
-        <%= selection(:plant_id, plants_path, :id , :code) %>
+        <%= selection(form, :plant_id, plants_path, :id , :code) %>
       </div>
       <div>
         <label for="purch_org_id">Purchasing Organization</label>
-        <%= selection(:purch_org_id, purch_orgs_path, :id , :code) %>
+        <%= selection(form, :purch_org_id, purch_orgs_path, :id , :code) %>
       </div>
     </div>
-    <div class="col-md-6">
-      <label for="pr-type">Description</label>
-      <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
+    <div class=" d-flex flex-column gap-3" data-controller="toggler">
+      <div>
+        <label for="pr-type">Description</label>
+        <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
+      </div>
+      <div>
+        <label for="fund_source">Fund Source</label>
+        <div class="form-check">
+          <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input', id: 'project-wbs', data: {hide: 'toggle-cost-center', action: 'change->toggler#hide', 'toggler-target': 'toggler'} %>
+          <label class="form-check-label" for="project-wbs">
+            Project AFE
+          </label>
+        </div>
+        <div class="form-check">
+          <%= form.radio_button :fund_source, 'COST_CENTER', class: 'form-check-input', id: 'cost-center', data: {show: 'toggle-cost-center', action: 'change->toggler#show', 'toggler-target': 'toggler'} %>
+          <label class="form-check-label" for="cost-center">
+            Cost Center
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="d-none toggle-cost-center ">
+      <label for="cost_center_id">Cost Center</label>
+      <%= selection(form, :cost_center_id, cost_centers_path, :id , :desc) %>
+    </div>
+    <div>
+      <label for="currency_id">Currency</label>
+      <%= selection(form, :currency_id, currencies_path, :id , :code) %>
     </div>
   </div>
-  <%= submit_tag 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+  <!-- <table class='table'>
+    <tr>
+      <td><label for="pr-type">PR Type</label></td>
+      <td>
+        <div class="form-check">
+          <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material' %>
+          <label class="form-check-label" for="material">Material</label>
+        </div>
+        <div class="form-check">
+          <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service' %>
+          <label class="form-check-label" for="service">Service</label>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="pr-type">Contact Reference</label></td>
+      <td>
+        <div class="form-check">
+          <%= form.radio_button :contract, true, class: 'form-check-input', id: 'contract-true' %>
+          <label class="form-check-label" for="contract-true">Yes</label>
+        </div>
+        <div class="form-check">
+          <%= form.radio_button :contract, false, class: 'form-check-input', id: 'contract-false' %>
+          <label class="form-check-label" for="contract-false">No</label>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="purch_group_id">Purchasing Group</label></td>
+      <td><%= selection(form, :purch_group_id, purch_groups_path, :id, :code) %></td>
+    </tr>
+    <tr>
+      <td><label for="plant_id">Plant</label></td>
+      <td><%= selection(form, :plant_id, plants_path, :id, :code) %></td>
+    </tr>
+    <tr>
+      <td><label for="purch_org_id">Purchasing Organization</label></td>
+      <td><%= selection(form, :purch_org_id, purch_orgs_path, :id, :code) %></td>
+    </tr>
+    <tr>
+      <td><label for="pr-type">Description</label></td>
+      <td><textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea></td>
+    </tr>
+    <tr>
+      <td><label for="fund_source">Fund Source</label></td>
+      <td>
+        <div class="form-check">
+          <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input', id: 'project-wbs', data: { hide: 'toggle-cost-center', action: 'change->toggler#hide', 'toggler-target': 'toggler' } %>
+          <label class="form-check-label" for="project-wbs">Project AFE</label>
+        </div>
+        <div class="form-check">
+          <%= form.radio_button :fund_source, 'COST_CENTER', class: 'form-check-input', id: 'cost-center', data: { show: 'toggle-cost-center', action: 'change->toggler#show', 'toggler-target': 'toggler' } %>
+          <label class="form-check-label" for="cost-center">Cost Center</label>
+        </div>
+      </td>
+    </tr>
+    <tr class="d-none toggle-cost-center">
+      <td><label for="cost_center_id">Cost Center</label></td>
+      <td><%= selection(form, :cost_center_id, cost_centers_path, :id, :desc) %></td>
+    </tr>
+    <tr>
+      <td><label for="currency_id">Currency</label></td>
+      <td><%= selection(form, :currency_id, currencies_path, :id, :code) %></td>
+    </tr>
+  </table>   -->
+  <%= submit_tag 'Submit', class: 'btn btn-secondary mt-9' %>
 <% end %>

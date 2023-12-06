@@ -19,7 +19,7 @@ class PurchReqnCancellationsTest < ApplicationSystemTestCase
     fill_in "Current workflow instance", with: @purch_reqn_cancellation.current_workflow_instance_id
     fill_in "Purch reqn", with: @purch_reqn_cancellation.purch_reqn_id
     fill_in "State", with: @purch_reqn_cancellation.state
-    fill_in "Updated by", with: @purch_reqn_cancellation.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_cancellation.updated_by
     click_on "Create Purch reqn cancellation"
 
     assert_text "Purch reqn cancellation was successfully created"
@@ -35,7 +35,7 @@ class PurchReqnCancellationsTest < ApplicationSystemTestCase
     fill_in "Current workflow instance", with: @purch_reqn_cancellation.current_workflow_instance_id
     fill_in "Purch reqn", with: @purch_reqn_cancellation.purch_reqn_id
     fill_in "State", with: @purch_reqn_cancellation.state
-    fill_in "Updated by", with: @purch_reqn_cancellation.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_cancellation.updated_by
     click_on "Update Purch reqn cancellation"
 
     assert_text "Purch reqn cancellation was successfully updated"

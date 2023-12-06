@@ -18,12 +18,14 @@ class CreateContractReferences < ActiveRecord::Migration[7.1]
       t.string :electronic_address
 
       t.uuid :created_by
-      t.uuid :updated_by_id
+      t.uuid :updated_by
       t.string :area_code
       t.string :ext
       t.string :postal_code
 
       t.timestamps
     end
+    add_index :contract_references, :created_by
+    add_index :contract_references, :updated_by
   end
 end

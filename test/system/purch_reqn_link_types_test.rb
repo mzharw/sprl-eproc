@@ -20,7 +20,7 @@ class PurchReqnLinkTypesTest < ApplicationSystemTestCase
     fill_in "Ident name", with: @purch_reqn_link_type.ident_name
     fill_in "Name", with: @purch_reqn_link_type.name
     check "System" if @purch_reqn_link_type.system
-    fill_in "Updated by", with: @purch_reqn_link_type.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_link_type.updated_by
     click_on "Create Purch reqn link type"
 
     assert_text "Purch reqn link type was successfully created"
@@ -37,7 +37,7 @@ class PurchReqnLinkTypesTest < ApplicationSystemTestCase
     fill_in "Ident name", with: @purch_reqn_link_type.ident_name
     fill_in "Name", with: @purch_reqn_link_type.name
     check "System" if @purch_reqn_link_type.system
-    fill_in "Updated by", with: @purch_reqn_link_type.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_link_type.updated_by
     click_on "Update Purch reqn link type"
 
     assert_text "Purch reqn link type was successfully updated"

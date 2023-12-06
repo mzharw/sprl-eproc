@@ -34,7 +34,7 @@ class ContractReferencesTest < ApplicationSystemTestCase
     fill_in "Province", with: @contract_reference.province_id
     fill_in "Sub district", with: @contract_reference.sub_district_id
     fill_in "Updated at", with: @contract_reference.updated_at
-    fill_in "Updated by", with: @contract_reference.updated_by_id
+    fill_in "Updated by", with: @contract_reference.updated_by
     fill_in "Village", with: @contract_reference.village_id
     click_on "Create Contract reference"
 
@@ -66,7 +66,7 @@ class ContractReferencesTest < ApplicationSystemTestCase
     fill_in "Province", with: @contract_reference.province_id
     fill_in "Sub district", with: @contract_reference.sub_district_id
     fill_in "Updated at", with: @contract_reference.updated_at
-    fill_in "Updated by", with: @contract_reference.updated_by_id
+    fill_in "Updated by", with: @contract_reference.updated_by
     fill_in "Village", with: @contract_reference.village_id
     click_on "Update Contract reference"
 

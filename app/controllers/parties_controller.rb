@@ -1,5 +1,6 @@
 class PartiesController < ApplicationController
-  before_action :set_party, only: %i[ show edit update destroy ]
+  include UserTrackable
+  before_action :set_party, only: %i[show edit update destroy]
 
   # GET /parties or /parties.json
   def index
@@ -13,8 +14,7 @@ class PartiesController < ApplicationController
   end
 
   # GET /parties/1 or /parties/1.json
-  def show
-  end
+  def show; end
 
   # GET /parties/new
   def new
@@ -22,16 +22,15 @@ class PartiesController < ApplicationController
   end
 
   # GET /parties/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /parties or /parties.json
   def create
-    @party = Party.new(party_params)
+    @party = Party.new({ **party_params, **tracker })
 
     respond_to do |format|
       if @party.save
-        format.html { redirect_to party_url(@party), notice: "Party was successfully created." }
+        format.html { redirect_to party_url(@party), notice: 'Party was successfully created.' }
         format.json { render :show, status: :created, location: @party }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +43,7 @@ class PartiesController < ApplicationController
   def update
     respond_to do |format|
       if @party.update(party_params)
-        format.html { redirect_to party_url(@party), notice: "Party was successfully updated." }
+        format.html { redirect_to party_url(@party), notice: 'Party was successfully updated.' }
         format.json { render :show, status: :ok, location: @party }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,19 +57,20 @@ class PartiesController < ApplicationController
     @party.destroy!
 
     respond_to do |format|
-      format.html { redirect_to parties_url, notice: "Party was successfully destroyed." }
+      format.html { redirect_to parties_url, notice: 'Party was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_party
-      @party = Party.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def party_params
-      params.require(:party).permit(:party_type, :full_name, :created_at, :updated_at, :created_by, :updated_by, :data)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_party
+    @party = Party.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def party_params
+    params.require(:party).permit(:party_type, :full_name)
+  end
 end

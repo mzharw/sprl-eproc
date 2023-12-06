@@ -6,7 +6,11 @@ class CreateBuyers < ActiveRecord::Migration[7.1]
       t.date :from_date
       t.date :thru_date
 
+      t.uuid :created_by
+      t.uuid :updated_by
       t.timestamps
     end
+    add_index :buyers, :created_by
+    add_index :buyers, :updated_by
   end
 end

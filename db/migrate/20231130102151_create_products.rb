@@ -7,12 +7,13 @@ class CreateProducts < ActiveRecord::Migration[7.1]
       t.string :code
       t.string :name
       t.uuid :measurement_unit_id
-
-      t.uuid :created_by
-      t.uuid :updated_by_id
       t.text :desc
 
+      t.uuid :created_by
+      t.uuid :updated_by
       t.timestamps
     end
+    add_index :products, :created_by
+    add_index :products, :updated_by
   end
 end

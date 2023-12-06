@@ -21,7 +21,7 @@ class CostCentersTest < ApplicationSystemTestCase
     fill_in "Payroll", with: @cost_center.payroll_id
     fill_in "Position", with: @cost_center.position
     fill_in "Purch group", with: @cost_center.purch_group_id
-    fill_in "Updated by", with: @cost_center.updated_by_id
+    fill_in "Updated by", with: @cost_center.updated_by
     fill_in "Valid to", with: @cost_center.valid_to
     click_on "Create Cost center"
 
@@ -40,7 +40,7 @@ class CostCentersTest < ApplicationSystemTestCase
     fill_in "Payroll", with: @cost_center.payroll_id
     fill_in "Position", with: @cost_center.position
     fill_in "Purch group", with: @cost_center.purch_group_id
-    fill_in "Updated by", with: @cost_center.updated_by_id
+    fill_in "Updated by", with: @cost_center.updated_by
     fill_in "Valid to", with: @cost_center.valid_to
     click_on "Update Cost center"
 

@@ -17,7 +17,7 @@ class PurchReqnCancellationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create purch_reqn_cancellation" do
     assert_difference("PurchReqnCancellation.count") do
-      post purch_reqn_cancellations_url, params: { purch_reqn_cancellation: { app_id: @purch_reqn_cancellation.app_id, created_by: @purch_reqn_cancellation.created_by, current_workflow_instance_id: @purch_reqn_cancellation.current_workflow_instance_id, purch_reqn_id: @purch_reqn_cancellation.purch_reqn_id, state: @purch_reqn_cancellation.state, updated_by_id: @purch_reqn_cancellation.updated_by_id } }
+      post purch_reqn_cancellations_url, params: { purch_reqn_cancellation: { app_id: @purch_reqn_cancellation.app_id, created_by: @purch_reqn_cancellation.created_by, current_workflow_instance_id: @purch_reqn_cancellation.current_workflow_instance_id, purch_reqn_id: @purch_reqn_cancellation.purch_reqn_id, state: @purch_reqn_cancellation.state, updated_by: @purch_reqn_cancellation.updated_by } }
     end
 
     assert_redirected_to purch_reqn_cancellation_url(PurchReqnCancellation.last)
@@ -34,7 +34,7 @@ class PurchReqnCancellationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update purch_reqn_cancellation" do
-    patch purch_reqn_cancellation_url(@purch_reqn_cancellation), params: { purch_reqn_cancellation: { app_id: @purch_reqn_cancellation.app_id, created_by: @purch_reqn_cancellation.created_by, current_workflow_instance_id: @purch_reqn_cancellation.current_workflow_instance_id, purch_reqn_id: @purch_reqn_cancellation.purch_reqn_id, state: @purch_reqn_cancellation.state, updated_by_id: @purch_reqn_cancellation.updated_by_id } }
+    patch purch_reqn_cancellation_url(@purch_reqn_cancellation), params: { purch_reqn_cancellation: { app_id: @purch_reqn_cancellation.app_id, created_by: @purch_reqn_cancellation.created_by, current_workflow_instance_id: @purch_reqn_cancellation.current_workflow_instance_id, purch_reqn_id: @purch_reqn_cancellation.purch_reqn_id, state: @purch_reqn_cancellation.state, updated_by: @purch_reqn_cancellation.updated_by } }
     assert_redirected_to purch_reqn_cancellation_url(@purch_reqn_cancellation)
   end
 

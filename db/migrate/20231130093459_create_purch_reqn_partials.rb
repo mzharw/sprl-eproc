@@ -18,5 +18,7 @@ class CreatePurchReqnPartials < ActiveRecord::Migration[7.1]
 
     add_index :purch_reqn_partials, :purch_reqn_item
     add_index :purch_reqn_partials, :discarded_at
+    add_index :purch_reqn_partials, :created_by
+    add_index :purch_reqn_partials, :updated_by
   end
 end

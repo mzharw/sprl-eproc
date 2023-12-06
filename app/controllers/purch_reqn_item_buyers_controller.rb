@@ -65,6 +65,6 @@ class PurchReqnItemBuyersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_reqn_item_buyer_params
-      params.require(:purch_reqn_item_buyer).permit(:app_id, :purch_reqn_item_id, :buyer_id, :created_by, :updated_by_id)
+      params.require(:purch_reqn_item_buyer).permit(:app_id, :purch_reqn_item_id, :buyer_id, :created_by, :updated_by)
     end
 end

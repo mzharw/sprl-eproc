@@ -1,0 +1,52 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+      <tr>
+          <th>
+            <%= sortable_header('PR Number', purch_reqns_path, :number) %>
+          </th>
+          <th>
+            <%= sortable_header('PR Type', purch_reqns_path, :purch_reqn_type) %>
+          </th>
+          <th>
+            <%= sortable_header('Contract', purch_reqns_path, :contract) %>
+          </th>
+          <th>
+            <%= sortable_header('Description', purch_reqns_path, :contract) %>
+          </th>
+          <th>
+            <%= sortable_header('Plant Code', purch_reqns_path, 'plants.code') %>
+          </th>
+          <th>Plant</th>
+          <th>Non AFE Code</th>
+          <th>Non AFE</th>
+          <th>Purchasing Group Code</th>
+          <th>Workflow State</th>
+          <th>State</th>
+          <th>Created By</th>
+          <th>Subtotal</th>
+          <th>Created at</th>
+          <th>Cancel Remark</th>
+      </tr>
+  </thead>
+  <tbody>
+    <% @purch_reqns.each do |purch_reqn| %>
+      <tr>
+        <td><%= link_to purch_reqn.number, purch_reqn %></td>
+        <td><%= purch_reqn.purch_reqn_type %></td>
+        <td><%= purch_reqn.contract %></td>
+        <td><%= purch_reqn.desc %></td>
+        <td><%= purch_reqn.plant_code %></td>
+        <td><%= purch_reqn.plant&.party&.full_name %></td>
+        <td><%= purch_reqn.cost_center&.id || '' %></td>
+        <td><%= purch_reqn.cost_center&.desc || '' %></td>
+        <td><%= purch_reqn.purch_group&.code %></td>
+        <td></td>
+        <td><%= purch_reqn.state %></td>
+        <td><%= purch_reqn.creator&.username %></td>
+        <td></td>
+        <td><%= purch_reqn.created_at %></td>
+        <td><%= purch_reqn.cancel_remark %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

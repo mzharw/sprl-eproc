@@ -3,7 +3,13 @@ class CostCentersController < ApplicationController
 
   # GET /cost_centers or /cost_centers.json
   def index
-    @cost_centers = CostCenter.all
+    query = params[:query] || ''
+    @cost_centers = CostCenter.where('lower("desc") LIKE ?', "%#{query.downcase}%")
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @cost_centers }
+    end
   end
 
   # GET /cost_centers/1 or /cost_centers/1.json
@@ -65,6 +71,6 @@ class CostCentersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cost_center_params
-      params.require(:cost_center).permit(:cost_center_id, :ctrl_name, :desc, :position, :payroll_id, :valid_to, :created_by, :updated_by_id, :purch_group_id)
+      params.require(:cost_center).permit(:cost_center_id, :ctrl_name, :desc, :position, :payroll_id, :valid_to, :created_by, :updated_by, :purch_group_id)
     end
 end

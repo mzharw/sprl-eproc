@@ -44,7 +44,7 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     fill_in "Qty", with: @purch_reqn_item.qty
     fill_in "Requisitioner", with: @purch_reqn_item.requisitioner
     fill_in "Specification", with: @purch_reqn_item.specification
-    fill_in "Updated by", with: @purch_reqn_item.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_item.updated_by
     fill_in "Wbsproject", with: @purch_reqn_item.wbsproject_id
     click_on "Create Purch reqn item"
 
@@ -86,7 +86,7 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     fill_in "Qty", with: @purch_reqn_item.qty
     fill_in "Requisitioner", with: @purch_reqn_item.requisitioner
     fill_in "Specification", with: @purch_reqn_item.specification
-    fill_in "Updated by", with: @purch_reqn_item.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_item.updated_by
     fill_in "Wbsproject", with: @purch_reqn_item.wbsproject_id
     click_on "Update Purch reqn item"
 

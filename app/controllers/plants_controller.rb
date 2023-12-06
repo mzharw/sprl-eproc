@@ -1,4 +1,5 @@
 class PlantsController < ApplicationController
+  include UserTrackable
   before_action :set_plant, only: %i[ show edit update destroy ]
 
   # GET /plants or /plants.json
@@ -27,7 +28,7 @@ class PlantsController < ApplicationController
 
   # POST /plants or /plants.json
   def create
-    @plant = Plant.new(plant_params)
+    @plant = Plant.new({ **plant_params, **tracker })
 
     respond_to do |format|
       if @plant.save

@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :attachments
   resources :facilities
   resources :parties
-  resources :buyers
-  resources :measurement_units
-  resources :products
+  resources :buyers, path: 'buyers'
+  resources :measurement_units, path: 'uom'
+  resources :products, path: 'products'
   resources :product_groups
-  resources :prcmts
+  resources :prcmts, path: 'procurements'
   resources :contract_references
-  resources :currencies
-  resources :cost_centers
-  resources :plants
-  resources :purch_groups
-  resources :purch_orgs
-  resources :purch_reqn_cancellations
+  resources :currencies, path: 'currencies'
+  resources :cost_centers, path: 'cost-centers'
+  resources :plants, path: 'plants'
+  resources :purch_groups, path: 'purchase-groups'
+  resources :purch_orgs, path: 'purchase-organizations'
+  resources :purch_reqn_cancellations, path: 'purchase-requisitions-cancellations'
   resources :purch_reqn_item_buyers
   resources :purch_reqn_item_histories
   resources :purch_reqn_items
@@ -23,7 +24,11 @@ Rails.application.routes.draw do
   resources :purch_reqn_partial_statuses
   resources :purch_reqn_partials
   resources :purch_reqn_uncommits
-  resources :purch_reqns, path: 'purchase-requisitions'
+  resources :purch_reqns, path: 'purchase-requisitions' do
+    member do
+      delete 'purge-attachment', to: 'purch_reqns#purge_attachment', as: 'purge_attachment'
+    end
+  end
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
     sign_out: 'logout',

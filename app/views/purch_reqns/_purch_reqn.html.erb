@@ -1,18 +1,50 @@
-<tr>
-  <td><%= purch_reqn.number %></td>
-  <td><%= purch_reqn.purch_reqn_type %></td>
-  <td><%= purch_reqn.contract %></td>
-  <td><%= purch_reqn.desc %></td>
-  <td><%= purch_reqn.plant_id %></td>
-  <td><%= purch_reqn.plant_id %></td>
-  <td><%= purch_reqn.plant_id %></td>
-  <td><%= purch_reqn.plant_id %></td>
-  <td><%= purch_reqn.purch_group_id %></td>
-  <td></td>
-  <td><%= purch_reqn.state %></td>
-  <td><%= purch_reqn.created_by %></td>
-  <td></td>
-  <td><%= purch_reqn.created_at %></td>
-  <td><%= purch_reqn.cancel_remark %></td>
-  <td><%= link_to "Show", purch_reqn %></td>
-</tr>
+<table class="table">
+  <tr>
+    <td>Purchase Requisition Number</td>
+    <td><%= purch_reqn.number %></td>
+  </tr>
+  <tr>
+    <td>Purchase Requisition Type</td>
+    <td><%= purch_reqn.purch_reqn_type %></td>
+  </tr>
+  <tr>
+    <td>Contract</td>
+    <td><%= purch_reqn.contract %></td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td><%= purch_reqn.desc %></td>
+  </tr>
+  <tr>
+    <td>Purchasing Group</td>
+    <td><%= purch_reqn.purch_group&.code %></td>
+  </tr>
+  <tr>
+    <td>Plant</td>
+    <td><%= purch_reqn.plant_code %></td>
+  </tr>
+  <tr>
+    <td>Date PR</td>
+    <td><%= purch_reqn.created_at %></td>
+  </tr>
+  <tr>
+    <td>Purchasing Organization</td>
+    <td><%= purch_reqn.purch_org.code %></td>
+  </tr>
+  <tr>
+    <td>Source Found</td>
+    <td><%= purch_reqn.fund_source%></td>
+  </tr>
+  <tr>
+    <td>Non AFE</td>
+    <td><%= purch_reqn.cost_center&.desc || '' %></td>
+  </tr>
+  <tr>
+    <td>Currency</td>
+    <td><%= purch_reqn.currency&.code %></td>
+  </tr>
+  <tr>
+    <td>Subtotal</td>
+    <td>0</td>
+  </tr>
+</table>

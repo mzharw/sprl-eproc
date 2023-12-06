@@ -1,0 +1,38 @@
+<p class="fw-bolder"><%= title %></p>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+        <th>Attachment</th>
+        <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if docs.empty? %>
+            <tr>
+                <td colspan="2">
+                No Entry
+                </td>
+            </tr>
+        <% else %>
+            <% docs.each do |doc| %>
+                <tr>
+                    <td>
+                        <%= link_to doc.filename, rails_blob_path(doc) %>
+                    </td>
+                    <td>
+                       <%= link_to purge_attachment_purch_reqn_path(attachment_name: name, attachment_id: doc.id), data: {turbo_method: :delete} do %>
+                        <i class="ti ti-trash"></i>
+                       <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+    </tbody>
+</table>
+<div class="input-group">
+    <%= form.file_field name, class: 'form-control', multiple: true %>
+    <button class="btn btn-outline-secondary" type="submit">
+        <i class="ti ti-cloud-upload"></i>
+        Upload
+    </button>
+</div>

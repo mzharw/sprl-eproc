@@ -22,7 +22,7 @@ class PurchReqnPartialStatusesTest < ApplicationSystemTestCase
     fill_in "Partialable type", with: @purch_reqn_partial_status.partialable_type
     fill_in "Purch reqn partial", with: @purch_reqn_partial_status.purch_reqn_partial_id
     fill_in "Status", with: @purch_reqn_partial_status.status
-    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by
     click_on "Create Purch reqn partial status"
 
     assert_text "Purch reqn partial status was successfully created"
@@ -41,7 +41,7 @@ class PurchReqnPartialStatusesTest < ApplicationSystemTestCase
     fill_in "Partialable type", with: @purch_reqn_partial_status.partialable_type
     fill_in "Purch reqn partial", with: @purch_reqn_partial_status.purch_reqn_partial_id
     fill_in "Status", with: @purch_reqn_partial_status.status
-    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by
     click_on "Update Purch reqn partial status"
 
     assert_text "Purch reqn partial status was successfully updated"

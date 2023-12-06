@@ -17,7 +17,7 @@ class PurchReqnUncommitsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create purch_reqn_uncommit" do
     assert_difference("PurchReqnUncommit.count") do
-      post purch_reqn_uncommits_url, params: { purch_reqn_uncommit: { app_id: @purch_reqn_uncommit.app_id, created_by: @purch_reqn_uncommit.created_by, current_workflow_instance_id: @purch_reqn_uncommit.current_workflow_instance_id, desc: @purch_reqn_uncommit.desc, purch_reqn_id: @purch_reqn_uncommit.purch_reqn_id, state: @purch_reqn_uncommit.state, uncommit_remark: @purch_reqn_uncommit.uncommit_remark, updated_by_id: @purch_reqn_uncommit.updated_by_id } }
+      post purch_reqn_uncommits_url, params: { purch_reqn_uncommit: { app_id: @purch_reqn_uncommit.app_id, created_by: @purch_reqn_uncommit.created_by, current_workflow_instance_id: @purch_reqn_uncommit.current_workflow_instance_id, desc: @purch_reqn_uncommit.desc, purch_reqn_id: @purch_reqn_uncommit.purch_reqn_id, state: @purch_reqn_uncommit.state, uncommit_remark: @purch_reqn_uncommit.uncommit_remark, updated_by: @purch_reqn_uncommit.updated_by } }
     end
 
     assert_redirected_to purch_reqn_uncommit_url(PurchReqnUncommit.last)
@@ -34,7 +34,7 @@ class PurchReqnUncommitsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update purch_reqn_uncommit" do
-    patch purch_reqn_uncommit_url(@purch_reqn_uncommit), params: { purch_reqn_uncommit: { app_id: @purch_reqn_uncommit.app_id, created_by: @purch_reqn_uncommit.created_by, current_workflow_instance_id: @purch_reqn_uncommit.current_workflow_instance_id, desc: @purch_reqn_uncommit.desc, purch_reqn_id: @purch_reqn_uncommit.purch_reqn_id, state: @purch_reqn_uncommit.state, uncommit_remark: @purch_reqn_uncommit.uncommit_remark, updated_by_id: @purch_reqn_uncommit.updated_by_id } }
+    patch purch_reqn_uncommit_url(@purch_reqn_uncommit), params: { purch_reqn_uncommit: { app_id: @purch_reqn_uncommit.app_id, created_by: @purch_reqn_uncommit.created_by, current_workflow_instance_id: @purch_reqn_uncommit.current_workflow_instance_id, desc: @purch_reqn_uncommit.desc, purch_reqn_id: @purch_reqn_uncommit.purch_reqn_id, state: @purch_reqn_uncommit.state, uncommit_remark: @purch_reqn_uncommit.uncommit_remark, updated_by: @purch_reqn_uncommit.updated_by } }
     assert_redirected_to purch_reqn_uncommit_url(@purch_reqn_uncommit)
   end
 

@@ -3,7 +3,13 @@ class CurrenciesController < ApplicationController
 
   # GET /currencies or /currencies.json
   def index
-    @currencies = Currency.all
+    query = params[:query] || ''
+    @currencies = Currency.where('lower(code) LIKE ?', "%#{query.downcase}%")
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @currencies }
+    end
   end
 
   # GET /currencies/1 or /currencies/1.json

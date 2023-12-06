@@ -19,7 +19,7 @@ class FacilitiesTest < ApplicationSystemTestCase
     fill_in "Facility type", with: @facility.facility_type
     fill_in "Name", with: @facility.name
     fill_in "Updated at", with: @facility.updated_at
-    fill_in "Updated by", with: @facility.updated_by_id
+    fill_in "Updated by", with: @facility.updated_by
     click_on "Create Facility"
 
     assert_text "Facility was successfully created"
@@ -35,7 +35,7 @@ class FacilitiesTest < ApplicationSystemTestCase
     fill_in "Facility type", with: @facility.facility_type
     fill_in "Name", with: @facility.name
     fill_in "Updated at", with: @facility.updated_at
-    fill_in "Updated by", with: @facility.updated_by_id
+    fill_in "Updated by", with: @facility.updated_by
     click_on "Update Facility"
 
     assert_text "Facility was successfully updated"

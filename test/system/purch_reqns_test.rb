@@ -44,7 +44,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Risk category", with: @purch_reqn.risk_category
     fill_in "Scope of work", with: @purch_reqn.scope_of_work
     fill_in "State", with: @purch_reqn.state
-    fill_in "Updated by", with: @purch_reqn.updated_by_id
+    fill_in "Updated by", with: @purch_reqn.updated_by
     click_on "Create Purch reqn"
 
     assert_text "Purch reqn was successfully created"
@@ -85,7 +85,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Risk category", with: @purch_reqn.risk_category
     fill_in "Scope of work", with: @purch_reqn.scope_of_work
     fill_in "State", with: @purch_reqn.state
-    fill_in "Updated by", with: @purch_reqn.updated_by_id
+    fill_in "Updated by", with: @purch_reqn.updated_by
     click_on "Update Purch reqn"
 
     assert_text "Purch reqn was successfully updated"

@@ -5,8 +5,12 @@ class CreatePurchReqnLinks < ActiveRecord::Migration[7.1]
       t.uuid :from_purch_reqn, null: false
       t.uuid :to_purch_reqn, null: false
       t.string :desc
+      t.uuid :created_by
+      t.uuid :updated_by
 
       t.timestamps
     end
+    add_index :purch_reqn_links, :created_by
+    add_index :purch_reqn_links, :updated_by
   end
 end

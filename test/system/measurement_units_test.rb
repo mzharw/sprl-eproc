@@ -23,7 +23,7 @@ class MeasurementUnitsTest < ApplicationSystemTestCase
     fill_in "Name", with: @measurement_unit.name
     fill_in "Symbol", with: @measurement_unit.symbol
     fill_in "Updated at", with: @measurement_unit.updated_at
-    fill_in "Updated by", with: @measurement_unit.updated_by_id
+    fill_in "Updated by", with: @measurement_unit.updated_by
     click_on "Create Measurement unit"
 
     assert_text "Measurement unit was successfully created"
@@ -43,7 +43,7 @@ class MeasurementUnitsTest < ApplicationSystemTestCase
     fill_in "Name", with: @measurement_unit.name
     fill_in "Symbol", with: @measurement_unit.symbol
     fill_in "Updated at", with: @measurement_unit.updated_at
-    fill_in "Updated by", with: @measurement_unit.updated_by_id
+    fill_in "Updated by", with: @measurement_unit.updated_by
     click_on "Update Measurement unit"
 
     assert_text "Measurement unit was successfully updated"

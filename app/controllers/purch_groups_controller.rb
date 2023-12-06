@@ -1,4 +1,5 @@
 class PurchGroupsController < ApplicationController
+  include UserTrackable
   before_action :set_purch_group, only: %i[show edit update destroy]
 
   # GET /purch_groups or /purch_groups.json
@@ -25,7 +26,7 @@ class PurchGroupsController < ApplicationController
 
   # POST /purch_groups or /purch_groups.json
   def create
-    @purch_group = PurchGroup.new(purch_group_params)
+    @purch_group = PurchGroup.new({ **purch_group_params, **tracker })
 
     respond_to do |format|
       if @purch_group.save
@@ -70,6 +71,6 @@ class PurchGroupsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def purch_group_params
-    params.require(:purch_group).permit(:code, :from_date, :thru_date, :description)
+    params.require(:purch_group).permit(:code, :from_date, :thru_date, :description, :party_id)
   end
 end

@@ -1,4 +1,4 @@
-<%= form_with(model: purch_group) do |form| %>
+<%= form_with(model: purch_group, html: { class: 'form-container' }) do |form| %>
   <% if purch_group.errors.any? %>
     <div style="color: red">
       <h2>
@@ -25,9 +25,15 @@
       <%= form.date_field :from_date, class: 'form-control' %>
     </div>
 
-    <div class="col-md-6">
-      <label for="thru_date">Thru Date</label>
-      <%= form.date_field :thru_date, class: 'form-control' %>
+    <div class="col-md-6 d-flex flex-column gap-3">
+      <div>
+        <label for="thru_date">Thru Date</label>
+        <%= form.date_field :thru_date, class: 'form-control' %>  
+      </div>
+      <div>
+        <label for="party_id">Party</label>
+        <%= selection(form, :party_id, parties_path, :id, :full_name) %>
+      </div>
     </div>
 
     <div class="col-md-6">
@@ -35,14 +41,10 @@
       <%= form.text_area :description, class: 'form-control', rows: 5 %>
     </div>
 
-    <div class="col-md-6">
-      <label for="party_id">Party</label>
-      <%= selection(:party_id, parties_path, :id, :full_name) %>
-    </div>
 
     <!-- Add more fields as needed -->
 
   </div>
 
-  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
 <% end %>

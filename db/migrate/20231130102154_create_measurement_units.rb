@@ -6,12 +6,13 @@ class CreateMeasurementUnits < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :symbol
       t.text :desc
-
-      t.uuid :created_by
-      t.uuid :updated_by_id
       t.string :dimid
-
+      
+      t.uuid :created_by
+      t.uuid :updated_by
       t.timestamps
     end
+    add_index :measurement_units, :created_by
+    add_index :measurement_units, :updated_by
   end
 end

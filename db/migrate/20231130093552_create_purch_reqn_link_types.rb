@@ -10,5 +10,7 @@ class CreatePurchReqnLinkTypes < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+    add_index :purch_reqn_link_types, :created_by
+    add_index :purch_reqn_link_types, :updated_by
   end
 end

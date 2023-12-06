@@ -21,7 +21,7 @@ class PurchReqnItemHistoriesTest < ApplicationSystemTestCase
     fill_in "Purch reqn item", with: @purch_reqn_item_history.purch_reqn_item_id
     fill_in "Schedule", with: @purch_reqn_item_history.schedule_id
     check "System" if @purch_reqn_item_history.system
-    fill_in "Updated by", with: @purch_reqn_item_history.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_item_history.updated_by
     fill_in "Username", with: @purch_reqn_item_history.username
     click_on "Create Purch reqn item history"
 
@@ -40,7 +40,7 @@ class PurchReqnItemHistoriesTest < ApplicationSystemTestCase
     fill_in "Purch reqn item", with: @purch_reqn_item_history.purch_reqn_item_id
     fill_in "Schedule", with: @purch_reqn_item_history.schedule_id
     check "System" if @purch_reqn_item_history.system
-    fill_in "Updated by", with: @purch_reqn_item_history.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_item_history.updated_by
     fill_in "Username", with: @purch_reqn_item_history.username
     click_on "Update Purch reqn item history"
 

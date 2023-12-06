@@ -17,7 +17,7 @@ class PurchReqnPartialStatusesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create purch_reqn_partial_status" do
     assert_difference("PurchReqnPartialStatus.count") do
-      post purch_reqn_partial_statuses_url, params: { purch_reqn_partial_status: { app_id: @purch_reqn_partial_status.app_id, created_by: @purch_reqn_partial_status.created_by, partial_itemable_id: @purch_reqn_partial_status.partial_itemable_id, partial_itemable_type: @purch_reqn_partial_status.partial_itemable_type, partialable_id: @purch_reqn_partial_status.partialable_id, partialable_type: @purch_reqn_partial_status.partialable_type, purch_reqn_partial_id: @purch_reqn_partial_status.purch_reqn_partial_id, status: @purch_reqn_partial_status.status, updated_by_id: @purch_reqn_partial_status.updated_by_id } }
+      post purch_reqn_partial_statuses_url, params: { purch_reqn_partial_status: { app_id: @purch_reqn_partial_status.app_id, created_by: @purch_reqn_partial_status.created_by, partial_itemable_id: @purch_reqn_partial_status.partial_itemable_id, partial_itemable_type: @purch_reqn_partial_status.partial_itemable_type, partialable_id: @purch_reqn_partial_status.partialable_id, partialable_type: @purch_reqn_partial_status.partialable_type, purch_reqn_partial_id: @purch_reqn_partial_status.purch_reqn_partial_id, status: @purch_reqn_partial_status.status, updated_by: @purch_reqn_partial_status.updated_by } }
     end
 
     assert_redirected_to purch_reqn_partial_status_url(PurchReqnPartialStatus.last)
@@ -34,7 +34,7 @@ class PurchReqnPartialStatusesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update purch_reqn_partial_status" do
-    patch purch_reqn_partial_status_url(@purch_reqn_partial_status), params: { purch_reqn_partial_status: { app_id: @purch_reqn_partial_status.app_id, created_by: @purch_reqn_partial_status.created_by, partial_itemable_id: @purch_reqn_partial_status.partial_itemable_id, partial_itemable_type: @purch_reqn_partial_status.partial_itemable_type, partialable_id: @purch_reqn_partial_status.partialable_id, partialable_type: @purch_reqn_partial_status.partialable_type, purch_reqn_partial_id: @purch_reqn_partial_status.purch_reqn_partial_id, status: @purch_reqn_partial_status.status, updated_by_id: @purch_reqn_partial_status.updated_by_id } }
+    patch purch_reqn_partial_status_url(@purch_reqn_partial_status), params: { purch_reqn_partial_status: { app_id: @purch_reqn_partial_status.app_id, created_by: @purch_reqn_partial_status.created_by, partial_itemable_id: @purch_reqn_partial_status.partial_itemable_id, partial_itemable_type: @purch_reqn_partial_status.partial_itemable_type, partialable_id: @purch_reqn_partial_status.partialable_id, partialable_type: @purch_reqn_partial_status.partialable_type, purch_reqn_partial_id: @purch_reqn_partial_status.purch_reqn_partial_id, status: @purch_reqn_partial_status.status, updated_by: @purch_reqn_partial_status.updated_by } }
     assert_redirected_to purch_reqn_partial_status_url(@purch_reqn_partial_status)
   end
 

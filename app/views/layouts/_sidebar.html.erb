@@ -31,7 +31,7 @@
                     <span class="hide-menu">Purchase Requisition</span>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if is_active?('purch_reqns')}" do %>
+                    <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if active?('purch_reqns')}" do %>
                         <span>
                             <i class="ti ti-shopping-cart"></i>
                         </span>
@@ -39,7 +39,7 @@
                     <% end %>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to purch_groups_path, class: "sidebar-link #{'active' if is_active?('purch_groups')}" do %>
+                    <%= link_to purch_groups_path, class: "sidebar-link #{'active' if active?('purch_groups')}" do %>
                         <span>
                             <i class="ti ti-shopping-cart-cog"></i>
                         </span>
@@ -47,7 +47,7 @@
                     <% end %>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to purch_orgs_path, class: "sidebar-link #{'active' if is_active?('purch_orgs')}" do %>
+                    <%= link_to purch_orgs_path, class: "sidebar-link #{'active' if active?('purch_orgs')}" do %>
                         <span>
                             <i class="ti ti-affiliate"></i>
                         </span>
@@ -113,7 +113,7 @@
                     <span class="hide-menu">Master Data</span>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to parties_path, class: "sidebar-link #{'active' if is_active?('parties')}" do %>
+                    <%= link_to parties_path, class: "sidebar-link #{'active' if active?('parties')}" do %>
                         <span>
                             <i class="ti ti-confetti"></i>
                         </span>
@@ -121,11 +121,35 @@
                     <% end %>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to plants_path, class: "sidebar-link #{'active' if is_active?('plants')}" do %>
+                    <%= link_to plants_path, class: "sidebar-link #{'active' if active?('plants')}" do %>
                         <span>
                             <i class="ti ti-seeding"></i>
                         </span>
                         <span class="hide-menu">Plant</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to facilities_path, class: "sidebar-link #{'active' if active?('facilities')}" do %>
+                        <span>
+                            <i class="ti ti-building-community"></i>
+                        </span>
+                        <span class="hide-menu">Facility</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to cost_centers_path, class: "sidebar-link #{'active' if active?('cost_centers')}" do %>
+                        <span>
+                            <i class="ti ti-building-bank"></i>
+                        </span>
+                        <span class="hide-menu">Non AFE</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to currencies_path, class: "sidebar-link #{'active' if active?('currencies')}" do %>
+                        <span>
+                            <i class="ti ti-currency-euro"></i>
+                        </span>
+                        <span class="hide-menu">Currency</span>
                     <% end %>
                 </li>
             </ul>

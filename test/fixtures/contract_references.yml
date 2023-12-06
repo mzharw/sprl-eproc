@@ -19,7 +19,7 @@ one:
   created_at: 2023-11-30 17:21:02
   updated_at: 2023-11-30 17:21:02
   created_by: 
-  updated_by_id: 
+  updated_by: 
   area_code: MyString
   ext: MyString
   postal_code: MyString
@@ -43,7 +43,7 @@ two:
   created_at: 2023-11-30 17:21:02
   updated_at: 2023-11-30 17:21:02
   created_by: 
-  updated_by_id: 
+  updated_by: 
   area_code: MyString
   ext: MyString
   postal_code: MyString

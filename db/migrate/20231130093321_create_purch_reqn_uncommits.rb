@@ -15,5 +15,7 @@ class CreatePurchReqnUncommits < ActiveRecord::Migration[7.1]
 
     add_index :purch_reqn_uncommits, :discarded_at
     add_index :purch_reqn_uncommits, :purch_reqn
+    add_index :purch_reqn_uncommits, :created_by
+    add_index :purch_reqn_uncommits, :updated_by
   end
 end

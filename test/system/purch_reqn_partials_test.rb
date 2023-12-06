@@ -24,7 +24,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     fill_in "Purch reqn item", with: @purch_reqn_partial.purch_reqn_item_id
     fill_in "Qty", with: @purch_reqn_partial.qty
     fill_in "State", with: @purch_reqn_partial.state
-    fill_in "Updated by", with: @purch_reqn_partial.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_partial.updated_by
     click_on "Create Purch reqn partial"
 
     assert_text "Purch reqn partial was successfully created"
@@ -45,7 +45,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     fill_in "Purch reqn item", with: @purch_reqn_partial.purch_reqn_item_id
     fill_in "Qty", with: @purch_reqn_partial.qty
     fill_in "State", with: @purch_reqn_partial.state
-    fill_in "Updated by", with: @purch_reqn_partial.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_partial.updated_by
     click_on "Update Purch reqn partial"
 
     assert_text "Purch reqn partial was successfully updated"

@@ -1,9 +1,15 @@
-<h1>New currency</h1>
+<% content_for :content_header do %>
+  <b>Currency / New</b>
+  <%= link_to currencies_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
 
-<%= render "form", currency: @currency %>
+<% content_for :content do %>
+  <%= render "form", currency: @currency %>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Back to currencies", currencies_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

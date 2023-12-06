@@ -8,5 +8,7 @@ class CreatePurchReqnItemBuyers < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+    add_index :purch_reqn_item_buyers, :created_by
+    add_index :purch_reqn_item_buyers, :updated_by
   end
 end

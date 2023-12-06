@@ -5,8 +5,8 @@
   </div>
   <div data-selection-target="optionsContainer" class="options-container shadow ">
     <span class="ti ti-search selection-search-icon"></span>
-    <%= text_field_tag :selection_search, "", data: { "selection-target": "input", action: "input->selection#filterOptions" }, class: 'form-control selection-search', placeholder: 'Search' %>
-    <%= hidden_field_tag select_name, '', data: { "selection-target": "selectedInput" } %>
+    <input type="text" id="selection_search" class="form-control selection-search" data-selection-target="input" data-action="input->selection#filterOptions" placeholder="Search" value="">
+    <%= form.hidden_field select_name, data: { "selection-target": "selectedInput" } %>
     <div data-selection-target="optionsList" class="options-list"></div>
   </div>
 </div>
@@ -18,7 +18,7 @@
 
   .selection-clear {
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 20px;
   }
 
   .selection-clear:hover {
@@ -37,6 +37,7 @@
 
   .preview-container {
     border: var(--bs-border-width) solid #DFE5EF;
+    background-color: white;
     border-radius: 5px;
     height: 40px;
     padding: 8px;

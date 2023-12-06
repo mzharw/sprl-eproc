@@ -61,7 +61,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Tender location", with: @prcmt.tender_location
     fill_in "Tkdn percentage", with: @prcmt.tkdn_percentage
     fill_in "Updated at", with: @prcmt.updated_at
-    fill_in "Updated by", with: @prcmt.updated_by_id
+    fill_in "Updated by", with: @prcmt.updated_by
     click_on "Create Prcmt"
 
     assert_text "Prcmt was successfully created"
@@ -119,7 +119,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Tender location", with: @prcmt.tender_location
     fill_in "Tkdn percentage", with: @prcmt.tkdn_percentage
     fill_in "Updated at", with: @prcmt.updated_at
-    fill_in "Updated by", with: @prcmt.updated_by_id
+    fill_in "Updated by", with: @prcmt.updated_by
     click_on "Update Prcmt"
 
     assert_text "Prcmt was successfully updated"

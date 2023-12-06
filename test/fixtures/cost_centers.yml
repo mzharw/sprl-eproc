@@ -8,7 +8,7 @@ one:
   payroll_id: MyString
   valid_to: 2023-12-04
   created_by: 
-  updated_by_id: 
+  updated_by: 
   purch_group_id: 
 
 two:
@@ -19,5 +19,5 @@ two:
   payroll_id: MyString
   valid_to: 2023-12-04
   created_by: 
-  updated_by_id: 
+  updated_by: 
   purch_group_id: 

@@ -1,10 +1,84 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Purchase Requisition / Overview </b>
+  <%= link_to purch_reqns_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
 
-<%= render @purch_reqn %>
+<% content_for :content do %>
+  <div class="overflow-y-scroll w-100 h-100 d-flex flex-column gap-2">
+    <a class="p-3 rounded-2 border text-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn" aria-expanded="false" aria-controls="purch_reqn">
+      Purchase Requisition
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="form-container collapse show" id="purch_reqn">
+      <%= render @purch_reqn %>
+    </div>
+  
+    <a class="p-3 rounded-2 border text-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn_item" aria-expanded="false" aria-controls="purch_reqn_item">
+      Purchase Requisition Items
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="form-container collapse show" id="purch_reqn_item">
+      <%= render 'purch_reqn_items/list', locals: { items: @purch_reqn.items } %>
+    </div>
 
-<div>
-  <%= link_to "Edit this purch reqn", edit_purch_reqn_path(@purch_reqn) %> |
-  <%= link_to "Back to purch reqns", purch_reqns_path %>
+    <a class="p-3 rounded-2 border text-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false" aria-controls="documents">
+      Documents
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <%= form_with(model: @purch_reqn, html: { class: 'form-container collapse show', id: :documents }) do |form| %>
+      <div class="row g-5">
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.contract_docs, title: 'Contract Document', form: form, name: :contract_docs %>
+        </div>
 
-  <%= button_to "Destroy this purch reqn", @purch_reqn, method: :delete %>
-</div>
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.contract_ex_sp_docs, title: 'Contract Exhibits/Specification', form: form, name: :contract_ex_sp_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.memo_scm_manager_docs, title: 'Memo SCM Manager', form: form, name: :memo_scm_manager_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.work_ex_plan_docs, title: 'Work Execution Plan', form: form, name: :work_ex_plan_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.owner_estimate_docs, title: 'Owner Estimate', form: form, name: :owner_estimate_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.tech_eval_method_docs, title: 'Technical Evaluation Method', form: form, name: :tech_eval_method_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.det_landing_cost_docs, title: 'Detail Landing Cost', form: form, name: :det_landing_cost_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.inspect_eval_method_docs, title: 'Inspection Evaluation Method', form: form, name: :inspect_eval_method_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.risk_assessment_docs, title: 'Risk Assessment', form: form, name: :risk_assessment_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.justify_memo_docs, title: 'Justification Memo', form: form, name: :justify_memo_docs %>
+        </div>
+        
+        <div class="col-md-6">
+          <%= render 'docs', docs: @purch_reqn.res_util_justify_docs, title: 'Resource Utilization Justification', form: form, name: :res_util_justify_docs %>
+        </div>
+        
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

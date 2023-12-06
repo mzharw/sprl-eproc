@@ -21,7 +21,7 @@ class PurchReqnUncommitsTest < ApplicationSystemTestCase
     fill_in "Purch reqn", with: @purch_reqn_uncommit.purch_reqn_id
     fill_in "State", with: @purch_reqn_uncommit.state
     fill_in "Uncommit remark", with: @purch_reqn_uncommit.uncommit_remark
-    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by
     click_on "Create Purch reqn uncommit"
 
     assert_text "Purch reqn uncommit was successfully created"
@@ -39,7 +39,7 @@ class PurchReqnUncommitsTest < ApplicationSystemTestCase
     fill_in "Purch reqn", with: @purch_reqn_uncommit.purch_reqn_id
     fill_in "State", with: @purch_reqn_uncommit.state
     fill_in "Uncommit remark", with: @purch_reqn_uncommit.uncommit_remark
-    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by_id
+    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by
     click_on "Update Purch reqn uncommit"
 
     assert_text "Purch reqn uncommit was successfully updated"
