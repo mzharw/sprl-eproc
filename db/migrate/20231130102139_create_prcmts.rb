@@ -1,7 +1,6 @@
 class CreatePrcmts < ActiveRecord::Migration[7.1]
   def change
     create_table :prcmts, id: :uuid do |t|
-      t.uuid :app_id
       t.uuid :prcmt_type_id
       t.string :number
       t.string :name
@@ -46,11 +45,11 @@ class CreatePrcmts < ActiveRecord::Migration[7.1]
       t.decimal :tkdn_percentage
       t.string :tender_location
 
-      t.uuid :created_by
-      t.uuid :updated_by
+      t.uuid :created_by_id
+      t.uuid :updated_by_id
       t.timestamps
     end
-    add_index :prcmts, :created_by
-    add_index :prcmts, :updated_by
+    add_index :prcmts, :created_by_id
+    add_index :prcmts, :updated_by_id
   end
 end

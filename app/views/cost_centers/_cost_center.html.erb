@@ -1,47 +1,48 @@
-<div id="<%= dom_id cost_center %>">
-  <p>
-    <strong>Cost center:</strong>
-    <%= cost_center.cost_center_id %>
-  </p>
+<table class="table">
 
-  <p>
-    <strong>Ctrl name:</strong>
-    <%= cost_center.ctrl_name %>
-  </p>
+  <tr>
+    <td><strong>Cost Center ID:</strong></td> 
+    <td><%= cost_center.cost_center_id %></td>
+  </tr>
 
-  <p>
-    <strong>Desc:</strong>
-    <%= cost_center.desc %>
-  </p>
+  <tr>
+    <td><strong>Controller Name:</strong></td>
+    <td><%= cost_center.ctrl_name %></td>
+  </tr>
 
-  <p>
-    <strong>Position:</strong>
-    <%= cost_center.position %>
-  </p>
+  <tr>
+    <td><strong>Description:</strong></td>
+    <td><%= cost_center.desc %></td>
+  </tr>
 
-  <p>
-    <strong>Payroll:</strong>
-    <%= cost_center.payroll_id %>
-  </p>
+  <tr>
+    <td><strong>Position:</strong></td>
+    <td><%= cost_center.position %></td>
+  </tr>
 
-  <p>
-    <strong>Valid to:</strong>
-    <%= cost_center.valid_to %>
-  </p>
+  <tr>
+    <td><strong>Payroll:</strong></td>
+    <td><%= cost_center.payroll_id %></td>
+  </tr>
 
-  <p>
-    <strong>Created by:</strong>
-    <%= cost_center.created_by %>
-  </p>
+  <tr>
+    <td><strong>Valid to:</strong></td>
+    <td><%= cost_center.valid_to %></td>
+  </tr>
 
-  <p>
-    <strong>Updated by:</strong>
-    <%= cost_center.updated_by %>
-  </p>
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= cost_center.creator.username %></td>
+  </tr>
 
-  <p>
-    <strong>Purch group:</strong>
-    <%= cost_center.purch_group_id %>
-  </p>
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= cost_center.updater.username %></td>
+  </tr>
 
-</div>
+  <tr>
+    <td><strong>Purchasing group:</strong></td>
+    <td><%= cost_center.purch_group.code %></td>
+  </tr>
+
+</table>

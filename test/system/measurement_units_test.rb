@@ -14,16 +14,15 @@ class MeasurementUnitsTest < ApplicationSystemTestCase
     visit measurement_units_url
     click_on "New measurement unit"
 
-    fill_in "App", with: @measurement_unit.app_id
     fill_in "Created at", with: @measurement_unit.created_at
-    fill_in "Created by", with: @measurement_unit.created_by
+    fill_in "Created by", with: @measurement_unit.created_by_id
     fill_in "Desc", with: @measurement_unit.desc
     fill_in "Dimid", with: @measurement_unit.dimid
     fill_in "Ident name", with: @measurement_unit.ident_name
     fill_in "Name", with: @measurement_unit.name
     fill_in "Symbol", with: @measurement_unit.symbol
     fill_in "Updated at", with: @measurement_unit.updated_at
-    fill_in "Updated by", with: @measurement_unit.updated_by
+    fill_in "Updated by", with: @measurement_unit.updated_by_id
     click_on "Create Measurement unit"
 
     assert_text "Measurement unit was successfully created"
@@ -34,16 +33,15 @@ class MeasurementUnitsTest < ApplicationSystemTestCase
     visit measurement_unit_url(@measurement_unit)
     click_on "Edit this measurement unit", match: :first
 
-    fill_in "App", with: @measurement_unit.app_id
     fill_in "Created at", with: @measurement_unit.created_at
-    fill_in "Created by", with: @measurement_unit.created_by
+    fill_in "Created by", with: @measurement_unit.created_by_id
     fill_in "Desc", with: @measurement_unit.desc
     fill_in "Dimid", with: @measurement_unit.dimid
     fill_in "Ident name", with: @measurement_unit.ident_name
     fill_in "Name", with: @measurement_unit.name
     fill_in "Symbol", with: @measurement_unit.symbol
     fill_in "Updated at", with: @measurement_unit.updated_at
-    fill_in "Updated by", with: @measurement_unit.updated_by
+    fill_in "Updated by", with: @measurement_unit.updated_by_id
     click_on "Update Measurement unit"
 
     assert_text "Measurement unit was successfully updated"

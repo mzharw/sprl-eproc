@@ -1,14 +1,13 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Measurement units</h1>
-
-<div id="measurement_units">
-  <% @measurement_units.each do |measurement_unit| %>
-    <%= render measurement_unit %>
-    <p>
-      <%= link_to "Show this measurement unit", measurement_unit %>
-    </p>
+<% content_for :content_header do %>
+  <b>Measurement Unit</b>
+  <%= link_to new_measurement_unit_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-plus"></i>
+      New entry
+    </button>
   <% end %>
-</div>
-
-<%= link_to "New measurement unit", new_measurement_unit_path %>
+<% end %>
+<% content_for :content do %>
+    <%= render 'list', measurement_units: @measurement_units %>
+<% end %>
+<%= render "layouts/wrapper" , sidebar: true %>

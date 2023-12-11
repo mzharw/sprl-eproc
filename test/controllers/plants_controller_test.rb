@@ -17,7 +17,7 @@ class PlantsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create plant" do
     assert_difference("Plant.count") do
-      post plants_url, params: { plant: { app_id: @plant.app_id, code: @plant.code, facility_id: @plant.facility_id, from_date: @plant.from_date, owner_party_id: @plant.owner_party_id, thru_date: @plant.thru_date } }
+      post plants_url, params: { plant: { code: @plant.code, facility_id: @plant.facility_id, from_date: @plant.from_date, owner_party_id: @plant.owner_party_id, thru_date: @plant.thru_date } }
     end
 
     assert_redirected_to plant_url(Plant.last)
@@ -34,7 +34,7 @@ class PlantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update plant" do
-    patch plant_url(@plant), params: { plant: { app_id: @plant.app_id, code: @plant.code, facility_id: @plant.facility_id, from_date: @plant.from_date, owner_party_id: @plant.owner_party_id, thru_date: @plant.thru_date } }
+    patch plant_url(@plant), params: { plant: { code: @plant.code, facility_id: @plant.facility_id, from_date: @plant.from_date, owner_party_id: @plant.owner_party_id, thru_date: @plant.thru_date } }
     assert_redirected_to plant_url(@plant)
   end
 

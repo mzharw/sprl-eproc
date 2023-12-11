@@ -16,7 +16,6 @@ class PrcmtsTest < ApplicationSystemTestCase
 
     fill_in "Aanwijzing visibility", with: @prcmt.aanwijzing_visibility
     fill_in "Announced at", with: @prcmt.announced_at
-    fill_in "App", with: @prcmt.app_id
     fill_in "Assessment method", with: @prcmt.assessment_method
     check "Auction" if @prcmt.auction
     check "Bid bond" if @prcmt.bid_bond
@@ -30,7 +29,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Candidate selection remark", with: @prcmt.candidate_selection_remark
     fill_in "Contract number", with: @prcmt.contract_number
     fill_in "Created at", with: @prcmt.created_at
-    fill_in "Created by", with: @prcmt.created_by
+    fill_in "Created by", with: @prcmt.created_by_id
     fill_in "Current workflow instance", with: @prcmt.current_workflow_instance_id
     fill_in "Data", with: @prcmt.data
     fill_in "Desc", with: @prcmt.desc
@@ -61,7 +60,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Tender location", with: @prcmt.tender_location
     fill_in "Tkdn percentage", with: @prcmt.tkdn_percentage
     fill_in "Updated at", with: @prcmt.updated_at
-    fill_in "Updated by", with: @prcmt.updated_by
+    fill_in "Updated by", with: @prcmt.updated_by_id
     click_on "Create Prcmt"
 
     assert_text "Prcmt was successfully created"
@@ -74,7 +73,6 @@ class PrcmtsTest < ApplicationSystemTestCase
 
     fill_in "Aanwijzing visibility", with: @prcmt.aanwijzing_visibility
     fill_in "Announced at", with: @prcmt.announced_at
-    fill_in "App", with: @prcmt.app_id
     fill_in "Assessment method", with: @prcmt.assessment_method
     check "Auction" if @prcmt.auction
     check "Bid bond" if @prcmt.bid_bond
@@ -88,7 +86,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Candidate selection remark", with: @prcmt.candidate_selection_remark
     fill_in "Contract number", with: @prcmt.contract_number
     fill_in "Created at", with: @prcmt.created_at
-    fill_in "Created by", with: @prcmt.created_by
+    fill_in "Created by", with: @prcmt.created_by_id
     fill_in "Current workflow instance", with: @prcmt.current_workflow_instance_id
     fill_in "Data", with: @prcmt.data
     fill_in "Desc", with: @prcmt.desc
@@ -119,7 +117,7 @@ class PrcmtsTest < ApplicationSystemTestCase
     fill_in "Tender location", with: @prcmt.tender_location
     fill_in "Tkdn percentage", with: @prcmt.tkdn_percentage
     fill_in "Updated at", with: @prcmt.updated_at
-    fill_in "Updated by", with: @prcmt.updated_by
+    fill_in "Updated by", with: @prcmt.updated_by_id
     click_on "Update Prcmt"
 
     assert_text "Prcmt was successfully updated"

@@ -5,39 +5,9 @@
       <i class="ti ti-plus"></i>
       New entry
     </button>
-    <% end %>
-      <% end %>
-        <% content_for :content do %>
-          <div style="overflow: auto; height: calc(100% - 50px);">
-            <table class="table table-striped table-hover table-bordered">
-              <thead>
-                <tr>
-                  <th>PR Number</th>
-                  <th>PR Type</th>
-                  <th>Contract</th>
-                  <th>Description</th>
-                  <th>Plant Code</th>
-                  <th>Plant</th>
-                  <th>Non AFE Code</th>
-                  <th>Non AFE</th>
-                  <th>Purchasing Group Code</th>
-                  <th>Workflow State</th>
-                  <th>State</th>
-                  <th>Created By</th>
-                  <th>Subtotal</th>
-                  <th>Created at</th>
-                  <th>Cancel Remark</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <%= turbo_frame_tag "blog_posts" do %>
-                  <% @purch_groups.each do |purch_group| %>
-                    <%= render purch_group %>
-                      <% end %>
-                        <% end %>
-              </tbody>
-            </table>
-          </div>
-          <% end %>
-            <%= render "layouts/wrapper" , sidebar: true %>
+  <% end %>
+<% end %>
+<% content_for :content do %>
+    <%= render partial: 'list', collection: @purch_groups.presence|| ['Empty'] %>
+<% end %>
+<%= render "layouts/wrapper" , sidebar: true %>

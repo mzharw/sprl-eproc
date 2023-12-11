@@ -1,4 +1,4 @@
-<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+<div class="page-wrapper" style="background-color: rgb(214, 48, 48);" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
   data-sidebar-position="fixed" data-header-position="fixed" data-controller="sidebar">
   <% if local_assigns[:sidebar] %>
     <%= render partial: 'layouts/sidebar' %>
@@ -6,14 +6,16 @@
     <!-- Main wrapper -->
   <div class="<%= 'body-wrapper' if !!local_assigns[:sidebar] %>" style="overflow: hidden; height: 100vh; position: relative;">
     <%= render 'layouts/header', full: !!local_assigns[:sidebar] %>
-    <div style="padding: 70px 20px; height: 100%;">
-      <div style="padding: 10px 0; display: flex; justify-content: space-between; align-items: center;">
-        <% if content_for?(:'content_header') %>
+    <div style="transform: translateY(115px);">
+      <!-- <% if content_for?(:'content_header') %>
+        <div style="padding: 10px 20px;" class="text-white d-flex justify-content-between border-bottom align-items-center">
           <%= yield :content_header %>
-        <% end %>
-      </div>
+        </div>
+      <% end %> -->
       <% if content_for?(:'content') %>
-        <%= yield :content %>
+        <div class="p-9 overflow-x-auto d-flex flex-column" style="height: calc(100vh - 115px); background-color: #f9f9f9;">
+          <%= yield :content %>
+        </div>
       <% end %>
     </div>
   </div>

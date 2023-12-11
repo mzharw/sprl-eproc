@@ -1,32 +1,28 @@
-<div id="<%= dom_id product_group %>">
-  <p>
-    <strong>App:</strong>
-    <%= product_group.app_id %>
-  </p>
+<table class="table">
 
-  <p>
-    <strong>Party:</strong>
-    <%= product_group.party_id %>
-  </p>
+  <tr>
+    <td><strong>Code:</strong></td>
+    <td><%= product_group.code %></td>
+  </tr>
 
-  <p>
-    <strong>Code:</strong>
-    <%= product_group.code %>
-  </p>
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td><%= product_group.name %></td>
+  </tr>
 
-  <p>
-    <strong>From date:</strong>
-    <%= product_group.from_date %>
-  </p>
+  <tr>
+    <td><strong>Desc:</strong></td>
+    <td><%= product_group.desc %></td>
+  </tr>
 
-  <p>
-    <strong>Thru date:</strong>
-    <%= product_group.thru_date %>
-  </p>
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= product_group.creator.username %></td>
+  </tr>
 
-  <p>
-    <strong>Desc:</strong>
-    <%= product_group.desc %>
-  </p>
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= product_group.updater.username %></td>
+  </tr>
 
-</div>
+</table>

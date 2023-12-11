@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Party / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render @party %>
+    <%= link_to parties_path do %>
+      <button class="btn btn-sm btn-outline-secondary text-white">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to edit_party_path(@party), class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-edit"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
 
-<div>
-  <%= link_to "Edit this party", edit_party_path(@party) %> |
-  <%= link_to "Back to parties", parties_path %>
+<% content_for :content do %>
+  <%= render @party %>
+<% end %>
 
-  <%= button_to "Destroy this party", @party, method: :delete %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

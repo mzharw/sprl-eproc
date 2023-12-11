@@ -17,7 +17,7 @@ class ProductGroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create product_group" do
     assert_difference("ProductGroup.count") do
-      post product_groups_url, params: { product_group: { app_id: @product_group.app_id, code: @product_group.code, desc: @product_group.desc, from_date: @product_group.from_date, party_id: @product_group.party_id, thru_date: @product_group.thru_date } }
+      post product_groups_url, params: { product_group: { code: @product_group.code, created_by_id: @product_group.created_by_id, desc: @product_group.desc, name: @product_group.name, updated_by_id: @product_group.updated_by_id } }
     end
 
     assert_redirected_to product_group_url(ProductGroup.last)
@@ -34,7 +34,7 @@ class ProductGroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update product_group" do
-    patch product_group_url(@product_group), params: { product_group: { app_id: @product_group.app_id, code: @product_group.code, desc: @product_group.desc, from_date: @product_group.from_date, party_id: @product_group.party_id, thru_date: @product_group.thru_date } }
+    patch product_group_url(@product_group), params: { product_group: { code: @product_group.code, created_by_id: @product_group.created_by_id, desc: @product_group.desc, name: @product_group.name, updated_by_id: @product_group.updated_by_id } }
     assert_redirected_to product_group_url(@product_group)
   end
 

@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Purchase Organization / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render @purch_org %>
+    <%= link_to purch_orgs_path do %>
+      <button class="btn btn-sm btn-outline-secondary text-white">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to edit_purch_org_path(@purch_org), class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-edit"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
 
-<div>
-  <%= link_to "Edit this purch org", edit_purch_org_path(@purch_org) %> |
-  <%= link_to "Back to purch orgs", purch_orgs_path %>
+<% content_for :content do %>
+  <%= render @purch_org %>
+<% end %>
 
-  <%= button_to "Destroy this purch org", @purch_org, method: :delete %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

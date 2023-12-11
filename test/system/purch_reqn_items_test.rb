@@ -15,15 +15,14 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     click_on "New purch reqn item"
 
     fill_in "Adjustment qty", with: @purch_reqn_item.adjustment_qty
-    fill_in "App", with: @purch_reqn_item.app_id
     fill_in "Commodity list", with: @purch_reqn_item.commodity_list
     check "Contract flag" if @purch_reqn_item.contract_flag
     fill_in "Contract item reference", with: @purch_reqn_item.contract_item_reference_id
-    fill_in "Created by", with: @purch_reqn_item.created_by
+    fill_in "Created by", with: @purch_reqn_item.created_by_id
     fill_in "Currency", with: @purch_reqn_item.currency_id
     fill_in "Data", with: @purch_reqn_item.data
     fill_in "Deleted at", with: @purch_reqn_item.deleted_at
-    fill_in "Deleted by", with: @purch_reqn_item.deleted_by_id
+    fill_in "Deleted by", with: @purch_reqn_item.discarded_by_id
     fill_in "Desc", with: @purch_reqn_item.desc
     fill_in "Desired vendor", with: @purch_reqn_item.desired_vendor
     fill_in "Est subtotal", with: @purch_reqn_item.est_subtotal
@@ -44,7 +43,7 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     fill_in "Qty", with: @purch_reqn_item.qty
     fill_in "Requisitioner", with: @purch_reqn_item.requisitioner
     fill_in "Specification", with: @purch_reqn_item.specification
-    fill_in "Updated by", with: @purch_reqn_item.updated_by
+    fill_in "Updated by", with: @purch_reqn_item.updated_by_id
     fill_in "Wbsproject", with: @purch_reqn_item.wbsproject_id
     click_on "Create Purch reqn item"
 
@@ -57,15 +56,14 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     click_on "Edit this purch reqn item", match: :first
 
     fill_in "Adjustment qty", with: @purch_reqn_item.adjustment_qty
-    fill_in "App", with: @purch_reqn_item.app_id
     fill_in "Commodity list", with: @purch_reqn_item.commodity_list
     check "Contract flag" if @purch_reqn_item.contract_flag
     fill_in "Contract item reference", with: @purch_reqn_item.contract_item_reference_id
-    fill_in "Created by", with: @purch_reqn_item.created_by
+    fill_in "Created by", with: @purch_reqn_item.created_by_id
     fill_in "Currency", with: @purch_reqn_item.currency_id
     fill_in "Data", with: @purch_reqn_item.data
     fill_in "Deleted at", with: @purch_reqn_item.deleted_at
-    fill_in "Deleted by", with: @purch_reqn_item.deleted_by_id
+    fill_in "Deleted by", with: @purch_reqn_item.discarded_by_id
     fill_in "Desc", with: @purch_reqn_item.desc
     fill_in "Desired vendor", with: @purch_reqn_item.desired_vendor
     fill_in "Est subtotal", with: @purch_reqn_item.est_subtotal
@@ -86,7 +84,7 @@ class PurchReqnItemsTest < ApplicationSystemTestCase
     fill_in "Qty", with: @purch_reqn_item.qty
     fill_in "Requisitioner", with: @purch_reqn_item.requisitioner
     fill_in "Specification", with: @purch_reqn_item.specification
-    fill_in "Updated by", with: @purch_reqn_item.updated_by
+    fill_in "Updated by", with: @purch_reqn_item.updated_by_id
     fill_in "Wbsproject", with: @purch_reqn_item.wbsproject_id
     click_on "Update Purch reqn item"
 

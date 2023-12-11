@@ -17,7 +17,7 @@ class PurchReqnItemBuyersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create purch_reqn_item_buyer" do
     assert_difference("PurchReqnItemBuyer.count") do
-      post purch_reqn_item_buyers_url, params: { purch_reqn_item_buyer: { app_id: @purch_reqn_item_buyer.app_id, buyer_id: @purch_reqn_item_buyer.buyer_id, created_by: @purch_reqn_item_buyer.created_by, purch_reqn_item_id: @purch_reqn_item_buyer.purch_reqn_item_id, updated_by: @purch_reqn_item_buyer.updated_by } }
+      post purch_reqn_item_buyers_url, params: { purch_reqn_item_buyer: { buyer_id: @purch_reqn_item_buyer.buyer_id, created_by_id: @purch_reqn_item_buyer.created_by_id, purch_reqn_item_id: @purch_reqn_item_buyer.purch_reqn_item_id, updated_by_id: @purch_reqn_item_buyer.updated_by_id } }
     end
 
     assert_redirected_to purch_reqn_item_buyer_url(PurchReqnItemBuyer.last)
@@ -34,7 +34,7 @@ class PurchReqnItemBuyersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update purch_reqn_item_buyer" do
-    patch purch_reqn_item_buyer_url(@purch_reqn_item_buyer), params: { purch_reqn_item_buyer: { app_id: @purch_reqn_item_buyer.app_id, buyer_id: @purch_reqn_item_buyer.buyer_id, created_by: @purch_reqn_item_buyer.created_by, purch_reqn_item_id: @purch_reqn_item_buyer.purch_reqn_item_id, updated_by: @purch_reqn_item_buyer.updated_by } }
+    patch purch_reqn_item_buyer_url(@purch_reqn_item_buyer), params: { purch_reqn_item_buyer: { buyer_id: @purch_reqn_item_buyer.buyer_id, created_by_id: @purch_reqn_item_buyer.created_by_id, purch_reqn_item_id: @purch_reqn_item_buyer.purch_reqn_item_id, updated_by_id: @purch_reqn_item_buyer.updated_by_id } }
     assert_redirected_to purch_reqn_item_buyer_url(@purch_reqn_item_buyer)
   end
 

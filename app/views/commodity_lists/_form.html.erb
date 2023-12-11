@@ -1,0 +1,38 @@
+<%= form_with(model: commodity_list) do |form| %>
+  <% if commodity_list.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(commodity_list.errors.count, "error" ) %> prohibited this commodity list from being saved:
+      </h2>
+      <ul>
+        <% commodity_list.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="number">ID</label>
+      <%= form.text_field :commodity_list_id, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="number">Number</label>
+      <%= form.text_field :number, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="desc">Description</label>
+      <%= form.text_field :desc, class: 'form-control' %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+<% end %>

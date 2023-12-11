@@ -1,3 +1,33 @@
-<div id="<%= dom_id purch_group %>">
-  <%= purch_group.id %>
-</div>
+<table class="table">
+
+    <tr>
+      <td><strong>Code:</strong></td>
+      <td><%= purch_group.code %></td>
+    </tr>
+  
+    <tr>
+      <td><strong>Description:</strong></td>
+      <td><%= purch_group.description %></td>
+    </tr>
+  
+    <tr>
+      <td><strong>From date:</strong></td>
+      <td><%= purch_group.from_date %></td>
+    </tr>
+  
+    <tr>
+      <td><strong>Thru date:</strong></td>
+      <td><%= purch_group.thru_date %></td>
+    </tr>
+  
+    <tr>
+      <td><strong>Created by:</strong></td>
+      <td><%= purch_group.creator.username %></td>
+    </tr>
+  
+    <tr>
+      <td><strong>Updated by:</strong></td>
+      <td><%= purch_group.updater.username %></td> 
+    </tr>
+  
+  </table>

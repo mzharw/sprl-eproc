@@ -1,4 +1,3 @@
-// selection_controller.js
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
@@ -6,8 +5,8 @@ export default class extends Controller {
 
     connect() {
         this.loadOptions();
-        this.hideOptions();
         this.toggleClearSelection();
+        // this.hideOptions();
 
         // Add a global click event listener
         document.addEventListener("click", (event) => {
@@ -48,6 +47,7 @@ export default class extends Controller {
                 // Check if the option is selected and add the "active" class
                 if (result[data.value] === this.selectedInputTarget.value) {
                     optionElement.classList.add("active");
+                    this.selectOption(result, false);
                 }
             });
         } else {
@@ -58,7 +58,8 @@ export default class extends Controller {
     }
 
     filterOptions() {
-        this.loadOptions(this.inputTarget.value);
+        const query = this.inputTarget.value.trim();
+        this.debounce(this.loadOptions(query), 300)
     }
 
     toggleOptions() {
@@ -66,7 +67,7 @@ export default class extends Controller {
         optionsContainer.classList.toggle("show-options");
     }
 
-    selectOption(option) {
+    selectOption(option, close = true) {
         this.selectedValueTarget.textContent = option[this.element.dataset.text];
         this.selectedInputTarget.value = option[this.element.dataset.value];
 
@@ -80,8 +81,8 @@ export default class extends Controller {
         if (selectedOptionElement) {
             selectedOptionElement.classList.add("active");
         }
-
-        this.hideOptions();
+        
+        if (close) this.hideOptions();
         this.toggleClearSelection();
     }
 
@@ -92,7 +93,9 @@ export default class extends Controller {
     toggleClearSelection() {
         const clearSelectionIcon = this.clearSelectionTarget;
         const selectedValue = this.selectedValueTarget.textContent.trim();
-        clearSelectionIcon.style.display = selectedValue ? "inline-block" : "none";
+        // clearSelectionIcon.style.display = selectedValue ? "inline-block" : "none";
+        clearSelectionIcon.classList.toggle('ti-chevron-down', !selectedValue);
+        clearSelectionIcon.classList.toggle('ti-x', selectedValue);
     }
 
     clearSelection() {
@@ -104,5 +107,17 @@ export default class extends Controller {
         this.selectedValueTarget.textContent = "";
         this.selectedInputTarget.value = "";
         this.toggleClearSelection();
+    }
+
+    debounce(func, delay) {
+        let timeoutId;
+        return function (...args) {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            timeoutId = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
     }
 }

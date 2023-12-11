@@ -17,7 +17,7 @@ class PurchReqnItemHistoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create purch_reqn_item_history" do
     assert_difference("PurchReqnItemHistory.count") do
-      post purch_reqn_item_histories_url, params: { purch_reqn_item_history: { app_id: @purch_reqn_item_history.app_id, created_by: @purch_reqn_item_history.created_by, desc: @purch_reqn_item_history.desc, finished_at: @purch_reqn_item_history.finished_at, purch_reqn_item_id: @purch_reqn_item_history.purch_reqn_item_id, schedule_id: @purch_reqn_item_history.schedule_id, system: @purch_reqn_item_history.system, updated_by: @purch_reqn_item_history.updated_by, username: @purch_reqn_item_history.username } }
+      post purch_reqn_item_histories_url, params: { purch_reqn_item_history: { created_by_id: @purch_reqn_item_history.created_by_id, desc: @purch_reqn_item_history.desc, finished_at: @purch_reqn_item_history.finished_at, purch_reqn_item_id: @purch_reqn_item_history.purch_reqn_item_id, schedule_id: @purch_reqn_item_history.schedule_id, system: @purch_reqn_item_history.system, updated_by_id: @purch_reqn_item_history.updated_by_id, username: @purch_reqn_item_history.username } }
     end
 
     assert_redirected_to purch_reqn_item_history_url(PurchReqnItemHistory.last)
@@ -34,7 +34,7 @@ class PurchReqnItemHistoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update purch_reqn_item_history" do
-    patch purch_reqn_item_history_url(@purch_reqn_item_history), params: { purch_reqn_item_history: { app_id: @purch_reqn_item_history.app_id, created_by: @purch_reqn_item_history.created_by, desc: @purch_reqn_item_history.desc, finished_at: @purch_reqn_item_history.finished_at, purch_reqn_item_id: @purch_reqn_item_history.purch_reqn_item_id, schedule_id: @purch_reqn_item_history.schedule_id, system: @purch_reqn_item_history.system, updated_by: @purch_reqn_item_history.updated_by, username: @purch_reqn_item_history.username } }
+    patch purch_reqn_item_history_url(@purch_reqn_item_history), params: { purch_reqn_item_history: { created_by_id: @purch_reqn_item_history.created_by_id, desc: @purch_reqn_item_history.desc, finished_at: @purch_reqn_item_history.finished_at, purch_reqn_item_id: @purch_reqn_item_history.purch_reqn_item_id, schedule_id: @purch_reqn_item_history.schedule_id, system: @purch_reqn_item_history.system, updated_by_id: @purch_reqn_item_history.updated_by_id, username: @purch_reqn_item_history.username } }
     assert_redirected_to purch_reqn_item_history_url(@purch_reqn_item_history)
   end
 

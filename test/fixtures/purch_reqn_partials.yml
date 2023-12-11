@@ -1,8 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app: one
-  purch_reqn_item: one
+
+  purch_reqn_item_id: one
   partialable_type: MyString
   partialable: one
   partial_itemable_type: MyString
@@ -10,12 +10,12 @@ one:
   qty: 1.5
   data: 
   state: MyString
-  created_by: one
-  updated_by: one
+  created_by_id: one
+  updated_by_id: one
 
 two:
-  app: two
-  purch_reqn_item: two
+
+  purch_reqn_item_id: two
   partialable_type: MyString
   partialable: two
   partial_itemable_type: MyString
@@ -23,5 +23,5 @@ two:
   qty: 1.5
   data: 
   state: MyString
-  created_by: two
-  updated_by: two
+  created_by_id: two
+  updated_by_id: two

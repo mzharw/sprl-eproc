@@ -14,12 +14,11 @@ class ProductGroupsTest < ApplicationSystemTestCase
     visit product_groups_url
     click_on "New product group"
 
-    fill_in "App", with: @product_group.app_id
     fill_in "Code", with: @product_group.code
+    fill_in "Created by", with: @product_group.created_by_id
     fill_in "Desc", with: @product_group.desc
-    fill_in "From date", with: @product_group.from_date
-    fill_in "Party", with: @product_group.party_id
-    fill_in "Thru date", with: @product_group.thru_date
+    fill_in "Name", with: @product_group.name
+    fill_in "Updated by", with: @product_group.updated_by_id
     click_on "Create Product group"
 
     assert_text "Product group was successfully created"
@@ -30,12 +29,11 @@ class ProductGroupsTest < ApplicationSystemTestCase
     visit product_group_url(@product_group)
     click_on "Edit this product group", match: :first
 
-    fill_in "App", with: @product_group.app_id
     fill_in "Code", with: @product_group.code
+    fill_in "Created by", with: @product_group.created_by_id
     fill_in "Desc", with: @product_group.desc
-    fill_in "From date", with: @product_group.from_date
-    fill_in "Party", with: @product_group.party_id
-    fill_in "Thru date", with: @product_group.thru_date
+    fill_in "Name", with: @product_group.name
+    fill_in "Updated by", with: @product_group.updated_by_id
     click_on "Update Product group"
 
     assert_text "Product group was successfully updated"

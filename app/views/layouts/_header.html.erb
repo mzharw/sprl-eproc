@@ -1,6 +1,6 @@
 <!-- Header Start -->
 <header class="app-header <%= 'w-100' unless !!local_assigns[:full] %>">
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light shadow-lg" style="padding: 0 30px;">
         <ul class="navbar-nav d-flex gap-3">
             <li class="nav-item d-block d-xl-none">
                 <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
@@ -8,11 +8,11 @@
                 </a>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <h5 class="fw-bolder mb-0 text-white">
+                <h5 class="fw-bolder mb-0 text-white text-nowrap">
                     SPR Langgak E-procurement
                 </h5>
             </li>
-            <li class="nav-item d-flex align-items-center">
+            <!-- <li class="nav-item d-flex align-items-center">
                 <span>Home</span>
             </li>
             <li class="nav-item d-flex align-items-center">
@@ -26,7 +26,7 @@
             </li>
             <li class="nav-item d-flex align-items-center">
                 <span>Announcement</span>
-            </li>
+            </li> -->
             <!-- <li class="nav-item">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)">
                     <i class="ti ti-bell-ringing"></i>
@@ -65,5 +65,10 @@
             </div>
             <% end %>
     </nav>
+    <% if content_for?(:'content_header') %>
+        <div style="padding: 7px 30px;" class="text-white d-flex justify-content-between align-items-center">
+            <%= yield :content_header %>
+        </div>
+    <% end %>
 </header>
 <!-- Header End -->

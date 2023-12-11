@@ -1,0 +1,50 @@
+<table class="table  table-hover table-bordered data-container">
+    <thead>
+      <tr>
+        <th><%= sortable_header('Product Type', products_path, :product_type) %></th>
+        <th><%= sortable_header('Product Group', products_path, :product_group_id) %></th>
+        <th><%= sortable_header('Code', products_path, :code) %></th>
+        <th><%= sortable_header('Name', products_path, :name) %></th>
+        <th><%= sortable_header('Measurement Unit', products_path, :measurement_unit_id) %></th>
+        <th><%= sortable_header('Created At', products_path, :created_at) %></th>
+        <th><%= sortable_header('Updated At', products_path, :updated_at) %></th>
+        <th><%= sortable_header('Created By', products_path, :created_by_id) %></th>
+        <th><%= sortable_header('Updated By', products_path, :updated_by_id) %></th>
+        <th><%= sortable_header('Description', products_path, :desc) %></th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.product_type %></td>
+          <td><%= product.product_group_id %></td>
+          <td><%= product.code %></td>
+          <td><%= product.name %></td>
+          <td><%= product.measurement_unit_id %></td>
+          <td><%= product.created_at %></td>
+          <td><%= product.updated_at %></td>
+          <td><%= product.creator.username %></td>
+          <td><%= product.updater.username %></td>
+          <td><%= product.desc %></td>
+          <td>
+            <%= link_to product, class: 'm-1 btn btn-sm btn-outline-secondary' do %>
+              <i class="ti ti-eye"></i>
+            <% end %>
+            <%= link_to edit_product_path(product), class: 'm-1 btn btn-sm btn-secondary' do %>
+              <i class="ti ti-edit"></i>
+            <% end %>
+            <%= link_to product, class: 'm-1 btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+              <i class="ti ti-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @products.empty? %>
+        <tr>
+          <td colspan="11">No Entry</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  

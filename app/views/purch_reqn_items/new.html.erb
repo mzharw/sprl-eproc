@@ -1,9 +1,15 @@
-<h1>New purch reqn item</h1>
+<% content_for :content_header do %>
+  <b>Purchase Requisition Item / New</b>
+  <%= link_to :back do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
 
-<%= render "form", purch_reqn_item: @purch_reqn_item %>
+<% content_for :content do %>
+  <%= render "form", purch_reqn_item: @purch_reqn_item %>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Back to purch reqn items", purch_reqn_items_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

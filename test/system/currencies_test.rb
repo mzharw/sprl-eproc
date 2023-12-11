@@ -14,7 +14,6 @@ class CurrenciesTest < ApplicationSystemTestCase
     visit currencies_url
     click_on "New currency"
 
-    fill_in "App", with: @currency.app_id
     fill_in "Code", with: @currency.code
     fill_in "Desc", with: @currency.desc
     fill_in "Name", with: @currency.name
@@ -29,7 +28,6 @@ class CurrenciesTest < ApplicationSystemTestCase
     visit currency_url(@currency)
     click_on "Edit this currency", match: :first
 
-    fill_in "App", with: @currency.app_id
     fill_in "Code", with: @currency.code
     fill_in "Desc", with: @currency.desc
     fill_in "Name", with: @currency.name

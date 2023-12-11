@@ -1,7 +1,7 @@
 <div data-controller="selection" data-options-path="<%= options_path %>" data-value="<%= value %>" data-text="<%= text %>" class="selection-wrapper">
   <div data-action="click->selection#toggleOptions" class="preview-container">
     <span class="selected-value" data-selection-target="selectedValue"></span>
-    <i class="ti ti-x selection-clear" data-action="click->selection#clearSelection" data-selection-target="clearSelection"></i>
+    <i class="ti selection-clear" data-action="click->selection#clearSelection" data-selection-target="clearSelection"></i>
   </div>
   <div data-selection-target="optionsContainer" class="options-container shadow ">
     <span class="ti ti-search selection-search-icon"></span>
@@ -40,7 +40,7 @@
     background-color: white;
     border-radius: 5px;
     height: 40px;
-    padding: 8px;
+    padding: 8px 12px 8px 17px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -68,7 +68,7 @@
   }
 
   .options-list {
-    padding: 10px 0;
+    padding-top: 10px;
     max-height: 260px;
     overflow-y: auto;
   }

@@ -14,7 +14,6 @@ class BuyersTest < ApplicationSystemTestCase
     visit buyers_url
     click_on "New buyer"
 
-    fill_in "App", with: @buyer.app_id
     fill_in "Code", with: @buyer.code
     fill_in "Created at", with: @buyer.created_at
     fill_in "From date", with: @buyer.from_date
@@ -31,7 +30,6 @@ class BuyersTest < ApplicationSystemTestCase
     visit buyer_url(@buyer)
     click_on "Edit this buyer", match: :first
 
-    fill_in "App", with: @buyer.app_id
     fill_in "Code", with: @buyer.code
     fill_in "Created at", with: @buyer.created_at
     fill_in "From date", with: @buyer.from_date

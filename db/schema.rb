@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -36,8 +36,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -47,16 +47,25 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.string "code"
     t.date "from_date"
     t.date "thru_date"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_buyers_on_created_by"
-    t.index ["updated_by"], name: "index_buyers_on_updated_by"
+    t.index ["created_by_id"], name: "index_buyers_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_buyers_on_updated_by_id"
+  end
+
+  create_table "commodity_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "commodity_list_id"
+    t.string "number"
+    t.string "desc"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "contract_references", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "app_id"
     t.uuid "contact_type_id"
     t.string "number"
     t.uuid "country_id"
@@ -71,15 +80,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.string "other_village"
     t.text "postal_address"
     t.string "electronic_address"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.string "area_code"
     t.string "ext"
     t.string "postal_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_contract_references_on_created_by"
-    t.index ["updated_by"], name: "index_contract_references_on_updated_by"
+    t.index ["created_by_id"], name: "index_contract_references_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_contract_references_on_updated_by_id"
   end
 
   create_table "cost_centers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -90,12 +99,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.string "payroll_id"
     t.date "valid_to"
     t.uuid "purch_group_id"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_cost_centers_on_created_by"
-    t.index ["updated_by"], name: "index_cost_centers_on_updated_by"
+    t.index ["created_by_id"], name: "index_cost_centers_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_cost_centers_on_updated_by_id"
   end
 
   create_table "currencies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -103,56 +112,55 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.string "name"
     t.string "symbol"
     t.text "desc"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_currencies_on_created_by"
-    t.index ["updated_by"], name: "index_currencies_on_updated_by"
+    t.index ["created_by_id"], name: "index_currencies_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_currencies_on_updated_by_id"
   end
 
   create_table "facilities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "facility_type"
     t.string "name"
-    t.uuid "created_by"
-    t.uuid "updated_by"
-    t.datetime "discarded_at"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "discarded_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_facilities_on_created_by"
+    t.index ["created_by_id"], name: "index_facilities_on_created_by_id"
     t.index ["discarded_at"], name: "index_facilities_on_discarded_at"
     t.index ["facility_type"], name: "index_facilities_on_facility_type"
-    t.index ["updated_by"], name: "index_facilities_on_updated_by"
+    t.index ["updated_by_id"], name: "index_facilities_on_updated_by_id"
   end
 
   create_table "measurement_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "app_id"
     t.string "ident_name"
     t.string "name"
     t.string "symbol"
     t.text "desc"
     t.string "dimid"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_measurement_units_on_created_by"
-    t.index ["updated_by"], name: "index_measurement_units_on_updated_by"
+    t.index ["created_by_id"], name: "index_measurement_units_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_measurement_units_on_updated_by_id"
   end
 
   create_table "parties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "party_type"
     t.string "full_name"
     t.jsonb "data"
-    t.uuid "created_by"
-    t.uuid "updated_by"
-    t.datetime "discarded_at"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "discarded_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_parties_on_created_by"
+    t.index ["created_by_id"], name: "index_parties_on_created_by_id"
     t.index ["discarded_at"], name: "index_parties_on_discarded_at"
     t.index ["party_type"], name: "index_parties_on_party_type"
-    t.index ["updated_by"], name: "index_parties_on_updated_by"
+    t.index ["updated_by_id"], name: "index_parties_on_updated_by_id"
   end
 
   create_table "plants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -161,17 +169,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.date "from_date"
     t.date "thru_date"
     t.uuid "owner_party_id"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "sap"
-    t.index ["created_by"], name: "index_plants_on_created_by"
-    t.index ["updated_by"], name: "index_plants_on_updated_by"
+    t.index ["created_by_id"], name: "index_plants_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_plants_on_updated_by_id"
   end
 
   create_table "prcmts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "app_id"
     t.uuid "prcmt_type_id"
     t.string "number"
     t.string "name"
@@ -215,43 +222,37 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.string "business_field"
     t.decimal "tkdn_percentage"
     t.string "tender_location"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_prcmts_on_created_by"
-    t.index ["updated_by"], name: "index_prcmts_on_updated_by"
+    t.index ["created_by_id"], name: "index_prcmts_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_prcmts_on_updated_by_id"
   end
 
   create_table "product_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "app_id"
-    t.uuid "party_id"
     t.string "code"
-    t.date "from_date"
-    t.date "thru_date"
+    t.string "name"
     t.text "desc"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_product_groups_on_created_by"
-    t.index ["updated_by"], name: "index_product_groups_on_updated_by"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "app_id"
     t.string "product_type"
     t.uuid "product_group_id"
     t.string "code"
     t.string "name"
     t.uuid "measurement_unit_id"
     t.text "desc"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_products_on_created_by"
-    t.index ["updated_by"], name: "index_products_on_updated_by"
+    t.index ["created_by_id"], name: "index_products_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_products_on_updated_by_id"
   end
 
   create_table "purch_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -260,12 +261,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.date "from_date"
     t.date "thru_date"
     t.string "description"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_groups_on_created_by"
-    t.index ["updated_by"], name: "index_purch_groups_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_groups_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_groups_on_updated_by_id"
   end
 
   create_table "purch_orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -273,65 +274,65 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.string "code"
     t.date "from_date"
     t.date "thru_date"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_orgs_on_created_by"
-    t.index ["updated_by"], name: "index_purch_orgs_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_orgs_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_orgs_on_updated_by_id"
   end
 
   create_table "purch_reqn_cancellations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn", null: false
-    t.uuid "current_workflow_instance", null: false
+    t.uuid "purch_reqn_id"
+    t.uuid "current_workflow_instance"
     t.string "state"
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_cancellations_on_created_by"
-    t.index ["updated_by"], name: "index_purch_reqn_cancellations_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_cancellations_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_cancellations_on_updated_by_id"
   end
 
   create_table "purch_reqn_item_buyers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn_item", null: false
-    t.uuid "buyer", null: false
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
+    t.uuid "purch_reqn_item_id", null: false
+    t.uuid "buyer_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_item_buyers_on_created_by"
-    t.index ["updated_by"], name: "index_purch_reqn_item_buyers_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_item_buyers_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_item_buyers_on_updated_by_id"
   end
 
   create_table "purch_reqn_item_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn_item", null: false
+    t.uuid "purch_reqn_item_id", null: false
     t.string "desc"
     t.string "username"
     t.boolean "system"
     t.uuid "schedule", null: false
     t.datetime "finished_at", precision: nil
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_item_histories_on_created_by"
-    t.index ["updated_by"], name: "index_purch_reqn_item_histories_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_item_histories_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_item_histories_on_updated_by_id"
   end
 
   create_table "purch_reqn_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn_id", null: false
+    t.uuid "purch_reqn_id"
     t.string "number"
-    t.uuid "product_group_id", null: false
-    t.uuid "product_id", null: false
+    t.uuid "product_group_id"
+    t.uuid "product_id"
     t.string "desired_vendor"
     t.string "fixed_vendor"
     t.decimal "qty"
-    t.uuid "measurement_unit", null: false
+    t.uuid "measurement_unit_id"
     t.decimal "est_unit_price"
     t.float "price_unit"
     t.decimal "est_subtotal"
-    t.uuid "currency_id", null: false
+    t.uuid "currency_id"
     t.string "requisitioner"
     t.datetime "expected_delivery_date", precision: nil
     t.text "desc"
@@ -339,25 +340,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.float "processed_qty"
     t.text "specification"
     t.text "note"
-    t.datetime "deleted_at", precision: nil
-    t.uuid "deleted_by", null: false
     t.string "item_type"
-    t.uuid "wbsproject_id", null: false
-    t.uuid "parent_id", null: false
-    t.uuid "contract_item_reference", null: false
+    t.uuid "wbsproject_id"
+    t.uuid "parent_id"
+    t.uuid "contract_item_reference_id"
     t.boolean "contract_flag"
-    t.uuid "purch_reqn_item_noncontract_id", null: false
-    t.integer "commodity_list"
+    t.uuid "purch_reqn_item_noncontract_id"
+    t.uuid "commodity_list_id"
     t.decimal "adjustment_qty"
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
-    t.datetime "discarded_at"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "discarded_by_id"
+    t.datetime "discarded_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_items_on_created_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_items_on_created_by_id"
     t.index ["discarded_at"], name: "index_purch_reqn_items_on_discarded_at"
     t.index ["purch_reqn_id"], name: "index_purch_reqn_items_on_purch_reqn_id"
-    t.index ["updated_by"], name: "index_purch_reqn_items_on_updated_by"
+    t.index ["updated_by_id"], name: "index_purch_reqn_items_on_updated_by_id"
   end
 
   create_table "purch_reqn_link_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -365,44 +365,44 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.string "name"
     t.text "desc"
     t.boolean "system"
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_link_types_on_created_by"
-    t.index ["updated_by"], name: "index_purch_reqn_link_types_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_link_types_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_link_types_on_updated_by_id"
   end
 
   create_table "purch_reqn_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn_link_type", null: false
-    t.uuid "from_purch_reqn", null: false
-    t.uuid "to_purch_reqn", null: false
+    t.uuid "purch_reqn_link_type_id", null: false
+    t.uuid "from_purch_reqn_id", null: false
+    t.uuid "to_purch_reqn_id", null: false
     t.string "desc"
-    t.uuid "created_by"
-    t.uuid "updated_by"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_links_on_created_by"
-    t.index ["updated_by"], name: "index_purch_reqn_links_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_links_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_links_on_updated_by_id"
   end
 
   create_table "purch_reqn_partial_statuses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn_partial", null: false
+    t.uuid "purch_reqn_partial_id", null: false
     t.string "partialable_type"
-    t.uuid "partialable", null: false
+    t.uuid "partialable_id", null: false
     t.string "partial_itemable_type"
-    t.uuid "partial_itemable", null: false
+    t.uuid "partial_itemable_id", null: false
     t.string "status"
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_partial_statuses_on_created_by"
-    t.index ["updated_by"], name: "index_purch_reqn_partial_statuses_on_updated_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_partial_statuses_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_partial_statuses_on_updated_by_id"
   end
 
   create_table "purch_reqn_partials", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn_item", null: false
+    t.uuid "purch_reqn_item_id", null: false
     t.string "partialable_type"
     t.uuid "partialable", null: false
     t.string "partial_itemable_type"
@@ -410,32 +410,32 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.float "qty"
     t.jsonb "data"
     t.string "state"
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
-    t.datetime "discarded_at"
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
+    t.datetime "discarded_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_partials_on_created_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_partials_on_created_by_id"
     t.index ["discarded_at"], name: "index_purch_reqn_partials_on_discarded_at"
-    t.index ["purch_reqn_item"], name: "index_purch_reqn_partials_on_purch_reqn_item"
-    t.index ["updated_by"], name: "index_purch_reqn_partials_on_updated_by"
+    t.index ["purch_reqn_item_id"], name: "index_purch_reqn_partials_on_purch_reqn_item_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_partials_on_updated_by_id"
   end
 
   create_table "purch_reqn_uncommits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "purch_reqn", null: false
+    t.uuid "purch_reqn_id", null: false
     t.string "desc"
     t.text "uncommit_remark"
     t.string "state"
     t.uuid "current_workflow_instance", null: false
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
-    t.datetime "discarded_at"
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
+    t.datetime "discarded_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_by"], name: "index_purch_reqn_uncommits_on_created_by"
+    t.index ["created_by_id"], name: "index_purch_reqn_uncommits_on_created_by_id"
     t.index ["discarded_at"], name: "index_purch_reqn_uncommits_on_discarded_at"
-    t.index ["purch_reqn"], name: "index_purch_reqn_uncommits_on_purch_reqn"
-    t.index ["updated_by"], name: "index_purch_reqn_uncommits_on_updated_by"
+    t.index ["purch_reqn_id"], name: "index_purch_reqn_uncommits_on_purch_reqn_id"
+    t.index ["updated_by_id"], name: "index_purch_reqn_uncommits_on_updated_by_id"
   end
 
   create_table "purch_reqns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -466,20 +466,22 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.text "cancel_remark"
     t.uuid "contract_reference_id"
     t.uuid "prcmt_id"
-    t.uuid "created_by", null: false
-    t.uuid "updated_by", null: false
-    t.datetime "discarded_at"
+    t.uuid "current_workflow_instance_id"
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
+    t.datetime "discarded_at", precision: nil
+    t.uuid "discarded_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cost_center_id"], name: "index_purch_reqns_on_cost_center_id"
-    t.index ["created_by"], name: "index_purch_reqns_on_created_by"
+    t.index ["created_by_id"], name: "index_purch_reqns_on_created_by_id"
     t.index ["currency_id"], name: "index_purch_reqns_on_currency_id"
     t.index ["discarded_at"], name: "index_purch_reqns_on_discarded_at"
     t.index ["number"], name: "index_purch_reqns_on_number", unique: true
     t.index ["plant_id"], name: "index_purch_reqns_on_plant_id"
     t.index ["purch_group_id"], name: "index_purch_reqns_on_purch_group_id"
     t.index ["purch_org_id"], name: "index_purch_reqns_on_purch_org_id"
-    t.index ["updated_by"], name: "index_purch_reqns_on_updated_by"
+    t.index ["updated_by_id"], name: "index_purch_reqns_on_updated_by_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -494,7 +496,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "discarded_at"
+    t.datetime "discarded_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "party_id"
@@ -504,6 +506,85 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_220231) do
     t.index ["party_id"], name: "index_users_on_party_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
+  end
+
+  create_table "work_acceptance_note_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "number"
+    t.uuid "work_acceptance_note_id"
+    t.uuid "parent_id"
+    t.uuid "purch_order_item_id"
+    t.uuid "commodity_list_id"
+    t.uuid "product_group_id"
+    t.uuid "product_id"
+    t.float "qty"
+    t.uuid "measurement_unit_id"
+    t.float "unit_price"
+    t.float "price_unit"
+    t.float "subtotal"
+    t.boolean "sales_taxable"
+    t.string "amount_type"
+    t.uuid "wbsproject_id"
+    t.uuid "cost_center_id"
+    t.uuid "from_currency_id"
+    t.float "from_amount"
+    t.uuid "to_currency_id"
+    t.uuid "to_amount"
+    t.date "delivery_date"
+    t.text "desc"
+    t.text "specification"
+    t.text "note"
+    t.jsonb "data"
+    t.datetime "deleted_at", precision: nil
+    t.float "process_qty"
+    t.float "process_unit_price"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_work_acceptance_note_items_on_created_by_id"
+    t.index ["purch_order_item_id"], name: "index_work_acceptance_note_items_on_purch_order_item_id"
+    t.index ["updated_by_id"], name: "index_work_acceptance_note_items_on_updated_by_id"
+    t.index ["work_acceptance_note_id"], name: "index_work_acceptance_note_items_on_work_acceptance_note_id"
+  end
+
+  create_table "work_acceptance_notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "number"
+    t.string "sap_number"
+    t.string "name"
+    t.string "state"
+    t.uuid "current_workflow_instance_id"
+    t.jsonb "data"
+    t.string "wan_type"
+    t.uuid "internal_org_id"
+    t.uuid "purch_org_id"
+    t.uuid "purch_group_id"
+    t.uuid "plant_id"
+    t.uuid "purch_order_id"
+    t.uuid "vendor_id"
+    t.uuid "to_currency"
+    t.uuid "incoterm_id"
+    t.uuid "incoterm_desc"
+    t.decimal "payment_term_number"
+    t.string "payment_term_desc"
+    t.string "request_type_code"
+    t.string "request_type"
+    t.datetime "delivery_date", precision: nil
+    t.text "desc"
+    t.string "receiver"
+    t.string "delivery_detail"
+    t.text "remark"
+    t.datetime "released_at", precision: nil
+    t.datetime "rejected_at", precision: nil
+    t.datetime "discard_at", precision: nil
+    t.text "cancel_remark"
+    t.uuid "reference_by_id"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_work_acceptance_notes_on_created_by_id"
+    t.index ["number"], name: "index_work_acceptance_notes_on_number"
+    t.index ["updated_by_id"], name: "index_work_acceptance_notes_on_updated_by_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

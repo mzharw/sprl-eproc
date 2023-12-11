@@ -14,7 +14,6 @@ class PurchReqnLinksTest < ApplicationSystemTestCase
     visit purch_reqn_links_url
     click_on "New purch reqn link"
 
-    fill_in "App", with: @purch_reqn_link.app_id
     fill_in "Desc", with: @purch_reqn_link.desc
     fill_in "From purch reqn", with: @purch_reqn_link.from_purch_reqn_id
     fill_in "Purch reqn link type", with: @purch_reqn_link.purch_reqn_link_type_id
@@ -29,7 +28,6 @@ class PurchReqnLinksTest < ApplicationSystemTestCase
     visit purch_reqn_link_url(@purch_reqn_link)
     click_on "Edit this purch reqn link", match: :first
 
-    fill_in "App", with: @purch_reqn_link.app_id
     fill_in "Desc", with: @purch_reqn_link.desc
     fill_in "From purch reqn", with: @purch_reqn_link.from_purch_reqn_id
     fill_in "Purch reqn link type", with: @purch_reqn_link.purch_reqn_link_type_id

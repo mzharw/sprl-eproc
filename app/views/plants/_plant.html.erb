@@ -1,27 +1,28 @@
-<div id="<%= dom_id plant %>">
-  <p>
-    <strong>Facility:</strong>
-    <%= plant.facility_id %>
-  </p>
+<table class="table">
 
-  <p>
-    <strong>Code:</strong>
-    <%= plant.code %>
-  </p>
+  <tr>
+    <td><strong>Facility:</strong></td>
+    <td><%= plant.facility.name %></td>
+  </tr>
 
-  <p>
-    <strong>From date:</strong>
-    <%= plant.from_date %>
-  </p>
+  <tr>
+    <td><strong>Code:</strong></td>
+    <td><%= plant.code %></td>
+  </tr>
 
-  <p>
-    <strong>Thru date:</strong>
-    <%= plant.thru_date %>
-  </p>
+  <tr>
+    <td><strong>From date:</strong></td>
+    <td><%= plant.from_date %></td>
+  </tr>
 
-  <p>
-    <strong>Owner party:</strong>
-    <%= plant.owner_party_id %>
-  </p>
+  <tr>
+    <td><strong>Thru date:</strong></td>
+    <td><%= plant.thru_date %></td>
+  </tr>
 
-</div>
+  <tr>
+    <td><strong>Owner party:</strong></td> 
+    <td><%= plant.party.full_name %></td>
+  </tr>
+
+</table>

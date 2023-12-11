@@ -17,7 +17,7 @@ class BuyersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create buyer" do
     assert_difference("Buyer.count") do
-      post buyers_url, params: { buyer: { app_id: @buyer.app_id, code: @buyer.code, created_at: @buyer.created_at, from_date: @buyer.from_date, party_id: @buyer.party_id, thru_date: @buyer.thru_date, updated_at: @buyer.updated_at } }
+      post buyers_url, params: { buyer: { code: @buyer.code, created_at: @buyer.created_at, from_date: @buyer.from_date, party_id: @buyer.party_id, thru_date: @buyer.thru_date, updated_at: @buyer.updated_at } }
     end
 
     assert_redirected_to buyer_url(Buyer.last)
@@ -34,7 +34,7 @@ class BuyersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update buyer" do
-    patch buyer_url(@buyer), params: { buyer: { app_id: @buyer.app_id, code: @buyer.code, created_at: @buyer.created_at, from_date: @buyer.from_date, party_id: @buyer.party_id, thru_date: @buyer.thru_date, updated_at: @buyer.updated_at } }
+    patch buyer_url(@buyer), params: { buyer: { code: @buyer.code, created_at: @buyer.created_at, from_date: @buyer.from_date, party_id: @buyer.party_id, thru_date: @buyer.thru_date, updated_at: @buyer.updated_at } }
     assert_redirected_to buyer_url(@buyer)
   end
 

@@ -65,6 +65,6 @@ class PurchReqnPartialStatusesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_reqn_partial_status_params
-      params.require(:purch_reqn_partial_status).permit(:app_id, :purch_reqn_partial_id, :partialable_type, :partialable_id, :partial_itemable_type, :partial_itemable_id, :status, :created_by, :updated_by)
+      params.require(:purch_reqn_partial_status).permit(:purch_reqn_partial_id, :partialable_type, :partialable_id, :partial_itemable_type, :partial_itemable_id, :status, :created_by_id, :updated_by_id)
     end
 end

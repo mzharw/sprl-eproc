@@ -1,83 +1,122 @@
 <% content_for :content_header do %>
   <b>Purchase Requisition / Overview </b>
-  <%= link_to purch_reqns_path do %>
-    <button class="btn btn-sm btn-secondary">
-      <i class="ti ti-arrow-back-up"></i>
-      Back
-    </button>
-  <% end %>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to purch_reqns_path do %>
+      <button class="btn btn-sm btn-outline-secondary text-white">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <% if @purch_reqn.state === 'DRAFT' %>
+      <%= link_to purch_reqns_path do %>
+        <button class="btn btn-sm btn-secondary">
+          <i class="ti ti-device-floppy"></i>
+          Save All
+        </button>
+      <% end %>
+      <%= link_to purch_reqns_path do %>
+        <button class="btn btn-sm btn-success">
+          <i class="ti ti-send"></i>
+          Submit
+        </button>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
 
 <% content_for :content do %>
   <div class="overflow-y-scroll w-100 h-100 d-flex flex-column gap-2">
-    <a class="p-3 rounded-2 border text-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn" aria-expanded="false" aria-controls="purch_reqn">
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn" aria-expanded="false" aria-controls="purch_reqn">
       Purchase Requisition
       <i class="ti ti-caret-down-filled"></i>
     </a>
-    <div class="form-container collapse show" id="purch_reqn">
+    <div class="data-container collapse show" id="purch_reqn">
       <%= render @purch_reqn %>
     </div>
   
-    <a class="p-3 rounded-2 border text-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn_item" aria-expanded="false" aria-controls="purch_reqn_item">
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn_item" aria-expanded="false" aria-controls="purch_reqn_item">
       Purchase Requisition Items
       <i class="ti ti-caret-down-filled"></i>
     </a>
-    <div class="form-container collapse show" id="purch_reqn_item">
-      <%= render 'purch_reqn_items/list', locals: { items: @purch_reqn.items } %>
+    <div class="data-container collapse show" id="purch_reqn_item">
+      <div class="d-flex flex-column">
+        <div class="dropdown align-self-end">
+          <button class="btn btn-sm btn-secondary dropdown-toggle my-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="ti ti-plus"></i>
+            New Entry
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to new_purch_reqn_item_path(type: :material), class: 'dropdown-item' do %>
+                <i class="ti ti-packages"></i>
+                Material
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_purch_reqn_item_path(type: :service), class: 'dropdown-item' do %>
+                <i class="ti ti-forklift"></i>
+                Service
+              <% end %>
+            </li>
+          </ul>
+        </div>
+        <%= render 'purch_reqn_items/list', locals: { items: @purch_reqn.items } %>
+      </div>
     </div>
 
-    <a class="p-3 rounded-2 border text-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false" aria-controls="documents">
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false" aria-controls="documents">
       Documents
       <i class="ti ti-caret-down-filled"></i>
     </a>
-    <%= form_with(model: @purch_reqn, html: { class: 'form-container collapse show', id: :documents }) do |form| %>
+    <div class="data-container collapse show" id="documents">
       <div class="row g-5">
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.contract_docs, title: 'Contract Document', form: form, name: :contract_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :contract_docs, title: 'Contract Document' %>
         </div>
 
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.contract_ex_sp_docs, title: 'Contract Exhibits/Specification', form: form, name: :contract_ex_sp_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :contract_ex_sp_docs, title: 'Contract Exhibits/Specification' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.memo_scm_manager_docs, title: 'Memo SCM Manager', form: form, name: :memo_scm_manager_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :memo_scm_manager_docs, title: 'Memo SCM Manager' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.work_ex_plan_docs, title: 'Work Execution Plan', form: form, name: :work_ex_plan_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :work_ex_plan_docs, title: 'Work Execution Plan' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.owner_estimate_docs, title: 'Owner Estimate', form: form, name: :owner_estimate_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :owner_estimate_docs, title: 'Owner Estimate' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.tech_eval_method_docs, title: 'Technical Evaluation Method', form: form, name: :tech_eval_method_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :tech_eval_method_docs, title: 'Technical Evaluation Method' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.det_landing_cost_docs, title: 'Detail Landing Cost', form: form, name: :det_landing_cost_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :det_landing_cost_docs, title: 'Detail Landing Cost' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.inspect_eval_method_docs, title: 'Inspection Evaluation Method', form: form, name: :inspect_eval_method_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :inspect_eval_method_docs, title: 'Inspection Evaluation Method' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.risk_assessment_docs, title: 'Risk Assessment', form: form, name: :risk_assessment_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :risk_assessment_docs, title: 'Risk Assessment' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.justify_memo_docs, title: 'Justification Memo', form: form, name: :justify_memo_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :justify_memo_docs, title: 'Justification Memo' %>
         </div>
         
         <div class="col-md-6">
-          <%= render 'docs', docs: @purch_reqn.res_util_justify_docs, title: 'Resource Utilization Justification', form: form, name: :res_util_justify_docs %>
+          <%= render 'docs', model: @purch_reqn, name: :res_util_justify_docs, title: 'Resource Utilization Justification' %>
         </div>
         
       </div>
-    <% end %>
+    </div>
   </div>
 <% end %>
 

@@ -6,12 +6,12 @@ class CreatePurchGroups < ActiveRecord::Migration[7.1]
       t.date :from_date
       t.date :thru_date
       t.string :description
-      t.uuid :created_by
-      t.uuid :updated_by
+      t.uuid :created_by_id
+      t.uuid :updated_by_id
 
       t.timestamps
     end
-    add_index :purch_groups, :created_by
-    add_index :purch_groups, :updated_by
+    add_index :purch_groups, :created_by_id
+    add_index :purch_groups, :updated_by_id
   end
 end

@@ -28,10 +28,12 @@ class CreatePurchReqns < ActiveRecord::Migration[7.1]
       t.text :cancel_remark
       t.uuid :contract_reference_id
       t.uuid :prcmt_id
-      t.uuid :created_by, null: false
-      t.uuid :updated_by, null: false
+      t.uuid :current_workflow_instance_id
+      t.uuid :created_by_id, null: false
+      t.uuid :updated_by_id, null: false
 
-      t.datetime :discarded_at
+      t.timestamp :discarded_at
+      t.uuid :discarded_by_id
       t.timestamps
     end
 
@@ -41,8 +43,8 @@ class CreatePurchReqns < ActiveRecord::Migration[7.1]
     add_index :purch_reqns, :plant_id
     add_index :purch_reqns, :cost_center_id
     add_index :purch_reqns, :currency_id
-    add_index :purch_reqns, :created_by
-    add_index :purch_reqns, :updated_by
+    add_index :purch_reqns, :created_by_id
+    add_index :purch_reqns, :updated_by_id
     add_index :purch_reqns, :discarded_at
   end
 end

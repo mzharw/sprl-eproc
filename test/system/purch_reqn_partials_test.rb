@@ -14,8 +14,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     visit purch_reqn_partials_url
     click_on "New purch reqn partial"
 
-    fill_in "App", with: @purch_reqn_partial.app_id
-    fill_in "Created by", with: @purch_reqn_partial.created_by
+    fill_in "Created by", with: @purch_reqn_partial.created_by_id
     fill_in "Data", with: @purch_reqn_partial.data
     fill_in "Partial itemable", with: @purch_reqn_partial.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial.partial_itemable_type
@@ -24,7 +23,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     fill_in "Purch reqn item", with: @purch_reqn_partial.purch_reqn_item_id
     fill_in "Qty", with: @purch_reqn_partial.qty
     fill_in "State", with: @purch_reqn_partial.state
-    fill_in "Updated by", with: @purch_reqn_partial.updated_by
+    fill_in "Updated by", with: @purch_reqn_partial.updated_by_id
     click_on "Create Purch reqn partial"
 
     assert_text "Purch reqn partial was successfully created"
@@ -35,8 +34,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     visit purch_reqn_partial_url(@purch_reqn_partial)
     click_on "Edit this purch reqn partial", match: :first
 
-    fill_in "App", with: @purch_reqn_partial.app_id
-    fill_in "Created by", with: @purch_reqn_partial.created_by
+    fill_in "Created by", with: @purch_reqn_partial.created_by_id
     fill_in "Data", with: @purch_reqn_partial.data
     fill_in "Partial itemable", with: @purch_reqn_partial.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial.partial_itemable_type
@@ -45,7 +43,7 @@ class PurchReqnPartialsTest < ApplicationSystemTestCase
     fill_in "Purch reqn item", with: @purch_reqn_partial.purch_reqn_item_id
     fill_in "Qty", with: @purch_reqn_partial.qty
     fill_in "State", with: @purch_reqn_partial.state
-    fill_in "Updated by", with: @purch_reqn_partial.updated_by
+    fill_in "Updated by", with: @purch_reqn_partial.updated_by_id
     click_on "Update Purch reqn partial"
 
     assert_text "Purch reqn partial was successfully updated"

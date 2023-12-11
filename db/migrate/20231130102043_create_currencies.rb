@@ -5,12 +5,12 @@ class CreateCurrencies < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :symbol
       t.text :desc
-      t.uuid :created_by
-      t.uuid :updated_by
+      t.uuid :created_by_id
+      t.uuid :updated_by_id
 
       t.timestamps
     end
-    add_index :currencies, :created_by
-    add_index :currencies, :updated_by
+    add_index :currencies, :created_by_id
+    add_index :currencies, :updated_by_id
   end
 end

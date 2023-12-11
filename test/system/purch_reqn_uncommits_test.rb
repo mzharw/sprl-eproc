@@ -14,14 +14,13 @@ class PurchReqnUncommitsTest < ApplicationSystemTestCase
     visit purch_reqn_uncommits_url
     click_on "New purch reqn uncommit"
 
-    fill_in "App", with: @purch_reqn_uncommit.app_id
-    fill_in "Created by", with: @purch_reqn_uncommit.created_by
+    fill_in "Created by", with: @purch_reqn_uncommit.created_by_id
     fill_in "Current workflow instance", with: @purch_reqn_uncommit.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn_uncommit.desc
     fill_in "Purch reqn", with: @purch_reqn_uncommit.purch_reqn_id
     fill_in "State", with: @purch_reqn_uncommit.state
     fill_in "Uncommit remark", with: @purch_reqn_uncommit.uncommit_remark
-    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by
+    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by_id
     click_on "Create Purch reqn uncommit"
 
     assert_text "Purch reqn uncommit was successfully created"
@@ -32,14 +31,13 @@ class PurchReqnUncommitsTest < ApplicationSystemTestCase
     visit purch_reqn_uncommit_url(@purch_reqn_uncommit)
     click_on "Edit this purch reqn uncommit", match: :first
 
-    fill_in "App", with: @purch_reqn_uncommit.app_id
-    fill_in "Created by", with: @purch_reqn_uncommit.created_by
+    fill_in "Created by", with: @purch_reqn_uncommit.created_by_id
     fill_in "Current workflow instance", with: @purch_reqn_uncommit.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn_uncommit.desc
     fill_in "Purch reqn", with: @purch_reqn_uncommit.purch_reqn_id
     fill_in "State", with: @purch_reqn_uncommit.state
     fill_in "Uncommit remark", with: @purch_reqn_uncommit.uncommit_remark
-    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by
+    fill_in "Updated by", with: @purch_reqn_uncommit.updated_by_id
     click_on "Update Purch reqn uncommit"
 
     assert_text "Purch reqn uncommit was successfully updated"

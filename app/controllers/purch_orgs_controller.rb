@@ -71,6 +71,6 @@ class PurchOrgsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_org_params
-      params.require(:purch_org).permit(:app_id, :party_id, :code, :from_date, :thru_date)
+      params.require(:purch_org).permit(:party_id, :code, :from_date, :thru_date)
     end
 end

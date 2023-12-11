@@ -5,12 +5,12 @@ class CreatePurchReqnLinkTypes < ActiveRecord::Migration[7.1]
       t.string :name
       t.text :desc
       t.boolean :system
-      t.uuid :created_by, null: false
-      t.uuid :updated_by, null: false
+      t.uuid :created_by_id, null: false
+      t.uuid :updated_by_id, null: false
 
       t.timestamps
     end
-    add_index :purch_reqn_link_types, :created_by
-    add_index :purch_reqn_link_types, :updated_by
+    add_index :purch_reqn_link_types, :created_by_id
+    add_index :purch_reqn_link_types, :updated_by_id
   end
 end

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @work_acceptance_note %>
+
+<div>
+  <%= link_to "Edit this work acceptance note", edit_work_acceptance_note_path(@work_acceptance_note) %> |
+  <%= link_to "Back to work acceptance notes", work_acceptance_notes_path %>
+
+  <%= button_to "Destroy this work acceptance note", @work_acceptance_note, method: :delete %>
+</div>

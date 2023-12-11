@@ -65,6 +65,6 @@ class PurchReqnLinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_reqn_link_params
-      params.require(:purch_reqn_link).permit(:app_id, :purch_reqn_link_type_id, :from_purch_reqn_id, :to_purch_reqn_id, :desc)
+      params.require(:purch_reqn_link).permit(:purch_reqn_link_type_id, :from_purch_reqn_id, :to_purch_reqn_id, :desc)
     end
 end

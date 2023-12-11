@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app_id: 
+
   party_id: 
   code: MyString
   from_date: 2023-11-30
@@ -10,7 +10,7 @@ one:
   updated_at: 2023-11-30 17:22:05
 
 two:
-  app_id: 
+
   party_id: 
   code: MyString
   from_date: 2023-11-30

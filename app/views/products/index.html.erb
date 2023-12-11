@@ -1,14 +1,13 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+<% content_for :content_header do %>
+  <b>Product</b>
+  <%= link_to new_product_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-plus"></i>
+      New entry
+    </button>
   <% end %>
-</div>
-
-<%= link_to "New product", new_product_path %>
+<% end %>
+<% content_for :content do %>
+    <%= render 'list', products: @products %>
+<% end %>
+<%= render "layouts/wrapper" , sidebar: true %>

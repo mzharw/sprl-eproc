@@ -1,0 +1,61 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  work_acceptance_note_id: 
+  parent_id: 
+  purch_order_item_id: 
+  commodity_list_id: 1
+  product_group_id: 
+  product_id: 
+  qty: 1.5
+  measurement_unit_id: 
+  unit_price: 1.5
+  price_unit: 1.5
+  subtotal: 1.5
+  sales_taxable: false
+  amount_type: MyString
+  wbsproject_id: 
+  cost_center_id: 
+  from_currency_id: 
+  from_amount: 1.5
+  to_currency_id: 
+  to_amount: 
+  delivery_date: 2023-12-06
+  desc: MyText
+  specification: MyText
+  note: MyText
+  data: 
+  deleted_at: 2023-12-06 12:33:43
+  process_qty: 1.5
+  process_unit_price: 1.5
+
+two:
+  number: MyString
+  work_acceptance_note_id: 
+  parent_id: 
+  purch_order_item_id: 
+  commodity_list_id: 1
+  product_group_id: 
+  product_id: 
+  qty: 1.5
+  measurement_unit_id: 
+  unit_price: 1.5
+  price_unit: 1.5
+  subtotal: 1.5
+  sales_taxable: false
+  amount_type: MyString
+  wbsproject_id: 
+  cost_center_id: 
+  from_currency_id: 
+  from_amount: 1.5
+  to_currency_id: 
+  to_amount: 
+  delivery_date: 2023-12-06
+  desc: MyText
+  specification: MyText
+  note: MyText
+  data: 
+  deleted_at: 2023-12-06 12:33:43
+  process_qty: 1.5
+  process_unit_price: 1.5

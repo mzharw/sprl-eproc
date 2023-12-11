@@ -65,6 +65,6 @@ class ContractReferencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contract_reference_params
-      params.require(:contract_reference).permit(:app_id, :contact_type_id, :number, :country_id, :other_country, :province_id, :other_province, :district_id, :other_district, :sub_district_id, :other_sub_district, :village_id, :other_village, :postal_address, :electronic_address, :created_at, :updated_at, :created_by, :updated_by, :area_code, :ext, :postal_code)
+      params.require(:contract_reference).permit(:contact_type_id, :number, :country_id, :other_country, :province_id, :other_province, :district_id, :other_district, :sub_district_id, :other_sub_district, :village_id, :other_village, :postal_address, :electronic_address, :created_at, :updated_at, :created_by_id, :updated_by_id, :area_code, :ext, :postal_code)
     end
 end

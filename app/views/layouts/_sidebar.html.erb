@@ -1,11 +1,11 @@
 <!-- Sidebar Start -->
-<aside class="left-sidebar">
+<aside class="left-sidebar" style="border-radius: 0 20px 0 0;">
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="./index.html" class="text-nowrap logo-img">
+            <%= link_to root_path, class: 'text-nowrap logo-img' do %>
                 <%= image_tag "logo.png" %>
-            </a>
+            <% end %>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8"></i>
             </div>
@@ -31,7 +31,7 @@
                     <span class="hide-menu">Purchase Requisition</span>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if active?('purch_reqns')}" do %>
+                    <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if active?('purch_reqns', 'purch_reqn_items')}" do %>
                         <span>
                             <i class="ti ti-shopping-cart"></i>
                         </span>
@@ -54,8 +54,21 @@
                         <span class="hide-menu">Purchasing Organization</span>
                     <% end %>
                 </li>
-
+                
                 <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">WAN</span>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to work_acceptance_notes_path, class: "sidebar-link #{'active' if active?('work_acceptance_notes')}" do %>
+                        <span>
+                            <i class="ti ti-eye-edit"></i>
+                        </span>
+                        <span class="hide-menu">Work Acceptance Note</span>
+                    <% end %>
+                </li>
+
+                                <!-- <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Vendor Management</span>
                 </li>
@@ -106,7 +119,7 @@
                         </span>
                         <span class="hide-menu">Applicant Non-procures</span>
                     <% end %>
-                </li>
+                </li> -->
 
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -121,19 +134,19 @@
                     <% end %>
                 </li>
                 <li class="sidebar-item">
-                    <%= link_to plants_path, class: "sidebar-link #{'active' if active?('plants')}" do %>
-                        <span>
-                            <i class="ti ti-seeding"></i>
-                        </span>
-                        <span class="hide-menu">Plant</span>
-                    <% end %>
-                </li>
-                <li class="sidebar-item">
                     <%= link_to facilities_path, class: "sidebar-link #{'active' if active?('facilities')}" do %>
                         <span>
                             <i class="ti ti-building-community"></i>
                         </span>
                         <span class="hide-menu">Facility</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to plants_path, class: "sidebar-link #{'active' if active?('plants')}" do %>
+                        <span>
+                            <i class="ti ti-seeding"></i>
+                        </span>
+                        <span class="hide-menu">Plant</span>
                     <% end %>
                 </li>
                 <li class="sidebar-item">
@@ -150,6 +163,38 @@
                             <i class="ti ti-currency-euro"></i>
                         </span>
                         <span class="hide-menu">Currency</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to commodity_lists_path, class: "sidebar-link #{'active' if active?('commodity_lists')}" do %>
+                        <span>
+                            <i class="ti ti-list-details"></i>
+                        </span>
+                        <span class="hide-menu">Commodity List</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to measurement_units_path, class: "sidebar-link #{'active' if active?('measurement_units')}" do %>
+                        <span>
+                            <i class="ti ti-ruler-measure"></i>
+                        </span>
+                        <span class="hide-menu">Measurement Unit</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to products_path, class: "sidebar-link #{'active' if active?('products')}" do %>
+                        <span>
+                            <i class="ti ti-package"></i>
+                        </span>
+                        <span class="hide-menu">Material (Product)</span>
+                    <% end %>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to product_groups_path, class: "sidebar-link #{'active' if active?('product_groups')}" do %>
+                        <span>
+                            <i class="ti ti-packages"></i>
+                        </span>
+                        <span class="hide-menu">Material (Product) Group</span>
                     <% end %>
                 </li>
             </ul>

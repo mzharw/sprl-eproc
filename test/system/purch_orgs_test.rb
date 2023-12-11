@@ -14,7 +14,6 @@ class PurchOrgsTest < ApplicationSystemTestCase
     visit purch_orgs_url
     click_on "New purch org"
 
-    fill_in "App", with: @purch_org.app_id
     fill_in "Code", with: @purch_org.code
     fill_in "From date", with: @purch_org.from_date
     fill_in "Party", with: @purch_org.party_id
@@ -29,7 +28,6 @@ class PurchOrgsTest < ApplicationSystemTestCase
     visit purch_org_url(@purch_org)
     click_on "Edit this purch org", match: :first
 
-    fill_in "App", with: @purch_org.app_id
     fill_in "Code", with: @purch_org.code
     fill_in "From date", with: @purch_org.from_date
     fill_in "Party", with: @purch_org.party_id

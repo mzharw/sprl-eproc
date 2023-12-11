@@ -1,22 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app: one
+
   number: MyString
   desc: MyText
-  created_by: one
-  updated_by: one
+  created_by_id: one
+  updated_by_id: one
   state: MyString
-  current_workflow_instance: one
-  purch_org: one
+  current_workflow_instance_id: one
+  purch_org_id: one
   purch_reqn_type: MyString
   contract: false
-  purch_group: one
-  plant: one
-  cost_center: one
+  purch_group_id: one
+  plant_id: one
+  cost_center_id: one
   fund_source: MyString
   currency: one
-  recreate_from: one
+  recreate_from_id: one
   contract_title: MyString
   scope_of_work: MyString
   justification: MyString
@@ -30,26 +30,26 @@ one:
   local_of_content: 9.99
   rejected_at: 2023-11-29 21:22:30
   cancel_remark: MyText
-  contract_reference: one
-  prcmt: one
+  contract_reference_id: one
+  prcmt_id: one
 
 two:
-  app: two
+
   number: MyString
   desc: MyText
-  created_by: two
-  updated_by: two
+  created_by_id: two
+  updated_by_id: two
   state: MyString
-  current_workflow_instance: two
-  purch_org: two
+  current_workflow_instance_id: two
+  purch_org_id: two
   purch_reqn_type: MyString
   contract: false
-  purch_group: two
-  plant: two
-  cost_center: two
+  purch_group_id: two
+  plant_id: two
+  cost_center_id: two
   fund_source: MyString
   currency: two
-  recreate_from: two
+  recreate_from_id: two
   contract_title: MyString
   scope_of_work: MyString
   justification: MyString
@@ -63,5 +63,5 @@ two:
   local_of_content: 9.99
   rejected_at: 2023-11-29 21:22:30
   cancel_remark: MyText
-  contract_reference: two
-  prcmt: two
+  contract_reference_id: two
+  prcmt_id: two

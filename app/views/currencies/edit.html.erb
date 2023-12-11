@@ -1,10 +1,22 @@
-<h1>Editing currency</h1>
+<% content_for :content_header do %>
+  <b>Currency / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render "form", currency: @currency %>
+    <%= link_to currencies_path do %>
+      <button class="btn btn-sm btn-outline-secondary text-white">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to @currency, class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-eye"></i>
+      Show
+    <% end %>
+  </div>
+<% end %>
 
-<br>
+<% content_for :content do %>
+  <%= render 'form', currency: @currency %>
+<% end %>
 
-<div>
-  <%= link_to "Show this currency", @currency %> |
-  <%= link_to "Back to currencies", currencies_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

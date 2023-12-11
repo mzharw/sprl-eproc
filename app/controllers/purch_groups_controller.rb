@@ -1,9 +1,11 @@
 class PurchGroupsController < ApplicationController
+  include Filterable
   include UserTrackable
   before_action :set_purch_group, only: %i[show edit update destroy]
 
   # GET /purch_groups or /purch_groups.json
   def index
+    sortable(PurchGroup)
     query = params[:query] || ''
     @purch_groups = PurchGroup.where('lower(code) LIKE ?', "%#{query.downcase}%")
 

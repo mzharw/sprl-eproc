@@ -14,15 +14,14 @@ class PurchReqnPartialStatusesTest < ApplicationSystemTestCase
     visit purch_reqn_partial_statuses_url
     click_on "New purch reqn partial status"
 
-    fill_in "App", with: @purch_reqn_partial_status.app_id
-    fill_in "Created by", with: @purch_reqn_partial_status.created_by
+    fill_in "Created by", with: @purch_reqn_partial_status.created_by_id
     fill_in "Partial itemable", with: @purch_reqn_partial_status.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial_status.partial_itemable_type
     fill_in "Partialable", with: @purch_reqn_partial_status.partialable_id
     fill_in "Partialable type", with: @purch_reqn_partial_status.partialable_type
     fill_in "Purch reqn partial", with: @purch_reqn_partial_status.purch_reqn_partial_id
     fill_in "Status", with: @purch_reqn_partial_status.status
-    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by
+    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by_id
     click_on "Create Purch reqn partial status"
 
     assert_text "Purch reqn partial status was successfully created"
@@ -33,15 +32,14 @@ class PurchReqnPartialStatusesTest < ApplicationSystemTestCase
     visit purch_reqn_partial_status_url(@purch_reqn_partial_status)
     click_on "Edit this purch reqn partial status", match: :first
 
-    fill_in "App", with: @purch_reqn_partial_status.app_id
-    fill_in "Created by", with: @purch_reqn_partial_status.created_by
+    fill_in "Created by", with: @purch_reqn_partial_status.created_by_id
     fill_in "Partial itemable", with: @purch_reqn_partial_status.partial_itemable_id
     fill_in "Partial itemable type", with: @purch_reqn_partial_status.partial_itemable_type
     fill_in "Partialable", with: @purch_reqn_partial_status.partialable_id
     fill_in "Partialable type", with: @purch_reqn_partial_status.partialable_type
     fill_in "Purch reqn partial", with: @purch_reqn_partial_status.purch_reqn_partial_id
     fill_in "Status", with: @purch_reqn_partial_status.status
-    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by
+    fill_in "Updated by", with: @purch_reqn_partial_status.updated_by_id
     click_on "Update Purch reqn partial status"
 
     assert_text "Purch reqn partial status was successfully updated"

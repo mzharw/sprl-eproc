@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app_id: 
+
   facility_id: 
   code: MyString
   from_date: 2023-11-30
@@ -9,7 +9,7 @@ one:
   owner_party_id: 
 
 two:
-  app_id: 
+
   facility_id: 
   code: MyString
   from_date: 2023-11-30

@@ -15,12 +15,12 @@ class PartiesTest < ApplicationSystemTestCase
     click_on "New party"
 
     fill_in "Created at", with: @party.created_at
-    fill_in "Created by", with: @party.created_by
+    fill_in "Created by", with: @party.created_by_id
     fill_in "Data", with: @party.data
     fill_in "Full name", with: @party.full_name
     fill_in "Party type", with: @party.party_type
     fill_in "Updated at", with: @party.updated_at
-    fill_in "Updated by", with: @party.updated_by
+    fill_in "Updated by", with: @party.updated_by_id
     click_on "Create Party"
 
     assert_text "Party was successfully created"
@@ -32,12 +32,12 @@ class PartiesTest < ApplicationSystemTestCase
     click_on "Edit this party", match: :first
 
     fill_in "Created at", with: @party.created_at
-    fill_in "Created by", with: @party.created_by
+    fill_in "Created by", with: @party.created_by_id
     fill_in "Data", with: @party.data
     fill_in "Full name", with: @party.full_name
     fill_in "Party type", with: @party.party_type
     fill_in "Updated at", with: @party.updated_at
-    fill_in "Updated by", with: @party.updated_by
+    fill_in "Updated by", with: @party.updated_by_id
     click_on "Update Party"
 
     assert_text "Party was successfully updated"

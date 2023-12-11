@@ -17,7 +17,7 @@ class PartiesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create party" do
     assert_difference("Party.count") do
-      post parties_url, params: { party: { created_at: @party.created_at, created_by: @party.created_by, data: @party.data, full_name: @party.full_name, party_type: @party.party_type, updated_at: @party.updated_at, updated_by: @party.updated_by } }
+      post parties_url, params: { party: { created_at: @party.created_at, created_by_id: @party.created_by_id, data: @party.data, full_name: @party.full_name, party_type: @party.party_type, updated_at: @party.updated_at, updated_by_id: @party.updated_by_id } }
     end
 
     assert_redirected_to party_url(Party.last)
@@ -34,7 +34,7 @@ class PartiesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update party" do
-    patch party_url(@party), params: { party: { created_at: @party.created_at, created_by: @party.created_by, data: @party.data, full_name: @party.full_name, party_type: @party.party_type, updated_at: @party.updated_at, updated_by: @party.updated_by } }
+    patch party_url(@party), params: { party: { created_at: @party.created_at, created_by_id: @party.created_by_id, data: @party.data, full_name: @party.full_name, party_type: @party.party_type, updated_at: @party.updated_at, updated_by_id: @party.updated_by_id } }
     assert_redirected_to party_url(@party)
   end
 

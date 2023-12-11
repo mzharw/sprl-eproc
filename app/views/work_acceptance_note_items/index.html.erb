@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Work acceptance note items</h1>
+
+<div id="work_acceptance_note_items">
+  <% @work_acceptance_note_items.each do |work_acceptance_note_item| %>
+    <%= render work_acceptance_note_item %>
+    <p>
+      <%= link_to "Show this work acceptance note item", work_acceptance_note_item %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New work acceptance note item", new_work_acceptance_note_item_path %>

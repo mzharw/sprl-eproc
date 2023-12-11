@@ -1,14 +1,20 @@
 class MeasurementUnitsController < ApplicationController
-  before_action :set_measurement_unit, only: %i[ show edit update destroy ]
+  include UserTrackable
+  before_action :set_measurement_unit, only: %i[show edit update destroy]
 
   # GET /measurement_units or /measurement_units.json
   def index
-    @measurement_units = MeasurementUnit.all
+    query = params[:query] || ''
+    @measurement_units = MeasurementUnit.where('lower(name) LIKE ?', "%#{query.downcase}%")
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @measurement_units }
+    end
   end
 
   # GET /measurement_units/1 or /measurement_units/1.json
-  def show
-  end
+  def show; end
 
   # GET /measurement_units/new
   def new
@@ -16,16 +22,17 @@ class MeasurementUnitsController < ApplicationController
   end
 
   # GET /measurement_units/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /measurement_units or /measurement_units.json
   def create
-    @measurement_unit = MeasurementUnit.new(measurement_unit_params)
+    @measurement_unit = MeasurementUnit.new({ **measurement_unit_params, **tracker })
 
     respond_to do |format|
       if @measurement_unit.save
-        format.html { redirect_to measurement_unit_url(@measurement_unit), notice: "Measurement unit was successfully created." }
+        format.html do
+          redirect_to measurement_unit_url(@measurement_unit), notice: 'Measurement unit was successfully created.'
+        end
         format.json { render :show, status: :created, location: @measurement_unit }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,8 +44,10 @@ class MeasurementUnitsController < ApplicationController
   # PATCH/PUT /measurement_units/1 or /measurement_units/1.json
   def update
     respond_to do |format|
-      if @measurement_unit.update(measurement_unit_params)
-        format.html { redirect_to measurement_unit_url(@measurement_unit), notice: "Measurement unit was successfully updated." }
+      if @measurement_unit.update({ **measurement_unit_params, **tracker('update') })
+        format.html do
+          redirect_to measurement_unit_url(@measurement_unit), notice: 'Measurement unit was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @measurement_unit }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +61,21 @@ class MeasurementUnitsController < ApplicationController
     @measurement_unit.destroy!
 
     respond_to do |format|
-      format.html { redirect_to measurement_units_url, notice: "Measurement unit was successfully destroyed." }
+      format.html { redirect_to measurement_units_url, notice: 'Measurement unit was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_measurement_unit
-      @measurement_unit = MeasurementUnit.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def measurement_unit_params
-      params.require(:measurement_unit).permit(:app_id, :ident_name, :name, :symbol, :desc, :created_at, :updated_at, :created_by, :updated_by, :dimid)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_measurement_unit
+    @measurement_unit = MeasurementUnit.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def measurement_unit_params
+    params.require(:measurement_unit).permit(:ident_name, :name, :symbol, :desc, :created_at, :updated_at,
+                                             :created_by_id, :updated_by_id, :dimid)
+  end
 end

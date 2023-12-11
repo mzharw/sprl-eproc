@@ -17,7 +17,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create product" do
     assert_difference("Product.count") do
-      post products_url, params: { product: { app_id: @product.app_id, code: @product.code, created_at: @product.created_at, created_by: @product.created_by, desc: @product.desc, measurement_unit_id: @product.measurement_unit_id, name: @product.name, product_group_id: @product.product_group_id, product_type: @product.product_type, updated_at: @product.updated_at, updated_by: @product.updated_by } }
+      post products_url, params: { product: { code: @product.code, created_at: @product.created_at, created_by_id: @product.created_by_id, desc: @product.desc, measurement_unit_id: @product.measurement_unit_id, name: @product.name, product_group_id: @product.product_group_id, product_type: @product.product_type, updated_at: @product.updated_at, updated_by_id: @product.updated_by_id } }
     end
 
     assert_redirected_to product_url(Product.last)
@@ -34,7 +34,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update product" do
-    patch product_url(@product), params: { product: { app_id: @product.app_id, code: @product.code, created_at: @product.created_at, created_by: @product.created_by, desc: @product.desc, measurement_unit_id: @product.measurement_unit_id, name: @product.name, product_group_id: @product.product_group_id, product_type: @product.product_type, updated_at: @product.updated_at, updated_by: @product.updated_by } }
+    patch product_url(@product), params: { product: { code: @product.code, created_at: @product.created_at, created_by_id: @product.created_by_id, desc: @product.desc, measurement_unit_id: @product.measurement_unit_id, name: @product.name, product_group_id: @product.product_group_id, product_type: @product.product_type, updated_at: @product.updated_at, updated_by_id: @product.updated_by_id } }
     assert_redirected_to product_url(@product)
   end
 

@@ -16,7 +16,6 @@ class PurchGroupsTest < ApplicationSystemTestCase
 
     fill_in "Account holder", with: @purch_group.account_holder
     fill_in "Account number", with: @purch_group.account_number
-    fill_in "App", with: @purch_group.app_id
     fill_in "Commentcement date", with: @purch_group.commentcement_date
     check "Contract" if @purch_group.contract
     fill_in "Cost center", with: @purch_group.cost_center_id
@@ -72,7 +71,6 @@ class PurchGroupsTest < ApplicationSystemTestCase
 
     fill_in "Account holder", with: @purch_group.account_holder
     fill_in "Account number", with: @purch_group.account_number
-    fill_in "App", with: @purch_group.app_id
     fill_in "Commentcement date", with: @purch_group.commentcement_date
     check "Contract" if @purch_group.contract
     fill_in "Cost center", with: @purch_group.cost_center_id

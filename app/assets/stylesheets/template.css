@@ -2670,7 +2670,8 @@ progress {
     --bs-table-active-color: var(--bs-body-color);
     --bs-table-active-bg: rgba(0, 0, 0, 0.1);
     --bs-table-hover-color: var(--bs-body-color);
-    --bs-table-hover-bg: #F6F9FC;
+    /* --bs-table-hover-bg: #F6F9FC; */
+    --bs-table-hover-bg: #f3fff2;
     width: 100%;
     margin-bottom: 1rem;
     color: var(--bs-table-color);
@@ -19769,7 +19770,7 @@ fieldset:disabled .btn {
     width: 100%;
     background: rgb(214, 48, 48);
     color: #fff !important;
-    padding: 0 25px
+    /* padding: 0 20px */
 }
 
 .app-header .container-fluid,
@@ -19975,7 +19976,8 @@ fieldset:disabled .btn {
 }
 
 .body-wrapper {
-    position: relative
+    position: relative;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .body-wrapper>.container-fluid,
@@ -20169,9 +20171,70 @@ ul {
     border: 2px solid #d63030
 }
 
-.form-container {
+.data-container {
     padding: 50px 150px;
-    background-color: #fbfff9;
-    border: 1px #DFE5EF solid;
+    background-color: white;
+    border: 1px var(--bs-border-color) solid;
     border-radius: var(--bs-border-radius) !important;
+}
+
+@media (max-width:1200px) {
+    .data-container {
+        padding: 50px 100px;
+    }
+}
+
+@media (max-width:800px) {
+    .data-container {
+        padding: 50px 70px;
+    }
+}
+
+@media (max-width:500px) {
+    .data-container {
+        padding: 30px 50px;
+    }
+
+    .input-group.file {
+        flex-direction: column;
+    }
+
+    .input-group.file .form-control[type=file] {
+        width: 100%;
+    }
+}
+
+@media (max-width:350px) {
+    .data-container {
+        padding: 30px 30px;
+    }
+}
+
+#headerCollapse {
+    color: white;
+}
+
+#headerCollapse:hover {
+    color: var(--bs-body-color);
+}
+
+/* Add this to your CSS file */
+.left-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.sidebar-content {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.sidebar-open .sidebar-content {
+    opacity: 1;
+    transform: translateX(0);
 }

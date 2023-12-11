@@ -1,22 +1,23 @@
-<div id="<%= dom_id purch_org %>">
-  <p>
-    <strong>Party:</strong>
-    <%= purch_org.party_id %>
-  </p>
+<table class="table">
 
-  <p>
-    <strong>Code:</strong>
-    <%= purch_org.code %>
-  </p>
+  <tr>
+    <td><strong>Party:</strong></td>
+    <td><%= purch_org.party.full_name %></td>
+  </tr>
 
-  <p>
-    <strong>From date:</strong>
-    <%= purch_org.from_date %>
-  </p>
+  <tr>
+    <td><strong>Code:</strong></td>
+    <td><%= purch_org.code %></td>
+  </tr>
 
-  <p>
-    <strong>Thru date:</strong>
-    <%= purch_org.thru_date %>
-  </p>
+  <tr>
+    <td><strong>From date:</strong></td>
+    <td><%= purch_org.from_date %></td>
+  </tr>
 
-</div>
+  <tr>
+    <td><strong>Thru date:</strong></td>
+    <td><%= purch_org.thru_date %></td>
+  </tr>
+
+</table>

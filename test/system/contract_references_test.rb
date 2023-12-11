@@ -14,12 +14,11 @@ class ContractReferencesTest < ApplicationSystemTestCase
     visit contract_references_url
     click_on "New contract reference"
 
-    fill_in "App", with: @contract_reference.app_id
     fill_in "Area code", with: @contract_reference.area_code
     fill_in "Contact type", with: @contract_reference.contact_type_id
     fill_in "Country", with: @contract_reference.country_id
     fill_in "Created at", with: @contract_reference.created_at
-    fill_in "Created by", with: @contract_reference.created_by
+    fill_in "Created by", with: @contract_reference.created_by_id
     fill_in "District", with: @contract_reference.district_id
     fill_in "Electronic address", with: @contract_reference.electronic_address
     fill_in "Ext", with: @contract_reference.ext
@@ -34,7 +33,7 @@ class ContractReferencesTest < ApplicationSystemTestCase
     fill_in "Province", with: @contract_reference.province_id
     fill_in "Sub district", with: @contract_reference.sub_district_id
     fill_in "Updated at", with: @contract_reference.updated_at
-    fill_in "Updated by", with: @contract_reference.updated_by
+    fill_in "Updated by", with: @contract_reference.updated_by_id
     fill_in "Village", with: @contract_reference.village_id
     click_on "Create Contract reference"
 
@@ -46,12 +45,11 @@ class ContractReferencesTest < ApplicationSystemTestCase
     visit contract_reference_url(@contract_reference)
     click_on "Edit this contract reference", match: :first
 
-    fill_in "App", with: @contract_reference.app_id
     fill_in "Area code", with: @contract_reference.area_code
     fill_in "Contact type", with: @contract_reference.contact_type_id
     fill_in "Country", with: @contract_reference.country_id
     fill_in "Created at", with: @contract_reference.created_at
-    fill_in "Created by", with: @contract_reference.created_by
+    fill_in "Created by", with: @contract_reference.created_by_id
     fill_in "District", with: @contract_reference.district_id
     fill_in "Electronic address", with: @contract_reference.electronic_address
     fill_in "Ext", with: @contract_reference.ext
@@ -66,7 +64,7 @@ class ContractReferencesTest < ApplicationSystemTestCase
     fill_in "Province", with: @contract_reference.province_id
     fill_in "Sub district", with: @contract_reference.sub_district_id
     fill_in "Updated at", with: @contract_reference.updated_at
-    fill_in "Updated by", with: @contract_reference.updated_by
+    fill_in "Updated by", with: @contract_reference.updated_by_id
     fill_in "Village", with: @contract_reference.village_id
     click_on "Update Contract reference"
 

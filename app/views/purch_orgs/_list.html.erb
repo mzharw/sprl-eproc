@@ -1,0 +1,48 @@
+<table class="table  table-hover table-bordered data-container">
+    <thead>
+        <tr>
+            <th>
+              <%= sortable_header('Code', purch_orgs_path, :code) %>
+            </th>
+            <th>
+              <%= sortable_header('From Date', purch_orgs_path, :from_date) %>
+            </th>
+            <th>
+              <%= sortable_header('Thru Date', purch_orgs_path, :thru_date) %>
+            </th>
+            <th>
+              <%= sortable_header('Party', purch_orgs_path, 'party.code') %>
+            </th>
+            <th>
+              Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+      <% purch_orgs.each do |purch_org| %>
+        <tr>
+          <!-- <td><%= link_to purch_org.code, purch_org %></td> -->
+          <td><%= purch_org.code %></td>
+          <td><%= purch_org.from_date %></td>
+          <td><%= purch_org.thru_date %></td>
+          <td><%= purch_org.party.full_name %></td>
+          <td>
+            <%= link_to purch_org, class: 'm-1 btn btn-sm btn-outline-secondary m-1' do %>
+                <i class="ti ti-eye"></i>
+            <% end %>
+            <%= link_to edit_purch_org_path(purch_org), class: 'm-1 btn btn-sm btn-secondary m-1' do %>
+                <i class="ti ti-edit"></i>
+            <% end %>
+            <%= link_to purch_org, class: 'm-1 btn btn-sm btn-danger m-1', data: { turbo_method: :delete} do %>
+                <i class="ti ti-trash"></i>
+            <% end %>
+        </td>
+        </tr>
+      <% end %>
+      <% if purch_orgs.empty? %>
+        <tr>
+          <td colspan="5">No Entry</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

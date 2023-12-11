@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app: one
-  purch_reqn: one
+
+  purch_reqn_id: one
   current_workflow_instance: one
   state: MyString
-  created_by: one
-  updated_by: one
+  created_by_id: one
+  updated_by_id: one
 
 two:
-  app: two
-  purch_reqn: two
+
+  purch_reqn_id: two
   current_workflow_instance: two
   state: MyString
-  created_by: two
-  updated_by: two
+  created_by_id: two
+  updated_by_id: two

@@ -14,7 +14,6 @@ class PurchReqnsTest < ApplicationSystemTestCase
     visit purch_reqns_url
     click_on "New purch reqn"
 
-    fill_in "App", with: @purch_reqn.app_id
     fill_in "Budget soure", with: @purch_reqn.budget_soure
     fill_in "Cancel remark", with: @purch_reqn.cancel_remark
     check "Contract" if @purch_reqn.contract
@@ -22,7 +21,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Contract title", with: @purch_reqn.contract_title
     fill_in "Contract type", with: @purch_reqn.contract_type
     fill_in "Cost center", with: @purch_reqn.cost_center_id
-    fill_in "Created by", with: @purch_reqn.created_by
+    fill_in "Created by", with: @purch_reqn.created_by_id
     fill_in "Currency", with: @purch_reqn.currency_id
     fill_in "Current workflow instance", with: @purch_reqn.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn.desc
@@ -44,7 +43,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Risk category", with: @purch_reqn.risk_category
     fill_in "Scope of work", with: @purch_reqn.scope_of_work
     fill_in "State", with: @purch_reqn.state
-    fill_in "Updated by", with: @purch_reqn.updated_by
+    fill_in "Updated by", with: @purch_reqn.updated_by_id
     click_on "Create Purch reqn"
 
     assert_text "Purch reqn was successfully created"
@@ -55,7 +54,6 @@ class PurchReqnsTest < ApplicationSystemTestCase
     visit purch_reqn_url(@purch_reqn)
     click_on "Edit this purch reqn", match: :first
 
-    fill_in "App", with: @purch_reqn.app_id
     fill_in "Budget soure", with: @purch_reqn.budget_soure
     fill_in "Cancel remark", with: @purch_reqn.cancel_remark
     check "Contract" if @purch_reqn.contract
@@ -63,7 +61,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Contract title", with: @purch_reqn.contract_title
     fill_in "Contract type", with: @purch_reqn.contract_type
     fill_in "Cost center", with: @purch_reqn.cost_center_id
-    fill_in "Created by", with: @purch_reqn.created_by
+    fill_in "Created by", with: @purch_reqn.created_by_id
     fill_in "Currency", with: @purch_reqn.currency_id
     fill_in "Current workflow instance", with: @purch_reqn.current_workflow_instance_id
     fill_in "Desc", with: @purch_reqn.desc
@@ -85,7 +83,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Risk category", with: @purch_reqn.risk_category
     fill_in "Scope of work", with: @purch_reqn.scope_of_work
     fill_in "State", with: @purch_reqn.state
-    fill_in "Updated by", with: @purch_reqn.updated_by
+    fill_in "Updated by", with: @purch_reqn.updated_by_id
     click_on "Update Purch reqn"
 
     assert_text "Purch reqn was successfully updated"

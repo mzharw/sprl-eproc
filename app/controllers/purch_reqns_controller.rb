@@ -1,18 +1,16 @@
 class PurchReqnsController < ApplicationController
   include Filterable
   include UserTrackable
-  before_action :set_purch_reqn, only: %i[show edit update destroy purge_attachment]
+  before_action :set_purch_reqn, only: %i[show edit update destroy remove_attachment]
 
   # GET /purch_reqns or /purch_reqns.json
   def index
     sortable(PurchReqn)
-    @purch_reqns = PurchReqnDecorator.decorate_collection(
-      PurchReqn
-      .joins(:plant)
-      .select('purch_reqns.*, plants.code')
-      .order("#{@order_by} #{@order_dir || ''}")
-      .page(1)
-    )
+    @purch_reqns =  PurchReqn
+    .joins(:plant)
+    .select('purch_reqns.*, plants.code')
+    .order("#{@order_by} #{@order_dir || ''}")
+    .page
   end
 
   # GET /purch_reqns/1 or /purch_reqns/1.json
@@ -28,7 +26,7 @@ class PurchReqnsController < ApplicationController
 
   # POST /purch_reqns or /purch_reqns.json
   def create
-    @purch_reqn = PurchReqn.new({ **purch_reqn_params, **tracker })
+    @purch_reqn = PurchReqn.new({ **purch_reqn_params, **tracker, state: 'DRAFT' })
 
     respond_to do |format|
       if @purch_reqn.save
@@ -64,7 +62,7 @@ class PurchReqnsController < ApplicationController
     end
   end
 
-  def purge_attachment
+  def remove_attachment
     attachment = @purch_reqn.send(params[:attachment_name]).find(params[:attachment_id])
 
     respond_to do |format|

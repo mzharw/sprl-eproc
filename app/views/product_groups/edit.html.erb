@@ -1,10 +1,22 @@
-<h1>Editing product group</h1>
+<% content_for :content_header do %>
+  <b>Material (Product) Group / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render "form", product_group: @product_group %>
+    <%= link_to product_groups_path do %>
+      <button class="btn btn-sm btn-outline-secondary text-white">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to @product_group, class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-eye"></i>
+      Show
+    <% end %>
+  </div>
+<% end %>
 
-<br>
+<% content_for :content do %>
+  <%= render 'form', product_group: @product_group %>
+<% end %>
 
-<div>
-  <%= link_to "Show this product group", @product_group %> |
-  <%= link_to "Back to product groups", product_groups_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

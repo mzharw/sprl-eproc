@@ -1,4 +1,4 @@
-<%= form_with(model: purch_reqn, html: { class: 'form-container h-100 w-100 overflow-y-scroll' }) do |form| %>
+<%= form_with(model: purch_reqn, html: { class: 'data-container h-100 w-100 overflow-y-scroll' }) do |form| %>
   <% if purch_reqn.errors.any? %>
     <div style="color: red">
       <h2>
@@ -13,9 +13,9 @@
       </ul>
     </div>
   <% end %>
-  <div class="row g-3 w-50">
-    <div>
-      <label for="pr-type">PR Type</label>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="pr-type">PR Type <span class="text-danger">*</span></label>
       <div class="form-check">
         <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material' %>
         <label class="form-check-label" for="material">
@@ -29,7 +29,7 @@
         </label>
       </div>
     </div>
-    <div>
+    <div class="col-md-6">
       <label for="pr-type">Contact Reference</label>
       <div class="form-check">
         <%= form.radio_button :contract, true, class: 'form-check-input', id: 'contract-true' %>
@@ -44,7 +44,7 @@
         </label>
       </div>
     </div>
-    <div class=" d-flex flex-column gap-3">
+    <div class="col-md-6 d-flex flex-column gap-3">
       <div>
         <label for="purch_group_id">Purchasing Group</label>
         <%= selection(form, :purch_group_id, purch_groups_path, :id , :code) %>
@@ -58,10 +58,10 @@
         <%= selection(form, :purch_org_id, purch_orgs_path, :id , :code) %>
       </div>
     </div>
-    <div class=" d-flex flex-column gap-3" data-controller="toggler">
+    <div class="col-md-6 flex-column gap-3" data-controller="toggler">
       <div>
         <label for="pr-type">Description</label>
-        <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
+        <%= form.text_area :desc, id: :description, class: 'form-control' %>
       </div>
       <div>
         <label for="fund_source">Fund Source</label>
@@ -79,11 +79,11 @@
         </div>
       </div>
     </div>
-    <div class="d-none toggle-cost-center ">
+    <div class="col-md-6 toggle-cost-center ">
       <label for="cost_center_id">Cost Center</label>
       <%= selection(form, :cost_center_id, cost_centers_path, :id , :desc) %>
     </div>
-    <div>
+    <div class="col-md-6">
       <label for="currency_id">Currency</label>
       <%= selection(form, :currency_id, currencies_path, :id , :code) %>
     </div>

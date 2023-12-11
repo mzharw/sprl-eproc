@@ -1,19 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app: one
+
   ident_name: MyString
   name: MyString
   desc: MyText
   system: false
-  created_by: one
-  updated_by: one
+  created_by_id: one
+  updated_by_id: one
 
 two:
-  app: two
+
   ident_name: MyString
   name: MyString
   desc: MyText
   system: false
-  created_by: two
-  updated_by: two
+  created_by_id: two
+  updated_by_id: two

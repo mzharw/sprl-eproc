@@ -14,7 +14,6 @@ class PlantsTest < ApplicationSystemTestCase
     visit plants_url
     click_on "New plant"
 
-    fill_in "App", with: @plant.app_id
     fill_in "Code", with: @plant.code
     fill_in "Facility", with: @plant.facility_id
     fill_in "From date", with: @plant.from_date
@@ -30,7 +29,6 @@ class PlantsTest < ApplicationSystemTestCase
     visit plant_url(@plant)
     click_on "Edit this plant", match: :first
 
-    fill_in "App", with: @plant.app_id
     fill_in "Code", with: @plant.code
     fill_in "Facility", with: @plant.facility_id
     fill_in "From date", with: @plant.from_date

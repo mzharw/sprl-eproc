@@ -65,6 +65,6 @@ class PurchReqnItemHistoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purch_reqn_item_history_params
-      params.require(:purch_reqn_item_history).permit(:app_id, :purch_reqn_item_id, :desc, :username, :system, :created_by, :updated_by, :schedule_id, :finished_at)
+      params.require(:purch_reqn_item_history).permit(:purch_reqn_item_id, :desc, :username, :system, :created_by_id, :updated_by_id, :schedule_id, :finished_at)
     end
 end

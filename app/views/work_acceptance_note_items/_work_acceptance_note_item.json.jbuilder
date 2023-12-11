@@ -1,0 +1,2 @@
+json.extract! work_acceptance_note_item, :id, :number, :work_acceptance_note_id, :parent_id, :purch_order_item_id, :commodity_list_id, :product_group_id, :product_id, :qty, :measurement_unit_id, :unit_price, :price_unit, :subtotal, :sales_taxable, :amount_type, :wbsproject_id, :cost_center_id, :from_currency_id, :from_amount, :to_currency_id, :to_amount, :delivery_date, :desc, :specification, :note, :data, :deleted_at, :process_qty, :process_unit_price, :created_at, :updated_at
+json.url work_acceptance_note_item_url(work_acceptance_note_item, format: :json)

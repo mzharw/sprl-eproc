@@ -1,7 +1,6 @@
 class CreateProducts < ActiveRecord::Migration[7.1]
   def change
     create_table :products, id: :uuid do |t|
-      t.uuid :app_id
       t.string :product_type
       t.uuid :product_group_id
       t.string :code
@@ -9,11 +8,11 @@ class CreateProducts < ActiveRecord::Migration[7.1]
       t.uuid :measurement_unit_id
       t.text :desc
 
-      t.uuid :created_by
-      t.uuid :updated_by
+      t.uuid :created_by_id
+      t.uuid :updated_by_id
       t.timestamps
     end
-    add_index :products, :created_by
-    add_index :products, :updated_by
+    add_index :products, :created_by_id
+    add_index :products, :updated_by_id
   end
 end

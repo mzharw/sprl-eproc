@@ -5,12 +5,12 @@ class CreatePurchOrgs < ActiveRecord::Migration[7.1]
       t.string :code
       t.date :from_date
       t.date :thru_date
-      t.uuid :created_by
-      t.uuid :updated_by
+      t.uuid :created_by_id
+      t.uuid :updated_by_id
 
       t.timestamps
     end
-    add_index :purch_orgs, :created_by
-    add_index :purch_orgs, :updated_by
+    add_index :purch_orgs, :created_by_id
+    add_index :purch_orgs, :updated_by_id
   end
 end

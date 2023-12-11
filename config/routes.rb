@@ -1,32 +1,35 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :commodity_lists, path: 'commodity-list'
+  resources :work_acceptance_note_items
+  resources :work_acceptance_notes
   resources :attachments
   resources :facilities
   resources :parties
-  resources :buyers, path: 'buyers'
+  resources :buyers, path: 'buyer'
   resources :measurement_units, path: 'uom'
-  resources :products, path: 'products'
-  resources :product_groups
-  resources :prcmts, path: 'procurements'
+  resources :products, path: 'product'
+  resources :product_groups, path: 'product-group'
+  resources :prcmts, path: 'procurement'
   resources :contract_references
-  resources :currencies, path: 'currencies'
-  resources :cost_centers, path: 'cost-centers'
-  resources :plants, path: 'plants'
-  resources :purch_groups, path: 'purchase-groups'
-  resources :purch_orgs, path: 'purchase-organizations'
-  resources :purch_reqn_cancellations, path: 'purchase-requisitions-cancellations'
+  resources :currencies, path: 'currency'
+  resources :cost_centers, path: 'cost-center'
+  resources :plants, path: 'plant'
+  resources :purch_groups, path: 'purchase-group'
+  resources :purch_orgs, path: 'purchase-organization'
+  resources :purch_reqn_cancellations, path: 'purchase-requisitions-cancellation'
   resources :purch_reqn_item_buyers
   resources :purch_reqn_item_histories
-  resources :purch_reqn_items
   resources :purch_reqn_link_types
   resources :purch_reqn_links
   resources :purch_reqn_partial_statuses
   resources :purch_reqn_partials
   resources :purch_reqn_uncommits
-  resources :purch_reqns, path: 'purchase-requisitions' do
+  resources :purch_reqns, path: 'purchase-requisition' do
     member do
-      delete 'purge-attachment', to: 'purch_reqns#purge_attachment', as: 'purge_attachment'
+      resources :purch_reqn_items, path: 'items'
+      delete 'remove-attachment', to: 'purch_reqns#remove_attachment', as: 'remove_attachment'
     end
   end
   devise_for :users, path: '', path_names: {

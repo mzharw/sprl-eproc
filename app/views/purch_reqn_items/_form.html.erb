@@ -1,177 +1,93 @@
-<%= form_with(model: purch_reqn_item) do |form| %>
+<%= form_with(model: purch_reqn_item, html: { class: 'data-container' }) do |form| %>
   <% if purch_reqn_item.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(purch_reqn_item.errors.count, "error") %> prohibited this purch_reqn_item from being saved:</h2>
-
+      <h2>
+        <%= pluralize(purch_reqn_item.errors.count, "error" ) %> prohibited this purchase requisition item from being saved:
+      </h2>
       <ul>
         <% purch_reqn_item.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li>
+            <%= error.full_message %>
+          </li>
         <% end %>
       </ul>
     </div>
   <% end %>
+  <% type = params[:type] %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="item_type">Item Type</label>
+      <%= form.text_field :item_type, class: 'form-control bg-body-tertiary', readonly: :true, value: type&.upcase %>
+    </div>
 
-  <div>
-    <%= form.label :app_id, style: "display: block" %>
-    <%= form.text_field :app_id %>
+    <div class="col-md-6">
+      <label for="commodity_list_id">List Commodity</label>
+      <%= selection(form, :commodity_list_id, commodity_lists_path, :id, :desc) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="product_group_id"><%= type&.capitalize %> Classification</label>
+      <%= selection(form, :product_group_id, product_groups_path, :id, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="product_id">Product</label>
+      <%= selection(form, :product_id, products_path, :id, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="desired_vendor">Desired Vendor</label>
+      <%= form.text_field :desired_vendor, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="qty">Quantity</label>
+      <%= form.number_field :qty, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="measurement_unit_id">Measurement Unit</label>
+      <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="est_unit_price">Estimated Unit Price</label>
+      <%= form.number_field :est_unit_price, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="price_unit">Price Unit</label>
+      <%= form.number_field :price_unit, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="est_subtotal">Estimated Subtotal</label>
+      <%= form.number_field :est_subtotal, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="currency_id">Currency</label>
+      <%= selection(form, :currency_id, currencies_path, :id, :code) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="requisitioner">Requisitioner</label>
+      <%= form.text_field :requisitioner, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="expected_delivery_date">Expected Delivery Date</label>
+      <%= form.date_field :expected_delivery_date, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="desc">Description</label>
+      <%= form.text_area :desc, class: 'form-control', rows: 5 %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
   </div>
 
-  <div>
-    <%= form.label :purch_reqn_id, style: "display: block" %>
-    <%= form.text_field :purch_reqn_id %>
-  </div>
-
-  <div>
-    <%= form.label :number, style: "display: block" %>
-    <%= form.text_field :number %>
-  </div>
-
-  <div>
-    <%= form.label :product_group_id, style: "display: block" %>
-    <%= form.text_field :product_group_id %>
-  </div>
-
-  <div>
-    <%= form.label :product_id, style: "display: block" %>
-    <%= form.text_field :product_id %>
-  </div>
-
-  <div>
-    <%= form.label :desired_vendor, style: "display: block" %>
-    <%= form.text_field :desired_vendor %>
-  </div>
-
-  <div>
-    <%= form.label :fixed_vendor, style: "display: block" %>
-    <%= form.text_field :fixed_vendor %>
-  </div>
-
-  <div>
-    <%= form.label :qty, style: "display: block" %>
-    <%= form.text_field :qty %>
-  </div>
-
-  <div>
-    <%= form.label :measurement_unit_id, style: "display: block" %>
-    <%= form.text_field :measurement_unit_id %>
-  </div>
-
-  <div>
-    <%= form.label :est_unit_price, style: "display: block" %>
-    <%= form.text_field :est_unit_price %>
-  </div>
-
-  <div>
-    <%= form.label :price_unit, style: "display: block" %>
-    <%= form.text_field :price_unit %>
-  </div>
-
-  <div>
-    <%= form.label :est_subtotal, style: "display: block" %>
-    <%= form.text_field :est_subtotal %>
-  </div>
-
-  <div>
-    <%= form.label :currency_id, style: "display: block" %>
-    <%= form.text_field :currency_id %>
-  </div>
-
-  <div>
-    <%= form.label :requisitioner, style: "display: block" %>
-    <%= form.text_field :requisitioner %>
-  </div>
-
-  <div>
-    <%= form.label :expected_delivery_date, style: "display: block" %>
-    <%= form.datetime_field :expected_delivery_date %>
-  </div>
-
-  <div>
-    <%= form.label :desc, style: "display: block" %>
-    <%= form.text_area :desc %>
-  </div>
-
-  <div>
-    <%= form.label :data, style: "display: block" %>
-    <%= form.text_field :data %>
-  </div>
-
-  <div>
-    <%= form.label :created_by, style: "display: block" %>
-    <%= form.text_field :created_by %>
-  </div>
-
-  <div>
-    <%= form.label :updated_by, style: "display: block" %>
-    <%= form.text_field :updated_by %>
-  </div>
-
-  <div>
-    <%= form.label :processed_qty, style: "display: block" %>
-    <%= form.text_field :processed_qty %>
-  </div>
-
-  <div>
-    <%= form.label :specification, style: "display: block" %>
-    <%= form.text_area :specification %>
-  </div>
-
-  <div>
-    <%= form.label :note, style: "display: block" %>
-    <%= form.text_area :note %>
-  </div>
-
-  <div>
-    <%= form.label :deleted_at, style: "display: block" %>
-    <%= form.datetime_field :deleted_at %>
-  </div>
-
-  <div>
-    <%= form.label :deleted_by_id, style: "display: block" %>
-    <%= form.text_field :deleted_by_id %>
-  </div>
-
-  <div>
-    <%= form.label :item_type, style: "display: block" %>
-    <%= form.text_field :item_type %>
-  </div>
-
-  <div>
-    <%= form.label :wbsproject_id, style: "display: block" %>
-    <%= form.text_field :wbsproject_id %>
-  </div>
-
-  <div>
-    <%= form.label :parent_id, style: "display: block" %>
-    <%= form.text_field :parent_id %>
-  </div>
-
-  <div>
-    <%= form.label :contract_item_reference_id, style: "display: block" %>
-    <%= form.text_field :contract_item_reference_id %>
-  </div>
-
-  <div>
-    <%= form.label :contract_flag, style: "display: block" %>
-    <%= form.check_box :contract_flag %>
-  </div>
-
-  <div>
-    <%= form.label :purch_reqn_item_noncontract_id, style: "display: block" %>
-    <%= form.text_field :purch_reqn_item_noncontract_id %>
-  </div>
-
-  <div>
-    <%= form.label :commodity_list, style: "display: block" %>
-    <%= form.number_field :commodity_list %>
-  </div>
-
-  <div>
-    <%= form.label :adjustment_qty, style: "display: block" %>
-    <%= form.text_field :adjustment_qty %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
 <% end %>

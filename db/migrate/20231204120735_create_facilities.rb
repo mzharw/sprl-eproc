@@ -4,15 +4,15 @@ class CreateFacilities < ActiveRecord::Migration[7.1]
       t.string :facility_type
       t.string :name
 
-      t.uuid :created_by
-      t.uuid :updated_by
-      t.datetime :discarded_at
+      t.uuid :created_by_id
+      t.uuid :updated_by_id
+      t.timestamp :discarded_at
       t.timestamps
     end
 
     add_index :facilities, :facility_type
     add_index :facilities, :discarded_at
-    add_index :facilities, :created_by
-    add_index :facilities, :updated_by
+    add_index :facilities, :created_by_id
+    add_index :facilities, :updated_by_id
   end
 end

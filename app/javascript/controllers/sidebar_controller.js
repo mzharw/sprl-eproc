@@ -2,11 +2,6 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
     connect() {
-        // Admin Panel settings
-
-        //****************************
-        /* This is for the mini-sidebar if width is less then 1170*/
-        //****************************
         var setsidebartype = function () {
             var width =
                 window.innerWidth > 0 ? window.innerWidth : this.screen.width;
@@ -18,11 +13,11 @@ export default class extends Controller {
                 $("#main-wrapper").removeClass("mini-sidebar");
             }
         };
-        $(window).on('load', setsidebartype);
+        $(window).on('load', () => {
+            setsidebartype;
+        });
+        document.body.classList.toggle('sidebar-open');
         $(window).on("resize", setsidebartype);
-        //****************************
-        /* This is for sidebartoggler*/
-        //****************************
         $(".sidebartoggler").on("click", function () {
             $("#main-wrapper").toggleClass("mini-sidebar");
             if ($("#main-wrapper").hasClass("mini-sidebar")) {

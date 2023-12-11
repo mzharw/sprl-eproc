@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  app_id: 
+
   prcmt_type_id: 
   number: MyString
   name: MyString
@@ -25,8 +25,8 @@ one:
   state: MyString
   created_at: 2023-11-30 17:21:39
   updated_at: 2023-11-30 17:21:39
-  created_by: 
-  updated_by: 
+  created_by_id: 
+  updated_by_id: 
   bid_bond: false
   scope_of_supplies: 
   announced_at: 2023-11-30 17:21:39
@@ -51,7 +51,7 @@ one:
   tender_location: MyString
 
 two:
-  app_id: 
+
   prcmt_type_id: 
   number: MyString
   name: MyString
@@ -75,8 +75,8 @@ two:
   state: MyString
   created_at: 2023-11-30 17:21:39
   updated_at: 2023-11-30 17:21:39
-  created_by: 
-  updated_by: 
+  created_by_id: 
+  updated_by_id: 
   bid_bond: false
   scope_of_supplies: 
   announced_at: 2023-11-30 17:21:39

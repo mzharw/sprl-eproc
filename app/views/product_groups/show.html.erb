@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Material (Product) Group / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render @product_group %>
+    <%= link_to product_groups_path do %>
+      <button class="btn btn-sm btn-outline-secondary text-white">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to edit_product_group_path(@product_group), class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-edit"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
 
-<div>
-  <%= link_to "Edit this product group", edit_product_group_path(@product_group) %> |
-  <%= link_to "Back to product groups", product_groups_path %>
+<% content_for :content do %>
+  <%= render @product_group %>
+<% end %>
 
-  <%= button_to "Destroy this product group", @product_group, method: :delete %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

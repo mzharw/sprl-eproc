@@ -1,0 +1,87 @@
+<div class="overflow-x-auto">
+  <table class="table table-hover table-bordered data-container">
+    <thead>
+      <tr>
+        <th>
+          <%= sortable_header('Ident Name', measurement_units_path, :ident_name) %>
+        </th>
+        <th>
+          <%= sortable_header('Name', measurement_units_path, :name) %>
+        </th>
+        <th>
+          <%= sortable_header('Symbol', measurement_units_path, :symbol) %>
+        </th>
+        <th>
+          <%= sortable_header('Description', measurement_units_path, :desc) %>
+        </th>
+        <th>
+          <%= sortable_header('Created At', measurement_units_path, :created_at) %>
+        </th>
+        <th>
+          <%= sortable_header('Updated At', measurement_units_path, :updated_at) %>
+        </th>
+        <th>
+          <%= sortable_header('Created By', measurement_units_path, :created_by_id) %>
+        </th>
+        <th>
+          <%= sortable_header('Updated By', measurement_units_path, :updated_by_id) %>
+        </th>
+        <th>
+          <%= sortable_header('Dimid', measurement_units_path, :dimid) %>
+        </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @measurement_units.present? %>
+        <% @measurement_units.each do |measurement_unit| %>
+          <tr>
+            <td>
+              <%= measurement_unit.ident_name %>
+            </td>
+            <td>
+              <%= measurement_unit.name %>
+            </td>
+            <td>
+              <%= measurement_unit.symbol %>
+            </td>
+            <td>
+              <%= measurement_unit.desc %>
+            </td>
+            <td>
+              <%= measurement_unit.created_at %>
+            </td>
+            <td>
+              <%= measurement_unit.updated_at %>
+            </td>
+            <td>
+              <%= measurement_unit.creator.username %>
+            </td>
+            <td>
+              <%= measurement_unit.updater.username %>
+            </td>
+            <td>
+              <%= measurement_unit.dimid %>
+            </td>
+            <td>
+              <%= link_to measurement_unit, class: 'btn btn-sm m-1 btn-outline-secondary' do %>
+                <i class="ti ti-eye"></i>
+                <% end %>
+                  <%= link_to edit_measurement_unit_path(measurement_unit), class: 'btn btn-sm m-1 btn-secondary' do %>
+                    <i class="ti ti-edit"></i>
+                    <% end %>
+                      <%= link_to measurement_unit, class: 'btn btn-sm m-1 btn-danger' , data: { turbo_method: :delete,
+                        confirm: 'Are you sure?' } do %>
+                        <i class="ti ti-trash"></i>
+                        <% end %>
+            </td>
+          </tr>
+          <% end %>
+            <% else %>
+              <tr>
+                <td colspan="10">No Entry</td>
+              </tr>
+              <% end %>
+    </tbody>
+  </table>
+</div>

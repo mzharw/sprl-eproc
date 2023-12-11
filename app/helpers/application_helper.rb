@@ -1,6 +1,23 @@
 module ApplicationHelper
-  def active?(controller, action = nil)
-    'active' if controller_name == controller && (action.nil? || action_name == action)
+  def active?(*pathroutes)
+    pathroutes.each do |arg|
+      case arg
+      when String
+        controller = arg
+        actions = []
+      when Hash
+        controller = arg.keys.first
+        actions = Array(arg[controller])
+      else
+        next
+      end
+
+      next unless controller_name == controller &&
+                  (actions.empty? || actions.include?(action_name))
+
+      return true
+    end
+    false
   end
 
   def selection(form, select_name, options_path, value, text)
