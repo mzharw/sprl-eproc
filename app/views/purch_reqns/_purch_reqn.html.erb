@@ -1,3 +1,11 @@
+<% unless purch_reqn.submitted? %>
+  <div class="float-end">
+    <%= link_to edit_purch_reqn_path, class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-pencil"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
 <table class="table">
   <tr>
     <td>Purchase Requisition Number</td>
@@ -9,7 +17,7 @@
   </tr>
   <tr>
     <td>Contract</td>
-    <td><%= purch_reqn.contract %></td>
+    <td><%= badge(purch_reqn.contract) %></td>
   </tr>
   <tr>
     <td>Description</td>
@@ -17,7 +25,7 @@
   </tr>
   <tr>
     <td>Purchasing Group</td>
-    <td><%= purch_reqn.purch_group&.code %></td>
+    <td><%= purch_reqn.purch_group_code %></td>
   </tr>
   <tr>
     <td>Plant</td>
@@ -25,15 +33,15 @@
   </tr>
   <tr>
     <td>Date PR</td>
-    <td><%= purch_reqn.created_at %></td>
+    <td><%= purch_reqn.formatted_create %></td>
   </tr>
-  <tr>
-    <td>Purchasing Organization</td>
-    <td><%= purch_reqn.purch_org.code %></td>
-  </tr>
+  <!--  <tr>-->
+  <!--    <td>Purchasing Organization</td>-->
+  <!--    <td><%#= purch_reqn.purch_org.code %></td>-->
+  <!--  </tr>-->
   <tr>
     <td>Source Found</td>
-    <td><%= purch_reqn.fund_source%></td>
+    <td><%= purch_reqn.fund_source %></td>
   </tr>
   <tr>
     <td>Non AFE</td>
@@ -41,10 +49,10 @@
   </tr>
   <tr>
     <td>Currency</td>
-    <td><%= purch_reqn.currency&.code %></td>
+    <td><%= purch_reqn.currency_code %></td>
   </tr>
   <tr>
     <td>Subtotal</td>
-    <td>0</td>
+    <td><%= purch_reqn.items_subtotal %></td>
   </tr>
 </table>

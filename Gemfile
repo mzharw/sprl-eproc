@@ -42,6 +42,14 @@ gem 'devise', '~> 4.9'
 # Authorization
 gem 'pundit', '~> 2.3'
 
+# gem 'prawn'
+
+gem 'rqrcode'
+
+gem 'wicked_pdf'
+
+gem 'wkhtmltopdf-binary'
+
 # Nested forms
 # gem 'cocoon', '~> 1.2'
 
@@ -104,3 +112,5 @@ gem "pry", "~> 0.14.2"
 gem "draper", "~> 4.0"
 
 gem "discard", "~> 1.3"
+
+gem "rolify", "~> 6.0"

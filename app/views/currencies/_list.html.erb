@@ -1,47 +1,50 @@
-<table class="table  table-hover table-bordered data-container">
-    <thead>
-        <tr>
-            <th>
-              <%= sortable_header('Code', currencies_path, :code) %>
-            </th>
-            <th>
-              <%= sortable_header('Name', currencies_path, :name) %>
-            </th>
-            <th>
-              <%= sortable_header('Symbol', currencies_path, :symbol) %>
-            </th>
-            <th>
-              <%= sortable_header('Description', currencies_path, :description) %>
-            </th>
-            <th>
-              Action
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-      <% @currencies.each do |currency| %>
-        <tr>
-          <td><%= currency.code %></td>
-          <td><%= currency.name %></td>
-          <td><%= currency.symbol %></td>
-          <td><%= currency.desc %></td>
-          <td>
-            <%= link_to currency, class: 'btn btn-sm btn-outline-secondary m-1' do %>
-                <i class="ti ti-eye"></i>
-            <% end %>
-            <%= link_to edit_currency_path(currency), class: 'btn btn-sm btn-secondary m-1' do %>
-                <i class="ti ti-edit"></i>
-            <% end %>
-            <%= link_to currency, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete} do %>
-                <i class="ti ti-trash"></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      <% if @currencies.empty? %>
-        <tr>
-          <td colspan="5">No Entry</td>
-        </tr>
-      <% end %>
-    </tbody>
-</table>
+<% content_for :table, flush: true do %>
+  <thead>
+  <tr>
+    <th>
+      <%= sortable_header('Code', currencies_path, :code) %>
+    </th>
+    <th>
+      <%= sortable_header('Name', currencies_path, :name) %>
+    </th>
+    <th>
+      <%= sortable_header('Symbol', currencies_path, :symbol) %>
+    </th>
+    <th>
+      <%= sortable_header('Description', currencies_path, :description) %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @currencies.each do |currency| %>
+    <tr>
+      <td><%= currency.code %></td>
+      <td><%= currency.name %></td>
+      <td><%= currency.symbol %></td>
+      <td><%= currency.desc %></td>
+      <td>
+        <%= link_to currency, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_currency_path(currency), class: 'btn btn-sm btn-secondary m-1' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to currency, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @currencies.empty? %>
+    <tr>
+      <td colspan="5">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+
+<%= render partial: 'shared/table', locals: { model: currencies } %>

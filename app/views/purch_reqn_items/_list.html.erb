@@ -1,70 +1,91 @@
-<div class="overflow-x-auto">
-  <table class="table table-hover table-bordered data-container">
-    <thead>
-        <tr>
-            <th>
-              <%= sortable_header('Item No.', purch_reqn_items_path, :number) %>
-            </th>
-            <th>
-              <%= sortable_header('Item Type', purch_reqn_items_path, :purch_reqn_item_type) %>
-            </th>
-            <th>
-              <%= sortable_header('Material', purch_reqn_items_path, :contract) %>
-            </th>
-            <th>
-              <%= sortable_header('Description', purch_reqn_items_path, :desc) %>
-            </th>
-            <th>
-              <%= sortable_header('Quantity', purch_reqn_items_path, :qty) %>
-            </th>
-            <th>
-              <%= sortable_header('UoM', purch_reqn_items_path, :uom) %>
-            </th>
-            <th>
-              <%= sortable_header('Unit Price (Estimation)', purch_reqn_items_path, :unit_price) %>
-            </th>
-            <th>
-              <%= sortable_header('Subtotal', purch_reqn_items_path, :subtotal) %>
-            </th>
-            <th>
-              <%= sortable_header('Delivery Date', purch_reqn_items_path, :delivery_date) %>
-            </th>
-            <th>
-              <%= sortable_header('Requisistioner', purch_reqn_items_path, :requisitioner) %>
-            </th>
-            <th>
-              <%= sortable_header('Action', purch_reqn_items_path, :action) %>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-      <% items = @purch_reqn_items || locals[:items] || ['Empty'] %>
-      <% if items.empty? %>
-        <tr>
-          <td colspan="15"> No Entry</td>
-        </tr>
-      <% else %>
-        <% items.each_with_index do |purch_reqn_item, index| %>
-          <tr>
-            <!-- <td><%= purch_reqn_item.number %></td> -->
-            <td><%= index + 1 %></td>
-            <td><%= purch_reqn_item.item_type %></td>
-            <td><%= purch_reqn_item.product.id %></td>
-            <td><%= purch_reqn_item.desc %></td>
-            <td><%= purch_reqn_item.qty %></td>
-            <td><%= purch_reqn_item.uom.name %></td>
-            <td><%= purch_reqn_item.est_unit_price %></td>
-            <td><%= purch_reqn_item.est_subtotal %></td>
-            <td><%= purch_reqn_item.expected_delivery_date %></td>
-            <td><%= purch_reqn_item.requisitioner %></td>
-            <td>
-              <%= link_to purch_reqn_item, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete} do %>
-                  <i class="ti ti-trash"></i>
-              <% end %>
-            </td>
-          </tr>
+<% items = @purch_reqn_items || items %>
+<% is_submitted = @purch_reqn.submitted? %>
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <% if is_submitted && defined? form %>
+      <th></th>
+    <% end %>
+    <th>
+      Item No.
+    </th>
+    <th>
+      Item Type
+    </th>
+    <th>
+      Product Group
+    </th>
+    <th>
+      Material
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Quantity
+    </th>
+    <th>
+      UoM
+    </th>
+    <th>
+      Unit Price (Estimation)
+    </th>
+    <th>
+      Subtotal
+    </th>
+    <th>
+      Delivery Date
+    </th>
+    <th>
+      Requisistioner
+    </th>
+    <% unless is_submitted %>
+      <th class="sticky">
+        Action
+      </th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% if items.empty? %>
+    <tr>
+      <td colspan="15"> No Entry</td>
+    </tr>
+  <% else %>
+    <% items.each_with_index do |purch_reqn_item, index| %>
+      <tr id="<%= purch_reqn_item.id %>">
+        <% if is_submitted && defined? form %>
+          <td>
+            <%= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
+          </td>
         <% end %>
-      <% end %>
+        <td><%= index + 1 %></td>
+        <td><%= purch_reqn_item.item_type %></td>
+        <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
+        <td><b><%= purch_reqn_item.product_code %></b> - <%= purch_reqn_item.product_name %></td>
+        <td><%= purch_reqn_item.desc %></td>
+        <td><%= purch_reqn_item.qty %></td>
+        <td><%= purch_reqn_item.uom&.name %></td>
+        <td><%= purch_reqn_item.est_unit_price %></td>
+        <td><%= purch_reqn_item.est_subtotal %></td>
+        <td><%= purch_reqn_item.formatted_delivery %></td>
+        <td><%= purch_reqn_item.requisitioner %></td>
+        <% unless is_submitted %>
+          <td>
+            <div class="d-flex">
+              <%= link_to purch_reqn_item_path(item_id: purch_reqn_item), class: 'btn btn-sm link-success' do %>
+                <i class="ti ti-eye"></i>
+              <% end %>
+              <%= button_to destroy_purch_reqn_item_path(item_id: purch_reqn_item), class: 'btn btn-sm link-danger', method: :delete do %>
+                <i class="ti ti-trash"></i>
+              <% end %>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
     </tbody>
-  </table>
-</div>
+  <% end %>
+<% end %>
+
+<%= render partial: 'shared/table' %>

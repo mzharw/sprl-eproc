@@ -1,6 +1,6 @@
 <div class='d-flex justify-content-between gap-1'>
-    <b><%= text %></b>
-    <%= link_to path + "?" + link_params.to_param do %>
-        <i class='ti <%= params[:by] == column.to_s ? (params[:dir] == 'ASC' ? 'ti-sort-ascending' : 'ti-sort-descending') : 'ti-arrows-sort' %>'></i>
+    <%= text %>
+    <%= link_to path + "?" + link_params.to_param, class: 'link-primary' do %>
+        <i class='ti <%= params[:sort_by] == column.to_s ? (params[:dir] == 'ASC' ? 'ti-sort-ascending' : 'ti-sort-descending') : 'ti-arrows-sort' %>'></i>
     <% end %>
 </div>

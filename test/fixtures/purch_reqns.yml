@@ -16,7 +16,7 @@ one:
   cost_center_id: one
   fund_source: MyString
   currency: one
-  recreate_from_id: one
+  prior_to_id: one
   contract_title: MyString
   scope_of_work: MyString
   justification: MyString
@@ -49,7 +49,7 @@ two:
   cost_center_id: two
   fund_source: MyString
   currency: two
-  recreate_from_id: two
+  prior_to_id: two
   contract_title: MyString
   scope_of_work: MyString
   justification: MyString

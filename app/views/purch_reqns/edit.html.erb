@@ -1,10 +1,18 @@
-<h1>Editing purch reqn</h1>
+<% content_for :content_header do %>
+  <b>Purchase Requisition / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render "form", purch_reqn: @purch_reqn %>
+    <%= link_to @purch_reqn do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+  </div>
+<% end %>
 
-<br>
+<% content_for :content do %>
+  <%= render "form", purch_reqn: @purch_reqn %>
+<% end %>
 
-<div>
-  <%= link_to "Show this purch reqn", @purch_reqn %> |
-  <%= link_to "Back to purch reqns", purch_reqns_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

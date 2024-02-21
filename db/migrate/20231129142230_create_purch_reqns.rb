@@ -3,7 +3,7 @@ class CreatePurchReqns < ActiveRecord::Migration[7.1]
     create_table :purch_reqns, id: :uuid do |t|
       t.string :number
       t.text :desc
-      t.string :state
+      t.string :state, default: 'ACTIVE'
       t.uuid :purch_org_id
       t.string :purch_reqn_type
       t.boolean :contract
@@ -12,7 +12,7 @@ class CreatePurchReqns < ActiveRecord::Migration[7.1]
       t.uuid :cost_center_id
       t.string :fund_source
       t.uuid :currency_id
-      t.uuid :recreate_from_id
+      t.uuid :prior_to_id
       t.string :contract_title
       t.string :scope_of_work
       t.string :justification
@@ -37,7 +37,7 @@ class CreatePurchReqns < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :purch_reqns, :number, unique: true
+    add_index :purch_reqns, :number
     add_index :purch_reqns, :purch_org_id
     add_index :purch_reqns, :purch_group_id
     add_index :purch_reqns, :plant_id

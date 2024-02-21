@@ -17,12 +17,12 @@
 
   <tr>
     <td><strong>Created by:</strong></td>
-    <td><%= commodity_list.creator.username %></td>
+    <td><%= commodity_list.creator&.username %></td>
   </tr>
 
   <tr>
     <td><strong>Updated by:</strong></td>
-    <td><%= commodity_list.updater.username %></td>
+    <td><%= commodity_list.updater&.username %></td>
   </tr>
 
 </table>

@@ -1,74 +1,55 @@
 <!-- Header Start -->
-<header class="app-header <%= 'w-100' unless !!local_assigns[:full] %>">
-    <nav class="navbar navbar-expand-lg navbar-light shadow-lg" style="padding: 0 30px;">
-        <ul class="navbar-nav d-flex gap-3">
-            <li class="nav-item d-block d-xl-none">
-                <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                    <i class="ti ti-menu-2"></i>
-                </a>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-                <h5 class="fw-bolder mb-0 text-white text-nowrap">
-                    SPR Langgak E-procurement
-                </h5>
-            </li>
-            <!-- <li class="nav-item d-flex align-items-center">
-                <span>Home</span>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-                <span>Terms & Conditions</span>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-                <span>Registration Procedure</span>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-                <span>Contact</span>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-                <span>Announcement</span>
-            </li> -->
-            <!-- <li class="nav-item">
-                <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                    <i class="ti ti-bell-ringing"></i>
-                    <div class="notification bg-primary rounded-circle"></div>
-                </a>
-            </li> -->
-        </ul>
-        <% if !!local_assigns[:full] %>
-            <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-                <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                    <li class="nav-item dropdown">
-                        <span class="nav-link cursor-pointer fs-3 text-white" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= current_user.username %>
-                            <i class="ti ti-caret-down-filled ms-3"></i>
-                        </span>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                            <div class="message-bodAy">
-                                <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                    <i class="ti ti-user fs-6"></i>
-                                    <p class="mb-0 fs-3">My Profile</p>
-                                </a>
-                                <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                    <i class="ti ti-mail fs-6"></i>
-                                    <p class="mb-0 fs-3">My Account</p>
-                                </a>
-                                <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                    <i class="ti ti-list-check fs-6"></i>
-                                    <p class="mb-0 fs-3">My Task</p>
-                                </a>
-                                <%= link_to 'Logout' , destroy_user_session_path, data: {turbo_method: :delete},
-                                    class: 'btn btn-outline-primary mx-3 mt-2 d-block' %>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <% end %>
-    </nav>
-    <% if content_for?(:'content_header') %>
-        <div style="padding: 7px 30px;" class="text-white d-flex justify-content-between align-items-center">
-            <%= yield :content_header %>
-        </div>
+<header class="d-flex py-3 align-items-center <%= 'w-100' unless defined? :full %> px-9 justify-content-between">
+  <div class="d-flex gap-2 w-100 align-items-center">
+    <div class="nav-item d-block d-xl-none">
+      <a class="nav-link sidebartoggler link-primary" id="headerCollapse" href="javascript:void(0)">
+        <i class="ti ti-menu-2"></i>
+      </a>
+    </div>
+    <%= link_to root_path, class: 'text-nowrap logo-img' do %>
+      <%= image_tag "logo.png", width: '120px' %>
     <% end %>
+  </div>
+  <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+    <ul class="navbar-nav flex-row ms-auto align-items-center gap-3 justify-content-end">
+      <li>
+        <span class="text-center"><%= current_user&.decorate&.full_name %></span>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-icon-hover cursor-pointer" style="font-size: 1.3rem" data-bs-toggle="dropdown"
+           aria-expanded="false">
+          <i class="ti ti-user-circle"></i>
+        </a>
+        <div class="
+                  dropdown-menu
+                  dropdown-menu-end
+                  dropdown-menu-animate-up
+                " aria-labelledby="drop2">
+          <div class="message-bodAy">
+            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+              <i class="ti ti-user fs-6"></i>
+              <p class="mb-0 fs-3">My Profile</p>
+            </a>
+            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+              <i class="ti ti-mail fs-6"></i>
+              <p class="mb-0 fs-3">My Account</p>
+            </a>
+            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+              <i class="ti ti-list-check fs-6"></i>
+              <p class="mb-0 fs-3">My Task</p>
+            </a>
+            <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete },
+                        class: 'btn btn-outline-primary mx-3 mt-2 d-block' %>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </header>
+
+<% if content_for?(:'content_header') %>
+  <div style="padding: 7px 20px;" class="d-flex justify-content-between align-items-center">
+    <%= yield :content_header %>
+  </div>
+<% end %>
 <!-- Header End -->

@@ -1,0 +1,2 @@
+class PrcmtType < ApplicationRecord
+end

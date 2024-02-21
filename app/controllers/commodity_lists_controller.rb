@@ -1,15 +1,18 @@
 class CommodityListsController < ApplicationController
   include UserTrackable
+  include Filterable
   before_action :set_commodity_list, only: %i[show edit update destroy]
 
   # GET /commodity_lists or /commodity_lists.json
   def index
-    query = params[:query] || ''
-    @commodity_lists = CommodityList.where('lower("desc") LIKE ?', "%#{query.downcase}%")
+    @commodity_lists = selectable(CommodityList, '"desc"', :number)
+    json = paginate_json(@commodity_lists)
+
+    @commodity_lists = paginate(@commodity_lists).decorate
 
     respond_to do |format|
       format.html
-      format.json { render json: @commodity_lists }
+      format.json { render json: }
     end
   end
 

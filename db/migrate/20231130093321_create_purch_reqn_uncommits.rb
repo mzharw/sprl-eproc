@@ -4,7 +4,7 @@ class CreatePurchReqnUncommits < ActiveRecord::Migration[7.1]
       t.uuid :purch_reqn_id, null: false
       t.string :desc
       t.text :uncommit_remark
-      t.string :state
+      t.string :state, default: 'ACTIVE'
       t.uuid :current_workflow_instance, null: false
       t.uuid :created_by_id, null: false
       t.uuid :updated_by_id, null: false

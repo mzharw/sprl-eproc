@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @workflow %>
+
+<div>
+  <%= link_to "Edit this workflow", edit_workflow_path(@workflow) %> |
+  <%= link_to "Back to workflows", workflows_path %>
+
+  <%= button_to "Destroy this workflow", @workflow, method: :delete %>
+</div>

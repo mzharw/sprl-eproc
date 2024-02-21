@@ -1,55 +1,57 @@
-<table class="table  table-hover table-bordered data-container">
-    <thead>
-        <tr>
-            <th>
-              <%= sortable_header('Cost Center ID', cost_centers_path, :cost_center_id) %>
-            </th>
-            <th>
-              <%= sortable_header('Controllers Name', cost_centers_path, :ctr_name) %>
-            </th>
-            <th>
-              <%= sortable_header('Description', cost_centers_path, :desc) %>
-            </th>
-            <th>
-              <%= sortable_header('Payroll ID', cost_centers_path, :payroll_id) %>
-            </th>
-            <th>
-              <%= sortable_header('Valid To', cost_centers_path, :valid_to) %>
-            </th>
-            <th>
-              <%= sortable_header('Purchasing Group', cost_centers_path, 'cost_center.desc') %>
-            </th>
-            <th>
-              Action
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-      <% cost_centers.each do |cost_center| %>
-        <tr>
-          <td><%= cost_center.cost_center_id%></td>
-          <td><%= cost_center.ctrl_name %></td>
-          <td><%= cost_center.desc %></td>
-          <td><%= cost_center.payroll_id %></td>
-          <td><%= cost_center.valid_to %></td>
-          <td><%= cost_center.purch_group.code %></td>
-          <td>
-            <%= link_to cost_center, class: 'btn btn-sm btn-outline-secondary m-1' do %>
-                <i class="ti ti-eye"></i>
-            <% end %>
-            <%= link_to edit_cost_center_path(cost_center), class: 'btn btn-sm btn-secondary m-1' do %>
-                <i class="ti ti-edit"></i>
-            <% end %>
-            <%= link_to cost_center, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete} do %>
-                <i class="ti ti-trash"></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      <% if cost_centers.empty? %>
-        <tr>
-          <td colspan="7">No Entry</td>
-        </tr>
-      <% end %>
-    </tbody>
-</table>
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      <%= sortable_header('Cost Center ID', cost_centers_path, :cost_center_id) %>
+    </th>
+    <th>
+      <%= sortable_header('Controllers Name', cost_centers_path, :ctr_name) %>
+    </th>
+    <th>
+      <%= sortable_header('Description', cost_centers_path, :desc) %>
+    </th>
+    <th>
+      <%= sortable_header('Payroll ID', cost_centers_path, :payroll_id) %>
+    </th>
+    <th>
+      <%= sortable_header('Valid To', cost_centers_path, :valid_to) %>
+    </th>
+    <th>
+      <%= sortable_header('Purchasing Group', cost_centers_path, 'cost_center.desc') %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% cost_centers.each do |cost_center| %>
+    <tr>
+      <td><%= cost_center.cost_center_id %></td>
+      <td><%= cost_center.ctrl_name %></td>
+      <td><%= cost_center.desc %></td>
+      <td><%= cost_center.payroll_id %></td>
+      <td><%= cost_center.valid_to %></td>
+      <td><%= cost_center.purch_group&.code %></td>
+      <td>
+        <%= link_to cost_center, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_cost_center_path(cost_center), class: 'btn btn-sm btn-secondary m-1' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to cost_center, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if cost_centers.empty? %>
+    <tr>
+      <td colspan="7">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: cost_centers } %>

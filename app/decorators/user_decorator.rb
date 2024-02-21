@@ -1,4 +1,8 @@
 class UserDecorator < Draper::Decorator
+  def self.collection_decorator_class
+    PaginationDecorator
+  end
+
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through
@@ -10,8 +14,12 @@ class UserDecorator < Draper::Decorator
   #     end
   #   end
 
-  def display_name
-    username
+  def full_name
+    party&.full_name
+  end
+
+  def position_name
+    party&.personnel&.position_name
   end
 
 end

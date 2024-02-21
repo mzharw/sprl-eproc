@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @prcmt_type %>
+
+<div>
+  <%= link_to "Edit this prcmt type", edit_prcmt_type_path(@prcmt_type) %> |
+  <%= link_to "Back to prcmt types", prcmt_types_path %>
+
+  <%= button_to "Destroy this prcmt type", @prcmt_type, method: :delete %>
+</div>

@@ -1,0 +1,25 @@
+<div class="dropdown">
+  <a class="link-dark p-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-target="#dropdown-advanced-filter" data-bs-auto-close="outside" aria-expanded="false">
+    <i class="ti ti-filter"></i>
+  </a>
+  <div class="dropdown-menu" id="dropdown-advanced-filter" style="width: 18.7rem">
+    <div class="dropdown-header">Sort by</div>
+    <%= form_with(url: url, method: :get, class: 'px-3 py-1') do %>
+      <div class="pb-2">
+        <label for="state" class="col-form-label-sm">State</label>
+        <div>
+          <input type="radio" class="btn-check" name="filters[state]" id="warning-outlined" autocomplete="off" value="INACTIVE">
+          <label class="btn btn-sm btn-outline-dark" for="warning-outlined">Inactive</label>
+
+          <input type="radio" class="btn-check" name="filters[state]" id="success-outlined" autocomplete="off" value="ACTIVE" checked>
+          <label class="btn btn-sm btn-outline-dark" for="success-outlined">Active</label>
+        </div>
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+        <button class="btn btn-link link-muted text-decoration-none px-0">Clear</button>
+        <button class="btn btn-link link-info text-decoration-none px-0">Apply filters</button>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -8,7 +8,7 @@ class CreateParties < ActiveRecord::Migration[7.1]
       t.uuid :created_by_id
       t.uuid :updated_by_id
       t.timestamp :discarded_at
-      t.timestamps
+      t.timestamps null: true
     end
 
     add_index :parties, :party_type

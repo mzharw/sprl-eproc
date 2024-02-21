@@ -4,3 +4,6 @@ import "controllers"
 import "jquery"
 import "popper"
 import "bootstrap"
+import { start } from "activestorage"
+
+start()

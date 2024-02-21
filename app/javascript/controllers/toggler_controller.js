@@ -3,6 +3,14 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
     static targets = ['toggler'];
 
+    connect() {
+        let togglerHide = document.querySelectorAll('.toggler-hide')
+
+        togglerHide.forEach(e => {
+            if (e.checked) this.switch(e.dataset.hide, false)
+        })
+    }
+
     show(event) {
         const data = event.target.dataset;
         this.switch(data.show, true);

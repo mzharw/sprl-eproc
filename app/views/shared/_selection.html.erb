@@ -1,90 +1,15 @@
-<div data-controller="selection" data-options-path="<%= options_path %>" data-value="<%= value %>" data-text="<%= text %>" class="selection-wrapper">
+<div data-controller="selection" id="<%= select_name %>" data-options-path="<%= options_path %>" data-value="<%= value %>" data-text="<%= text %>" data-desc="<%= desc %>" data-options="<%= options %>" class="selection-wrapper">
   <div data-action="click->selection#toggleOptions" class="preview-container">
-    <span class="selected-value" data-selection-target="selectedValue"></span>
+    <div class="selected-value overflow-hidden text-nowrap" data-selection-target="selectedValue"></div>
     <i class="ti selection-clear" data-action="click->selection#clearSelection" data-selection-target="clearSelection"></i>
   </div>
-  <div data-selection-target="optionsContainer" class="options-container shadow ">
+  <div data-selection-target="optionsContainer" class="options-container shadow">
     <span class="ti ti-search selection-search-icon"></span>
-    <input type="text" id="selection_search" class="form-control selection-search" data-selection-target="input" data-action="input->selection#filterOptions" placeholder="Search" value="">
-    <%= form.hidden_field select_name, data: { "selection-target": "selectedInput" } %>
+    <!--    <div class="spinner-grow text-primary position-absolute spinner-border-sm" style="right: 25px" role="status">-->
+    <!--      <span class="visually-hidden">Loading...</span>-->
+    <!--    </div>-->
+    <input type="text" class="form-control selection-search" data-selection-target="input" data-action="input->selection#filterOptions" placeholder="Search" value="">
+    <%= form.hidden_field select_name, class: 'selected-input', data: { "selection-target": "selectedInput" } %>
     <div data-selection-target="optionsList" class="options-list"></div>
   </div>
 </div>
-
-<style>
-  .selection-wrapper {
-    position: relative;
-  }
-
-  .selection-clear {
-    padding: 5px;
-    border-radius: 20px;
-  }
-
-  .selection-clear:hover {
-    background-color: #DFE5EF;
-  }
-
-  .selection-search {
-    cursor: text;
-    padding-left: 35px;
-  }
-
-  .selection-search-icon {
-    position: absolute;
-    transform: translate(10px, 12px);
-  }
-
-  .preview-container {
-    border: var(--bs-border-width) solid #DFE5EF;
-    background-color: white;
-    border-radius: 5px;
-    height: 40px;
-    padding: 8px 12px 8px 17px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .options-container {
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    z-index: 999;
-    width: 100%;
-    margin-top: 5px;
-    padding: 15px;
-    border: var(--bs-border-width) solid #DFE5EF;
-    border-radius: 5px;
-    background-color: white;
-    overflow: hidden;
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  }
-
-  .options-container.show-options {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .options-list {
-    padding-top: 10px;
-    max-height: 260px;
-    overflow-y: auto;
-  }
-
-  .options-list .selection-option.active {
-    background-color: #dfe5ef70;
-  }
-
-  .options-list .selection-option:hover {
-    background-color: #DFE5EF;
-  }
-
-  .options-list .selection-option {
-    cursor: pointer !important;
-    padding: 10px;
-    border-radius: 3px;
-  }
-
-</style>

@@ -1,61 +1,57 @@
-<table class="table  table-hover table-bordered data-container">
-    <thead>
-        <tr>
-            <th>
-                <%= sortable_header('Commodity List', commodity_lists_path, :commodity_list_id) %>
-            </th>
-            <th>
-                <%= sortable_header('Number', commodity_lists_path, :number) %>
-            </th>
-            <th>
-                <%= sortable_header('Description', commodity_lists_path, :desc) %>
-            </th>
-            <th>
-                <%= sortable_header('Created By', commodity_lists_path, :created_by_id) %>
-            </th>
-            <th>
-                <%= sortable_header('Updated By', commodity_lists_path, :updated_by_id) %>
-            </th>
-            <th>
-                Action
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @commodity_lists.each do |commodity_list| %>
-            <tr>
-                <td>
-                    <%= commodity_list.commodity_list_id %>
-                </td>
-                <td>
-                    <%= commodity_list.number %>
-                </td>
-                <td>
-                    <%= commodity_list.desc %>
-                </td>
-                <td>
-                    <%= commodity_list.creator.username %>
-                </td>
-                <td>
-                    <%= commodity_list.updater.username %>
-                </td>
-                <td>
-                    <%= link_to commodity_list, class: 'btn btn-sm btn-outline-secondary m-1' do %>
-                        <i class="ti ti-eye"></i>
-                    <% end %>
-                    <%= link_to edit_commodity_list_path(commodity_list), class: 'btn btn-sm btn-secondary m-1' do %>
-                        <i class="ti ti-edit"></i>
-                    <% end %>
-                    <%= link_to commodity_list, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete} do %>
-                        <i class="ti ti-trash"></i>
-                    <% end %>
-                </td>
-            </tr>
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      <%= sortable_header('Number', commodity_lists_path, :number) %>
+    </th>
+    <th>
+      <%= sortable_header('Description', commodity_lists_path, :desc) %>
+    </th>
+    <th>
+      <%= sortable_header('Created By', commodity_lists_path, :created_by_id) %>
+    </th>
+    <th>
+      <%= sortable_header('Updated By', commodity_lists_path, :updated_by_id) %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @commodity_lists.each do |commodity_list| %>
+    <tr>
+      <td>
+        <%= commodity_list.number %>
+      </td>
+      <td>
+        <%= commodity_list.desc %>
+      </td>
+      <td>
+        <%= commodity_list.creator&.username %>
+      </td>
+      <td>
+        <%= commodity_list.updater&.username %>
+      </td>
+      <td>
+        <%= link_to commodity_list, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+          <i class="ti ti-eye"></i>
         <% end %>
-        <% if @commodity_lists.empty? %>
-            <tr>
-                <td colspan="6">No Entry</td>
-            </tr>
+        <%= link_to edit_commodity_list_path(commodity_list), class: 'btn btn-sm btn-secondary m-1' do %>
+          <i class="ti ti-edit"></i>
         <% end %>
-    </tbody>
-</table>
+        <%= link_to commodity_list, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @commodity_lists.empty? %>
+    <tr>
+      <td colspan="6">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: @commodity_lists } %>

@@ -11,7 +11,7 @@
  cost_center_id: [1;36mnil[0m,
  fund_source: [1;36mnil[0m,
  currency_id: [1;36mnil[0m,
- recreate_from_id: [1;36mnil[0m,
+ prior_to_id: [1;36mnil[0m,
  contract_title: [1;36mnil[0m,
  scope_of_work: [1;36mnil[0m,
  justification: [1;36mnil[0m,

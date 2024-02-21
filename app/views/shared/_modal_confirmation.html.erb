@@ -1,0 +1,8 @@
+<% content_for :modal_body, flush: true do %>
+  Are you sure want to continue?
+<% end %>
+<% content_for :modal_button, flush: true do %>
+  <%= yield :confirm_button %>
+<% end %>
+
+<%= render 'shared/modal', title: 'Alert', id: id, back: back %>

@@ -1,10 +1,12 @@
 class CurrenciesController < ApplicationController
+  include Filterable
   before_action :set_currency, only: %i[ show edit update destroy ]
 
   # GET /currencies or /currencies.json
   def index
-    query = params[:query] || ''
-    @currencies = Currency.where('lower(code) LIKE ?', "%#{query.downcase}%")
+    @currencies = selectable(Currency, :code, :name)
+    @currencies = filter(@currencies)
+    @currencies = @currencies.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -64,13 +66,14 @@ class CurrenciesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_currency
-      @currency = Currency.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def currency_params
-      params.require(:currency).permit(:code, :name, :symbol, :desc)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_currency
+    @currency = Currency.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def currency_params
+    params.require(:currency).permit(:code, :name, :symbol, :desc)
+  end
 end

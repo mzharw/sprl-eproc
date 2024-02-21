@@ -1,15 +1,17 @@
 class MeasurementUnitsController < ApplicationController
   include UserTrackable
+  include Filterable
   before_action :set_measurement_unit, only: %i[show edit update destroy]
 
   # GET /measurement_units or /measurement_units.json
   def index
-    query = params[:query] || ''
-    @measurement_units = MeasurementUnit.where('lower(name) LIKE ?', "%#{query.downcase}%")
+    @measurement_units = selectable(MeasurementUnit, :symbol, :name)
+    json = paginate_json(@measurement_units)
+    @measurement_units = paginate(@measurement_units).decorate
 
     respond_to do |format|
       format.html
-      format.json { render json: @measurement_units }
+      format.json { render json: }
     end
   end
 
@@ -44,7 +46,7 @@ class MeasurementUnitsController < ApplicationController
   # PATCH/PUT /measurement_units/1 or /measurement_units/1.json
   def update
     respond_to do |format|
-      if @measurement_unit.update({ **measurement_unit_params, **tracker('update') })
+      if @measurement_unit.update({ **measurement_unit_params, **tracker(:update) })
         format.html do
           redirect_to measurement_unit_url(@measurement_unit), notice: 'Measurement unit was successfully updated.'
         end

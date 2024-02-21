@@ -1,0 +1,22 @@
+<div>
+  <%= form_with(url: url, method: :get) do %>
+    <%= hidden_field_tag :search_by, params[:search_by] || default_column %>
+    <div class="dropdown">
+      <a class="text-dark dropdown-toggle selection-search-icon" type="button" style="transform: translate(10px, 10px)" data-bs-toggle="dropdown" data-bs-target="#dropdown-search-filter" aria-expanded="false">
+        <i class="ti ti-search"></i>
+      </a>
+      <ul class="dropdown-menu selection-search-options" id="dropdown-search-filter">
+        <li><h6 class="dropdown-header">Search by :</h6></li>
+        <li>
+          <a class="dropdown-item <%= 'active' if params[:search_by] == default_column %>" href="<%= url + 'search_by=' + default_column %>"><%= (default_column.sub "_", " ")&.capitalize %></a>
+        </li>
+        <% columns.each do |column| %>
+          <li>
+            <a class="dropdown-item <%= 'active' if params[:search_by] == column %>" href="<%= url + 'search_by=' + column %>"><%= column.capitalize&.sub "_", " " %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <input type="text" class="form-control selection-search bg-transparent" style="padding-left: 50px" aria-label="search" placeholder="Search <%= ((params[:search_by] || (default_column))&.sub "_", " ")&.downcase %>" name="search" value="<%= params[:search] %>">
+  <% end %>
+</div>

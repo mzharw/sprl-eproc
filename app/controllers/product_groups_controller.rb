@@ -1,15 +1,17 @@
 class ProductGroupsController < ApplicationController
+  include Filterable
   include UserTrackable
   before_action :set_product_group, only: %i[show edit update destroy]
 
   # GET /product_groups or /product_groups.json
   def index
-    query = params[:query] || ''
-    @product_groups = ProductGroup.where('lower(code) LIKE ?', "%#{query.downcase}%")
+    @product_groups = selectable(ProductGroup, :code, :name)
+    json = paginate_json(@product_groups)
+    @product_groups = paginate(@product_groups).decorate
 
     respond_to do |format|
       format.html
-      format.json { render json: @product_groups }
+      format.json { render json: }
     end
   end
 
@@ -44,7 +46,7 @@ class ProductGroupsController < ApplicationController
   # PATCH/PUT /product_groups/1 or /product_groups/1.json
   def update
     respond_to do |format|
-      if @product_group.update({ **product_group_params, **tracker('update') })
+      if @product_group.update({ **product_group_params, **tracker(:update) })
         format.html do
           redirect_to product_group_url(@product_group), notice: 'Product group was successfully updated.'
         end

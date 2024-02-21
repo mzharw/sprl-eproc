@@ -25,7 +25,7 @@
           <td><%= purch_org.code %></td>
           <td><%= purch_org.from_date %></td>
           <td><%= purch_org.thru_date %></td>
-          <td><%= purch_org.party.full_name %></td>
+          <td><%= purch_org.party&.full_name %></td>
           <td>
             <%= link_to purch_org, class: 'm-1 btn btn-sm btn-outline-secondary m-1' do %>
                 <i class="ti ti-eye"></i>

@@ -1,0 +1,47 @@
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      <%= sortable_header('Number', tasks_path, :number) %>
+    </th>
+    <th>
+      <%= sortable_header('Name', tasks_path, :name) %>
+    </th>
+    <th>
+      <%= sortable_header('State', tasks_path, :state) %>
+    </th>
+    <th>
+      <%= sortable_header('Created At', tasks_path, :created_at) %>
+    </th>
+    <th>
+      <%= sortable_header('Updated At', tasks_path, :updated_at) %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.number %></td>
+      <td><%= task.name %></td>
+      <td><%= badge(task.state) %></td>
+      <td><%= task.formatted_create %></td>
+      <td><%= task.formatted_update %></td>
+      <td>
+        <%= link_to task.taskable, class: 'm-1 btn btn-sm btn-outline-secondary' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @tasks.empty? %>
+    <tr>
+      <td colspan="12">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: tasks } %>

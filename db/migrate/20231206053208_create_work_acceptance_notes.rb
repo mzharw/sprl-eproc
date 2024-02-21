@@ -4,7 +4,7 @@ class CreateWorkAcceptanceNotes < ActiveRecord::Migration[7.1]
       t.string :number
       t.string :sap_number
       t.string :name
-      t.string :state
+      t.string :state, default: 'ACTIVE'
       t.uuid :current_workflow_instance_id
       t.jsonb :data
       t.string :wan_type

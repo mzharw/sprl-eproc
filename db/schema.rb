@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_21_022800) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -114,8 +114,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.text "desc"
     t.uuid "created_by_id"
     t.uuid "updated_by_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["created_by_id"], name: "index_currencies_on_created_by_id"
     t.index ["updated_by_id"], name: "index_currencies_on_updated_by_id"
   end
@@ -142,8 +142,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.string "dimid"
     t.uuid "created_by_id"
     t.uuid "updated_by_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["created_by_id"], name: "index_measurement_units_on_created_by_id"
     t.index ["updated_by_id"], name: "index_measurement_units_on_updated_by_id"
   end
@@ -155,12 +155,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.uuid "created_by_id"
     t.uuid "updated_by_id"
     t.datetime "discarded_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["created_by_id"], name: "index_parties_on_created_by_id"
     t.index ["discarded_at"], name: "index_parties_on_discarded_at"
     t.index ["party_type"], name: "index_parties_on_party_type"
     t.index ["updated_by_id"], name: "index_parties_on_updated_by_id"
+  end
+
+  create_table "personnels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "party_id"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.string "position_name"
+    t.uuid "unit_internal_org_id"
+    t.string "number"
+    t.boolean "is_section_head"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "plants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -176,6 +190,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.string "sap"
     t.index ["created_by_id"], name: "index_plants_on_created_by_id"
     t.index ["updated_by_id"], name: "index_plants_on_updated_by_id"
+  end
+
+  create_table "prcmt_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.string "visibility"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
   end
 
   create_table "prcmts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -199,7 +225,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.string "contract_number"
     t.jsonb "data"
     t.uuid "current_workflow_instance_id"
-    t.string "state"
+    t.string "state", default: "ACTIVE"
     t.boolean "bid_bond"
     t.jsonb "scope_of_supplies"
     t.datetime "announced_at", precision: nil
@@ -263,8 +289,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.string "description"
     t.uuid "created_by_id"
     t.uuid "updated_by_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["created_by_id"], name: "index_purch_groups_on_created_by_id"
     t.index ["updated_by_id"], name: "index_purch_groups_on_updated_by_id"
   end
@@ -285,7 +311,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
   create_table "purch_reqn_cancellations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "purch_reqn_id"
     t.uuid "current_workflow_instance"
-    t.string "state"
+    t.string "state", default: "ACTIVE"
     t.uuid "created_by_id"
     t.uuid "updated_by_id"
     t.datetime "created_at", null: false
@@ -329,14 +355,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.string "fixed_vendor"
     t.decimal "qty"
     t.uuid "measurement_unit_id"
-    t.decimal "est_unit_price"
-    t.float "price_unit"
-    t.decimal "est_subtotal"
+    t.decimal "est_unit_price", default: "0.0"
+    t.float "price_unit", default: 0.0
+    t.decimal "est_subtotal", default: "0.0"
     t.uuid "currency_id"
     t.string "requisitioner"
     t.datetime "expected_delivery_date", precision: nil
     t.text "desc"
-    t.jsonb "data"
+    t.json "data"
     t.float "processed_qty"
     t.text "specification"
     t.text "note"
@@ -409,7 +435,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.uuid "partial_itemable", null: false
     t.float "qty"
     t.jsonb "data"
-    t.string "state"
+    t.string "state", default: "ACTIVE"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "discarded_at", precision: nil
@@ -425,7 +451,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.uuid "purch_reqn_id", null: false
     t.string "desc"
     t.text "uncommit_remark"
-    t.string "state"
+    t.string "state", default: "ACTIVE"
     t.uuid "current_workflow_instance", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
@@ -441,7 +467,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
   create_table "purch_reqns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "number"
     t.text "desc"
-    t.string "state"
+    t.string "state", default: "ACTIVE"
     t.uuid "purch_org_id"
     t.string "purch_reqn_type"
     t.boolean "contract"
@@ -450,7 +476,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.uuid "cost_center_id"
     t.string "fund_source"
     t.uuid "currency_id"
-    t.uuid "recreate_from_id"
+    t.uuid "prior_to_id"
     t.string "contract_title"
     t.string "scope_of_work"
     t.string "justification"
@@ -477,11 +503,42 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.index ["created_by_id"], name: "index_purch_reqns_on_created_by_id"
     t.index ["currency_id"], name: "index_purch_reqns_on_currency_id"
     t.index ["discarded_at"], name: "index_purch_reqns_on_discarded_at"
-    t.index ["number"], name: "index_purch_reqns_on_number", unique: true
+    t.index ["number"], name: "index_purch_reqns_on_number"
     t.index ["plant_id"], name: "index_purch_reqns_on_plant_id"
     t.index ["purch_group_id"], name: "index_purch_reqns_on_purch_group_id"
     t.index ["purch_org_id"], name: "index_purch_reqns_on_purch_org_id"
     t.index ["updated_by_id"], name: "index_purch_reqns_on_updated_by_id"
+  end
+
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "ident_name"
+    t.string "resource_type"
+    t.uuid "resource_id"
+    t.string "state", default: "ACTIVE"
+    t.uuid "created_by_id_id"
+    t.uuid "updated_by_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id_id"], name: "index_roles_on_created_by_id_id"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+    t.index ["updated_by_id_id"], name: "index_roles_on_updated_by_id_id"
+  end
+
+  create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.string "number"
+    t.string "name"
+    t.uuid "taskable_id"
+    t.string "taskable_type"
+    t.json "data"
+    t.string "state"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -497,15 +554,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.datetime "discarded_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.uuid "party_id"
     t.uuid "user_type_id"
+    t.string "state"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.index ["discarded_at"], name: "index_users_on_discarded_at"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email"
     t.index ["party_id"], name: "index_users_on_party_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
   create_table "work_acceptance_note_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -551,7 +619,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.string "number"
     t.string "sap_number"
     t.string "name"
-    t.string "state"
+    t.string "state", default: "ACTIVE"
     t.uuid "current_workflow_instance_id"
     t.jsonb "data"
     t.string "wan_type"
@@ -585,6 +653,53 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_130624) do
     t.index ["created_by_id"], name: "index_work_acceptance_notes_on_created_by_id"
     t.index ["number"], name: "index_work_acceptance_notes_on_number"
     t.index ["updated_by_id"], name: "index_work_acceptance_notes_on_updated_by_id"
+  end
+
+  create_table "workflow_instances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "instance_number"
+    t.uuid "workflow_id"
+    t.text "comment"
+    t.string "workflowable_type"
+    t.uuid "workflowable_id"
+    t.string "state", default: "ACTIVE"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "discarded_at", precision: nil
+    t.uuid "discarded_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "workflow_step"
+    t.uuid "workflow_step_id"
+    t.index ["instance_number"], name: "index_workflow_instances_on_instance_number"
+    t.index ["workflow_id"], name: "index_workflow_instances_on_workflow_id"
+    t.index ["workflowable_type", "workflowable_id"], name: "index_workflow_instances_on_workflowable"
+  end
+
+  create_table "workflow_steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "workflow_id"
+    t.string "name"
+    t.string "ident_name"
+    t.string "resource_name"
+    t.integer "seq"
+    t.json "opts"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "discarded_at", precision: nil
+    t.uuid "discarded_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["workflow_id"], name: "index_workflow_steps_on_workflow_id"
+  end
+
+  create_table "workflows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "state", default: "ACTIVE"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "discarded_at", precision: nil
+    t.uuid "discarded_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

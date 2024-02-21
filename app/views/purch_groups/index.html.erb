@@ -1,5 +1,5 @@
 <% content_for :content_header do %>
-  <b>Purchasing Group</b>
+  <h1>Purchasing Group</h1>
   <%= link_to new_purch_group_path do %>
     <button class="btn btn-sm btn-secondary">
       <i class="ti ti-plus"></i>
@@ -8,6 +8,6 @@
   <% end %>
 <% end %>
 <% content_for :content do %>
-    <%= render partial: 'list', collection: @purch_groups.presence|| ['Empty'] %>
+  <%= render 'list', purch_groups: @purch_groups %>
 <% end %>
-<%= render "layouts/wrapper" , sidebar: true %>
+<%= render "layouts/wrapper", sidebar: true %>

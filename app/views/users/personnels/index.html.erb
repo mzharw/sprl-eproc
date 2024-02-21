@@ -1,0 +1,18 @@
+<% content_for :content_header do %>
+  <h1>Personnel</h1>
+  <div class="d-flex align-items-center">
+    <%= search_filter(users_path, 'full_name', %w[username email]) %>
+    <%= advanced_filter(users_path) %>
+    <%= link_to new_user_path do %>
+      <button class="btn btn-secondary">
+        <i class="ti ti-plus"></i>
+      </button>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'users/personnels/list', users: @users %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

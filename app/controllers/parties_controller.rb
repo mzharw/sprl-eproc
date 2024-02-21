@@ -1,11 +1,14 @@
 class PartiesController < ApplicationController
   include UserTrackable
+  include Filterable
   before_action :set_party, only: %i[show edit update destroy]
 
   # GET /parties or /parties.json
   def index
     query = params[:query] || ''
-    @parties = Party.where('lower(full_name) LIKE ?', "%#{query.downcase}%").page(params[:page])
+    @parties = Party.where('lower(full_name) LIKE ?', "%#{query.downcase}%")
+    @parties = filter(@parties)
+    @parties = @parties.page(params[:page])
 
     respond_to do |format|
       format.html

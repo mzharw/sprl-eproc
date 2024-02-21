@@ -29,3 +29,11 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      purch_reqn:
+        purch_reqn_type: 'Purchase requisition type'
+      purch_reqn_item:
+        product_group: 'List commodity'
+        desc: 'Description'
+        expected_delivery_date: 'Delivery date'

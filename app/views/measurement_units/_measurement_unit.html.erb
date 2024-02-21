@@ -32,12 +32,12 @@
 
   <tr>
     <td><strong>Created by:</strong></td>
-    <td><%= measurement_unit.creator.username %></td>
+    <td><%= measurement_unit.creator&.username %></td>
   </tr>
 
   <tr>
     <td><strong>Updated by:</strong></td>
-    <td><%= measurement_unit.updater.username %></td>
+    <td><%= measurement_unit.updater&.username %></td>
   </tr>
 
   <tr>

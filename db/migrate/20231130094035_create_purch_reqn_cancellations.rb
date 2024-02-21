@@ -3,7 +3,7 @@ class CreatePurchReqnCancellations < ActiveRecord::Migration[7.1]
     create_table :purch_reqn_cancellations, id: :uuid do |t|
       t.uuid :purch_reqn_id
       t.uuid :current_workflow_instance
-      t.string :state
+      t.string :state, default: 'ACTIVE'
       t.uuid :created_by_id
       t.uuid :updated_by_id
 

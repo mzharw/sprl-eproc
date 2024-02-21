@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Workflows</h1>
+
+<div id="workflows">
+  <% @workflows.each do |workflow| %>
+    <%= render workflow %>
+    <p>
+      <%= link_to "Show this workflow", workflow %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New workflow", new_workflow_path %>

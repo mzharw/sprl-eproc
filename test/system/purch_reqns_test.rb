@@ -38,7 +38,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Purch org", with: @purch_reqn.purch_org_id
     fill_in "Purch reqn type", with: @purch_reqn.purch_reqn_type
     fill_in "Reason", with: @purch_reqn.reason
-    fill_in "Recreate from", with: @purch_reqn.recreate_from_id
+    fill_in "Recreate from", with: @purch_reqn.prior_to_id
     fill_in "Rejected at", with: @purch_reqn.rejected_at
     fill_in "Risk category", with: @purch_reqn.risk_category
     fill_in "Scope of work", with: @purch_reqn.scope_of_work
@@ -78,7 +78,7 @@ class PurchReqnsTest < ApplicationSystemTestCase
     fill_in "Purch org", with: @purch_reqn.purch_org_id
     fill_in "Purch reqn type", with: @purch_reqn.purch_reqn_type
     fill_in "Reason", with: @purch_reqn.reason
-    fill_in "Recreate from", with: @purch_reqn.recreate_from_id
+    fill_in "Recreate from", with: @purch_reqn.prior_to_id
     fill_in "Rejected at", with: @purch_reqn.rejected_at
     fill_in "Risk category", with: @purch_reqn.risk_category
     fill_in "Scope of work", with: @purch_reqn.scope_of_work

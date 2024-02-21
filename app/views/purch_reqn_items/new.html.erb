@@ -1,10 +1,19 @@
 <% content_for :content_header do %>
   <b>Purchase Requisition Item / New</b>
-  <%= link_to :back do %>
-    <button class="btn btn-sm btn-secondary">
-      <i class="ti ti-arrow-back-up"></i>
-      Back
-    </button>
+  <% if params[:item_type] == 'service_item' %>
+    <%= link_to purch_reqn_item_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+  <% else %>
+    <%= link_to purch_reqn_path(params[:id]) do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
   <% end %>
 <% end %>
 

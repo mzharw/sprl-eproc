@@ -9,5 +9,8 @@ class PurchGroupDecorator < Draper::Decorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+  def name
+    party.full_name
+  end
 
 end

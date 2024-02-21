@@ -32,17 +32,17 @@
 
   <tr>
     <td><strong>Created by:</strong></td>
-    <td><%= cost_center.creator.username %></td>
+    <td><%= cost_center.creator&.username %></td>
   </tr>
 
   <tr>
     <td><strong>Updated by:</strong></td>
-    <td><%= cost_center.updater.username %></td>
+    <td><%= cost_center.updater&.username %></td>
   </tr>
 
   <tr>
     <td><strong>Purchasing group:</strong></td>
-    <td><%= cost_center.purch_group.code %></td>
+    <td><%= cost_center.purch_group&.code %></td>
   </tr>
 
 </table>

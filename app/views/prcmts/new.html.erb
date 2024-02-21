@@ -1,9 +1,19 @@
-<h1>New prcmt</h1>
+<% content_for :content_header do %>
+  <b>New tender</b>
+  <% if defined? @purch_reqn %>
+    <div class="d-flex gap-2 flex-wrap">
+      <%= link_to purch_reqn_items_path(@purch_reqn) do %>
+        <button class="btn btn-sm btn-light-warning">
+          <i class="ti ti-arrow-back-up"></i>
+          Back
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 
-<%= render "form", prcmt: @prcmt %>
+<% content_for :content do %>
+  <%= render "form", prcmt: @prcmt %>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Back to prcmts", prcmts_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

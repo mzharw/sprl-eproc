@@ -1,39 +1,39 @@
-<div>
-    <table class="table  table-hover table-bordered data-container">
-        <thead class="sticky-top shadow-lg border rounded" style="backdrop-filter: blur(50px);">
-            <tr>
-                <th>
-                    <%= sortable_header('Party Type', parties_path, :party_type) %>
-                </th>
-                <th>
-                    <%= sortable_header('Name', parties_path, :full_name) %>
-                </th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody class="overflow-x-auto overflow-y-scroll">
-            <% parties.each do |party| %>
-                <tr>
-                    <td><%= party.party_type %></td>
-                    <td><%= party.full_name %></td>
-                    <td>
-                        <%= link_to party, class: 'm-1 btn btn-sm btn-outline-secondary' do %>
-                            <i class="ti ti-eye"></i>
-                        <% end %>
-                        <%= link_to edit_party_path(party), class: 'm-1 btn btn-sm btn-secondary' do %>
-                            <i class="ti ti-edit"></i>
-                        <% end %>
-                        <%= link_to party, class: 'm-1 btn btn-sm btn-danger', data: { turbo_method: :delete} do %>
-                            <i class="ti ti-trash"></i>
-                        <% end %>
-                    </td>
-                </tr>
-            <% end %>
-            <% if parties.empty? %>
-                <tr>
-                    <td colspan="3">No Entry</td>
-                </tr>
-          <% end %>
-        </tbody>
-    </table>
-</div>
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      <%= sortable_header('Party Type', parties_path, :party_type) %>
+    </th>
+    <th>
+      <%= sortable_header('Name', parties_path, :full_name) %>
+    </th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody class="overflow-x-auto overflow-y-scroll">
+  <% parties.each do |party| %>
+    <tr>
+      <td><%= party.party_type %></td>
+      <td><%= party&.full_name %></td>
+      <td>
+        <%= link_to party, class: 'm-1 btn btn-sm btn-outline-secondary' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_party_path(party), class: 'm-1 btn btn-sm btn-secondary' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to party, class: 'm-1 btn btn-sm btn-danger', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if parties.empty? %>
+    <tr>
+      <td colspan="3">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render 'shared/table', model: parties %>

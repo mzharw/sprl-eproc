@@ -1,52 +1,53 @@
-<table class="table  table-hover table-bordered data-container">
-    <thead>
-        <tr>
-            <th>
-              <%= sortable_header('Code', purch_groups_path, :code) %>
-            </th>
-            <th>
-              <%= sortable_header('From Date', purch_groups_path, :from_date) %>
-            </th>
-            <th>
-              <%= sortable_header('Thru Date', purch_groups_path, :thru_date) %>
-            </th>
-            <th>
-              <%= sortable_header('Description', purch_groups_path, :description) %>
-            </th>
-            <th>
-              <%= sortable_header('Party', purch_groups_path, 'party.code') %>
-            </th>
-            <th>
-              Action
-            </th>
-        </tr>
+  <% content_for :table, flush: true do %>
+    <thead class="sticky">
+    <tr>
+      <th>
+        <%= sortable_header('Code', purch_groups_path, :code) %>
+      </th>
+      <th>
+        <%= sortable_header('From Date', purch_groups_path, :from_date) %>
+      </th>
+      <th>
+        <%= sortable_header('Thru Date', purch_groups_path, :thru_date) %>
+      </th>
+      <th>
+        <%= sortable_header('Description', purch_groups_path, :description) %>
+      </th>
+      <th>
+        <%= sortable_header('Party', purch_groups_path, 'party.code') %>
+      </th>
+      <th>
+        Action
+      </th>
+    </tr>
     </thead>
     <tbody>
-      <% @purch_groups.each do |purch_group| %>
-        <tr>
-          <!-- <td><%= link_to purch_group.code, purch_group %></td> -->
-          <td><%= purch_group.code %></td>
-          <td><%= purch_group.from_date %></td>
-          <td><%= purch_group.thru_date %></td>
-          <td><%= purch_group.description %></td>
-          <td><%= purch_group.party.full_name %></td>
-          <td>
-            <%= link_to purch_group, class: 'm-1 btn btn-sm btn-outline-secondary m-1' do %>
-                <i class="ti ti-eye"></i>
-            <% end %>
-            <%= link_to edit_purch_group_path(purch_group), class: 'm-1 btn btn-sm btn-secondary m-1' do %>
-                <i class="ti ti-edit"></i>
-            <% end %>
-            <%= link_to purch_group, class: 'm-1 btn btn-sm btn-danger m-1', data: { turbo_method: :delete} do %>
-                <i class="ti ti-trash"></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      <% if @purch_groups.empty? %>
-        <tr>
-          <td colspan="6">No Entry</td>
-        </tr>
-      <% end %>
+    <% @purch_groups.each do |purch_group| %>
+      <tr>
+        <td><%= purch_group.code %></td>
+        <td><%= purch_group.from_date %></td>
+        <td><%= purch_group.thru_date %></td>
+        <td><%= purch_group.description %></td>
+        <td><%= purch_group.party&.full_name %></td>
+        <td>
+          <%= link_to purch_group, class: 'm-1 btn btn-sm btn-outline-secondary m-1' do %>
+            <i class="ti ti-eye"></i>
+          <% end %>
+          <%= link_to edit_purch_group_path(purch_group), class: 'm-1 btn btn-sm btn-secondary m-1' do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+          <%= link_to purch_group, class: 'm-1 btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+            <i class="ti ti-trash"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @purch_groups.empty? %>
+    <tr>
+        <td colspan="6">No Entry</td>
+      </tr>
+    <% end %>
     </tbody>
-  </table>
+  <% end %>
+
+  <%= render partial: 'shared/table', locals: { model: purch_groups } %>

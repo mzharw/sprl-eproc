@@ -1,0 +1,31 @@
+<p>
+  Kepada Yth. User
+</p>
+
+<p>
+  Mohon review dan koreksi dokumen PR berikut karena telah ditolak :
+</p>
+
+<table>
+  <tbody>
+  <tr>
+    <td>Nomor PR</td>
+    <td>: <%= @model.number %></td>
+  </tr>
+  <tr>
+    <td>Tanggal pengajuan PR</td>
+    <td>: <%= @model.created_at %></td>
+  </tr>
+  <tr>
+    <td>Deskripsi PR</td>
+    <td>: <%= @model.desc %></td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+Untuk informasi lebih lanjut, silahkan <%= link_to 'login', purch_reqn_url(@model) %>.
+<br>
+Terima kasih.
+
+<p>E-Procurement PT. SPR Langgak</p>

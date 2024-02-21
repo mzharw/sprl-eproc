@@ -8,7 +8,7 @@ class CreatePurchReqnPartials < ActiveRecord::Migration[7.1]
       t.uuid :partial_itemable, null: false
       t.float :qty
       t.jsonb :data
-      t.string :state
+      t.string :state, default: 'ACTIVE'
       t.uuid :created_by_id, null: false
       t.uuid :updated_by_id, null: false
 

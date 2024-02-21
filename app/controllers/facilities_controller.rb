@@ -1,11 +1,14 @@
 class FacilitiesController < ApplicationController
   include UserTrackable
+  include Filterable
   before_action :set_facility, only: %i[show edit update destroy]
 
   # GET /facilities or /facilities.json
   def index
     query = params[:query] || ''
     @facilities = Facility.where('lower(name) LIKE ?', "%#{query.downcase}%")
+    @facilities = filter(@facilities)
+    @facilities = @facilities.page(params[:page])
 
     respond_to do |format|
       format.html

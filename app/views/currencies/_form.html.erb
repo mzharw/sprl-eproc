@@ -1,4 +1,4 @@
-<%= form_with(model: currency) do |form| %>
+<%= form_with(model: currency, html: { class: 'data-container' }) do |form| %>
   <% if currency.errors.any? %>
     <div style="color: red">
       <h2>

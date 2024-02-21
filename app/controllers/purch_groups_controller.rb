@@ -5,13 +5,14 @@ class PurchGroupsController < ApplicationController
 
   # GET /purch_groups or /purch_groups.json
   def index
-    sortable(PurchGroup)
-    query = params[:query] || ''
-    @purch_groups = PurchGroup.where('lower(code) LIKE ?', "%#{query.downcase}%")
+    @purch_groups = selectable(PurchGroup.joins(:party), 'parties.full_name', :code)
+    @purch_groups = filter(@purch_groups)
+    @purch_groups = @purch_groups.page(params[:page])
+
 
     respond_to do |format|
       format.html
-      format.json { render json: @purch_groups }
+      format.json { render json: @purch_groups.select(:id, :code, 'parties.full_name as name') }
     end
   end
 

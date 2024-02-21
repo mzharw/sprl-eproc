@@ -1,0 +1,19 @@
+<% content_for :content_header do %>
+  <b>Procurement Type</b>
+  <% if defined? @prcmt_type %>
+    <div class="d-flex gap-2 flex-wrap">
+      <%= link_to prcmt_types_path(@prcmt_type) do %>
+        <button class="btn btn-sm btn-light-warning">
+          <i class="ti ti-arrow-back-up"></i>
+          Back
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render "form", prcmt_type: @prcmt_type %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

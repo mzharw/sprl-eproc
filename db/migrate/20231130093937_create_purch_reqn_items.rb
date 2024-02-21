@@ -7,16 +7,16 @@ class CreatePurchReqnItems < ActiveRecord::Migration[7.1]
       t.uuid :product_id
       t.string :desired_vendor
       t.string :fixed_vendor
-      t.decimal :qty
+      t.decimal :qty, default: 0
       t.uuid :measurement_unit_id
-      t.decimal :est_unit_price
-      t.float :price_unit
-      t.decimal :est_subtotal
+      t.decimal :est_unit_price, default: 0
+      t.float :price_unit, default: 0
+      t.decimal :est_subtotal, default: 0
       t.uuid :currency_id
       t.string :requisitioner
       t.timestamp :expected_delivery_date
       t.text :desc
-      t.jsonb :data
+      t.json :data
       t.float :processed_qty
       t.text :specification
       t.text :note

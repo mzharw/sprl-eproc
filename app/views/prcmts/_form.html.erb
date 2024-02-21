@@ -1,252 +1,118 @@
-<%= form_with(model: prcmt) do |form| %>
+<%= render partial: 'purch_reqn_items/list' %>
+<%= form_with(model: prcmt, html: { class: 'data-container mt-3' }) do |form| %>
   <% if prcmt.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(prcmt.errors.count, "error") %> prohibited this prcmt from being saved:</h2>
-
+      <h2>
+        <%= pluralize(prcmt.errors.count, "error") %> prohibited this prcmt from being saved:
+      </h2>
       <ul>
         <% prcmt.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li>
+            <%= error.full_message %>
+          </li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :prcmt_type_id, style: "display: block" %>
-    <%= form.text_field :prcmt_type_id %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="name">Procurement Title</label>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label>Business Field</label>
+      <div class="form-check">
+        <%= form.radio_button :business_field, 'goods', class: 'form-check-input' %>
+        <label class="form-check-label" for="business_field_goods">Goods</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :business_field, 'services', class: 'form-check-input' %>
+        <label class="form-check-label" for="business_field_services">Services</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="prcmt_type_id">Procurement Types</label>
+      <%= selection(form, :prcmt_type_id, prcmt_types_path, :id, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="purch_group_id">Purchasing Group</label>
+      <%= selection(form, :purch_group_id, purch_groups_path, :id, :code, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label>Procurement Criterion</label>
+      <div class="form-check">
+        <%= form.radio_button :procurement_criterion, 'merit', class: 'form-check-input' %>
+        <label class="form-check-label" for="procurement_criterion_merit">Merit</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :procurement_criterion, 'quality', class: 'form-check-input' %>
+        <label class="form-check-label" for="procurement_criterion_quality">Quality</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :procurement_criterion, 'price', class: 'form-check-input' %>
+        <label class="form-check-label" for="procurement_criterion_price">Price</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label>Prequalification</label>
+      <div class="form-check">
+        <%= form.radio_button :prequalification, true, class: 'form-check-input' %>
+        <label class="form-check-label" for="prequalification_yes">Yes</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :prequalification, false, class: 'form-check-input' %>
+        <label class="form-check-label" for="prequalification_no">No</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label>E-Auction</label>
+      <div class="form-check">
+        <%= form.radio_button :e_auction, true, class: 'form-check-input' %>
+        <label class="form-check-label" for="e_auction_yes">Yes</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :e_auction, false, class: 'form-check-input' %>
+        <label class="form-check-label" for="e_auction_no">No</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label>Submission Method</label>
+      <div class="form-check">
+        <%= form.radio_button :submission_method, 'one_envelope', class: 'form-check-input' %>
+        <label class="form-check-label" for="submission_method_one_envelope">One Envelope</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :submission_method, 'two_envelope', class: 'form-check-input' %>
+        <label class="form-check-label" for="submission_method_two_envelope">Two Envelope</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :submission_method, 'two_envelope_separate_evaluations', class: 'form-check-input' %>
+        <label class="form-check-label" for="submission_method_two_envelope_separate_evaluations">Two Envelope Separate
+          Evaluations</label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label>Assessment Method</label>
+      <div class="form-check">
+        <%= form.radio_button :assessment_method, 'knockout', class: 'form-check-input' %>
+        <label class="form-check-label" for="assessment_method_knockout">Knockout</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :assessment_method, 'score', class: 'form-check-input' %>
+        <label class="form-check-label" for="assessment_method_score">Score</label>
+      </div>
+    </div>
+
   </div>
 
-  <div>
-    <%= form.label :number, style: "display: block" %>
-    <%= form.text_field :number %>
-  </div>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :scope_of_work, style: "display: block" %>
-    <%= form.text_area :scope_of_work %>
-  </div>
-
-  <div>
-    <%= form.label :purch_org_id, style: "display: block" %>
-    <%= form.text_field :purch_org_id %>
-  </div>
-
-  <div>
-    <%= form.label :purch_group_id, style: "display: block" %>
-    <%= form.text_field :purch_group_id %>
-  </div>
-
-  <div>
-    <%= form.label :buyer_id, style: "display: block" %>
-    <%= form.text_field :buyer_id %>
-  </div>
-
-  <div>
-    <%= form.label :prebid_meeting, style: "display: block" %>
-    <%= form.text_field :prebid_meeting %>
-  </div>
-
-  <div>
-    <%= form.label :prequalification, style: "display: block" %>
-    <%= form.check_box :prequalification %>
-  </div>
-
-  <div>
-    <%= form.label :auction, style: "display: block" %>
-    <%= form.check_box :auction %>
-  </div>
-
-  <div>
-    <%= form.label :bid_submission_method, style: "display: block" %>
-    <%= form.text_field :bid_submission_method %>
-  </div>
-
-  <div>
-    <%= form.label :quotation_media, style: "display: block" %>
-    <%= form.text_field :quotation_media %>
-  </div>
-
-  <div>
-    <%= form.label :quotation_validity_days, style: "display: block" %>
-    <%= form.number_field :quotation_validity_days %>
-  </div>
-
-  <div>
-    <%= form.label :eval_method, style: "display: block" %>
-    <%= form.text_field :eval_method %>
-  </div>
-
-  <div>
-    <%= form.label :incoterm_id, style: "display: block" %>
-    <%= form.text_field :incoterm_id %>
-  </div>
-
-  <div>
-    <%= form.label :proposed_delivery_location, style: "display: block" %>
-    <%= form.text_field :proposed_delivery_location %>
-  </div>
-
-  <div>
-    <%= form.label :purch_order_number, style: "display: block" %>
-    <%= form.text_field :purch_order_number %>
-  </div>
-
-  <div>
-    <%= form.label :contract_number, style: "display: block" %>
-    <%= form.text_field :contract_number %>
-  </div>
-
-  <div>
-    <%= form.label :data, style: "display: block" %>
-    <%= form.text_field :data %>
-  </div>
-
-  <div>
-    <%= form.label :current_workflow_instance_id, style: "display: block" %>
-    <%= form.text_field :current_workflow_instance_id %>
-  </div>
-
-  <div>
-    <%= form.label :state, style: "display: block" %>
-    <%= form.text_field :state %>
-  </div>
-
-  <div>
-    <%= form.label :created_at, style: "display: block" %>
-    <%= form.datetime_field :created_at %>
-  </div>
-
-  <div>
-    <%= form.label :updated_at, style: "display: block" %>
-    <%= form.datetime_field :updated_at %>
-  </div>
-
-  <div>
-    <%= form.label :created_by_id, style: "display: block" %>
-    <%= form.text_field :created_by_id %>
-  </div>
-
-  <div>
-    <%= form.label :updated_by_id, style: "display: block" %>
-    <%= form.text_field :updated_by_id %>
-  </div>
-
-  <div>
-    <%= form.label :bid_bond, style: "display: block" %>
-    <%= form.check_box :bid_bond %>
-  </div>
-
-  <div>
-    <%= form.label :scope_of_supplies, style: "display: block" %>
-    <%= form.text_field :scope_of_supplies %>
-  </div>
-
-  <div>
-    <%= form.label :announced_at, style: "display: block" %>
-    <%= form.datetime_field :announced_at %>
-  </div>
-
-  <div>
-    <%= form.label :cancelled_at, style: "display: block" %>
-    <%= form.datetime_field :cancelled_at %>
-  </div>
-
-  <div>
-    <%= form.label :finished_at, style: "display: block" %>
-    <%= form.datetime_field :finished_at %>
-  </div>
-
-  <div>
-    <%= form.label :desc, style: "display: block" %>
-    <%= form.text_area :desc %>
-  </div>
-
-  <div>
-    <%= form.label :internal_remark, style: "display: block" %>
-    <%= form.text_area :internal_remark %>
-  </div>
-
-  <div>
-    <%= form.label :candidate_selection_remark, style: "display: block" %>
-    <%= form.text_area :candidate_selection_remark %>
-  </div>
-
-  <div>
-    <%= form.label :finish_remark, style: "display: block" %>
-    <%= form.text_area :finish_remark %>
-  </div>
-
-  <div>
-    <%= form.label :prcmt_phase_evaluation_visibility, style: "display: block" %>
-    <%= form.text_field :prcmt_phase_evaluation_visibility %>
-  </div>
-
-  <div>
-    <%= form.label :cancel_remark, style: "display: block" %>
-    <%= form.text_area :cancel_remark %>
-  </div>
-
-  <div>
-    <%= form.label :aanwijzing_visibility, style: "display: block" %>
-    <%= form.text_field :aanwijzing_visibility %>
-  </div>
-
-  <div>
-    <%= form.label :bid_bond_visibility, style: "display: block" %>
-    <%= form.text_field :bid_bond_visibility %>
-  </div>
-
-  <div>
-    <%= form.label :est_total, style: "display: block" %>
-    <%= form.text_field :est_total %>
-  </div>
-
-  <div>
-    <%= form.label :prcmt_criterion_template_id, style: "display: block" %>
-    <%= form.text_field :prcmt_criterion_template_id %>
-  </div>
-
-  <div>
-    <%= form.label :internal_org_id, style: "display: block" %>
-    <%= form.text_field :internal_org_id %>
-  </div>
-
-  <div>
-    <%= form.label :plant_id, style: "display: block" %>
-    <%= form.text_field :plant_id %>
-  </div>
-
-  <div>
-    <%= form.label :assessment_method, style: "display: block" %>
-    <%= form.text_field :assessment_method %>
-  </div>
-
-  <div>
-    <%= form.label :business_class, style: "display: block" %>
-    <%= form.text_field :business_class %>
-  </div>
-
-  <div>
-    <%= form.label :business_field, style: "display: block" %>
-    <%= form.text_field :business_field %>
-  </div>
-
-  <div>
-    <%= form.label :tkdn_percentage, style: "display: block" %>
-    <%= form.text_field :tkdn_percentage %>
-  </div>
-
-  <div>
-    <%= form.label :tender_location, style: "display: block" %>
-    <%= form.text_field :tender_location %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
 <% end %>

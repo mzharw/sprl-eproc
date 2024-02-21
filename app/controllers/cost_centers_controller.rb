@@ -1,11 +1,13 @@
 class CostCentersController < ApplicationController
   include UserTrackable
+  include Filterable
   before_action :set_cost_center, only: %i[show edit update destroy]
 
   # GET /cost_centers or /cost_centers.json
   def index
-    query = params[:query] || ''
-    @cost_centers = CostCenter.where('lower("desc") LIKE ?', "%#{query.downcase}%")
+    @cost_centers = selectable(CostCenter, :cost_center_id, '"desc"')
+    @cost_centers = filter(@cost_centers)
+    @cost_centers = @cost_centers.page(params[:page])
 
     respond_to do |format|
       format.html

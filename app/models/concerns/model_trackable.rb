@@ -2,6 +2,11 @@ module ModelTrackable
   extend ActiveSupport::Concern
 
   class_methods do
+    def track_user(optional = false)
+      belongs_to :creator, class_name: 'User', foreign_key: :created_by_id, optional: optional
+      belongs_to :updater, class_name: 'User', foreign_key: :updated_by_id, optional: optional
+    end
+
     def track_number(column_name, options = {})
       class_attribute :track_column_name, :suffix_options, :suffix_default, :prefix_options,
                       :prefix_default, :dependent, :pad_value, :pad_char
@@ -17,11 +22,6 @@ module ModelTrackable
 
       before_validation :generate_track_number, on: :create
     end
-
-    def track_user
-      belongs_to :creator, class_name: 'User', foreign_key: :created_by_id
-      belongs_to :updater, class_name: 'User', foreign_key: :updated_by_id
-    end
   end
 
   private
@@ -36,14 +36,8 @@ module ModelTrackable
     query_conditions << "#{self.class.track_column_name} LIKE '%#{suffix}'" if suffix.present?
     query_conditions << "#{self.class.track_column_name} LIKE '%#{send(dependent)}%'" if dependent.present?
 
-    latest_number = query_conditions.empty? ? nil : self.class.where(query_conditions.join(' OR ')).maximum(self.class.track_column_name)
-
-    # Extract the numeric part, increment it, and format it with the prefix
-    next_number = if latest_number.present?
-                    latest_number.gsub(prefix, '').to_i + 1
-                  else
-                    1
-                  end
+    latest_number = query_conditions.empty? ? nil : self.class.where(query_conditions.join(' AND ')).maximum("CAST(SUBSTRING(#{self.class.track_column_name} FROM LENGTH('#{prefix}') + 1) AS INTEGER)")
+    next_number = ((latest_number.is_a?(String) ? latest_number.to_s.gsub(prefix, '').to_i : latest_number) || 0) + 1
 
     pad_value = self.class.pad_value.abs
     track_number = "#{prefix}#{next_number.to_s.rjust(pad_value, pad_char.to_s)}#{suffix}"

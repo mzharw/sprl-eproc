@@ -1,4 +1,4 @@
-<%= form_with(model: cost_center) do |form| %>
+<%= form_with(model: cost_center, html: { class: 'data-container' }) do |form| %>
   <% if cost_center.errors.any? %>
     <div style="color: red">
       <h2>

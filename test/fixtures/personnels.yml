@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  party_id: 
+  from_date: 2023-12-30
+  thru_date: 2023-12-30
+  created_by_id: 
+  updated_by_id: 
+  position_name: MyString
+  unit_internal_org_id: 
+  number: MyString
+  is_section_head: false
+
+two:
+  party_id: 
+  from_date: 2023-12-30
+  thru_date: 2023-12-30
+  created_by_id: 
+  updated_by_id: 
+  position_name: MyString
+  unit_internal_org_id: 
+  number: MyString
+  is_section_head: false

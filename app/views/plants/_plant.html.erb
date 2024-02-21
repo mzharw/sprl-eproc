@@ -2,7 +2,7 @@
 
   <tr>
     <td><strong>Facility:</strong></td>
-    <td><%= plant.facility.name %></td>
+    <td><%= plant.facility&.name %></td>
   </tr>
 
   <tr>
@@ -22,7 +22,7 @@
 
   <tr>
     <td><strong>Owner party:</strong></td> 
-    <td><%= plant.party.full_name %></td>
+    <td><%= plant.party&.full_name %></td>
   </tr>
 
 </table>

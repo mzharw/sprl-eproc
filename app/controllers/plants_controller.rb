@@ -1,15 +1,16 @@
 class PlantsController < ApplicationController
   include UserTrackable
+  include Filterable
+
   before_action :set_plant, only: %i[ show edit update destroy ]
 
   # GET /plants or /plants.json
   def index
-    query = params[:query] || ''
-    @plants = Plant.where('lower(code) LIKE ?', "%#{query.downcase}%")
+    @plants = selectable(Plant.joins(:facility), 'facilities.name', :code)
 
     respond_to do |format|
       format.html
-      format.json { render json: @plants }
+      format.json { render json: @plants.select(:id, :code, 'facilities.name as name') }
     end
   end
 

@@ -1,15 +1,15 @@
-<%= form_with(model: purch_reqn, html: { class: 'data-container h-100 w-100 overflow-y-scroll' }) do |form| %>
+<%= form_with(model: purch_reqn, html: { class: 'data-container h-100 w-100' }, id: 'form', data: { turbo: false }) do |form| %>
   <% if purch_reqn.errors.any? %>
     <div style="color: red">
       <h2>
-        <%= pluralize(purch_reqn.errors.count, "error" ) %> prohibited this purch_reqn from being saved:
+        <%= pluralize(purch_reqn.errors.count, "error") %> prohibited this purch_reqn from being saved:
       </h2>
       <ul>
         <% purch_reqn.errors.each do |error| %>
           <li>
             <%= error.full_message %>
           </li>
-          <% end %>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -47,18 +47,14 @@
     <div class="col-md-6 d-flex flex-column gap-3">
       <div>
         <label for="purch_group_id">Purchasing Group</label>
-        <%= selection(form, :purch_group_id, purch_groups_path, :id , :code) %>
+        <%= selection(form, :purch_group_id, purch_groups_path, :id, :code, :name) %>
       </div>
       <div>
         <label for="plant_id">Plant</label>
-        <%= selection(form, :plant_id, plants_path, :id , :code) %>
-      </div>
-      <div>
-        <label for="purch_org_id">Purchasing Organization</label>
-        <%= selection(form, :purch_org_id, purch_orgs_path, :id , :code) %>
+        <%= selection(form, :plant_id, plants_path, :id, :code, :name) %>
       </div>
     </div>
-    <div class="col-md-6 flex-column gap-3" data-controller="toggler">
+    <div class="col-md-6 d-flex flex-column gap-3" data-controller="toggler">
       <div>
         <label for="pr-type">Description</label>
         <%= form.text_area :desc, id: :description, class: 'form-control' %>
@@ -66,92 +62,32 @@
       <div>
         <label for="fund_source">Fund Source</label>
         <div class="form-check">
-          <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input', id: 'project-wbs', data: {hide: 'toggle-cost-center', action: 'change->toggler#hide', 'toggler-target': 'toggler'} %>
+          <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input toggler-hide', id: 'project-wbs', data: { hide: 'toggle-cost-center', action: 'change->toggler#hide' } %>
           <label class="form-check-label" for="project-wbs">
             Project AFE
           </label>
         </div>
         <div class="form-check">
-          <%= form.radio_button :fund_source, 'COST_CENTER', class: 'form-check-input', id: 'cost-center', data: {show: 'toggle-cost-center', action: 'change->toggler#show', 'toggler-target': 'toggler'} %>
+          <%= form.radio_button :fund_source, 'COST_CENTER', class: 'form-check-input toggler-show', id: 'cost-center', data: { show: 'toggle-cost-center', action: 'change->toggler#show' } %>
           <label class="form-check-label" for="cost-center">
             Cost Center
           </label>
         </div>
       </div>
     </div>
-    <div class="col-md-6 toggle-cost-center ">
+    <div class="col-md-6 toggle-cost-center">
       <label for="cost_center_id">Cost Center</label>
-      <%= selection(form, :cost_center_id, cost_centers_path, :id , :desc) %>
+      <%= selection(form, :cost_center_id, cost_centers_path, :id, :cost_center_id, :desc) %>
     </div>
     <div class="col-md-6">
       <label for="currency_id">Currency</label>
-      <%= selection(form, :currency_id, currencies_path, :id , :code) %>
+      <%= selection(form, :currency_id, currencies_path, :id, :code, :name) %>
+    </div>
+    <div class="col-md-6">
+      <%= form.button '', class: 'btn btn-secondary mt-xxl-9', disabled: purch_reqn.new_record? ? false : purch_reqn.submitable? do %>
+        <i class="ti ti-device-floppy"></i>
+        <%= purch_reqn.new_record? ? 'Save' : 'Update' %>
+      <% end %>
     </div>
   </div>
-  <!-- <table class='table'>
-    <tr>
-      <td><label for="pr-type">PR Type</label></td>
-      <td>
-        <div class="form-check">
-          <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material' %>
-          <label class="form-check-label" for="material">Material</label>
-        </div>
-        <div class="form-check">
-          <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service' %>
-          <label class="form-check-label" for="service">Service</label>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td><label for="pr-type">Contact Reference</label></td>
-      <td>
-        <div class="form-check">
-          <%= form.radio_button :contract, true, class: 'form-check-input', id: 'contract-true' %>
-          <label class="form-check-label" for="contract-true">Yes</label>
-        </div>
-        <div class="form-check">
-          <%= form.radio_button :contract, false, class: 'form-check-input', id: 'contract-false' %>
-          <label class="form-check-label" for="contract-false">No</label>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td><label for="purch_group_id">Purchasing Group</label></td>
-      <td><%= selection(form, :purch_group_id, purch_groups_path, :id, :code) %></td>
-    </tr>
-    <tr>
-      <td><label for="plant_id">Plant</label></td>
-      <td><%= selection(form, :plant_id, plants_path, :id, :code) %></td>
-    </tr>
-    <tr>
-      <td><label for="purch_org_id">Purchasing Organization</label></td>
-      <td><%= selection(form, :purch_org_id, purch_orgs_path, :id, :code) %></td>
-    </tr>
-    <tr>
-      <td><label for="pr-type">Description</label></td>
-      <td><textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea></td>
-    </tr>
-    <tr>
-      <td><label for="fund_source">Fund Source</label></td>
-      <td>
-        <div class="form-check">
-          <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input', id: 'project-wbs', data: { hide: 'toggle-cost-center', action: 'change->toggler#hide', 'toggler-target': 'toggler' } %>
-          <label class="form-check-label" for="project-wbs">Project AFE</label>
-        </div>
-        <div class="form-check">
-          <%= form.radio_button :fund_source, 'COST_CENTER', class: 'form-check-input', id: 'cost-center', data: { show: 'toggle-cost-center', action: 'change->toggler#show', 'toggler-target': 'toggler' } %>
-          <label class="form-check-label" for="cost-center">Cost Center</label>
-        </div>
-      </td>
-    </tr>
-    <tr class="d-none toggle-cost-center">
-      <td><label for="cost_center_id">Cost Center</label></td>
-      <td><%= selection(form, :cost_center_id, cost_centers_path, :id, :desc) %></td>
-    </tr>
-    <tr>
-      <td><label for="currency_id">Currency</label></td>
-      <td><%= selection(form, :currency_id, currencies_path, :id, :code) %></td>
-    </tr>
-  </table>   -->
-  <%= submit_tag 'Submit', class: 'btn btn-secondary mt-9' %>
 <% end %>
