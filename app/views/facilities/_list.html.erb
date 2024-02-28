@@ -1,0 +1,40 @@
+<% content_for :table, flush: true do %>
+  <thead>
+  <tr>
+    <th>
+      <%= sortable_header('Facility Type', facilities_path, :facility_type) %>
+    </th>
+    <th>
+      <%= sortable_header('Name', facilities_path, :name) %>
+    </th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if facilities.empty? %>
+    <tr>
+      <td colspan="3">No Entry</td>
+    </tr>
+  <% else %>
+    <% facilities.each do |facility| %>
+      <tr>
+        <td><%= facility.facility_type %></td>
+        <td><%= facility.name %></td>
+        <td>
+          <%= link_to facility, class: 'm-1 btn btn-sm btn-outline-secondary' do %>
+            <i class="ti ti-eye"></i>
+          <% end %>
+          <%= link_to edit_facility_path(facility), class: 'm-1 btn btn-sm btn-secondary' do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+          <%= link_to facility, class: 'm-1 btn btn-sm btn-danger', data: { turbo_method: :delete } do %>
+            <i class="ti ti-trash"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: facilities } %>

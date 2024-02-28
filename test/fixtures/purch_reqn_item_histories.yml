@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  purch_reqn_item_id: one
+  desc: MyString
+  username: MyString
+  system: false
+  created_by_id: one
+  updated_by_id: one
+  schedule: one
+  finished_at: 2023-11-30 16:39:57
+
+two:
+
+  purch_reqn_item_id: two
+  desc: MyString
+  username: MyString
+  system: false
+  created_by_id: two
+  updated_by_id: two
+  schedule: two
+  finished_at: 2023-11-30 16:39:57

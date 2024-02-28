@@ -1,0 +1,22 @@
+<% content_for :content_header do %>
+  <b>Commodity List / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to commodity_lists_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to edit_commodity_list_path(@commodity_list), class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-edit"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render @commodity_list %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

@@ -1,16 +1,14 @@
-<img src="https://api-eproc-langgak.sprcorp.com:443/shared/images/header.jpg" style="position: absolute; z-index: -1; width: max-content; left: 0; width: 100%">
-<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-  data-sidebar-position="fixed" data-header-position="fixed">
-  <% if local_assigns[:sidebar] %>
+<div class="page-wrapper" id="main-wrapper" style="background-color: #f9fafe;" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed" data-controller="sidebar">
+  <% if defined? sidebar %>
     <%= render partial: 'layouts/sidebar' %>
   <% end %>
-    <!-- Main wrapper -->
-  <div class="body-wrapper">
-    <%= render partial:'layouts/header' %>
-    <div style="z-index: 10;">
-      <% if content_for?(:'content') %>
+  <div class="<%= 'body-wrapper' if defined? sidebar %>" style="height: 100vh">
+    <%= render 'layouts/header', full: defined? sidebar %>
+    <% if content_for?(:'content') %>
+      <div class="d-flex flex-column justify-content-between p-9">
         <%= yield :content %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,0 +1,1 @@
+json.partial! "purch_reqn_partial_statuses/purch_reqn_partial_status", purch_reqn_partial_status: @purch_reqn_partial_status

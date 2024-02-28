@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  purch_reqn_item_id: one
+  partialable_type: MyString
+  partialable: one
+  partial_itemable_type: MyString
+  partial_itemable: one
+  qty: 1.5
+  data: 
+  state: MyString
+  created_by_id: one
+  updated_by_id: one
+
+two:
+
+  purch_reqn_item_id: two
+  partialable_type: MyString
+  partialable: two
+  partial_itemable_type: MyString
+  partial_itemable: two
+  qty: 1.5
+  data: 
+  state: MyString
+  created_by_id: two
+  updated_by_id: two

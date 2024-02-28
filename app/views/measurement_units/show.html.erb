@@ -1,0 +1,22 @@
+<% content_for :content_header do %>
+  <b>Measurement Unit / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to measurement_units_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to edit_measurement_unit_path(@measurement_unit), class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-edit"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render @measurement_unit %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

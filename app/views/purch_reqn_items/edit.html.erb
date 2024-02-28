@@ -1,0 +1,25 @@
+<% content_for :content_header do %>
+  <b>Purchase Requisition Item / Show</b>
+  <% if @purch_reqn_item.item_type == 'SERVICE_ITEM' %>
+    <%= link_to purch_reqn_item_path(item_id: @purch_reqn_item.service.id) do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+  <% else %>
+    <%= link_to purch_reqn_path(params[:id]) do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+  <% end %>
+
+  <% content_for :content do %>
+    <%= render "form", purch_reqn_item: @purch_reqn_item %>
+  <% end %>
+
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

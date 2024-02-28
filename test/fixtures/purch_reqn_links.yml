@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  purch_reqn_link_type_id: one
+  from_purch_reqn_id: one
+  to_purch_reqn_id: one
+  desc: MyString
+
+two:
+
+  purch_reqn_link_type_id: two
+  from_purch_reqn_id: two
+  to_purch_reqn_id: two
+  desc: MyString

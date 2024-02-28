@@ -42,6 +42,14 @@ gem 'devise', '~> 4.9'
 # Authorization
 gem 'pundit', '~> 2.3'
 
+# gem 'prawn'
+
+gem 'rqrcode'
+
+gem 'wicked_pdf'
+
+gem 'wkhtmltopdf-binary'
+
 # Nested forms
 # gem 'cocoon', '~> 1.2'
 
@@ -61,7 +69,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -86,6 +94,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem 'spring'
+
 end
 
 group :test do
@@ -99,3 +108,9 @@ gem 'bootstrap', '~> 5.3'
 gem 'erb-formatter', '~> 0.4.3'
 
 gem "pry", "~> 0.14.2"
+
+gem "draper", "~> 4.0"
+
+gem "discard", "~> 1.3"
+
+gem "rolify", "~> 6.0"

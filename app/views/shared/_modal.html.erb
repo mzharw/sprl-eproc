@@ -1,0 +1,21 @@
+<div class="modal fade" id="<%= id %>" tabindex="-1" aria-labelledby="<%= id %>Label" aria-hidden="true" data-bs-backdrop="<%= defined?(back) ? 'static' : 'true' %>" data-bs-keyboard="<%= defined?(back) ? 'false' : 'true' %>">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="<%= id %>Label"><%= title %></h1>
+        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="ti ti-circle-x"></i>
+        </button>
+      </div>
+      <div class="modal-body py-1">
+        <%= yield :modal_body %>
+      </div>
+      <div class="modal-footer">
+        <% data = defined?(back) && back ? { 'bs-target': back, 'bs-toggle': 'modal' } : { 'bs-dismiss': 'modal' } %>
+        <%= button_tag type: :button, class: 'btn btn-light-warning', data: data do %>
+          Cancel
+        <% end %>
+        <%= yield :modal_button %>
+      </div>
+    </div>
+  </div>
+</div>

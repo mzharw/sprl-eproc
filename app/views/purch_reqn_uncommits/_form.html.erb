@@ -1,0 +1,54 @@
+<%= form_with(model: purch_reqn_uncommit) do |form| %>
+  <% if purch_reqn_uncommit.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(purch_reqn_uncommit.errors.count, "error") %> prohibited this purch_reqn_uncommit from being saved:</h2>
+
+      <ul>
+        <% purch_reqn_uncommit.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div>
+    <%= form.label :purch_reqn_id, style: "display: block" %>
+    <%= form.text_field :purch_reqn_id %>
+  </div>
+
+  <div>
+    <%= form.label :desc, style: "display: block" %>
+    <%= form.text_field :desc %>
+  </div>
+
+  <div>
+    <%= form.label :uncommit_remark, style: "display: block" %>
+    <%= form.text_area :uncommit_remark %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :current_workflow_instance_id, style: "display: block" %>
+    <%= form.text_field :current_workflow_instance_id %>
+  </div>
+
+  <div>
+    <%= form.label :created_by_id, style: "display: block" %>
+    <%= form.text_field :created_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by_id, style: "display: block" %>
+    <%= form.text_field :updated_by_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+class ContractReference < ApplicationRecord
+end

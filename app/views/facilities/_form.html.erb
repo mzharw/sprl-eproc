@@ -1,0 +1,33 @@
+<%= form_with(model: facility, html: { class: 'data-container' }) do |form| %>
+  <% if facility.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(facility.errors.count, "error" ) %> prohibited this facility from being saved:
+      </h2>
+      <ul>
+        <% facility.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="facility_type">Facility Type</label>
+      <%= form.text_field :facility_type, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="name">Name</label>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
+<% end %>

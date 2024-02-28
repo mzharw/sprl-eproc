@@ -1,0 +1,15 @@
+<% content_for :content_header do %>
+  <b>Facility / New</b>
+  <%= link_to facilities_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render "form", facility: @facility %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

@@ -1,0 +1,92 @@
+<% items = @purch_reqn_items || items %>
+<% purch_reqn = @purch_reqn || purch_reqn %>
+<% is_submitted = purch_reqn.submitted? %>
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <% if is_submitted && defined? form %>
+      <th></th>
+    <% end %>
+    <th>
+      Item No.
+    </th>
+    <th>
+      Item Type
+    </th>
+    <th>
+      Product Group
+    </th>
+    <th>
+      Material
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Quantity
+    </th>
+    <th>
+      UoM
+    </th>
+    <th>
+      Unit Price (Estimation)
+    </th>
+    <th>
+      Subtotal
+    </th>
+    <th>
+      Delivery Date
+    </th>
+    <th>
+      Requisistioner
+    </th>
+    <% unless is_submitted %>
+      <th class="sticky">
+        Action
+      </th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% if items.empty? %>
+    <tr>
+      <td colspan="15"> No Entry</td>
+    </tr>
+  <% else %>
+    <% items.each_with_index do |purch_reqn_item, index| %>
+      <tr id="<%= purch_reqn_item.id %>">
+        <% if is_submitted && defined? form %>
+          <td>
+            <%= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
+          </td>
+        <% end %>
+        <td><%= purch_reqn_item.number || index + 1 %></td>
+        <td><%= purch_reqn_item.item_type %></td>
+        <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
+        <td><b><%= purch_reqn_item.product_code %></b> - <%= purch_reqn_item.product_name %></td>
+        <td><%= purch_reqn_item.desc %></td>
+        <td><%= purch_reqn_item.qty %></td>
+        <td><%= purch_reqn_item.uom&.name %></td>
+        <td><%= purch_reqn_item.est_unit_price %></td>
+        <td><%= purch_reqn_item.est_subtotal %></td>
+        <td><%= purch_reqn_item.formatted_delivery %></td>
+        <td><%= purch_reqn_item.requisitioner %></td>
+        <% unless is_submitted %>
+          <td>
+            <div class="d-flex">
+              <%= link_to purch_reqn_item_path(item_id: purch_reqn_item), class: 'btn btn-sm link-success' do %>
+                <i class="ti ti-eye"></i>
+              <% end %>
+              <%= button_to destroy_purch_reqn_item_path(item_id: purch_reqn_item), class: 'btn btn-sm link-danger', method: :delete do %>
+                <i class="ti ti-trash"></i>
+              <% end %>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  <% end %>
+<% end %>
+
+<%= render partial: 'shared/table' %>

@@ -1,0 +1,67 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  number: MyString
+  desc: MyText
+  created_by_id: one
+  updated_by_id: one
+  state: MyString
+  current_workflow_instance_id: one
+  purch_org_id: one
+  purch_reqn_type: MyString
+  contract: false
+  purch_group_id: one
+  plant_id: one
+  cost_center_id: one
+  fund_source: MyString
+  currency: one
+  prior_to_id: one
+  contract_title: MyString
+  scope_of_work: MyString
+  justification: MyString
+  budget_soure: MyString
+  reason: MyString
+  contract_type: MyString
+  risk_category: MyString
+  explanation: MyString
+  previous_contract_number: MyString
+  previous_contract_title: MyString
+  local_of_content: 9.99
+  rejected_at: 2023-11-29 21:22:30
+  cancel_remark: MyText
+  contract_reference_id: one
+  prcmt_id: one
+
+two:
+
+  number: MyString
+  desc: MyText
+  created_by_id: two
+  updated_by_id: two
+  state: MyString
+  current_workflow_instance_id: two
+  purch_org_id: two
+  purch_reqn_type: MyString
+  contract: false
+  purch_group_id: two
+  plant_id: two
+  cost_center_id: two
+  fund_source: MyString
+  currency: two
+  prior_to_id: two
+  contract_title: MyString
+  scope_of_work: MyString
+  justification: MyString
+  budget_soure: MyString
+  reason: MyString
+  contract_type: MyString
+  risk_category: MyString
+  explanation: MyString
+  previous_contract_number: MyString
+  previous_contract_title: MyString
+  local_of_content: 9.99
+  rejected_at: 2023-11-29 21:22:30
+  cancel_remark: MyText
+  contract_reference_id: two
+  prcmt_id: two

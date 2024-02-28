@@ -1,0 +1,22 @@
+<% content_for :content_header do %>
+  <b>Purchase Organization / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to purch_orgs_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to @purch_org, class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-eye"></i>
+      Show
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'form', purch_org: @purch_org %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

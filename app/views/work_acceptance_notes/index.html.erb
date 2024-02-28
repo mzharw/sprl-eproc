@@ -1,0 +1,13 @@
+<% content_for :content_header do %>
+  <b>Work Acceptance Note</b>
+  <%= link_to new_work_acceptance_note_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-plus"></i>
+      New entry
+    </button>
+  <% end %>
+<% end %>
+<% content_for :content do %>
+    <%= render 'list', collection: @work_acceptance_notes.presence || ['Empty'] %>
+<% end %>
+<%= render "layouts/wrapper", sidebar: true %>

@@ -1,0 +1,15 @@
+<% content_for :content_header do %>
+  <h1>Party</h1>
+  <div class="d-flex align-items-center gap-2">
+    <%= search_filter(parties_path, 'full_name', ['party_type']) %>
+    <%= link_to new_party_path do %>
+      <button class="btn btn-secondary">
+        <i class="ti ti-plus"></i>
+      </button>
+    <% end %>
+  </div>
+<% end %>
+<% content_for :content do %>
+  <%= render 'list', parties: @parties %>
+<% end %>
+<%= render "layouts/wrapper", sidebar: true %>

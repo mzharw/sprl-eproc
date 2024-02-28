@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @purch_reqn_item_buyer %>
+
+<div>
+  <%= link_to "Edit this purch reqn item buyer", edit_purch_reqn_item_buyer_path(@purch_reqn_item_buyer) %> |
+  <%= link_to "Back to purch reqn item buyers", purch_reqn_item_buyers_path %>
+
+  <%= button_to "Destroy this purch reqn item buyer", @purch_reqn_item_buyer, method: :delete %>
+</div>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Purch reqn links</h1>
+
+<div id="purch_reqn_links">
+  <% @purch_reqn_links.each do |purch_reqn_link| %>
+    <%= render purch_reqn_link %>
+    <p>
+      <%= link_to "Show this purch reqn link", purch_reqn_link %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New purch reqn link", new_purch_reqn_link_path %>

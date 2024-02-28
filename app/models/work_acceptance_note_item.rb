@@ -1,0 +1,2 @@
+class WorkAcceptanceNoteItem < ApplicationRecord
+end

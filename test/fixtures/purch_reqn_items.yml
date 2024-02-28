@@ -1,0 +1,69 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  purch_reqn_id: one
+  number: MyString
+  product_group_id: one
+  product_id: one
+  desired_vendor: MyString
+  fixed_vendor: MyString
+  qty: 9.99
+  measurement_unit: one
+  est_unit_price: 9.99
+  price_unit: 1.5
+  est_subtotal: 9.99
+  currency: one
+  requisitioner: MyString
+  expected_delivery_date: 2023-11-30 16:39:37
+  desc: MyText
+  data: 
+  created_by_id: one
+  updated_by_id: one
+  processed_qty: 1.5
+  specification: MyText
+  note: MyText
+  deleted_at: 2023-11-30 16:39:37
+  discarded_by_id: one
+  item_type: MyString
+  wbsproject_id: one
+  parent_id: one
+  contract_item_reference_id: one
+  contract_flag: false
+  purch_reqn_item_noncontract_id: one
+  commodity_list_id: 1
+  adjustment_qty: 9.99
+
+two:
+
+  purch_reqn_id: two
+  number: MyString
+  product_group_id: two
+  product_id: two
+  desired_vendor: MyString
+  fixed_vendor: MyString
+  qty: 9.99
+  measurement_unit: two
+  est_unit_price: 9.99
+  price_unit: 1.5
+  est_subtotal: 9.99
+  currency: two
+  requisitioner: MyString
+  expected_delivery_date: 2023-11-30 16:39:37
+  desc: MyText
+  data: 
+  created_by_id: two
+  updated_by_id: two
+  processed_qty: 1.5
+  specification: MyText
+  note: MyText
+  deleted_at: 2023-11-30 16:39:37
+  discarded_by_id: two
+  item_type: MyString
+  wbsproject_id: two
+  parent_id: two
+  contract_item_reference_id: two
+  contract_flag: false
+  purch_reqn_item_noncontract_id: two
+  commodity_list_id: 1
+  adjustment_qty: 9.99

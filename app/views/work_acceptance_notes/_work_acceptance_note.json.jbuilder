@@ -1,0 +1,2 @@
+json.extract! work_acceptance_note, :id, :number, :sap_number, :name, :state, :current_workflow_instance_id, :data, :wan_type, :internal_org_id, :purch_org_id, :purch_group_id, :plant_id, :purch_order_id, :vendor_id, :to_currency, :incoterm_id, :incoterm_desc, :payment_term_number, :payment_term_desc, :request_type_code, :request_type, :delivery_date, :desc, :receiver, :delivery_detail, :remark, :released_at, :rejected_at, :discard_at, :cancel_remark, :reference_by_id, :created_at, :updated_at
+json.url work_acceptance_note_url(work_acceptance_note, format: :json)

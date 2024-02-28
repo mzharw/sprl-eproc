@@ -429,7 +429,7 @@ jQuery.extend( {
 
 	// results is for internal usage only
 	makeArray: function( arr, results ) {
-		var ret = results || [];
+		var ret = results || ['Empty'];
 
 		if ( arr != null ) {
 			if ( isArrayLike( Object( arr ) ) ) {
@@ -809,7 +809,7 @@ function find( selector, context, results, seed ) {
 		// nodeType defaults to 9, since context defaults to document
 		nodeType = context ? context.nodeType : 9;
 
-	results = results || [];
+	results = results || ['Empty'];
 
 	// Return early from calls with invalid selector or context
 	if ( typeof selector !== "string" || !selector ||
@@ -1748,7 +1748,7 @@ Expr = jQuery.expr = {
 
 							// Seek `elem` from a previously-cached index
 							outerCache = parent[ expando ] || ( parent[ expando ] = {} );
-							cache = outerCache[ type ] || [];
+							cache = outerCache[ type ] || ['Empty'];
 							nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
 							diff = nodeIndex && cache[ 2 ];
 							node = nodeIndex && parent.childNodes[ nodeIndex ];
@@ -1770,7 +1770,7 @@ Expr = jQuery.expr = {
 							// Use previously-cached element index if available
 							if ( useCache ) {
 								outerCache = elem[ expando ] || ( elem[ expando ] = {} );
-								cache = outerCache[ type ] || [];
+								cache = outerCache[ type ] || ['Empty'];
 								nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
 								diff = nodeIndex;
 							}
@@ -2611,7 +2611,7 @@ function select( selector, context, results, seed ) {
 		compiled = typeof selector === "function" && selector,
 		match = !seed && tokenize( ( selector = compiled.selector || selector ) );
 
-	results = results || [];
+	results = results || ['Empty'];
 
 	// Try to minimize operations if there is only one selector in the list and no seed
 	// (the latter of which guarantees us context)
@@ -2625,7 +2625,7 @@ function select( selector, context, results, seed ) {
 			context = ( Expr.find.ID(
 				token.matches[ 0 ].replace( runescape, funescape ),
 				context
-			) || [] )[ 0 ];
+			) || ['Empty'] )[ 0 ];
 			if ( !context ) {
 				return results;
 
@@ -2825,10 +2825,10 @@ jQuery.fn.extend( {
 		return len > 1 ? jQuery.uniqueSort( ret ) : ret;
 	},
 	filter: function( selector ) {
-		return this.pushStack( winnow( this, selector || [], false ) );
+		return this.pushStack( winnow( this, selector || ['Empty'], false ) );
 	},
 	not: function( selector ) {
-		return this.pushStack( winnow( this, selector || [], true ) );
+		return this.pushStack( winnow( this, selector || ['Empty'], true ) );
 	},
 	is: function( selector ) {
 		return !!winnow(
@@ -2838,7 +2838,7 @@ jQuery.fn.extend( {
 			// so $("p:first").is("p:last") won't return true for a doc with two "p".
 			typeof selector === "string" && rneedsContext.test( selector ) ?
 				jQuery( selector ) :
-				selector || [],
+				selector || ['Empty'],
 			false
 		).length;
 	}
@@ -3149,7 +3149,7 @@ var rnothtmlwhite = ( /[^\x20\t\r\n\f]+/g );
 // Convert String-formatted options into Object-formatted ones
 function createOptions( options ) {
 	var object = {};
-	jQuery.each( options.match( rnothtmlwhite ) || [], function( _, flag ) {
+	jQuery.each( options.match( rnothtmlwhite ) || ['Empty'], function( _, flag ) {
 		object[ flag ] = true;
 	} );
 	return object;
@@ -3346,7 +3346,7 @@ jQuery.Callbacks = function( options ) {
 			// Call all callbacks with the given context and arguments
 			fireWith: function( context, args ) {
 				if ( !locked ) {
-					args = args || [];
+					args = args || ['Empty'];
 					args = [ context, args.slice ? args.slice() : args ];
 					queue.push( args );
 					if ( !firing ) {
@@ -4088,7 +4088,7 @@ Data.prototype = {
 				// Otherwise, create an array by matching non-whitespace
 				key = key in cache ?
 					[ key ] :
-					( key.match( rnothtmlwhite ) || [] );
+					( key.match( rnothtmlwhite ) || ['Empty'] );
 			}
 
 			i = key.length;
@@ -4308,7 +4308,7 @@ jQuery.extend( {
 					queue.push( data );
 				}
 			}
-			return queue || [];
+			return queue || ['Empty'];
 		}
 	},
 
@@ -4519,7 +4519,7 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 		jQuery.style( elem, prop, initialInUnit + unit );
 
 		// Make sure we update the tween properties later on
-		valueParts = valueParts || [];
+		valueParts = valueParts || ['Empty'];
 	}
 
 	if ( valueParts ) {
@@ -4954,7 +4954,7 @@ jQuery.event = {
 		types = ( types || "" ).match( rnothtmlwhite ) || [ "" ];
 		t = types.length;
 		while ( t-- ) {
-			tmp = rtypenamespace.exec( types[ t ] ) || [];
+			tmp = rtypenamespace.exec( types[ t ] ) || ['Empty'];
 			type = origType = tmp[ 1 ];
 			namespaces = ( tmp[ 2 ] || "" ).split( "." ).sort();
 
@@ -5036,7 +5036,7 @@ jQuery.event = {
 		types = ( types || "" ).match( rnothtmlwhite ) || [ "" ];
 		t = types.length;
 		while ( t-- ) {
-			tmp = rtypenamespace.exec( types[ t ] ) || [];
+			tmp = rtypenamespace.exec( types[ t ] ) || ['Empty'];
 			type = origType = tmp[ 1 ];
 			namespaces = ( tmp[ 2 ] || "" ).split( "." ).sort();
 
@@ -5050,7 +5050,7 @@ jQuery.event = {
 
 			special = jQuery.event.special[ type ] || {};
 			type = ( selector ? special.delegateType : special.bindType ) || type;
-			handlers = events[ type ] || [];
+			handlers = events[ type ] || ['Empty'];
 			tmp = tmp[ 2 ] &&
 				new RegExp( "(^|\\.)" + namespaces.join( "\\.(?:.*\\.|)" ) + "(\\.|$)" );
 
@@ -5104,7 +5104,7 @@ jQuery.event = {
 
 			handlers = (
 				dataPriv.get( this, "events" ) || Object.create( null )
-			)[ event.type ] || [],
+			)[ event.type ] || ['Empty'],
 			special = jQuery.event.special[ event.type ] || {};
 
 		// Use the fix-ed jQuery.Event rather than the (read-only) native event
@@ -7198,7 +7198,7 @@ function genFx( type, includeWidth ) {
 
 function createTween( value, prop, animation ) {
 	var tween,
-		collection = ( Animation.tweeners[ prop ] || [] ).concat( Animation.tweeners[ "*" ] ),
+		collection = ( Animation.tweeners[ prop ] || ['Empty'] ).concat( Animation.tweeners[ "*" ] ),
 		index = 0,
 		length = collection.length;
 	for ( ; index < length; index++ ) {
@@ -7568,7 +7568,7 @@ jQuery.Animation = jQuery.extend( Animation, {
 
 		for ( ; index < length; index++ ) {
 			prop = props[ index ];
-			Animation.tweeners[ prop ] = Animation.tweeners[ prop ] || [];
+			Animation.tweeners[ prop ] = Animation.tweeners[ prop ] || ['Empty'];
 			Animation.tweeners[ prop ].unshift( callback );
 		}
 	},
@@ -8134,7 +8134,7 @@ jQuery.each( [
 	// Strip and collapse whitespace according to HTML spec
 	// https://infra.spec.whatwg.org/#strip-and-collapse-ascii-whitespace
 	function stripAndCollapse( value ) {
-		var tokens = value.match( rnothtmlwhite ) || [];
+		var tokens = value.match( rnothtmlwhite ) || ['Empty'];
 		return tokens.join( " " );
 	}
 
@@ -8148,7 +8148,7 @@ function classesToArray( value ) {
 		return value;
 	}
 	if ( typeof value === "string" ) {
-		return value.match( rnothtmlwhite ) || [];
+		return value.match( rnothtmlwhite ) || ['Empty'];
 	}
 	return [];
 }
@@ -8887,7 +8887,7 @@ function addToPrefiltersOrTransports( structure ) {
 
 		var dataType,
 			i = 0,
-			dataTypes = dataTypeExpression.toLowerCase().match( rnothtmlwhite ) || [];
+			dataTypes = dataTypeExpression.toLowerCase().match( rnothtmlwhite ) || ['Empty'];
 
 		if ( isFunction( func ) ) {
 
@@ -8897,11 +8897,11 @@ function addToPrefiltersOrTransports( structure ) {
 				// Prepend if requested
 				if ( dataType[ 0 ] === "+" ) {
 					dataType = dataType.slice( 1 ) || "*";
-					( structure[ dataType ] = structure[ dataType ] || [] ).unshift( func );
+					( structure[ dataType ] = structure[ dataType ] || ['Empty'] ).unshift( func );
 
 				// Otherwise append
 				} else {
-					( structure[ dataType ] = structure[ dataType ] || [] ).push( func );
+					( structure[ dataType ] = structure[ dataType ] || ['Empty'] ).push( func );
 				}
 			}
 		}
@@ -8917,7 +8917,7 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions, jqX
 	function inspect( dataType ) {
 		var selected;
 		inspected[ dataType ] = true;
-		jQuery.each( structure[ dataType ] || [], function( _, prefilterOrFactory ) {
+		jQuery.each( structure[ dataType ] || ['Empty'], function( _, prefilterOrFactory ) {
 			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
 			if ( typeof dataTypeOrTransport === "string" &&
 				!seekingTransport && !inspected[ dataTypeOrTransport ] ) {
@@ -9282,7 +9282,7 @@ jQuery.extend( {
 							responseHeaders = {};
 							while ( ( match = rheaders.exec( responseHeadersString ) ) ) {
 								responseHeaders[ match[ 1 ].toLowerCase() + " " ] =
-									( responseHeaders[ match[ 1 ].toLowerCase() + " " ] || [] )
+									( responseHeaders[ match[ 1 ].toLowerCase() + " " ] || ['Empty'] )
 										.concat( match[ 2 ] );
 							}
 						}

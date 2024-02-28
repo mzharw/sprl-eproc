@@ -1,0 +1,41 @@
+<% content_for :table, flush: true do %>
+  <thead>
+  <tr>
+    <th><%= sortable_header('Ident Name', prcmt_types_path, :ident_name) %></th>
+    <th><%= sortable_header('Name', prcmt_types_path, :name) %></th>
+    <th><%= sortable_header('Desc', prcmt_types_path, :desc) %></th>
+    <th><%= sortable_header('System', prcmt_types_path, :system) %></th>
+    <th><%= sortable_header('Visibility', prcmt_types_path, :visibility) %></th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @prcmt_types.each do |prcmt_type| %>
+    <tr>
+      <td><%= prcmt_type.ident_name %></td>
+      <td><%= prcmt_type.name %></td>
+      <td><%= prcmt_type.desc %></td>
+      <td><%= prcmt_type.system %></td>
+      <td><%= prcmt_type.visibility %></td>
+      <td>
+        <%= link_to prcmt_type, class: 'btn btn-sm btn-outline-secondary' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_prcmt_type_path(prcmt_type), class: 'btn btn-sm btn-secondary' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to prcmt_type, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+  <% if @prcmt_types.empty? %>
+    <tr>
+      <td colspan="5">No Entry</td>
+    </tr>
+  <% end %>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: @prcmt_types } %>

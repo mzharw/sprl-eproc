@@ -1,0 +1,53 @@
+<table class="table">
+
+  <tr>
+    <td><strong>Product type:</strong></td>
+    <td><%= product.product_type %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Product group:</strong></td>
+    <td><%= product.product_group.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Code:</strong></td>
+    <td><%= product.code %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td><%= product.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Measurement unit:</strong></td>
+    <td><%= product.measurement_unit.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created at:</strong></td>
+    <td><%= product.created_at %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated at:</strong></td>
+    <td><%= product.updated_at %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= product.creator&.username %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= product.updater&.username %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Desc:</strong></td>
+    <td><%= product.desc %></td>
+  </tr>
+
+</table>  

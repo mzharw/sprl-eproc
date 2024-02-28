@@ -1,0 +1,147 @@
+<% type = params[:item_type] || purch_reqn_item.item_type %>
+<% is_service = type&.downcase == 'service' %>
+<% is_material = type&.downcase == 'material' %>
+<% is_service_item = type&.downcase == 'service_item' %>
+<% is_new = purch_reqn_item.new_record? %>
+
+<div class="d-flex flex-column gap-2" id="item_form" >
+  <%= form_with(model: purch_reqn_item, url: (
+    if is_new
+      is_service_item ? create_service_purch_reqn_item_path : create_purch_reqn_item_path
+    else
+      update_purch_reqn_item_path
+    end), html: { class: 'data-container' }, data: { turbo: false }) do |form| %>
+    <% if purch_reqn_item.errors.any? %>
+      <div style="color: red">
+        <h2>
+          <%= pluralize(purch_reqn_item.errors.count, "error") %> prohibited this purchase requisition item from being
+          saved:
+        </h2>
+        <ul>
+          <% purch_reqn_item.errors.each do |error| %>
+            <li>
+              <%= error.full_message %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row g-3">
+      <div class="col-md-6 <%= 'd-none' if is_service_item %>">
+        <label for="item_type">Item Type</label>
+        <%= form.text_field :item_type, class: 'form-control bg-body-tertiary', readonly: :true, value: type&.upcase %>
+      </div>
+
+      <% unless is_service_item %>
+        <div class="col-md-6">
+          <label for="commodity_list_id">List Commodity</label>
+          <%= selection(form, :commodity_list_id, commodity_lists_path, :id, :number, :description) %>
+        </div>
+
+        <div class="col-md-6">
+          <label for="product_group_id"><%= type&.capitalize %> Classification</label>
+          <%= selection(form, :product_group_id, product_groups_path, :id, :code, :name, cascade_to: 'product_id') if is_material %>
+          <%= selection(form, :product_group_id, product_groups_path, :id, :code, :name) if is_service %>
+        </div>
+      <% end %>
+
+      <% if is_material %>
+        <div class="col-md-6">
+          <label for="product_id"><%= type&.capitalize %></label>
+          <%= selection(form, :product_id, products_path, :id, :code, :name, dependent_on: 'measurement_unit_id') %>
+        </div>
+      <% end %>
+
+      <!--    <div class="col-md-6">-->
+      <!--      <label for="desired_vendor">Desired Vendor</label>-->
+      <%#= form.text_field :desired_vendor, class: 'form-control' %>
+      <!--    </div>-->
+
+      <% unless is_service_item %>
+        <div class="col-md-6">
+          <label for="specification">Specification</label>
+          <%= form.text_field :specification, class: 'form-control' %>
+        </div>
+
+        <div class="col-md-6">
+          <label for="requisitioner">Requisitioner</label>
+          <%= form.text_field :requisitioner, class: 'form-control' %>
+        </div>
+      <% end %>
+
+      <% if is_material || is_service_item %>
+        <div class="col-md-6">
+          <label for="measurement_unit_id">UoM</label>
+          <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :symbol, :name) %>
+        </div>
+      <% end %>
+
+      <% unless is_service_item %>
+        <div class="col-md-6">
+          <label for="expected_delivery_date">Delivery Date</label>
+          <%= form.date_field :expected_delivery_date, class: 'form-control' %>
+        </div>
+      <% end %>
+
+      <!--    <div class="col-md-6">-->
+      <!--      <label for="price_unit">Price Unit</label>-->
+      <%#= form.number_field :price_unit, class: 'form-control' %>
+      <!--    </div>-->
+
+      <!--    <div class="col-md-6">-->
+      <!--      <label for="currency_id">Currency</label>-->
+      <%#= selection(form, :currency_id, currencies_path, :id, :code, :name) %>
+      <!--    </div>-->
+
+      <% if is_material || is_service_item %>
+        <div class="d-flex flex-row gap-3 w-50" data-controller="counter">
+          <div>
+            <label for="qty">Quantity</label>
+            <%= form.number_field :qty, class: 'form-control', data: { action: "change->counter#updateCounter", 'counter-target': 'multiplier' } %>
+          </div>
+
+          <div>
+            <label for="est_unit_price">Unit Price</label>
+            <%= form.number_field :est_unit_price, class: 'form-control', step: 0.1, default: 0, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
+          </div>
+
+          <div>
+            <label for="est_subtotal">Subtotal</label>
+            <%= form.number_field :est_subtotal, class: 'form-control', step: 0.1, data: { 'counter-target': 'counter' } %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if is_service %>
+        <div class="col-md-6 <%= 'd-none' if is_new %>">
+          <label for="est_subtotal">Subtotal</label>
+          <%= form.number_field :est_subtotal, class: 'form-control', data: { 'counter-target': 'counter' }, readonly: true, default: 0 %>
+        </div>
+      <% end %>
+
+      <div class="col-md-6">
+        <label for="desc">Description</label>
+        <%= form.text_area :desc, class: 'form-control', rows: 5 %>
+      </div>
+    </div>
+
+    <%= form.button '', class: 'btn btn-secondary mt-xxl-9' do %>
+      <i class="ti ti-device-floppy"></i>
+      <%= is_new ? 'Save' : 'Update' %>
+    <% end %>
+  <% end %>
+
+  <% if is_service && !is_new %>
+    <div class="data-container gap-3 d-flex flex-column">
+      <div class="align-self-end">
+        <%= link_to new_service_purch_reqn_item_path(item_type: 'service_item'), class: "btn btn-sm btn-secondary" do %>
+          <i class="ti ti-plus"></i>
+          Add item
+        <% end %>
+      </div>
+      <div id="items">
+        <%= render 'service_items', items: purch_reqn_item.items %>
+      </div>
+    </div>
+  <% end %>
+</div>

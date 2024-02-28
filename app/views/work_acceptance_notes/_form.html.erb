@@ -1,0 +1,41 @@
+<%= form_with(model: work_acceptance_note, html: { class: 'data-container h-100 w-100 overflow-y-scroll' }) do |form| %>
+  <% if work_acceptance_note.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(work_acceptance_note.errors.count, "error") %> prohibited this work_acceptance_note from being saved:</h2>
+
+      <ul>
+        <% work_acceptance_note.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row g-3">
+    <div>
+      <label for="pr-type">PR Type</label>
+      <div class="form-check">
+        <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material' %>
+        <label class="form-check-label" for="material">
+          Material
+        </label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service' %>
+        <label class="form-check-label" for="service">
+          Service
+        </label>
+      </div>
+    </div>
+    <div>
+      <label for="po-number">PO Number</label>
+      <%= form.text_field :po_number, class: 'form-control' %>
+    </div>
+    <div>
+      <label for="po-name">PO name</label>
+      <%= form.text_field :po_name, class: 'form-control' %>
+    </div>
+  </div>
+  <button class="btn btn-outline-secondary mt-9">Search</button>
+  <%= submit_tag 'Submit', class: 'btn btn-secondary mt-9' %>
+
+<% end %>

@@ -1,0 +1,3 @@
+<% if defined? state %>
+  <span class="badge <%= state == 'ACTIVE' ? 'text-bg-success' : 'text-bg-warning' %>"><%= state&.capitalize %></span>
+<% end %>

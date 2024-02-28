@@ -1,0 +1,97 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# one:
+
+#   purch_order_type_id: 
+#   number: MyString
+#   issued_date: 2023-11-30
+#   name: MyString
+#   incoterm_id: 
+#   incoterm_desc: MyString
+#   internal_org_id: 
+#   purch_org_id: 
+#   purch_group_id: 
+#   prcmt_id: 
+#   data: 
+#   state: MyString
+#   created_at: 2023-11-30 17:20:24
+#   updated_at: 2023-11-30 17:20:24
+#   vendor_id: 
+#   referrable_type: MyString
+#   referrable_id: 
+#   payment_term_id: 
+#   delivery_location: MyString
+#   current_workflow_instance_id: 
+#   used_up: false
+#   finished_at: 2023-11-30 17:20:24
+#   discarded_at: 2023-11-30 17:20:24
+#   finished_by_id: 
+#   length_of_work: 1
+#   payment_term_number: 9.99
+#   payment_term_desc: MyString
+#   po_type: MyString
+#   contract: false
+#   validity_start_date: 2023-11-30
+#   commentcement_date: 2023-11-30
+#   delivery_detail: MyText
+#   remark: MyText
+#   scope_of_work: MyText
+#   po_to_amount: 9.99
+#   account_holder: MyString
+#   account_number: MyString
+#   po_signing: MyString
+#   tax_policy: false
+#   to_currency_id: 
+#   rejected_at: 2023-11-30
+#   cost_center_id: 
+#   plant_id: 
+#   uncommit_remark: MyString
+#   is_replicated: false
+
+# two:
+
+#   purch_order_type_id: 
+#   number: MyString
+#   issued_date: 2023-11-30
+#   name: MyString
+#   incoterm_id: 
+#   incoterm_desc: MyString
+#   internal_org_id: 
+#   purch_org_id: 
+#   purch_group_id: 
+#   prcmt_id: 
+#   data: 
+#   state: MyString
+#   created_at: 2023-11-30 17:20:24
+#   updated_at: 2023-11-30 17:20:24
+#   vendor_id: 
+#   referrable_type: MyString
+#   referrable_id: 
+#   payment_term_id: 
+#   delivery_location: MyString
+#   current_workflow_instance_id: 
+#   used_up: false
+#   finished_at: 2023-11-30 17:20:24
+#   discarded_at: 2023-11-30 17:20:24
+#   finished_by_id: 
+#   length_of_work: 1
+#   payment_term_number: 9.99
+#   payment_term_desc: MyString
+#   po_type: MyString
+#   contract: false
+#   validity_start_date: 2023-11-30
+#   commentcement_date: 2023-11-30
+#   delivery_detail: MyText
+#   remark: MyText
+#   scope_of_work: MyText
+#   po_to_amount: 9.99
+#   account_holder: MyString
+#   account_number: MyString
+#   po_signing: MyString
+#   tax_policy: false
+#   to_currency_id: 
+#   rejected_at: 2023-11-30
+#   cost_center_id: 
+#   plant_id: 
+#   uncommit_remark: MyString
+#   is_replicated: false

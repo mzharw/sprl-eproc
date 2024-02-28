@@ -1,0 +1,2 @@
+module PurchReqnPartialStatusesHelper
+end

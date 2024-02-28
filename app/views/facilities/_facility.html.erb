@@ -1,0 +1,33 @@
+<table class="table">
+
+  <tr>
+    <td><strong>Facility type:</strong></td>
+    <td><%= facility.facility_type %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td><%= facility.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created at:</strong></td> 
+    <td><%= facility.created_at %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated at:</strong></td>
+    <td><%= facility.updated_at %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= facility.creator&.username %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= facility.updater&.username %></td>
+  </tr>
+
+</table>

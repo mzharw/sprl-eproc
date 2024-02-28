@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Purch reqn partial statuses</h1>
+
+<div id="purch_reqn_partial_statuses">
+  <% @purch_reqn_partial_statuses.each do |purch_reqn_partial_status| %>
+    <%= render purch_reqn_partial_status %>
+    <p>
+      <%= link_to "Show this purch reqn partial status", purch_reqn_partial_status %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New purch reqn partial status", new_purch_reqn_partial_status_path %>

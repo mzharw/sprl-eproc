@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  party_id: 
+  code: MyString
+  from_date: 2023-11-30
+  thru_date: 2023-11-30
+
+two:
+
+  party_id: 
+  code: MyString
+  from_date: 2023-11-30
+  thru_date: 2023-11-30

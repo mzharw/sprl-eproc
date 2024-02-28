@@ -1,0 +1,48 @@
+<%= form_with(model: prcmt_type, html: { class: 'data-container' }) do |form| %>
+  <% if prcmt_type.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(prcmt_type.errors.count, "error") %> prohibited this procurement type from being saved:
+      </h2>
+      <ul>
+        <% prcmt_type.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <%= form.label :ident_name %>
+      <%= form.text_field :ident_name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="col-12">
+      <%= form.label :desc %>
+      <%= form.text_area :desc, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :system %>
+      <%= form.check_box :system, class: 'form-check-input' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :visibility %>
+      <%= form.text_field :visibility, class: 'form-control' %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+<% end %>

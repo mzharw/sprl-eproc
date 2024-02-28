@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @purch_reqn_item_history %>
+
+<div>
+  <%= link_to "Edit this purch reqn item history", edit_purch_reqn_item_history_path(@purch_reqn_item_history) %> |
+  <%= link_to "Back to purch reqn item histories", purch_reqn_item_histories_path %>
+
+  <%= button_to "Destroy this purch reqn item history", @purch_reqn_item_history, method: :delete %>
+</div>

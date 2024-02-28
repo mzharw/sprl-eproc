@@ -1,0 +1,1 @@
+json.partial! "work_acceptance_note_items/work_acceptance_note_item", work_acceptance_note_item: @work_acceptance_note_item

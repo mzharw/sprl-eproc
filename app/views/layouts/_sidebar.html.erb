@@ -1,138 +1,141 @@
-<!-- Sidebar Start -->
-<aside class="left-sidebar">
-    <!-- Sidebar scroll-->
-    <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="./index.html" class="text-nowrap logo-img">
-                <%= image_tag "logo.png" %>
-            </a>
-            <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                <i class="ti ti-x fs-8"></i>
-            </div>
-        </div>
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-            <ul id="sidebarnav">
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Home</span>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./index.html" aria-expanded="false">
+<aside class="left-sidebar text-light py-5" style="background: linear-gradient(to bottom, rgb(214,48,48) 0%, rgb(200,40,40) 25%, rgb(180,35,35) 50%, rgb(150,25,25) 75%, rgb(120,15,15) 100%);">
+  <div class="position-absolute close-btn d-block sidebartoggler cursor-pointer d-flex align-items-center" id="sidebarCollapse" style="margin: 20px; right: 0; top: 0">
+    <i class="ti ti-x fs-8 d-xl-none "></i>
+  </div>
+  <nav class="sidebar-nav scroll-sidebar">
+    <ul id="sidebarnav">
+      <!--      <li class="nav-small-cap">-->
+      <!--        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>-->
+      <!--        <span class="hide-menu">Home</span>-->
+      <!--      </li>-->
+
+      <li class="sidebar-item">
+        <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+                  <span>
+                      <i class="ti ti-layout-dashboard"></i>
+                  </span>
+          <span class="hide-menu">Dashboard</span>
+        <% end %>
+      </li>
+
+      <li class="sidebar-item">
+        <%= link_to tasks_path, class: "sidebar-link #{'active' if active?('tasks')}" do %>
                         <span>
-                            <i class="ti ti-layout-dashboard"></i>
+                            <i class="ti ti-checklist"></i>
                         </span>
-                        <span class="hide-menu">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">UI COMPONENTS</span>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+          <span class="hide-menu">
+            Task
+          </span>
+          <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill" style="background-color: <%= active?('tasks') ? '#545d31' : '#a72525' %>">
+              <%= user_tasks_count %>
+            <span class="visually-hidden">unread messages</span>
+            </span>
+        <% end %>
+      </li>
+
+
+      <%= sidebar_item('ti ti-shopping-cart', 'Purchase Requisition', 'purch_reqns', [
+        { icon: 'file-invoice', title: 'Purchase Requisition', path: 'purch_reqns', active: 'purch_reqn_items' },
+        { icon: 'users', title: 'Purchasing Groups', path: 'purch_groups' }
+      ]) %>
+
+      <%= sidebar_item('ti ti-briefcase', 'Procurement', 'prcmts', [
+        { icon: 'briefcase-2', title: 'Procurement', path: 'prcmts' },
+        { icon: 'briefcase-2', title: 'Procurement Type', path: 'prcmt_types' },
+      ]) %>
+
+      <!--      <li class="nav-small-cap">-->
+      <!--        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>-->
+      <!--        <span class="hide-menu">WAN</span>-->
+      <!--      </li>-->
+      <li class="sidebar-item">
+        <%= link_to work_acceptance_notes_path, class: "sidebar-link #{'active' if active?('work_acceptance_notes')}" do %>
+                              <span>
+                                  <i class="ti ti-eye-edit"></i>
+                              </span>
+          <span class="hide-menu">Work Acceptance Note</span>
+        <% end %>
+      </li>
+
+      <li class="nav-small-cap">
+        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+        <span class="hide-menu">Master Data</span>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to facilities_path, class: "sidebar-link #{'active' if active?('facilities')}" do %>
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-building-community"></i>
                         </span>
-                        <span class="hide-menu">Buttons</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+          <span class="hide-menu">Facility</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to plants_path, class: "sidebar-link #{'active' if active?('plants')}" do %>
                         <span>
-                            <i class="ti ti-alert-circle"></i>
+                            <i class="ti ti-seeding"></i>
                         </span>
-                        <span class="hide-menu">Alerts</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+          <span class="hide-menu">Plant</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to cost_centers_path, class: "sidebar-link #{'active' if active?('cost_centers')}" do %>
                         <span>
-                            <i class="ti ti-cards"></i>
+                            <i class="ti ti-building-bank"></i>
                         </span>
-                        <span class="hide-menu">Card</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+          <span class="hide-menu">Non AFE</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to currencies_path, class: "sidebar-link #{'active' if active?('currencies')}" do %>
                         <span>
-                            <i class="ti ti-file-description"></i>
+                            <i class="ti ti-currency-euro"></i>
                         </span>
-                        <span class="hide-menu">Forms</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+          <span class="hide-menu">Currency</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to commodity_lists_path, class: "sidebar-link #{'active' if active?('commodity_lists')}" do %>
                         <span>
-                            <i class="ti ti-typography"></i>
+                            <i class="ti ti-list-details"></i>
                         </span>
-                        <span class="hide-menu">Typography</span>
-                    </a>
-                </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">AUTH</span>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+          <span class="hide-menu">Commodity List</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to measurement_units_path, class: "sidebar-link #{'active' if active?('measurement_units')}" do %>
                         <span>
-                            <i class="ti ti-login"></i>
+                            <i class="ti ti-ruler-measure"></i>
                         </span>
-                        <span class="hide-menu">Login</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+          <span class="hide-menu">Measurement Unit</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to products_path, class: "sidebar-link #{'active' if active?('products')}" do %>
                         <span>
-                            <i class="ti ti-user-plus"></i>
+                            <i class="ti ti-package"></i>
                         </span>
-                        <span class="hide-menu">Register</span>
-                    </a>
-                </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">EXTRA</span>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+          <span class="hide-menu">Material (Product)</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to product_groups_path, class: "sidebar-link #{'active' if active?('product_groups')}" do %>
                         <span>
-                            <i class="ti ti-mood-happy"></i>
+                            <i class="ti ti-packages"></i>
                         </span>
-                        <span class="hide-menu">Icons</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
+          <span class="hide-menu">Material (Product) Group</span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to users_path, class: "sidebar-link #{'active' if active?('users')}" do %>
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-users"></i>
                         </span>
-                        <span class="hide-menu">Sample Page</span>
-                    </a>
-                </li>
-            </ul>
-            <!-- <div class="
-            unlimited-access
-            hide-menu
-            bg-light-primary
-            position-relative
-            mb-7
-            mt-5
-            rounded
-          ">
-                <div class="d-flex">
-                    <div class="unlimited-access-title me-3">
-                        <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Upgrade to pro</h6>
-                        <a href="https://adminmart.com/product/modernize-bootstrap-5-admin-template/" target="_blank"
-                            class="btn btn-primary fs-2 fw-semibold lh-sm">Buy Pro</a>
-                    </div>
-                    <div class="unlimited-access-img">
-                        <img src="../assets/images/backgrounds/rocket.png" alt="" class="img-fluid">
-                    </div>
-                </div>
-            </div> -->
-        </nav>
-        <!-- End Sidebar navigation -->
-    </div>
-    <!-- End Sidebar scroll-->
+          <span class="hide-menu">User</span>
+        <% end %>
+      </li>
+
+    </ul>
+  </nav>
+  <p class="text-light text-center"><b>SPR Langgak</b> E-procurement</p>
+
 </aside>
-<!-- Sidebar End -->

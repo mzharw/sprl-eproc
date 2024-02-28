@@ -1,0 +1,169 @@
+<% content_for :content_header do %>
+  <b>Purchase Requisition / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
+    <%= link_to purch_reqns_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= render partial: 'show_submit_button', locals: { model: @purch_reqn } %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <div id="info" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner alert text-bg-light-info text-light-info d-flex align-items-center">
+      <div class="carousel-item active">
+        <i class="ti ti-info-circle"></i>
+        You must complete all required fields for items with subtotals over <b><%= @purch_reqn.currency_code %> 0</b> to
+        submit your
+        purchase requisition.
+      </div>
+      <div class="carousel-item ">
+        <i class="ti ti-info-circle"></i>
+        Please note that requisitions can only be modified while in draft status. Once submitted for approval, changes
+        are
+        prohibited unless rejected back to draft by the approver. To make edits, wait for approval/rejection decision or
+        contact approver to revert the status. The procurement team is happy to assist if you need help navigating
+        status changes or revisions.
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-2">
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn" aria-expanded="false" aria-controls="purch_reqn">
+      Purchase Requisition
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="purch_reqn">
+      <%= render @purch_reqn %>
+    </div>
+
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_reqn_item" aria-expanded="false" aria-controls="purch_reqn_item">
+      Purchase Requisition Items
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="purch_reqn_item">
+      <div class="d-flex flex-column">
+        <% unless @purch_reqn.submitted? %>
+          <div class="dropdown align-self-end">
+            <button class="btn btn-sm btn-secondary dropdown-toggle my-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="ti ti-plus"></i>
+              New Entry
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to new_purch_reqn_item_path(item_type: :material), class: 'dropdown-item' do %>
+                  <i class="ti ti-packages"></i>
+                  Material
+                <% end %>
+              </li>
+              <% if @purch_reqn.purch_reqn_type == 'SERVICE' %>
+                <li>
+                  <%= link_to new_purch_reqn_item_path(item_type: :service), class: 'dropdown-item' do %>
+                    <i class="ti ti-forklift"></i>
+                    Service
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div id="items">
+          <%= render partial: 'purch_reqn_items/list', locals: { items: @purch_reqn.decorated_items } %>
+        </div>
+      </div>
+    </div>
+
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false" aria-controls="documents">
+      Documents
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="documents">
+      <div class="row g-5">
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :contract_docs, required: false %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :contract_ex_sp_docs, required: true %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :memo_scm_manager_docs, required: false %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :work_ex_plan_docs, required: true %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :owner_estimate_docs, required: true %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :tech_eval_method_docs, required: true %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :det_landing_cost_docs, required: false %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :inspect_eval_method_docs, required: false %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :risk_assessment_docs, required: false %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :justify_memo_docs, required: false %>
+        </div>
+
+        <div class="col-md-6">
+          <%= render 'docs', model: @purch_reqn, name: :res_util_justify_docs, required: false %>
+        </div>
+      </div>
+    </div>
+
+    <% if @purch_reqn.workflow_instances %>
+      <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#comment-histories" aria-expanded="false" aria-controls="comment-histories">
+        Comment Histories
+        <i class="ti ti-caret-down-filled"></i>
+      </a>
+      <div class="data-container collapse show" id="comment-histories">
+        <%= render partial: 'comments', locals: { workflow_instances: @purch_reqn.workflow_instances } %>
+      </div>
+    <% end %>
+    <div class="alert alert-warning d-flex flex-column gap-3 justify-content-between" role="alert">
+      <% if @purch_reqn.submitted? %>
+        <% if @purch_reqn.finished? %>
+          <div>
+            Workflow finished
+          </div>
+        <% else %>
+          <div>
+            Currently waiting for <b><%= @purch_reqn.workflow_state %></b> since <%= @purch_reqn.created_at %>
+          </div>
+          <div class="btn-group">
+            <%= button_tag class: "btn btn-danger", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-reject' } do %>
+              <i class="ti ti-x"></i>
+              Reject
+            <% end %>
+            <%= button_tag class: "btn btn-secondary", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-approve' } do %>
+              <i class="ti ti-check"></i>
+              Approve
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div>Purchase Requisition is not submitted yet.</div>
+      <% end %>
+    </div>
+<% end %>
+
+<%= render partial: 'workflow_instance/approval', locals: { model: @purch_reqn.workflow_instance, action: :reject } %>
+<%= render partial: 'workflow_instance/approval', locals: { model: @purch_reqn.workflow_instance, action: :approve } %>
+
+<%= render "layouts/wrapper", sidebar: true %>

@@ -1,0 +1,22 @@
+<% content_for :content_header do %>
+  <b>Purchasing Group / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to purch_groups_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to @purch_group, class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-eye"></i>
+      Show
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'form', purch_group: @purch_group %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

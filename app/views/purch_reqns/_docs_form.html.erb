@@ -1,0 +1,43 @@
+<%= form_with(model: model, data: { remote: true }, id: name) do |form| %>
+  <table class="table table-bordered table-hover ">
+    <thead>
+    <tr>
+      <th>Attachment</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% docs = model.send(name) %>
+    <% if docs&.empty? %>
+      <tr>
+        <td colspan="2">
+          No Entry
+        </td>
+      </tr>
+    <% else %>
+      <% docs&.each do |doc| %>
+        <tr>
+          <td>
+            <%= link_to doc.filename, rails_blob_path(doc) %>
+            <%= form.hidden_field name, multiple: true, value: doc.signed_id %>
+          </td>
+          <td>
+            <% unless model.submitted? %>
+              <%= link_to remove_attachment_purch_reqn_path(attachment_name: name, attachment_id: doc.id), data: { turbo_method: :delete, remote: true }, class: 'btn btn-sm btn-danger' do %>
+                <i class="ti ti-trash"></i>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+  <div class="input-group file">
+    <%= form.file_field name, class: 'form-control', multiple: true, disabled: model.submitted?, direct_upload: true %>
+    <%= form.button class: 'btn btn-outline-secondary', disabled: model.submitted? do %>
+      <i class="ti ti-cloud-upload"></i>
+      Upload
+    <% end %>
+  </div>
+<% end %>

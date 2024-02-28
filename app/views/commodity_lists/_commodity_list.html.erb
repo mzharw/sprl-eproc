@@ -1,0 +1,28 @@
+<table class="table">
+
+  <tr>
+    <td><strong>Commodity list:</strong></td>
+    <td><%= commodity_list.commodity_list_id %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Number:</strong></td>
+    <td><%= commodity_list.number %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Desc:</strong></td>
+    <td><%= commodity_list.description %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= commodity_list.creator&.username %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= commodity_list.updater&.username %></td>
+  </tr>
+
+</table>

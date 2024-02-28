@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  product_type: MyString
+  product_group_id: 
+  code: MyString
+  name: MyString
+  measurement_unit_id: 
+  created_at: 2023-11-30 17:21:51
+  updated_at: 2023-11-30 17:21:51
+  created_by_id: 
+  updated_by_id: 
+  desc: MyText
+
+two:
+
+  product_type: MyString
+  product_group_id: 
+  code: MyString
+  name: MyString
+  measurement_unit_id: 
+  created_at: 2023-11-30 17:21:51
+  updated_at: 2023-11-30 17:21:51
+  created_by_id: 
+  updated_by_id: 
+  desc: MyText

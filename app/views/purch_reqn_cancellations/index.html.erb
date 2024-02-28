@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Purch reqn cancellations</h1>
+
+<div id="purch_reqn_cancellations">
+  <% @purch_reqn_cancellations.each do |purch_reqn_cancellation| %>
+    <%= render purch_reqn_cancellation %>
+    <p>
+      <%= link_to "Show this purch reqn cancellation", purch_reqn_cancellation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New purch reqn cancellation", new_purch_reqn_cancellation_path %>

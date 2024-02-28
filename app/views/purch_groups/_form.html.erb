@@ -1,0 +1,50 @@
+<%= form_with(model: purch_group, html: { class: 'data-container' }) do |form| %>
+  <% if purch_group.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(purch_group.errors.count, "error" ) %> prohibited this purch_group from being saved:
+      </h2>
+      <ul>
+        <% purch_group.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="code">Code</label>
+      <%= form.text_field :code, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="from_date">From Date</label>
+      <%= form.date_field :from_date, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6 d-flex flex-column gap-3">
+      <div>
+        <label for="thru_date">Thru Date</label>
+        <%= form.date_field :thru_date, class: 'form-control' %>  
+      </div>
+      <div>
+        <label for="party_id">Party</label>
+        <%= selection(form, :party_id, parties_path, :id, :full_name) %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="description">Description</label>
+      <%= form.text_area :description, class: 'form-control', rows: 5 %>
+    </div>
+
+
+    <!-- Add more fields as needed -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
+<% end %>

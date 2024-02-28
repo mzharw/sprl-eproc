@@ -1,0 +1,18 @@
+<% content_for :content_header do %>
+  <b>Purchase Requisition / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to @purch_reqn do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render "form", purch_reqn: @purch_reqn %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

@@ -1,0 +1,44 @@
+<%= form_with(model: party, html: { class: 'data-container' }) do |form| %>
+  <% if party.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(party.errors.count, "error" ) %> prohibited this party from being saved:
+      </h2>
+      <ul>
+        <% party.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="pr-type">Party Type</label>
+      <div class="form-check">
+        <%= form.radio_button :party_type, 'Person', class: 'form-check-input', id: 'person' %>
+        <label class="form-check-label" for="person">
+          Person
+        </label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :party_type, 'Organization', class: 'form-check-input', id: 'organization' %>
+        <label class="form-check-label" for="organization">
+          Organization
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="full_name">Full Name</label>
+      <%= form.text_field :full_name, class: 'form-control' %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
+<% end %>

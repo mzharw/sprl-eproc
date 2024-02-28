@@ -1,0 +1,48 @@
+<%= form_with(model: measurement_unit, html: { class: 'data-container' }) do |form| %>
+  <% if measurement_unit.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(measurement_unit.errors.count, "error" ) %> prohibited this measurement unit from being saved:
+      </h2>
+      <ul>
+        <% measurement_unit.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="ident_name">Identifier Name</label>
+      <%= form.text_field :ident_name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="name">Name</label>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="symbol">Symbol</label>
+      <%= form.text_field :symbol, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="desc">Description</label>
+      <%= form.text_area :desc, class: 'form-control', rows: 5 %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="dimid">Dimension ID</label>
+      <%= form.text_field :dimid, class: 'form-control' %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+<% end %>

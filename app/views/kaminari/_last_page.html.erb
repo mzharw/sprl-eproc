@@ -1,0 +1,5 @@
+<div>
+  <%= link_to url, rel: 'last', remote: remote, class: "page-link #{'bg-light disabled' if current_page.last?}", disabled: current_page.first? ? true : false do %>
+    <i class="ti ti-chevrons-right"></i>
+  <% end %>
+</div>

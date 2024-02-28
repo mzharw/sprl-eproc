@@ -1,0 +1,137 @@
+<%= form_with(model: prcmt_item) do |form| %>
+  <% if prcmt_item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(prcmt_item.errors.count, "error") %> prohibited this prcmt_item from being saved:</h2>
+
+      <ul>
+        <% prcmt_item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :prcmt_id, style: "display: block" %>
+    <%= form.text_field :prcmt_id %>
+  </div>
+
+  <div>
+    <%= form.label :number, style: "display: block" %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div>
+    <%= form.label :purch_reqn_item_id, style: "display: block" %>
+    <%= form.text_field :purch_reqn_item_id %>
+  </div>
+
+  <div>
+    <%= form.label :product_group_id, style: "display: block" %>
+    <%= form.text_field :product_group_id %>
+  </div>
+
+  <div>
+    <%= form.label :product_id, style: "display: block" %>
+    <%= form.text_field :product_id %>
+  </div>
+
+  <div>
+    <%= form.label :desired_vendor, style: "display: block" %>
+    <%= form.text_field :desired_vendor %>
+  </div>
+
+  <div>
+    <%= form.label :fixed_vendor, style: "display: block" %>
+    <%= form.text_field :fixed_vendor %>
+  </div>
+
+  <div>
+    <%= form.label :qty, style: "display: block" %>
+    <%= form.text_field :qty %>
+  </div>
+
+  <div>
+    <%= form.label :measurement_unit_id, style: "display: block" %>
+    <%= form.text_field :measurement_unit_id %>
+  </div>
+
+  <div>
+    <%= form.label :est_unit_price, style: "display: block" %>
+    <%= form.text_field :est_unit_price %>
+  </div>
+
+  <div>
+    <%= form.label :price_unit, style: "display: block" %>
+    <%= form.text_field :price_unit %>
+  </div>
+
+  <div>
+    <%= form.label :est_subtotal, style: "display: block" %>
+    <%= form.text_field :est_subtotal %>
+  </div>
+
+  <div>
+    <%= form.label :currency_id, style: "display: block" %>
+    <%= form.text_field :currency_id %>
+  </div>
+
+  <div>
+    <%= form.label :purch_group_id, style: "display: block" %>
+    <%= form.text_field :purch_group_id %>
+  </div>
+
+  <div>
+    <%= form.label :requisitioner, style: "display: block" %>
+    <%= form.text_field :requisitioner %>
+  </div>
+
+  <div>
+    <%= form.label :expected_delivery_date, style: "display: block" %>
+    <%= form.datetime_field :expected_delivery_date %>
+  </div>
+
+  <div>
+    <%= form.label :desc, style: "display: block" %>
+    <%= form.text_area :desc %>
+  </div>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.text_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :specification, style: "display: block" %>
+    <%= form.text_area :specification %>
+  </div>
+
+  <div>
+    <%= form.label :note, style: "display: block" %>
+    <%= form.text_area :note %>
+  </div>
+
+  <div>
+    <%= form.label :prcmt_award_item_id, style: "display: block" %>
+    <%= form.text_field :prcmt_award_item_id %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :awarded_at, style: "display: block" %>
+    <%= form.datetime_field :awarded_at %>
+  </div>
+
+  <div>
+    <%= form.label :po_processed, style: "display: block" %>
+    <%= form.check_box :po_processed %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

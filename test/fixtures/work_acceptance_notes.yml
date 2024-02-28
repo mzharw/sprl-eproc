@@ -1,0 +1,65 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  sap_number: MyString
+  name: MyString
+  state: MyString
+  current_workflow_instance_id: 
+  data: 
+  wan_type: MyString
+  internal_org_id: 
+  purch_org_id: 
+  purch_group_id: 
+  plant_id: 
+  purch_order_id: 
+  vendor_id: 
+  to_currency: 
+  incoterm_id: 
+  incoterm_desc: 
+  payment_term_number: 9.99
+  payment_term_desc: MyString
+  request_type_code: MyString
+  request_type: MyString
+  delivery_date: 2023-12-06 12:32:08
+  desc: MyText
+  receiver: MyString
+  delivery_detail: MyString
+  remark: MyText
+  released_at: 2023-12-06 12:32:08
+  rejected_at: 2023-12-06 12:32:08
+  discard_at: 2023-12-06 12:32:08
+  cancel_remark: MyText
+  reference_by_id: 
+
+two:
+  number: MyString
+  sap_number: MyString
+  name: MyString
+  state: MyString
+  current_workflow_instance_id: 
+  data: 
+  wan_type: MyString
+  internal_org_id: 
+  purch_org_id: 
+  purch_group_id: 
+  plant_id: 
+  purch_order_id: 
+  vendor_id: 
+  to_currency: 
+  incoterm_id: 
+  incoterm_desc: 
+  payment_term_number: 9.99
+  payment_term_desc: MyString
+  request_type_code: MyString
+  request_type: MyString
+  delivery_date: 2023-12-06 12:32:08
+  desc: MyText
+  receiver: MyString
+  delivery_detail: MyString
+  remark: MyText
+  released_at: 2023-12-06 12:32:08
+  rejected_at: 2023-12-06 12:32:08
+  discard_at: 2023-12-06 12:32:08
+  cancel_remark: MyText
+  reference_by_id: 

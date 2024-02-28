@@ -1,0 +1,15 @@
+<% content_for :content_header do %>
+  <h1>Product</h1>
+  <div class="d-flex gap-3">
+    <%= search_filter(products_path, 'name', %w[code product_type]) %>
+    <%= link_to new_product_path do %>
+      <button class="btn btn-secondary">
+        <i class="ti ti-plus"></i>
+      </button>
+    <% end %>
+  </div>
+<% end %>
+<% content_for :content do %>
+  <%= render 'list', products: @products %>
+<% end %>
+<%= render "layouts/wrapper", sidebar: true %>

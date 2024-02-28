@@ -1,0 +1,22 @@
+<% content_for :content_header do %>
+  <b>Non AFE / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to cost_centers_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to @cost_center, class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-eye"></i>
+      Show
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'form', cost_center: @cost_center %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

@@ -1,0 +1,15 @@
+<% content_for :content_header do %>
+  <b>Material (Product) Group / New</b>
+  <%= link_to product_groups_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render "form", product_group: @product_group %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

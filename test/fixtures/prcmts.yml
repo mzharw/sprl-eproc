@@ -1,0 +1,101 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  prcmt_type_id: 
+  number: MyString
+  name: MyString
+  scope_of_work: MyText
+  purch_org_id: 
+  purch_group_id: 
+  buyer_id: 
+  prebid_meeting: MyString
+  prequalification: false
+  auction: false
+  bid_submission_method: MyString
+  quotation_media: MyString
+  quotation_validity_days: 1
+  eval_method: MyString
+  incoterm_id: 
+  proposed_delivery_location: MyString
+  purch_order_number: MyString
+  contract_number: MyString
+  data: 
+  current_workflow_instance_id: 
+  state: MyString
+  created_at: 2023-11-30 17:21:39
+  updated_at: 2023-11-30 17:21:39
+  created_by_id: 
+  updated_by_id: 
+  bid_bond: false
+  scope_of_supplies: 
+  announced_at: 2023-11-30 17:21:39
+  cancelled_at: 2023-11-30 17:21:39
+  finished_at: 2023-11-30 17:21:39
+  desc: MyText
+  internal_remark: MyText
+  candidate_selection_remark: MyText
+  finish_remark: MyText
+  prcmt_phase_evaluation_visibility: MyString
+  cancel_remark: MyText
+  aanwijzing_visibility: MyString
+  bid_bond_visibility: MyString
+  est_total: 9.99
+  prcmt_criterion_template_id: 
+  internal_org_id: 
+  plant_id: 
+  assessment_method: MyString
+  business_class: 
+  business_field: MyString
+  tkdn_percentage: 9.99
+  tender_location: MyString
+
+two:
+
+  prcmt_type_id: 
+  number: MyString
+  name: MyString
+  scope_of_work: MyText
+  purch_org_id: 
+  purch_group_id: 
+  buyer_id: 
+  prebid_meeting: MyString
+  prequalification: false
+  auction: false
+  bid_submission_method: MyString
+  quotation_media: MyString
+  quotation_validity_days: 1
+  eval_method: MyString
+  incoterm_id: 
+  proposed_delivery_location: MyString
+  purch_order_number: MyString
+  contract_number: MyString
+  data: 
+  current_workflow_instance_id: 
+  state: MyString
+  created_at: 2023-11-30 17:21:39
+  updated_at: 2023-11-30 17:21:39
+  created_by_id: 
+  updated_by_id: 
+  bid_bond: false
+  scope_of_supplies: 
+  announced_at: 2023-11-30 17:21:39
+  cancelled_at: 2023-11-30 17:21:39
+  finished_at: 2023-11-30 17:21:39
+  desc: MyText
+  internal_remark: MyText
+  candidate_selection_remark: MyText
+  finish_remark: MyText
+  prcmt_phase_evaluation_visibility: MyString
+  cancel_remark: MyText
+  aanwijzing_visibility: MyString
+  bid_bond_visibility: MyString
+  est_total: 9.99
+  prcmt_criterion_template_id: 
+  internal_org_id: 
+  plant_id: 
+  assessment_method: MyString
+  business_class: 
+  business_field: MyString
+  tkdn_percentage: 9.99
+  tender_location: MyString

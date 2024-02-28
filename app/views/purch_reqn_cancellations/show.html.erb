@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @purch_reqn_cancellation %>
+
+<div>
+  <%= link_to "Edit this purch reqn cancellation", edit_purch_reqn_cancellation_path(@purch_reqn_cancellation) %> |
+  <%= link_to "Back to purch reqn cancellations", purch_reqn_cancellations_path %>
+
+  <%= button_to "Destroy this purch reqn cancellation", @purch_reqn_cancellation, method: :delete %>
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  facility_id: 
+  code: MyString
+  from_date: 2023-11-30
+  thru_date: 2023-11-30
+  owner_party_id: 
+
+two:
+
+  facility_id: 
+  code: MyString
+  from_date: 2023-11-30
+  thru_date: 2023-11-30
+  owner_party_id: 

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @prcmt_item %>
+
+<div>
+  <%= link_to "Edit this prcmt item", edit_prcmt_item_path(@prcmt_item) %> |
+  <%= link_to "Back to prcmt items", prcmt_items_path %>
+
+  <%= button_to "Destroy this prcmt item", @prcmt_item, method: :delete %>
+</div>

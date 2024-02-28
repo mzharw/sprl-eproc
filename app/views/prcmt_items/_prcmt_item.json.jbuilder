@@ -1,0 +1,2 @@
+json.extract! prcmt_item, :id, :prcmt_id, :number, :purch_reqn_item_id, :product_group_id, :product_id, :desired_vendor, :fixed_vendor, :qty, :measurement_unit_id, :est_unit_price, :price_unit, :est_subtotal, :currency_id, :purch_group_id, :requisitioner, :expected_delivery_date, :desc, :data, :specification, :note, :prcmt_award_item_id, :state, :awarded_at, :po_processed, :created_at, :updated_at
+json.url prcmt_item_url(prcmt_item, format: :json)

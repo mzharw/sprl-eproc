@@ -1,0 +1,28 @@
+<table class="table">
+
+  <tr>
+    <td><strong>Facility:</strong></td>
+    <td><%= plant.facility&.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Code:</strong></td>
+    <td><%= plant.code %></td>
+  </tr>
+
+  <tr>
+    <td><strong>From date:</strong></td>
+    <td><%= plant.from_date %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Thru date:</strong></td>
+    <td><%= plant.thru_date %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Owner party:</strong></td> 
+    <td><%= plant.party&.full_name %></td>
+  </tr>
+
+</table>

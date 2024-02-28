@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+
+  ident_name: MyString
+  name: MyString
+  symbol: MyString
+  desc: MyText
+  created_at: 2023-11-30 17:21:54
+  updated_at: 2023-11-30 17:21:54
+  created_by_id: 
+  updated_by_id: 
+  dimid: MyString
+
+two:
+
+  ident_name: MyString
+  name: MyString
+  symbol: MyString
+  desc: MyText
+  created_at: 2023-11-30 17:21:54
+  updated_at: 2023-11-30 17:21:54
+  created_by_id: 
+  updated_by_id: 
+  dimid: MyString
