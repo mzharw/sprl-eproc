@@ -1,4 +1,4 @@
-<% if @purch_reqn.state === 'DRAFT' %>
+<% unless @purch_reqn.submitted? %>
   <%= form_with(model: model, id: 'submit-button', data: { turbo: false }) do |f| %>
     <%= f.hidden_field :state, value: 'COMMITTED' %>
     <%= f.button class: 'btn btn-sm btn-secondary', disabled: !model.submitable? do %>

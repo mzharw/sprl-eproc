@@ -25,7 +25,7 @@ module Filterable
 
   def selectable(model, *columns, **options)
     query = params[:query]
-    model = model.where("LOWER(#{columns.join(" || ' - ' || ")}) LIKE ?", "%#{query.downcase}%") if query
+    model = model.where("LOWER(#{columns.join(" || ' - ' || ")})  ~* ?", "#{query.downcase}") if query
 
     # options handler
     ## filter options
@@ -47,7 +47,9 @@ module Filterable
   end
 
   def paginate_json(collection)
-    paginated = self.paginate(collection)
+    id = params[:id]
+    paginated = id ? collection.where(id:) : collection
+    paginated = paginate(paginated)
     {
       data: paginated,
       pagination: {

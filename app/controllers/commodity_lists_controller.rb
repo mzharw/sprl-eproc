@@ -5,7 +5,7 @@ class CommodityListsController < ApplicationController
 
   # GET /commodity_lists or /commodity_lists.json
   def index
-    @commodity_lists = selectable(CommodityList, '"desc"', :number)
+    @commodity_lists = selectable(CommodityList, :number, :description)
     json = paginate_json(@commodity_lists)
 
     @commodity_lists = paginate(@commodity_lists).decorate
@@ -78,6 +78,6 @@ class CommodityListsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def commodity_list_params
-    params.require(:commodity_list).permit(:commodity_list_id, :number, :desc, :created_by_id, :updated_by_id)
+    params.require(:commodity_list).permit(:commodity_list_id, :number, :description, :created_by_id, :updated_by_id)
   end
 end

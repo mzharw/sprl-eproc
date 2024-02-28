@@ -1,136 +1,134 @@
 <% content_for :table, flush: true do %>
-  <table class="table table-striped table-hover table-bordered">
-    <thead>
-    <tr>
-      <th>No.</th>
-      <th><%= sortable_header('Purchase Reqn. No.', prcmts_path, :purch_reqn_no) %></th>
-      <th><%= sortable_header('Tender Name', prcmts_path, :name) %></th>
-      <th><%= sortable_header('Business Field', prcmts_path, :business_field) %></th>
-      <th><%= sortable_header('Scope of Work', prcmts_path, :scope_of_work) %></th>
-      <th><%= sortable_header('Evaluation Method', prcmts_path, :eval_method) %></th>
-      <th><%= sortable_header('Prcmt Type', prcmts_path, :prcmt_type_id) %></th>
-      <th><%= sortable_header('State', prcmts_path, :state) %></th>
-      <th><%= sortable_header('Workflow State', prcmts_path, :workflow_state) %></th>
-      <th><%= sortable_header('Retender of', prcmts_path, :retender_of) %></th>
-      <th><%= sortable_header('Cancel Remark', prcmts_path, :cancel_remark) %></th>
-<!--      <th><%#= sortable_header('Number', prcmts_path, :number) %></th>-->
-<!--      <th><%#= sortable_header('Purch Org', prcmts_path, :purch_org_id) %></th>-->
-<!--      <th><%#= sortable_header('Purch Group', prcmts_path, :purch_group_id) %></th>-->
-<!--      <th><%#= sortable_header('Buyer', prcmts_path, :buyer_id) %></th>-->
-<!--      <th><%#= sortable_header('Prebid Meeting', prcmts_path, :prebid_meeting) %></th>-->
-<!--      <th><%#= sortable_header('Prequalification', prcmts_path, :prequalification) %></th>-->
-<!--      <th><%#= sortable_header('Auction', prcmts_path, :auction) %></th>-->
-<!--      <th><%#= sortable_header('Bid Submission Method', prcmts_path, :bid_submission_method) %></th>-->
-<!--      <th><%#= sortable_header('Quotation Media', prcmts_path, :quotation_media) %></th>-->
-<!--      <th><%#= sortable_header('Quotation Validity Days', prcmts_path, :quotation_validity_days) %></th>-->
-<!--      <th><%#= sortable_header('Incoterm', prcmts_path, :incoterm_id) %></th>-->
-<!--      <th><%#= sortable_header('Proposed Delivery Location', prcmts_path, :proposed_delivery_location) %></th>-->
-<!--      <th><%#= sortable_header('Purch Order Number', prcmts_path, :purch_order_number) %></th>-->
-<!--      <th><%#= sortable_header('Contract Number', prcmts_path, :contract_number) %></th>-->
-<!--      <th><%#= sortable_header('Data', prcmts_path, :data) %></th>-->
-<!--      <th><%#= sortable_header('Current Workflow Instance', prcmts_path, :current_workflow_instance_id) %></th>-->
-<!--      <th><%#= sortable_header('Created At', prcmts_path, :created_at) %></th>-->
-<!--      <th><%#= sortable_header('Updated At', prcmts_path, :updated_at) %></th>-->
-<!--      <th><%#= sortable_header('Created By', prcmts_path, :created_by_id) %></th>-->
-<!--      <th><%#= sortable_header('Updated By', prcmts_path, :updated_by_id) %></th>-->
-<!--      <th><%#= sortable_header('Bid Bond', prcmts_path, :bid_bond) %></th>-->
-<!--      <th><%#= sortable_header('Scope of Supplies', prcmts_path, :scope_of_supplies) %></th>-->
-<!--      <th><%#= sortable_header('Announced At', prcmts_path, :announced_at) %></th>-->
-<!--      <th><%#= sortable_header('Cancelled At', prcmts_path, :cancelled_at) %></th>-->
-<!--      <th><%#= sortable_header('Finished At', prcmts_path, :finished_at) %></th>-->
-<!--      <th><%#= sortable_header('Desc', prcmts_path, :desc) %></th>-->
-<!--      <th><%#= sortable_header('Internal Remark', prcmts_path, :internal_remark) %></th>-->
-<!--      <th><%#= sortable_header('Candidate Selection Remark', prcmts_path, :candidate_selection_remark) %></th>-->
-<!--      <th><%#= sortable_header('Finish Remark', prcmts_path, :finish_remark) %></th>-->
-<!--      <th><%#= sortable_header('Prcmt Phase Evaluation Visibility', prcmts_path, :prcmt_phase_evaluation_visibility) %></th>-->
-<!--      <th><%#= sortable_header('Aanwijzing Visibility', prcmts_path, :aanwijzing_visibility) %></th>-->
-<!--      <th><%#= sortable_header('Bid Bond Visibility', prcmts_path, :bid_bond_visibility) %></th>-->
-<!--      <th><%#= sortable_header('Est Total', prcmts_path, :est_total) %></th>-->
-<!--      <th><%#= sortable_header('Prcmt Criterion Template', prcmts_path, :prcmt_criterion_template_id) %></th>-->
-<!--      <th><%#= sortable_header('Internal Org', prcmts_path, :internal_org_id) %></th>-->
-<!--      <th><%#= sortable_header('Plant', prcmts_path, :plant_id) %></th>-->
-<!--      <th><%#= sortable_header('Assessment Method', prcmts_path, :assessment_method) %></th>-->
-<!--      <th><%#= sortable_header('Business Class', prcmts_path, :business_class) %></th>-->
-<!--      <th><%#= sortable_header('Tkdn Percentage', prcmts_path, :tkdn_percentage) %></th>-->
-<!--      <th><%#= sortable_header('Tender Location', prcmts_path, :tender_location) %></th>-->
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% if @prcmts.present? %>
-      <% @prcmts.each_with_index do |prcmt, index| %>
-        <tr>
-          <td><%= index + 1 %></td>
-          <td></td>
-          <td><%= prcmt.name %></td>
-          <td><%= prcmt.business_field %></td>
-          <td><%= prcmt.scope_of_work %></td>
-          <td><%= prcmt.prcmt_type_id %></td>
-          <td><%= prcmt.eval_method %></td>
-          <td><%= prcmt.state %></td>
-          <td></td>
-          <td></td>
-          <td><%= prcmt.cancel_remark %></td>
-<!--          <td><%#= prcmt.number %></td>-->
-<!--          <td><%#= prcmt.purch_org_id %></td>-->
-<!--          <td><%#= prcmt.purch_group_id %></td>-->
-<!--          <td><%#= prcmt.buyer_id %></td>-->
-<!--          <td><%#= prcmt.prebid_meeting %></td>-->
-<!--          <td><%#= prcmt.prequalification %></td>-->
-<!--          <td><%#= prcmt.auction %></td>-->
-<!--          <td><%#= prcmt.bid_submission_method %></td>-->
-<!--          <td><%#= prcmt.quotation_media %></td>-->
-<!--          <td><%#= prcmt.quotation_validity_days %></td>-->
-<!--          <td><%#= prcmt.incoterm_id %></td>-->
-<!--          <td><%#= prcmt.proposed_delivery_location %></td>-->
-<!--          <td><%#= prcmt.purch_order_number %></td>-->
-<!--          <td><%#= prcmt.contract_number %></td>-->
-<!--          <td><%#= prcmt.data %></td>-->
-<!--          <td><%#= prcmt.current_workflow_instance_id %></td>-->
-<!--          <td><%#= prcmt.created_at %></td>-->
-<!--          <td><%#= prcmt.updated_at %></td>-->
-<!--          <td><%#= prcmt.created_by_id %></td>-->
-<!--          <td><%#= prcmt.updated_by_id %></td>-->
-<!--          <td><%#= prcmt.bid_bond %></td>-->
-<!--          <td><%#= prcmt.scope_of_supplies %></td>-->
-<!--          <td><%#= prcmt.announced_at %></td>-->
-<!--          <td><%#= prcmt.cancelled_at %></td>-->
-<!--          <td><%#= prcmt.finished_at %></td>-->
-<!--          <td><%#= prcmt.desc %></td>-->
-<!--          <td><%#= prcmt.internal_remark %></td>-->
-<!--          <td><%#= prcmt.candidate_selection_remark %></td>-->
-<!--          <td><%#= prcmt.finish_remark %></td>-->
-<!--          <td><%#= prcmt.prcmt_phase_evaluation_visibility %></td>-->
-<!--          <td><%#= prcmt.aanwijzing_visibility %></td>-->
-<!--          <td><%#= prcmt.bid_bond_visibility %></td>-->
-<!--          <td><%#= prcmt.est_total %></td>-->
-<!--          <td><%#= prcmt.prcmt_criterion_template_id %></td>-->
-<!--          <td><%#= prcmt.internal_org_id %></td>-->
-<!--          <td><%#= prcmt.plant_id %></td>-->
-<!--          <td><%#= prcmt.assessment_method %></td>-->
-<!--          <td><%#= prcmt.business_class %></td>-->
-<!--          <td><%#= prcmt.tkdn_percentage %></td>-->
-<!--          <td><%#= prcmt.tender_location %></td>-->
-          <td>
-            <%= link_to prcmt, class: 'btn btn-sm btn-outline-secondary' do %>
-              <i class="ti ti-eye"></i>
-            <% end %>
-            <%= link_to edit_prcmt_path(prcmt), class: 'btn btn-sm btn-secondary' do %>
-              <i class="ti ti-edit"></i>
-            <% end %>
-            <%= link_to prcmt, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
-              <i class="ti ti-trash"></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    <% else %>
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th><%= sortable_header('Purchase Reqn. No.', prcmts_path, :purch_reqn_no) %></th>
+    <th><%= sortable_header('Tender Name', prcmts_path, :name) %></th>
+    <th><%= sortable_header('Business Field', prcmts_path, :business_field) %></th>
+    <th><%= sortable_header('Scope of Work', prcmts_path, :scope_of_work) %></th>
+    <th><%= sortable_header('Evaluation Method', prcmts_path, :eval_method) %></th>
+    <th><%= sortable_header('Prcmt Type', prcmts_path, :prcmt_type_id) %></th>
+    <th><%= sortable_header('State', prcmts_path, :state) %></th>
+    <th><%= sortable_header('Workflow State', prcmts_path, :workflow_state) %></th>
+    <th><%= sortable_header('Retender of', prcmts_path, :retender_of) %></th>
+    <th><%= sortable_header('Cancel Remark', prcmts_path, :cancel_remark) %></th>
+    <!--      <th><%#= sortable_header('Number', prcmts_path, :number) %></th>-->
+    <!--      <th><%#= sortable_header('Purch Org', prcmts_path, :purch_org_id) %></th>-->
+    <!--      <th><%#= sortable_header('Purch Group', prcmts_path, :purch_group_id) %></th>-->
+    <!--      <th><%#= sortable_header('Buyer', prcmts_path, :buyer_id) %></th>-->
+    <!--      <th><%#= sortable_header('Prebid Meeting', prcmts_path, :prebid_meeting) %></th>-->
+    <!--      <th><%#= sortable_header('Prequalification', prcmts_path, :prequalification) %></th>-->
+    <!--      <th><%#= sortable_header('Auction', prcmts_path, :auction) %></th>-->
+    <!--      <th><%#= sortable_header('Bid Submission Method', prcmts_path, :bid_submission_method) %></th>-->
+    <!--      <th><%#= sortable_header('Quotation Media', prcmts_path, :quotation_media) %></th>-->
+    <!--      <th><%#= sortable_header('Quotation Validity Days', prcmts_path, :quotation_validity_days) %></th>-->
+    <!--      <th><%#= sortable_header('Incoterm', prcmts_path, :incoterm_id) %></th>-->
+    <!--      <th><%#= sortable_header('Proposed Delivery Location', prcmts_path, :proposed_delivery_location) %></th>-->
+    <!--      <th><%#= sortable_header('Purch Order Number', prcmts_path, :purch_order_number) %></th>-->
+    <!--      <th><%#= sortable_header('Contract Number', prcmts_path, :contract_number) %></th>-->
+    <!--      <th><%#= sortable_header('Data', prcmts_path, :data) %></th>-->
+    <!--      <th><%#= sortable_header('Current Workflow Instance', prcmts_path, :current_workflow_instance_id) %></th>-->
+    <!--      <th><%#= sortable_header('Created At', prcmts_path, :created_at) %></th>-->
+    <!--      <th><%#= sortable_header('Updated At', prcmts_path, :updated_at) %></th>-->
+    <!--      <th><%#= sortable_header('Created By', prcmts_path, :created_by_id) %></th>-->
+    <!--      <th><%#= sortable_header('Updated By', prcmts_path, :updated_by_id) %></th>-->
+    <!--      <th><%#= sortable_header('Bid Bond', prcmts_path, :bid_bond) %></th>-->
+    <!--      <th><%#= sortable_header('Scope of Supplies', prcmts_path, :scope_of_supplies) %></th>-->
+    <!--      <th><%#= sortable_header('Announced At', prcmts_path, :announced_at) %></th>-->
+    <!--      <th><%#= sortable_header('Cancelled At', prcmts_path, :cancelled_at) %></th>-->
+    <!--      <th><%#= sortable_header('Finished At', prcmts_path, :finished_at) %></th>-->
+    <!--      <th><%#= sortable_header('Desc', prcmts_path, :desc) %></th>-->
+    <!--      <th><%#= sortable_header('Internal Remark', prcmts_path, :internal_remark) %></th>-->
+    <!--      <th><%#= sortable_header('Candidate Selection Remark', prcmts_path, :candidate_selection_remark) %></th>-->
+    <!--      <th><%#= sortable_header('Finish Remark', prcmts_path, :finish_remark) %></th>-->
+    <!--      <th><%#= sortable_header('Prcmt Phase Evaluation Visibility', prcmts_path, :prcmt_phase_evaluation_visibility) %></th>-->
+    <!--      <th><%#= sortable_header('Aanwijzing Visibility', prcmts_path, :aanwijzing_visibility) %></th>-->
+    <!--      <th><%#= sortable_header('Bid Bond Visibility', prcmts_path, :bid_bond_visibility) %></th>-->
+    <!--      <th><%#= sortable_header('Est Total', prcmts_path, :est_total) %></th>-->
+    <!--      <th><%#= sortable_header('Prcmt Criterion Template', prcmts_path, :prcmt_criterion_template_id) %></th>-->
+    <!--      <th><%#= sortable_header('Internal Org', prcmts_path, :internal_org_id) %></th>-->
+    <!--      <th><%#= sortable_header('Plant', prcmts_path, :plant_id) %></th>-->
+    <!--      <th><%#= sortable_header('Assessment Method', prcmts_path, :assessment_method) %></th>-->
+    <!--      <th><%#= sortable_header('Business Class', prcmts_path, :business_class) %></th>-->
+    <!--      <th><%#= sortable_header('Tkdn Percentage', prcmts_path, :tkdn_percentage) %></th>-->
+    <!--      <th><%#= sortable_header('Tender Location', prcmts_path, :tender_location) %></th>-->
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @prcmts.present? %>
+    <% @prcmts.each_with_index do |prcmt, index| %>
       <tr>
-        <td colspan="13">No Entry</td>
+        <td><%= index + 1 %></td>
+        <td></td>
+        <td><%= prcmt.name %></td>
+        <td><%= prcmt.business_field %></td>
+        <td><%= prcmt.scope_of_work %></td>
+        <td><%= prcmt.prcmt_type_id %></td>
+        <td><%= prcmt.eval_method %></td>
+        <td><%= prcmt.state %></td>
+        <td></td>
+        <td></td>
+        <td><%= prcmt.cancel_remark %></td>
+        <!--          <td><%#= prcmt.number %></td>-->
+        <!--          <td><%#= prcmt.purch_org_id %></td>-->
+        <!--          <td><%#= prcmt.purch_group_id %></td>-->
+        <!--          <td><%#= prcmt.buyer_id %></td>-->
+        <!--          <td><%#= prcmt.prebid_meeting %></td>-->
+        <!--          <td><%#= prcmt.prequalification %></td>-->
+        <!--          <td><%#= prcmt.auction %></td>-->
+        <!--          <td><%#= prcmt.bid_submission_method %></td>-->
+        <!--          <td><%#= prcmt.quotation_media %></td>-->
+        <!--          <td><%#= prcmt.quotation_validity_days %></td>-->
+        <!--          <td><%#= prcmt.incoterm_id %></td>-->
+        <!--          <td><%#= prcmt.proposed_delivery_location %></td>-->
+        <!--          <td><%#= prcmt.purch_order_number %></td>-->
+        <!--          <td><%#= prcmt.contract_number %></td>-->
+        <!--          <td><%#= prcmt.data %></td>-->
+        <!--          <td><%#= prcmt.current_workflow_instance_id %></td>-->
+        <!--          <td><%#= prcmt.created_at %></td>-->
+        <!--          <td><%#= prcmt.updated_at %></td>-->
+        <!--          <td><%#= prcmt.created_by_id %></td>-->
+        <!--          <td><%#= prcmt.updated_by_id %></td>-->
+        <!--          <td><%#= prcmt.bid_bond %></td>-->
+        <!--          <td><%#= prcmt.scope_of_supplies %></td>-->
+        <!--          <td><%#= prcmt.announced_at %></td>-->
+        <!--          <td><%#= prcmt.cancelled_at %></td>-->
+        <!--          <td><%#= prcmt.finished_at %></td>-->
+        <!--          <td><%#= prcmt.desc %></td>-->
+        <!--          <td><%#= prcmt.internal_remark %></td>-->
+        <!--          <td><%#= prcmt.candidate_selection_remark %></td>-->
+        <!--          <td><%#= prcmt.finish_remark %></td>-->
+        <!--          <td><%#= prcmt.prcmt_phase_evaluation_visibility %></td>-->
+        <!--          <td><%#= prcmt.aanwijzing_visibility %></td>-->
+        <!--          <td><%#= prcmt.bid_bond_visibility %></td>-->
+        <!--          <td><%#= prcmt.est_total %></td>-->
+        <!--          <td><%#= prcmt.prcmt_criterion_template_id %></td>-->
+        <!--          <td><%#= prcmt.internal_org_id %></td>-->
+        <!--          <td><%#= prcmt.plant_id %></td>-->
+        <!--          <td><%#= prcmt.assessment_method %></td>-->
+        <!--          <td><%#= prcmt.business_class %></td>-->
+        <!--          <td><%#= prcmt.tkdn_percentage %></td>-->
+        <!--          <td><%#= prcmt.tender_location %></td>-->
+        <td>
+          <%= link_to prcmt, class: 'btn btn-sm btn-outline-secondary' do %>
+            <i class="ti ti-eye"></i>
+          <% end %>
+          <%= link_to edit_prcmt_path(prcmt), class: 'btn btn-sm btn-secondary' do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+          <%= link_to prcmt, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+            <i class="ti ti-trash"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
-    </tbody>
-  </table>
+  <% else %>
+    <tr>
+      <td colspan="13">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
 <% end %>
 
 <%= render partial: 'shared/table', locals: { model: @prcmts } %>

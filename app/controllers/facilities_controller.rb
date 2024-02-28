@@ -5,8 +5,7 @@ class FacilitiesController < ApplicationController
 
   # GET /facilities or /facilities.json
   def index
-    query = params[:query] || ''
-    @facilities = Facility.where('lower(name) LIKE ?', "%#{query.downcase}%")
+    @facilities = selectable(Facility)
     @facilities = filter(@facilities)
     @facilities = @facilities.page(params[:page])
 

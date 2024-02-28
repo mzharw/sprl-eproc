@@ -4,7 +4,9 @@ export default class extends Controller {
     static targets = ["input", "optionsList", "selectedValue", "optionsContainer", "clearSelection", "selectedInput"];
 
     connect() {
-        this.loadOptions();
+        this.loadOptions('', this.element, {
+            selected: true
+        })
         this.toggleClearSelection();
         // this.hideOptions();
 
@@ -21,18 +23,45 @@ export default class extends Controller {
         }
     }
 
-    loadOptions(query = '', target = this.element, filters = {}) {
-        let options = JSON.parse(target.dataset.options);
-        let cascade_to = options.cascade_to;
-        if (cascade_to && !this.selectedInputTarget.value) document.getElementById(cascade_to).classList.add('disabled');
+    loadOptions(query = '', target = this.element, options = {}) {
+        const selectedInputTarget = target.querySelector('.selected-input') ?? this.selectedInputTarget;
+        let selected = options.selected ?? false;
+        let dependent = options.dependent ?? false;
 
-        let path = target.dataset.optionsPath + '.json' + `?query=${query}`;
+        if (!selectedInputTarget.value) selected = false
+
+        let filters = options.filters ?? {}
+        let dataOptions = JSON.parse(target.dataset.options);
+        let cascade_to = dataOptions.cascade_to;
+        if (cascade_to && !selectedInputTarget.value) document.getElementById(cascade_to).classList.add('disabled');
+
+        let path = target.dataset.optionsPath + '.json';
+
+        let firstUsed = false
         let filterKeys = Object.keys(filters);
-        if (filterKeys.length > 0) {
-            filterKeys.forEach((k) => {
-                path += `&${k}=${filters[k]}`
-            })
+        for (let i = 1; i <= 3; i++) {
+            if (query && i === 1) {
+                path += `?query=${query}`
+                firstUsed = true
+                continue;
+            }
+            let char = firstUsed ? '&' : '?';
+            if (selected && i === 2) {
+                path += char;
+                if (!firstUsed) firstUsed = true
+                path += `id=${selectedInputTarget.value}`;
+                continue
+            }
+
+            if (filterKeys.length > 0 && i === 3) {
+                filterKeys.forEach((k) => {
+                    path += char;
+                    if (!firstUsed) firstUsed = true
+                    path += `${k}=${filters[k]}`
+                })
+            }
         }
+
 
         if (!this.element.classList.contains('disabled')) {
             fetch(path)
@@ -41,29 +70,35 @@ export default class extends Controller {
                     result.pagination = result.pagination ?? null;
                     let pagination = result.pagination
 
-                    if (result) this.updateOptionsList(pagination ? result.data : result, target, pagination);
+                    if (result) this.updateOptionsList(pagination ? result.data : result, target, pagination, selected, dependent);
                 })
         }
     }
 
-    generateLabel(data, source, element) {
+    generateLabel(data, source, element, inputTarget = null) {
+        let text = source[data.text]
+        let inputVal = text
         if (!!data.desc) {
-            const label = document.createElement('b')
-            label.textContent = source[data.text]
-            element.textContent = ''
-            element.append(label)
-            element.append(` - ${source[data.desc]}`);
+            let desc = ` - ${source[data.desc]}`;
+            let label = document.createElement('b')
+            label.textContent = text;
+            element.textContent = '';
+            element.append(label);
+            element.append(desc);
+            inputVal += desc;
         } else {
             element.textContent = source[data.text];
         }
+
+        if (inputTarget) inputTarget.value = inputVal;
     }
 
-    updateOptionsList(results, target, pagination = null) {
+    updateOptionsList(results, target, pagination = null, selected = false, dependent = false) {
         const optionsList = target.querySelector('.options-list') ?? this.optionsListTarget;
         const selectedInputTarget = target.querySelector('.selected-input') ?? this.selectedInputTarget;
+        const inputTarget = selected || dependent ? target.querySelector('.selection-search') ?? this.inputTarget : null;
         const optionsContainer = target.querySelector('.options-container') ?? this.optionsContainer;
         const data = target.dataset ?? this.element.dataset;
-        // const options = target.options
 
         optionsList.innerHTML = "";
         if (results.length > 0) {
@@ -71,7 +106,7 @@ export default class extends Controller {
 
                 const optionElement = document.createElement("div");
                 optionElement.classList.add("selection-option");
-                this.generateLabel(data, result, optionElement)
+                this.generateLabel(data, result, optionElement, inputTarget)
 
                 optionElement.setAttribute("data-id", result[data.value]);
                 optionElement.addEventListener("click", () => this.selectOption(result, target));
@@ -131,20 +166,35 @@ export default class extends Controller {
 
         const data = target.dataset;
         let options = JSON.parse(data.options);
-        let cascade_to = options.cascade_to
+        let cascadeTo = options.cascade_to
+        let dependentOn = options.dependent_on
+        let dependent = document.getElementById(dependentOn)
+        let inputTarget = dependent ? dependent.querySelector('.selection-search') ?? this.inputTarget : null;
 
-        this.generateLabel(data, option, selectedValueTarget)
-        selectedInputTarget.value = option[data.value];
+        this.generateLabel(data, option, selectedValueTarget, inputTarget)
+        if (!selectedInputTarget.value) selectedInputTarget.value = option[data.value];
 
-        if (close && cascade_to && !!option[data.value]) {
-            const target = document.getElementById(cascade_to);
+
+        if (dependent) {
+            let dependentSelectedInput = dependent.querySelector('.selected-input');
+            dependentSelectedInput.value = option[dependentOn]
+            this.loadOptions('', dependent, {
+                dependent: true,
+                selected: true
+            })
+        }
+
+        if (close && cascadeTo && !!option[data.value]) {
+            const target = document.getElementById(cascadeTo);
             target.classList.remove('disabled')
 
             if (target) {
                 this.clearOptions(target)
                 this.toggleClearSelection(target)
                 this.loadOptions('', target, {
-                    [this.element.id]: option[data.value]
+                    filters: {
+                        [this.element.id]: option[data.value]
+                    }
                 })
             }
         }
@@ -174,10 +224,10 @@ export default class extends Controller {
 
         const data = this.element.dataset;
         let options = JSON.parse(data.options);
-        let cascade_to = options.cascade_to
+        let cascadeTo = options.cascade_to
 
-        if (cascade_to) {
-            const target = document.getElementById(cascade_to);
+        if (cascadeTo) {
+            const target = document.getElementById(cascadeTo);
             if (!this.selectedInputTarget.value) target.classList.add('disabled');
             this.clearOptions(target)
             this.toggleClearSelection(target);
@@ -205,16 +255,4 @@ export default class extends Controller {
         clearSelectionIcon.classList.toggle('ti-x', selectedValue);
     }
 
-
-    // debounce(func, delay) {
-    //     let timeoutId;
-    //     return function (...args) {
-    //         if (timeoutId) {
-    //             clearTimeout(timeoutId);
-    //         }
-    //         timeoutId = setTimeout(() => {
-    //             func.apply(this, args);
-    //         }, delay);
-    //     };
-    // }
 }

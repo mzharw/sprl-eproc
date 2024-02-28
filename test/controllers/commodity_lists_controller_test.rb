@@ -17,7 +17,7 @@ class CommodityListsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create commodity_list" do
     assert_difference("CommodityList.count") do
-      post commodity_lists_url, params: { commodity_list: { commodity_list_id: @commodity_list.commodity_list_id, created_by_id: @commodity_list.created_by_id, desc: @commodity_list.desc, number: @commodity_list.number, updated_by_id: @commodity_list.updated_by_id } }
+      post commodity_lists_url, params: { commodity_list: { commodity_list_id: @commodity_list.commodity_list_id, created_by_id: @commodity_list.created_by_id, desc: @commodity_list.description, number: @commodity_list.number, updated_by_id: @commodity_list.updated_by_id } }
     end
 
     assert_redirected_to commodity_list_url(CommodityList.last)
@@ -34,7 +34,7 @@ class CommodityListsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update commodity_list" do
-    patch commodity_list_url(@commodity_list), params: { commodity_list: { commodity_list_id: @commodity_list.commodity_list_id, created_by_id: @commodity_list.created_by_id, desc: @commodity_list.desc, number: @commodity_list.number, updated_by_id: @commodity_list.updated_by_id } }
+    patch commodity_list_url(@commodity_list), params: { commodity_list: { commodity_list_id: @commodity_list.commodity_list_id, created_by_id: @commodity_list.created_by_id, desc: @commodity_list.description, number: @commodity_list.number, updated_by_id: @commodity_list.updated_by_id } }
     assert_redirected_to commodity_list_url(@commodity_list)
   end
 

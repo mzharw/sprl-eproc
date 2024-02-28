@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_21_022800) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_022800) do
   create_table "commodity_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "commodity_list_id"
     t.string "number"
-    t.string "desc"
+    t.string "description"
     t.uuid "created_by_id"
     t.uuid "updated_by_id"
     t.datetime "created_at", null: false
@@ -190,6 +190,35 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_022800) do
     t.string "sap"
     t.index ["created_by_id"], name: "index_plants_on_created_by_id"
     t.index ["updated_by_id"], name: "index_plants_on_updated_by_id"
+  end
+
+  create_table "prcmt_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "prcmt_id"
+    t.string "number"
+    t.uuid "purch_reqn_item_id"
+    t.uuid "product_group_id"
+    t.uuid "product_id"
+    t.string "desired_vendor"
+    t.string "fixed_vendor"
+    t.float "qty"
+    t.uuid "measurement_unit_id"
+    t.decimal "est_unit_price"
+    t.float "price_unit"
+    t.decimal "est_subtotal"
+    t.uuid "currency_id"
+    t.uuid "purch_group_id"
+    t.string "requisitioner"
+    t.datetime "expected_delivery_date", precision: nil
+    t.text "desc"
+    t.json "data"
+    t.text "specification"
+    t.text "note"
+    t.uuid "prcmt_award_item_id"
+    t.string "state"
+    t.datetime "awarded_at", precision: nil
+    t.boolean "po_processed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "prcmt_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

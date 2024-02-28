@@ -35,7 +35,7 @@
       <% unless is_service_item %>
         <div class="col-md-6">
           <label for="commodity_list_id">List Commodity</label>
-          <%= selection(form, :commodity_list_id, commodity_lists_path, :id, :number, :desc) %>
+          <%= selection(form, :commodity_list_id, commodity_lists_path, :id, :number, :description) %>
         </div>
 
         <div class="col-md-6">
@@ -48,7 +48,7 @@
       <% if is_material %>
         <div class="col-md-6">
           <label for="product_id"><%= type&.capitalize %></label>
-          <%= selection(form, :product_id, products_path, :id, :code, :name, dependent: 'measurement_unit_id') %>
+          <%= selection(form, :product_id, products_path, :id, :code, :name, dependent_on: 'measurement_unit_id') %>
         </div>
       <% end %>
 

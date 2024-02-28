@@ -98,6 +98,10 @@ class PurchReqnsController < ApplicationController
             ]
           end
         end
+        @purch_reqn.items.each_with_index do |item, index|
+          item.number = index + 1
+          item.save
+        end
         format.html { redirect_to purch_reqn_url(@purch_reqn), notice: 'Purchase requisition was successfully updated.' }
         format.json { render :show, status: :ok, location: @purch_reqn }
       else

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Prcmt items</h1>
+
+<div id="prcmt_items">
+  <% @prcmt_items.each do |prcmt_item| %>
+    <%= render prcmt_item %>
+    <p>
+      <%= link_to "Show this prcmt item", prcmt_item %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New prcmt item", new_prcmt_item_path %>

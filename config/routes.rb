@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :prcmt_items
   resources :prcmt_types
   resources :tasks, only: :index
   resources :workflows

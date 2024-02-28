@@ -6,12 +6,14 @@ class PurchReqnItemsController < ApplicationController
   def index
     @purch_reqn = PurchReqnDecorator.new(PurchReqn.find(params[:id]))
     items = carry_out_items_params[:items]
-    if request.post? && !(items.nil? || items.empty?)
-      redirect_to new_prcmt_path(purch_reqn: @purch_reqn, items: carry_out_items_params[:items])
-    else
-      flash.alert = "Please add atleast one item to carry out."
-      @purch_reqn_items = PurchReqnItem.where(purch_reqn_id: params[:id]).without_service_item.decorate
+    if request.post?
+      if items.nil? || items.empty?
+        flash.alert = 'Please add atleast one item to carry out.'
+      else
+        redirect_to new_prcmt_path(purch_reqn: @purch_reqn, items: carry_out_items_params[:items])
+      end
     end
+    @purch_reqn_items = PurchReqnItem.where(purch_reqn_id: params[:id]).without_service_item.uncarried.decorate
   end
 
   # GET /purch_reqn_items/1 or /purch_reqn_items/1.json
@@ -90,10 +92,11 @@ class PurchReqnItemsController < ApplicationController
         flash.now[:notice] = notice
         is_service_item = @purch_reqn_item.item_type == 'SERVICE_ITEM'
         items = is_service_item ? @purch_reqn_item.service.service_items.decorate : @purch_reqn_item.purch_reqn.decorated_items
+        purch_reqn = @purch_reqn_item.purch_reqn.decorate
         partial = is_service_item ? 'service_items' : 'list'
         stream = [turbo_stream.append('toasts', partial: 'shared/toast'),
-                  turbo_stream.update('items', partial:, locals: { items: }, flush: true),
-                  turbo_stream.update('purch_reqn', partial: 'purch_reqns/purch_reqn', locals: { purch_reqn: @purch_reqn_item.purch_reqn.decorate }, flush: true)
+                  turbo_stream.update('items', partial:, locals: { items:, purch_reqn: }, flush: true),
+                  turbo_stream.update('purch_reqn', partial: 'purch_reqns/purch_reqn', locals: { purch_reqn: }, flush: true)
         ]
         stream = stream.push(turbo_stream.update('item_form', partial: 'form', locals: { purch_reqn_item: @purch_reqn_item.service.decorate }, flush: true)) if is_service_item
         render turbo_stream: stream

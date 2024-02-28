@@ -54,7 +54,7 @@ module ApplicationHelper
     end
   end
 
-  def selection(*options, **other)
+  def selection(*options, **misc)
     render partial: 'shared/selection',
            locals: { form: options[0],
                      select_name: options[1],
@@ -62,7 +62,7 @@ module ApplicationHelper
                      value: options[3],
                      text: options[4],
                      desc: options[5],
-                     options: other.to_json,
+                     options: misc.to_json,
                      results: [] }
   end
 

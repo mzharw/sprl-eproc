@@ -1,0 +1,53 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prcmt_id: 
+  number: MyString
+  purch_reqn_item_id: 
+  product_group_id: 
+  product_id: 
+  desired_vendor: MyString
+  fixed_vendor: MyString
+  qty: 1.5
+  measurement_unit_id: 
+  est_unit_price: 9.99
+  price_unit: 1.5
+  est_subtotal: 9.99
+  currency_id: 
+  purch_group_id: 
+  requisitioner: MyString
+  expected_delivery_date: 2024-02-27 04:33:22
+  desc: MyText
+  data: 
+  specification: MyText
+  note: MyText
+  prcmt_award_item_id: 
+  state: MyString
+  awarded_at: 2024-02-27 04:33:22
+  po_processed: false
+
+two:
+  prcmt_id: 
+  number: MyString
+  purch_reqn_item_id: 
+  product_group_id: 
+  product_id: 
+  desired_vendor: MyString
+  fixed_vendor: MyString
+  qty: 1.5
+  measurement_unit_id: 
+  est_unit_price: 9.99
+  price_unit: 1.5
+  est_subtotal: 9.99
+  currency_id: 
+  purch_group_id: 
+  requisitioner: MyString
+  expected_delivery_date: 2024-02-27 04:33:22
+  desc: MyText
+  data: 
+  specification: MyText
+  note: MyText
+  prcmt_award_item_id: 
+  state: MyString
+  awarded_at: 2024-02-27 04:33:22
+  po_processed: false

@@ -16,7 +16,7 @@ class CommodityListsTest < ApplicationSystemTestCase
 
     fill_in "Commodity list", with: @commodity_list.commodity_list_id
     fill_in "Created by", with: @commodity_list.created_by_id
-    fill_in "Desc", with: @commodity_list.desc
+    fill_in "Desc", with: @commodity_list.description
     fill_in "Number", with: @commodity_list.number
     fill_in "Updated by", with: @commodity_list.updated_by_id
     click_on "Create Commodity list"
@@ -31,7 +31,7 @@ class CommodityListsTest < ApplicationSystemTestCase
 
     fill_in "Commodity list", with: @commodity_list.commodity_list_id
     fill_in "Created by", with: @commodity_list.created_by_id
-    fill_in "Desc", with: @commodity_list.desc
+    fill_in "Desc", with: @commodity_list.description
     fill_in "Number", with: @commodity_list.number
     fill_in "Updated by", with: @commodity_list.updated_by_id
     click_on "Update Commodity list"

@@ -1,5 +1,7 @@
 <%= render partial: 'purch_reqn_items/list' %>
 <%= form_with(model: prcmt, html: { class: 'data-container mt-3' }) do |form| %>
+
+  <%= form.hidden_field :prcmt_items, value: @purch_reqn_items.pluck(:id), multiple: true %>
   <% if prcmt.errors.any? %>
     <div style="color: red">
       <h2>
@@ -9,7 +11,7 @@
         <% prcmt.errors.each do |error| %>
           <li>
             <%= error.full_message %>
-          </li>
+        </li>
         <% end %>
       </ul>
     </div>

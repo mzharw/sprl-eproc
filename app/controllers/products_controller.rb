@@ -6,12 +6,13 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = selectable(Product, :code, :name, filter: 'product_group_id')
+    json = paginate_json(@products)
     @products = filter(@products)
     @products = paginate(@products)
 
     respond_to do |format|
       format.html
-      format.json { render json: @products }
+      format.json { render json: }
     end
   end
 

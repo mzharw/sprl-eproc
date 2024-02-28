@@ -1,5 +1,6 @@
 <% items = @purch_reqn_items || items %>
-<% is_submitted = @purch_reqn.submitted? %>
+<% purch_reqn = @purch_reqn || purch_reqn %>
+<% is_submitted = purch_reqn.submitted? %>
 <% content_for :table, flush: true do %>
   <thead class="sticky">
   <tr>
@@ -59,7 +60,7 @@
             <%= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
           </td>
         <% end %>
-        <td><%= index + 1 %></td>
+        <td><%= purch_reqn_item.number || index + 1 %></td>
         <td><%= purch_reqn_item.item_type %></td>
         <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
         <td><b><%= purch_reqn_item.product_code %></b> - <%= purch_reqn_item.product_name %></td>
