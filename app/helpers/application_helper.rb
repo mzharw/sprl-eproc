@@ -77,18 +77,25 @@ module ApplicationHelper
            locals: { text:, path:, link_params:, column:, order_by:, order_dir:, css_class: }
   end
 
-  def search_filter(url, default_column, columns = [])
-    url = get_url(url, 'search_by=')
+  def search_filter(_path, default_column, columns = [])
+    url = get_url('search_by')
     render partial: 'shared/search_filter', locals: { url:, default_column:, columns: }
   end
 
-  def advanced_filter(url)
-    url = get_url(url, 'filters')
+  def advanced_filter(_path, param = 'filters')
+    url = get_url(param)
     render partial: 'shared/advanced_filter', locals: { url: }
   end
 
   def user_tasks_count
     Task.ongoing.count || 0
+  end
+
+  def link_access(name, path, access)
+    link = {}
+    link[name] = path if access
+
+    link
   end
 
   private
@@ -101,8 +108,8 @@ module ApplicationHelper
     end
   end
 
-  def get_url(base_path, param_to_remove)
-    uri = URI.parse(base_path)
+  def get_url(param_to_remove)
+    uri = URI.parse(request.fullpath)
     params = URI.decode_www_form(uri.query || '')
 
     # Remove only the specified parameter and its value

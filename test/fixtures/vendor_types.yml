@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ident_name: MyString
+  name: MyString
+  desc: MyText
+  system: false
+  created_at: 2024-03-01 04:11:12
+  updated_at: 2024-03-01 04:11:12
+  created_by_id: 
+  updated_by_id: 
+
+two:
+  ident_name: MyString
+  name: MyString
+  desc: MyText
+  system: false
+  created_at: 2024-03-01 04:11:12
+  updated_at: 2024-03-01 04:11:12
+  created_by_id: 
+  updated_by_id: 

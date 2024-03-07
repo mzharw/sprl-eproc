@@ -4,7 +4,7 @@
 <% is_service_item = type&.downcase == 'service_item' %>
 <% is_new = purch_reqn_item.new_record? %>
 
-<div class="d-flex flex-column gap-2" id="item_form" >
+<div class="d-flex flex-column gap-2" id="item_form">
   <%= form_with(model: purch_reqn_item, url: (
     if is_new
       is_service_item ? create_service_purch_reqn_item_path : create_purch_reqn_item_path

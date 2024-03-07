@@ -1,25 +1,40 @@
-<h2>Change your password</h2>
+<% content_for :content do %>
+  <img src="https://api-eproc-langgak.sprcorp.com:443/shared/images/header.jpg" style="position: absolute; top: 0; width: max-content; left: 0; width: 100%; filter: brightness(0.8);">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+    <div class="row justify-content-center" style="margin: 10% 0;">
+      <div class="col-md-5 col-lg-6 col-xxl-3">
+        <div class="card mb-0">
+          <div class="card-body">
+            <b class="text-center">Forgot password</b>
+            <a href="./" class="text-nowrap logo-img text-center d-block py-3 w-100">
+              <%= image_tag "logo.png" %>
+            </a>
+            <form>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em><br/>
+                <% end %>
+                <%= f.password_field :password, autofocus: true, autocomplete: "password", class: 'form-control' %>
+              </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+              <div class="mb-3">
+                <label for="password_confirmation" class="form-label">Confirm new password</label>
+                <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: 'form-control' %>
+              </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
+              <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-2 rounded-2">Change password</button>
+              <div class="d-flex align-items-center justify-content-center">
+                <%= render "users/shared/error_messages", resource: resource %>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 
-<%= render "users/shared/links" %>
+<%= render "layouts/wrapper" %>
+

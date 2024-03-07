@@ -10,22 +10,40 @@ class PurchReqnsController < ApplicationController
     @purch_reqns = PurchReqn
                      .joins(:plant, :creator)
                      .select('purch_reqns.*, plants.code, users.username')
+    @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups)
+    json = paginate_json(@purch_reqns)
 
     @purch_reqns = filter(@purch_reqns, { plants_code: 'plants.code', created_by: 'users.username', desc: 'purch_reqns.desc' })
     @purch_reqns = paginate(@purch_reqns).decorate
+
+    respond_to do |format|
+      format.html
+      format.json { render json: }
+    end
   end
 
   # GET /purch_reqns/1 or /purch_reqns/1.json
   def show
-    qr = RQRCode::QRCode.new(purch_reqn_url)
-    @qr_svg = qr.as_svg(color: "000",
-                        shape_rendering: "crispEdges",
-                        module_size: 3,
-                        standalone: true,
-                        use_path: true)
     respond_to do |format|
       format.html
       format.pdf do
+        svg_config = { color: "000",
+                       shape_rendering: "crispEdges",
+                       module_size: 3,
+                       standalone: true,
+                       use_path: true }
+
+        qr_purch_reqn = RQRCode::QRCode.new(purch_reqn_url)
+        @qr_purch_reqn = qr_purch_reqn.as_svg(**svg_config)
+
+        @approver_qrs = {}
+        @purch_reqn.workflow_approver.each do |id|
+          unless id.nil?
+            qr = RQRCode::QRCode.new(user_url(id:))
+            @approver_qrs[id] = qr.as_svg(**svg_config)
+          end
+        end
+
         render pdf: 'purch_reqn',
                template: 'purch_reqns/pdf_purch_reqn',
                formats: [:html],
@@ -38,6 +56,7 @@ class PurchReqnsController < ApplicationController
   # GET /purch_reqns/new
   def new
     @purch_reqn = PurchReqn.new
+    authorize @purch_reqn
   end
 
   # GET /purch_reqns/1/edit
@@ -53,6 +72,7 @@ class PurchReqnsController < ApplicationController
   def create
     @purch_reqn = PurchReqn.new({ **purch_reqn_params, **tracker, state: 'DRAFT' })
     @purch_reqn.purch_org_id = PurchOrg.first.id
+    authorize @purch_reqn
 
     respond_to do |format|
       if @purch_reqn.save
@@ -156,7 +176,10 @@ class PurchReqnsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_purch_reqn
-    @purch_reqn = PurchReqnDecorator.new(PurchReqn.find(params[:id]))
+    @purch_reqn = set_tracker(PurchReqn, :plants, :purch_groups, redirect_path: purch_reqns_path)
+    return if @purch_reqn.nil?
+
+    @purch_reqn = PurchReqnDecorator.new(@purch_reqn)
   end
 
   # Only allow a list of trusted parameters through.

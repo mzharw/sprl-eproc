@@ -1,0 +1,2 @@
+module BuyerPlantsHelper
+end

@@ -1,14 +1,14 @@
 <% content_for :content_header do %>
-  <b>Party / Overview </b>
+  <b>Personnel / Overview </b>
   <div class="d-flex gap-2 flex-wrap">
 
-    <%= link_to parties_path do %>
+    <%= link_to users_path do %>
       <button class="btn btn-sm btn-light-warning">
         <i class="ti ti-arrow-back-up"></i>
         Back
       </button>
     <% end %>
-    <%= link_to edit_party_path(@party), class: 'btn btn-sm btn-secondary' do %>
+    <%= link_to edit_user_path(@user), class: 'btn btn-sm btn-secondary' do %>
       <i class="ti ti-edit"></i>
       Edit
     <% end %>
@@ -16,7 +16,7 @@
 <% end %>
 
 <% content_for :content do %>
-  <%= render @party %>
+  <%= render 'users/personnels/personnel' %>
 <% end %>
 
 <%= render "layouts/wrapper", sidebar: true %>

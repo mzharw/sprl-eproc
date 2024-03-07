@@ -16,8 +16,8 @@ module SprlEproc
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
     config.form_with_generates_remote_forms = true
-    config.hosts << "24e8-182-253-245-137.ngrok-free.app"
 
+    config.active_job.queue_adapter = :sidekiq
 
     # Configuration for the application, engines, and railties goes here.
     #

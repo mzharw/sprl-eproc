@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  from_date: 2024-03-01
+  thru_date: 2024-03-01
+  created_at: 2024-03-01 04:10:25
+  updated_at: 2024-03-01 04:10:25
+  created_by_id: 
+  updated_by_id: 
+  active_vendor_status_id: 
+  data: 
+  vendor_type_id: 
+  state: MyString
+
+two:
+  code: MyString
+  from_date: 2024-03-01
+  thru_date: 2024-03-01
+  created_at: 2024-03-01 04:10:25
+  updated_at: 2024-03-01 04:10:25
+  created_by_id: 
+  updated_by_id: 
+  active_vendor_status_id: 
+  data: 
+  vendor_type_id: 
+  state: MyString

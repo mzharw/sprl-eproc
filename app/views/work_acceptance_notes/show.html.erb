@@ -1,10 +1,96 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>WAN / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
+    <%= link_to work_acceptance_notes_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= render partial: 'show_submit_button', locals: { model: @work_acceptance_note } %>
+  </div>
+<% end %>
 
-<%= render @work_acceptance_note %>
+<% content_for :content do %>
+  <div class="d-flex flex-column gap-2">
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#work_acceptance_note" aria-expanded="false" aria-controls="work_acceptance_note">
+      WAN
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="work_acceptance_note">
+      <%= render @work_acceptance_note %>
+    </div>
 
-<div>
-  <%= link_to "Edit this work acceptance note", edit_work_acceptance_note_path(@work_acceptance_note) %> |
-  <%= link_to "Back to work acceptance notes", work_acceptance_notes_path %>
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#work_acceptance_note_item" aria-expanded="false" aria-controls="work_acceptance_note_item">
+      WAN Items
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="work_acceptance_note_item">
+      <div class="d-flex flex-column">
+        <%# unless @work_acceptance_note.submitted? %>
+        <!--          <div class="dropdown align-self-end">-->
+        <!--            <button class="btn btn-sm btn-secondary my-3" type="button">-->
+        <!--              <i class="ti ti-plus"></i>-->
+        <!--              New Entry-->
+        <!--            </button>-->
+        <!--          </div>-->
+        <%# end %>
+        <div id="items">
+          <%= render partial: 'work_acceptance_note_items/list', locals: { items: @work_acceptance_note.items.decorate } %>
+        </div>
+      </div>
+    </div>
 
-  <%= button_to "Destroy this work acceptance note", @work_acceptance_note, method: :delete %>
-</div>
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false" aria-controls="documents">
+      Documents
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="documents">
+      <div class="row g-5">
+        <div class="col-md-6">
+          <%= render 'docs', model: @work_acceptance_note, name: :attachment, required: false, multiple: false %>
+        </div>
+      </div>
+    </div>
+
+    <% if @work_acceptance_note.workflow_instances %>
+      <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#comment-histories" aria-expanded="false" aria-controls="comment-histories">
+        Comment Histories
+        <i class="ti ti-caret-down-filled"></i>
+      </a>
+      <div class="data-container collapse show" id="comment-histories">
+        <%= render partial: 'purch_reqns/comments', locals: { workflow_instances: @work_acceptance_note.workflow_instances } %>
+      </div>
+    <% end %>
+    <div class="alert alert-warning d-flex flex-column gap-3 justify-content-between" role="alert">
+      <% if @work_acceptance_note.submitted? %>
+        <% if @work_acceptance_note.finished? %>
+          <div>
+            Workflow finished
+          </div>
+        <% else %>
+          <div>
+            Currently waiting for <b><%= @work_acceptance_note.workflow_state %></b>
+            since <%= @work_acceptance_note.formatted_create %>
+          </div>
+          <div class="btn-group">
+            <%= button_tag class: "btn btn-danger", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-reject' } do %>
+              <i class="ti ti-x"></i>
+              Reject
+            <% end %>
+            <%= button_tag class: "btn btn-secondary", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-approve' } do %>
+              <i class="ti ti-check"></i>
+              Approve
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div>WAN is not submitted yet.</div>
+      <% end %>
+    </div>
+<% end %>
+
+<%= render partial: 'workflow_instance/approval', locals: { model: @work_acceptance_note.workflow_instance, action: :reject } %>
+<%= render partial: 'workflow_instance/approval', locals: { model: @work_acceptance_note.workflow_instance, action: :approve } %>
+
+<%= render "layouts/wrapper", sidebar: true %>

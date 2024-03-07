@@ -32,4 +32,12 @@ class PurchReqnItemDecorator < PurchReqnDecorator
     product_group&.name
   end
 
+  def product_group_text
+    "<b>#{product_group_code}</b> - #{product_group_name}"
+  end
+
+  def carried_out_qty
+    prcmt_items ? prcmt_items.sum(:qty) || 0.0 : 0.0
+  end
+
 end

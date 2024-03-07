@@ -1,0 +1,26 @@
+
+[1mFrom:[0m /home/zhar/project/sprl-eproc/app/controllers/concerns/filterable.rb:45 Filterable#selectable:
+
+    [1;34m26[0m: [32mdef[0m [1;34mselectable[0m(model, *columns, **options)
+    [1;34m27[0m:   query = params[[33m:query[0m]
+    [1;34m28[0m:   model = model.where([31m[1;31m"[0m[31mLOWER(#{columns.join([1;31m"[0m[31m || ' - ' || [1;31m"[0m[31m[0m[31m)}[0m[31m)  ~* ?[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m#{query.downcase}[0m[31m[1;31m"[0m[31m[0m) [32mif[0m query
+    [1;34m29[0m: 
+    [1;34m30[0m:   [1;34m# options handler[0m
+    [1;34m31[0m:   [1;34m## filter options[0m
+    [1;34m32[0m:   filters = options[[33m:filter[0m]
+    [1;34m33[0m:   filters = [filters] [32mif[0m filters.is_a? [1;34;4mString[0m
+    [1;34m34[0m:   filters = params[[33m:filters[0m] [32mif[0m filters.nil?
+    [1;34m35[0m: 
+    [1;34m36[0m:   filter_map = options[[33m:filter_map[0m] || [1;36mnil[0m
+    [1;34m37[0m: 
+    [1;34m38[0m:   filters&.each [32mdo[0m |k, v|
+    [1;34m39[0m:     value = v.nil? ? params[k] : v
+    [1;34m40[0m:     key = filter_map.nil? ? k : filter_map[k.to_sym]
+    [1;34m41[0m: 
+    [1;34m42[0m:     model = model.where(key => value) [32munless[0m value.nil?
+    [1;34m43[0m:   [32mend[0m
+    [1;34m44[0m: 
+ => [1;34m45[0m:   binding.pry
+    [1;34m46[0m:   model
+    [1;34m47[0m: [32mend[0m
+

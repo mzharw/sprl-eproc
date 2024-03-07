@@ -16,6 +16,28 @@ Rails.application.configure do
   config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
+  # ActionMailer configuration
+  config.action_mailer.default_url_options = {
+    host: ENV["PROD_WEB_CLIENT_HOST"]
+  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = ENV["PROD_MAILER_PERFORM_DELIV"]&.to_bool
+  config.action_mailer.raise_delivery_errors = ENV["PROD_MAILER_RAISE_DELIV_ERR"]&.to_bool
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    address: ENV["PROD_SMTP_ADDRESS"],
+    port: ENV["PROD_SMTP_PORT"],
+    openssl_verify_mode: ENV["SMTP_OPENSSL_VERIFY_MODE"],
+    # domain: ENV["PROD_SMTP_DOMAIN"],
+    user_name: ENV["PROD_SMTP_USER"],
+    password: ENV["PROD_SMTP_PASS"],
+    authentication: ENV["PROD_SMTP_AUTH"].try(:to_sym),
+    enable_starttls_auto: ENV["PROD_ENABLE_STARTTLS_AUTO"]&.to_bool
+  }
+  config.action_mailer.default_options = {
+    from: ENV["PROD_SMTP_SENDER"]
+  }
+
   # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
@@ -53,11 +75,11 @@ Rails.application.configure do
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
-    .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
+                                       .tap { |logger| logger.formatter = ::Logger::Formatter.new }
+                                       .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Info include generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you

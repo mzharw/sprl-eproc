@@ -21,7 +21,7 @@ class CreatePrcmts < ActiveRecord::Migration[7.1]
       t.string :contract_number
       t.jsonb :data
       t.uuid :current_workflow_instance_id
-      t.string :state, default: 'ACTIVE'
+      t.string :state, default: 'DRAFT'
       t.boolean :bid_bond
       t.jsonb :scope_of_supplies
       t.timestamp :announced_at

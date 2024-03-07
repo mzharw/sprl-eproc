@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_currency_id: 
+  from_amount: 9.99
+  to_currency_id: 
+  to_amount: 9.99
+  from_time: 2024-03-07 15:38:46
+  thru_time: 2024-03-07 15:38:46
+  created_by_id: 
+  updated_by_id: 
+  issuer: MyString
+
+two:
+  from_currency_id: 
+  from_amount: 9.99
+  to_currency_id: 
+  to_amount: 9.99
+  from_time: 2024-03-07 15:38:46
+  thru_time: 2024-03-07 15:38:46
+  created_by_id: 
+  updated_by_id: 
+  issuer: MyString

@@ -11,7 +11,9 @@ class ProductsController < ApplicationController
     @products = paginate(@products)
 
     respond_to do |format|
-      format.html
+      format.html do
+        authorize @products
+      end
       format.json { render json: }
     end
   end
@@ -70,6 +72,7 @@ class ProductsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_product
     @product = Product.find(params[:id])
+    authorize @product
   end
 
   # Only allow a list of trusted parameters through.

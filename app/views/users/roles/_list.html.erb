@@ -1,0 +1,36 @@
+<% content_for :table, flush: true do %>
+  <thead class="sticky" style="backdrop-filter: blur(50px);">
+  <tr>
+    <th>
+      <%= sortable_header('Name', roles_path, :name) %>
+    </th>
+    <th>
+      <%= sortable_header('State', roles_path, :state) %>
+    </th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% roles.each do |role| %>
+    <tr>
+      <td><%= role.name %></td>
+      <td><%= badge(role.state) %></td>
+      <td>
+        <%= link_to role, class: 'm-1 btn btn-sm btn-outline-info' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_role_path(role), class: 'm-1 btn btn-sm btn-secondary' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if roles.empty? %>
+    <tr>
+      <td colspan="6">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: roles, new: new_role_path } %>

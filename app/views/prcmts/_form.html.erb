@@ -1,7 +1,11 @@
-<%= render partial: 'purch_reqn_items/list' %>
+<%= render partial: 'purch_reqn_items/list', locals: { carry_out_qty: @prmct_items } %>
 <%= form_with(model: prcmt, html: { class: 'data-container mt-3' }) do |form| %>
 
-  <%= form.hidden_field :prcmt_items, value: @purch_reqn_items.pluck(:id), multiple: true %>
+
+  <% @prmct_items.each do |k, q| %>
+    <%= hidden_field_tag "prcmt_items[#{k}]", q, id: "items-id-#{k}" %>
+  <% end %>
+
   <% if prcmt.errors.any? %>
     <div style="color: red">
       <h2>
@@ -11,7 +15,7 @@
         <% prcmt.errors.each do |error| %>
           <li>
             <%= error.full_message %>
-        </li>
+          </li>
         <% end %>
       </ul>
     </div>
@@ -26,11 +30,11 @@
     <div class="col-md-6">
       <label>Business Field</label>
       <div class="form-check">
-        <%= form.radio_button :business_field, 'goods', class: 'form-check-input' %>
+        <%= form.radio_button :business_field, 'GOODS', class: 'form-check-input' %>
         <label class="form-check-label" for="business_field_goods">Goods</label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :business_field, 'services', class: 'form-check-input' %>
+        <%= form.radio_button :business_field, 'SERVICES', class: 'form-check-input' %>
         <label class="form-check-label" for="business_field_services">Services</label>
       </div>
     </div>
@@ -48,15 +52,15 @@
     <div class="col-md-6">
       <label>Procurement Criterion</label>
       <div class="form-check">
-        <%= form.radio_button :procurement_criterion, 'merit', class: 'form-check-input' %>
+        <%= form.radio_button :procurement_criterion, 'MERIT', class: 'form-check-input' %>
         <label class="form-check-label" for="procurement_criterion_merit">Merit</label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :procurement_criterion, 'quality', class: 'form-check-input' %>
+        <%= form.radio_button :procurement_criterion, 'QUALITY', class: 'form-check-input' %>
         <label class="form-check-label" for="procurement_criterion_quality">Quality</label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :procurement_criterion, 'price', class: 'form-check-input' %>
+        <%= form.radio_button :procurement_criterion, 'PRICE', class: 'form-check-input' %>
         <label class="form-check-label" for="procurement_criterion_price">Price</label>
       </div>
     </div>
@@ -88,15 +92,15 @@
     <div class="col-md-6">
       <label>Submission Method</label>
       <div class="form-check">
-        <%= form.radio_button :submission_method, 'one_envelope', class: 'form-check-input' %>
+        <%= form.radio_button :bid_submission_method, 'ONE_ENVELOPE', class: 'form-check-input' %>
         <label class="form-check-label" for="submission_method_one_envelope">One Envelope</label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :submission_method, 'two_envelope', class: 'form-check-input' %>
+        <%= form.radio_button :bid_submission_method, 'TWO_ENVELOPE', class: 'form-check-input' %>
         <label class="form-check-label" for="submission_method_two_envelope">Two Envelope</label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :submission_method, 'two_envelope_separate_evaluations', class: 'form-check-input' %>
+        <%= form.radio_button :bid_submission_method, 'TWO_ENVELOPE_SEPARATE_EVALUATIONS', class: 'form-check-input' %>
         <label class="form-check-label" for="submission_method_two_envelope_separate_evaluations">Two Envelope Separate
           Evaluations</label>
       </div>
@@ -105,11 +109,11 @@
     <div class="col-md-6">
       <label>Assessment Method</label>
       <div class="form-check">
-        <%= form.radio_button :assessment_method, 'knockout', class: 'form-check-input' %>
+        <%= form.radio_button :assessment_method, 'KNOCKOUT', class: 'form-check-input' %>
         <label class="form-check-label" for="assessment_method_knockout">Knockout</label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :assessment_method, 'score', class: 'form-check-input' %>
+        <%= form.radio_button :assessment_method, 'SCORE', class: 'form-check-input' %>
         <label class="form-check-label" for="assessment_method_score">Score</label>
       </div>
     </div>

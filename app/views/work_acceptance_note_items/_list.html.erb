@@ -1,0 +1,90 @@
+<% items = @work_acceptance_note_items || items %>
+<% purch_reqn = @purch_reqn || purch_reqn || nil %>
+<% is_submitted = purch_reqn.nil? ? true : purch_reqn.submitted? %>
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <% if is_submitted && defined? form %>
+      <th></th>
+    <% end %>
+    <th>
+      Item No.
+    </th>
+    <!--    <th>-->
+    <!--      Item Type-->
+    <!--    </th>-->
+    <th>
+      Product Group
+    </th>
+    <th>
+      Material
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Quantity
+    </th>
+    <th>
+      UoM
+    </th>
+    <th>
+      Unit Price (Estimation)
+    </th>
+    <th>
+      Subtotal
+    </th>
+    <th>
+      Delivery Date
+    </th>
+    <% unless is_submitted %>
+      <th class="sticky">
+        Action
+      </th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% if items.nil? || items.empty? %>
+    <tr>
+      <td colspan="15"> No Entry</td>
+    </tr>
+  <% else %>
+    <% items.each_with_index do |work_acceptance_note_item, index| %>
+      <tr id="<%= work_acceptance_note_item.id %>">
+        <%= hidden_field_tag "work_acceptance_note_items[]", work_acceptance_note_item.id, multiple: true %>
+        <% if is_submitted && defined? form %>
+          <td>
+            <%= form.check_box :items, { class: 'form-check-input', multiple: true }, work_acceptance_note_item.id, nil %>
+          </td>
+        <% end %>
+        <td><%= work_acceptance_note_item.number || index + 1 %></td>
+        <!--        <td><%#= work_acceptance_note_item.item_type if defined? work_acceptance_note_item.item_type %></td>-->
+        <td><%= work_acceptance_note_item.product_group_code %>
+          - <%= work_acceptance_note_item.product_group_name %></td>
+        <td><b><%= work_acceptance_note_item.product_code %></b> - <%= work_acceptance_note_item.product_name %></td>
+        <td><%= work_acceptance_note_item.desc %></td>
+        <td><%= work_acceptance_note_item.qty %></td>
+        <td><%= work_acceptance_note_item.uom&.name %></td>
+        <td><%= work_acceptance_note_item.unit_price %></td>
+        <td><%= work_acceptance_note_item.subtotal %></td>
+        <td><%= work_acceptance_note_item.formatted_delivery %></td>
+        <% unless is_submitted %>
+          <td>
+            <div class="d-flex">
+              <%= link_to work_acceptance_note_item_path(item_id: work_acceptance_note_item), class: 'btn btn-sm link-success' do %>
+                <i class="ti ti-eye"></i>
+              <% end %>
+              <%= button_to destroy_work_acceptance_note_item_path(item_id: work_acceptance_note_item), class: 'btn btn-sm link-danger', method: :delete do %>
+                <i class="ti ti-trash"></i>
+              <% end %>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  <% end %>
+<% end %>
+
+<%= render partial: 'shared/table' %>

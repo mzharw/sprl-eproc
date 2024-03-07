@@ -1,0 +1,49 @@
+<% content_for :table do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      <%= sortable_header('From currency', currency_exchange_rates_path, :from_currency) %>
+    </th>
+    <th>
+      <%= sortable_header('To Currency', currency_exchange_rates_path, :to_currency) %>
+    </th>
+    <th>
+      <%= sortable_header('From Amount', currency_exchange_rates_path, :from_amount) %>
+    </th>
+    <th>
+      <%= sortable_header('To Amount', currency_exchange_rates_path, :to_amount) %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% currency_exchange_rates.each do |currency_exchange_rate| %>
+    <tr>
+      <td><%== currency_exchange_rate.from_currency_text %></td>
+      <td><%== currency_exchange_rate.to_currency_text %></td>
+      <td><%= currency_exchange_rate.from_amount %></td>
+      <td><%= currency_exchange_rate.to_amount %></td>
+      <td>
+        <%= link_to currency_exchange_rate, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_currency_exchange_rate_path(currency_exchange_rate), class: 'btn btn-sm btn-secondary m-1' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to currency_exchange_rate, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if currency_exchange_rates.empty? %>
+    <tr>
+      <td colspan="6">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: currency_exchange_rates, new: new_currency_exchange_rate_path } %>

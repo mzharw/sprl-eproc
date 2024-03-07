@@ -6,11 +6,13 @@ class CostCentersController < ApplicationController
   # GET /cost_centers or /cost_centers.json
   def index
     @cost_centers = selectable(CostCenter, :cost_center_id, '"desc"')
-    @cost_centers = filter(@cost_centers)
+    @cost_centers = filter(@cost_centers, { description: '"desc"' })
     @cost_centers = @cost_centers.page(params[:page])
 
     respond_to do |format|
-      format.html
+      format.html do
+        authorize @cost_centers
+      end
       format.json { render json: @cost_centers }
     end
   end
@@ -69,6 +71,7 @@ class CostCentersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_cost_center
     @cost_center = CostCenter.find(params[:id])
+    authorize @cost_center
   end
 
   # Only allow a list of trusted parameters through.

@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  Purchase Order
+<% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(purch_orders_path, 'number', %w[name]) %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'list', purch_orders: @purch_orders %>
+<% end %>
+
+<%= render "layouts/wrapper" , sidebar: true %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Vendor types</h1>
+
+<div id="vendor_types">
+  <% @vendor_types.each do |vendor_type| %>
+    <%= render vendor_type %>
+    <p>
+      <%= link_to "Show this vendor type", vendor_type %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New vendor type", new_vendor_type_path %>

@@ -1,6 +1,6 @@
 <table class="table" style="border-color: transparent;">
   <tr>
-    <td style="width: 10px;"><%== @qr_svg %></td>
+    <td style="width: 10px;"><%== @qr_purch_reqn %></td>
     <td>
       <div>
         <small>SPR Langgak</small>
@@ -48,7 +48,7 @@
     <td><b>Plant</b></td>
     <td><b>Source Found</b></td>
     <% unless @purch_reqn.fund_source == 'PROJECT_WBS' %>
-      <td>Non AFE</td>
+      <td><b>Non AFE</b></td>
     <% end %>
   </tr>
   <tr>
@@ -74,7 +74,7 @@
 
 <div style="border-top: 1px solid #ebf1f6; margin: 20px 0 "></div>
 
-<h3 style="margin: 30px 0">Items</h3>
+<h3 style="margin: 60px 0">Items</h3>
 <table class="table" style="border-color: #ebf1f6">
   <tr style="background-color: #f9fafe">
     <th>
@@ -114,7 +114,7 @@
   <% items = @purch_reqn.decorated_items %>
   <% items.each_with_index do |purch_reqn_item, index| %>
     <tr>
-      <td><%= index + 1 %></td>
+      <td><%= purch_reqn_item.number %></td>
       <td><%= purch_reqn_item.item_type %></td>
       <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
       <td><b><%= purch_reqn_item.product&.code %></b> - <%= purch_reqn_item.product&.name %></td>
@@ -156,7 +156,7 @@
   <% end %>
 </table>
 
-<h3 style="margin: 30px 0">Histories</h3>
+<h3 style="margin: 60px 0">Histories</h3>
 <table class="table" style="border-color: #ebf1f6">
   <tr style="background-color: #f9fafe">
     <th>Name</th>
@@ -173,7 +173,7 @@
         <%= instance.updater_name %>
       </td>
       <td>
-        <%= instance.updater&.party&.personnel.position_name %>
+        <%= instance.approver_position_name %>
       </td>
       <td>
         <%= instance.step %>
@@ -186,6 +186,20 @@
       </td>
       <td>
         <%= instance.comment %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<h3 style="margin: 60px 0">Approver Signature</h3>
+<table style="border-color: #ebf1f6">
+  <% @approver_qrs.each do |id, qr| %>
+    <tr>
+      <td style="width: 30px; height: 30px; padding: 20px">
+        <%== qr %>
+        <div style="text-align: center; padding-top: 100px">
+          <%= instances.where(updated_by_id: id).first.updater_name %>
+        </div>
       </td>
     </tr>
   <% end %>

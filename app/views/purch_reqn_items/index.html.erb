@@ -10,14 +10,21 @@
   </div>
 <% end %>
 <% content_for :content do %>
-  <%= form_for(@purch_reqn_items, url: purch_reqn_items_path, id: 'form', data: { turbo: false }, method: :post) do |form| %>
-    <%= render 'list', purch_reqn_items: @purch_reqn_items, form: %>
-    <div class="col-md-6">
-      <%= form.button '', class: 'btn btn-secondary mt-xxl-9' do %>
-        <i class="ti ti-device-floppy"></i>
-        Create tender draft
-      <% end %>
+  <% if @purch_reqn_items.empty? %>
+    <div class="alert alert-warning">
+      <i class="ti ti-zoom-question"></i>
+      Oops! All items have been carried out
     </div>
+  <% else %>
+    <%= form_for(@purch_reqn_items, url: purch_reqn_items_path, id: 'form', data: { turbo: false }, method: :post) do |form| %>
+      <%= render 'list', form: %>
+      <div class="col-md-6">
+        <%= form.button '', class: 'btn btn-secondary mt-xxl-9' do %>
+          <i class="ti ti-device-floppy"></i>
+          Create tender draft
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
 <%= render "layouts/wrapper", sidebar: true %>

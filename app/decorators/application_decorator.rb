@@ -27,7 +27,80 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def formatted_delivery
-    format_datetime(expected_delivery_date)
+    format_datetime(defined?(expected_delivery_date) ? expected_delivery_date : delivery_date)
+  end
+
+  def plant_code
+    object&.plant&.code
+  end
+
+  def plant_name
+    object&.plant&.party&.full_name
+  end
+
+  def cost_center_code
+    object&.cost_center&.cost_center_id
+  end
+
+  def cost_center_desc
+    object&.cost_center&.desc
+  end
+
+  def purch_group_code
+    object&.purch_group&.code
+  end
+
+  def purch_group_name
+    object&.purch_group&.party&.full_name
+  end
+
+  def purch_org_code
+    object&.purch_org&.code
+  end
+
+  def purch_org_name
+    object&.purch_org&.party&.full_name
+  end
+
+  def product_group_code
+    object&.product_group&.code
+  end
+
+  def product_group_name
+    object&.product_group&.name
+  end
+
+  def product_code
+    object&.product&.code
+  end
+
+  def product_name
+    object&.product&.name
+  end
+
+  def vendor_code
+    object&.vendor&.code
+  end
+
+  def vendor_name
+    object&.vendor&.party&.full_name
+  end
+
+  def currency_code
+    object&.currency&.code
+  end
+
+  def workflow_instance
+    object&.workflow_instances&.last
+  end
+
+  def workflow_state
+    step = workflow_instance&.workflow_step
+    (step&.seq || 0).zero? ? '' : step&.name
+  end
+
+  def workflow_approver
+    object&.workflow_instances&.pluck(:updated_by_id)&.uniq
   end
 
   private

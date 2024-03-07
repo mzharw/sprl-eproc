@@ -1,10 +1,22 @@
-<h1>Editing buyer</h1>
+<% content_for :content_header do %>
+  <b>Buyer / Edit </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render "form", buyer: @buyer %>
+    <%= link_to buyers_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to @buyer, class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-eye"></i>
+      Show
+    <% end %>
+  </div>
+<% end %>
 
-<br>
+<% content_for :content do %>
+  <%= render 'form', buyer: @buyer %>
+<% end %>
 
-<div>
-  <%= link_to "Show this buyer", @buyer %> |
-  <%= link_to "Back to buyers", buyers_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

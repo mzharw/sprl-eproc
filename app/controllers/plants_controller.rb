@@ -7,10 +7,16 @@ class PlantsController < ApplicationController
   # GET /plants or /plants.json
   def index
     @plants = selectable(Plant.joins(:facility), 'facilities.name', :code)
+    json_groups = current_user.is_superuser? ? @plants : @plants.where(id: current_user.plant_ids)
+    json = paginate_json(json_groups, :id, :code, 'facilities.name AS name')
+    @plants = filter(@plants, { facility: 'facilities.name' })
+    @plants = paginate(@plants).decorate
 
     respond_to do |format|
-      format.html
-      format.json { render json: @plants.select(:id, :code, 'facilities.name as name') }
+      format.html do
+        authorize @plants.object
+      end
+      format.json { render json: }
     end
   end
 
@@ -66,13 +72,15 @@ class PlantsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_plant
-      @plant = Plant.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def plant_params
-      params.require(:plant).permit(:facility_id, :code, :from_date, :thru_date, :owner_party_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_plant
+    @plant = Plant.find(params[:id])
+    authorize @plant
+  end
+
+  # Only allow a list of trusted parameters through.
+  def plant_params
+    params.require(:plant).permit(:facility_id, :code, :from_date, :thru_date, :owner_party_id)
+  end
 end

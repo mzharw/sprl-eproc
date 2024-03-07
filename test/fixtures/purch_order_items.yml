@@ -1,0 +1,75 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  purch_order: 
+  number: MyString
+  purch_reqn_item: 
+  prcmt_item: 
+  product_group: 
+  product: 
+  qty: 1.5
+  measurement_unit: 
+  unit_price: 9.99
+  price_unit: 1.5
+  subtotal: 9.99
+  desc: MyText
+  specification: MyText
+  note: MyText
+  data: 
+  created_by: 
+  updated_by: 
+  delivery_date: 2024-03-01
+  from_currency: 
+  from_amount: 9.99
+  to_currency: 
+  to_amount: 9.99
+  purch_order_item_type: 
+  line_total: 9.99
+  sales_taxable: false
+  ancestry: MyString
+  ancestry_depth: 1
+  amount_type: MyString
+  seq: 1
+  process_qty: 1.5
+  item_type: MyString
+  parent: 
+  wbsproject: 
+  cost_center: 
+  process_unit_price: 9.99
+
+two:
+  purch_order: 
+  number: MyString
+  purch_reqn_item: 
+  prcmt_item: 
+  product_group: 
+  product: 
+  qty: 1.5
+  measurement_unit: 
+  unit_price: 9.99
+  price_unit: 1.5
+  subtotal: 9.99
+  desc: MyText
+  specification: MyText
+  note: MyText
+  data: 
+  created_by: 
+  updated_by: 
+  delivery_date: 2024-03-01
+  from_currency: 
+  from_amount: 9.99
+  to_currency: 
+  to_amount: 9.99
+  purch_order_item_type: 
+  line_total: 9.99
+  sales_taxable: false
+  ancestry: MyString
+  ancestry_depth: 1
+  amount_type: MyString
+  seq: 1
+  process_qty: 1.5
+  item_type: MyString
+  parent: 
+  wbsproject: 
+  cost_center: 
+  process_unit_price: 9.99

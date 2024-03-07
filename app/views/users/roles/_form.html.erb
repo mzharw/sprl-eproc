@@ -1,0 +1,35 @@
+<%= form_with(model: role, html: { class: 'data-container' }) do |form| %>
+  <% if role.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(role.errors.count, "error") %> prohibited this role from being saved:
+      </h2>
+      <ul>
+        <% role.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="rolename">Name</label>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <label for="state">State</label>
+      <div>
+        <%= form.radio_button :state, 'INACTIVE', class: 'btn-check', id: "warning-outlined" %>
+        <label class="btn btn-sm btn-outline-warning" for="warning-outlined">Inactive</label>
+
+        <%= form.radio_button :state, 'ACTIVE', class: 'btn-check', id: "success-outlined" %>
+        <label class="btn btn-sm btn-outline-success" for="success-outlined">Active</label>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
+<% end %>

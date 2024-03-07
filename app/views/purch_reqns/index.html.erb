@@ -1,14 +1,11 @@
-<% content_for :content_header do %>
-  <h1>Purchase Requisition</h1>
-  <div class="d-flex gap-3">
-    <%= search_filter(purch_reqns_path, 'number', %w[desc created_by]) %>
-    <%= link_to new_purch_reqn_path do %>
-      <button class="btn btn-secondary">
-        <i class="ti ti-plus"></i>
-      </button>
-    <% end %>
-  </div>
+<% content_for :page_title do %>
+  Purchase Requisition
 <% end %>
+
+<%= content_for :filter do %>
+  <%= search_filter(purch_reqns_path, 'number', %w[desc created_by]) %>
+<% end %>
+
 <% content_for :content do %>
   <%= render 'list', purch_reqns: @purch_reqns %>
 <% end %>

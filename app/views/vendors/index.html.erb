@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  Vendor
+<% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(vendors_path, 'code', %w[vendor_type]) %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'list' %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

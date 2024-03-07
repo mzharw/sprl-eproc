@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Buyer plants</h1>
+
+<div id="buyer_plants">
+  <% @buyer_plants.each do |buyer_plant| %>
+    <%= render buyer_plant %>
+    <p>
+      <%= link_to "Show this buyer plant", buyer_plant %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New buyer plant", new_buyer_plant_path %>

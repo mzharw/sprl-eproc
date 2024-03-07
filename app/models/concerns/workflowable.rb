@@ -16,7 +16,7 @@ module Workflowable
     return unless state == 'COMMITTED'
 
     is_authorized = instance.nil?
-    instance = workflow_instances.last
+    instance = last_instance
 
     if rejected
       create_workflow_instance(0) if instance_rejected?(instance)
@@ -26,21 +26,40 @@ module Workflowable
       instance.update_step('FINISHED', updated_by_id) if instance.workflow_step&.seq&.zero?
 
       next_step = next_workflow_step
-      return false unless next_step
+      seq = next_step.seq if next_step
 
-      seq = next_step.seq
-      create_workflow_instance(seq, instance, is_authorized)
+      create_workflow_instance(seq, instance, is_authorized) unless finished?
       workflow_after_advanced if methods.include?(:workflow_after_advanced)
     end
 
     return if is_authorized
 
+    workflow_after_finished if methods.include?(:workflow_after_finished) && finished?
     instance&.update(state: rejected ? 'REJECTED' : 'FINISHED')
   end
 
   def finished?
-    num = defined?(last_step) ? last_step : workflow_steps.count
-    workflow_instances.last.workflow_step.seq >= num
+    step = last_step if defined?(last_step)
+    num = step.nil? ? workflow_steps.last.seq : step
+
+    last_instance.workflow_step.seq >= num && last_instance.state == 'FINISHED'
+  end
+
+  def can_approve(user = nil, *groups, **filter)
+    role = workflow_map[:role] if defined? workflow_map
+
+    approved = user.nil? ? true : user.has_role?(role)
+    approved &&= user&.purch_group_ids&.include?(purch_group_id) if groups.include? :purch_groups
+    approved &&= user&.plant_ids&.include?(plant_id) if groups.include? :plants
+
+    user.is_superuser? ? true : approved
+  end
+
+  def user_assignees(role, *groups)
+    @users = User.with_role(role)
+    @users = @users.joins(:buyer_purch_groups).where(buyer_purch_groups: { purch_group_id: }) if groups.include? :purch_groups
+    @users = @users.joins(:buyer_plants).where(buyer_plants: { plant_id: }) if groups.include? :plants
+    @users
   end
 
   private
@@ -53,8 +72,9 @@ module Workflowable
   def next_workflow_step
     workflow
       .workflow_steps
-      .find_by(seq: (workflow_instances.last&.workflow_step&.seq || 0) + 1)
+      .find_by(seq: (last_instance&.workflow_step&.seq || 0) + 1)
   end
+
   ##
 
   ## Workflow Instances
@@ -63,10 +83,12 @@ module Workflowable
     author = instance&.updated_by_id
 
     created_by_id = author unless author.nil? && authorized
+    created_by_id = self.created_by_id if created_by_id.nil?
 
     step = workflow.workflow_steps.find_by(seq:)
 
     tracker = { created_by_id: }
+
     number ||= instance_number
 
     workflow_instances
@@ -83,6 +105,11 @@ module Workflowable
   def instance_rejected?(instance)
     instance.state == 'REJECTED'
   end
+
+  def last_instance
+    workflow_instances.last
+  end
+
   ##
 
   def workflow

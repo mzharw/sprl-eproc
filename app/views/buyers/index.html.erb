@@ -1,14 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :page_title do %>
+  Buyer
+<% end %>
 
-<h1>Buyers</h1>
+<% content_for :filter do %>
+  <%= search_filter(buyers_path, 'code', %w[name]) %>
+<% end %>
 
-<div id="buyers">
-  <% @buyers.each do |buyer| %>
-    <%= render buyer %>
-    <p>
-      <%= link_to "Show this buyer", buyer %>
-    </p>
-  <% end %>
-</div>
+<% content_for :content do %>
+  <%= render 'list', buyers: @buyers %>
+<% end %>
 
-<%= link_to "New buyer", new_buyer_path %>
+<%= render "layouts/wrapper", sidebar: true %>

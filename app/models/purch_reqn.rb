@@ -31,6 +31,8 @@ class PurchReqn < ApplicationRecord
   has_many_attached :justify_memo_docs
   has_many_attached :res_util_justify_docs
   has_many :items, class_name: 'PurchReqnItem', foreign_key: :purch_reqn_id
+  has_many :prcmt_items, class_name: 'PrcmtItem', through: :items
+  has_many :purch_order_items, class_name: 'PurchOrderItem', through: :items
 
   # belongs_to :purch_reqn, foreign_key: :prior_to_id
   # belongs_to :contract, foreign_key: :contract_reference_id
@@ -75,13 +77,15 @@ class PurchReqn < ApplicationRecord
   end
 
   def last_step
-    if purch_reqn_type == 'MATERIAL'
-      5
-    elsif purch_reqn_type == 'SERVICE'
-      6
-    else
-      nil
+    curr = Currency.find_by(code: 'IDR')
+    item_subtotal = items.listed.sum(:est_subtotal)
+
+    unless currency_id == curr.id
+      rate = CurrencyExchangeRate.where(from_currency_id: curr.id).find_by(to_currency_id: currency_id)
+      item_subtotal = (item_subtotal.to_f / rate.from_amount) * rate.to_amount unless rate.nil?
     end
+
+    5 if item_subtotal < 50000000
   end
 
   private
@@ -96,7 +100,6 @@ class PurchReqn < ApplicationRecord
 
   def workflow_map
     last_instance = workflow_instances.last
-    self.assignees = User.where(username: 'admin')
     role = case last_instance.workflow_step.seq
            when 1
              {
@@ -131,7 +134,12 @@ class PurchReqn < ApplicationRecord
            else
              false
            end
+
+    self.assignees = user_assignees(role[:role], :purch_groups, :plants)
     self.task_name = "Purchase Requisition : #{role[:display_role]} Approval"
+
+    role[:assignees] = assignees.pluck(:email)
+    role[:creator] = creator.email
     role
   end
 

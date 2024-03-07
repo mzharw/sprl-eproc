@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Purch order item types</h1>
+
+<div id="purch_order_item_types">
+  <% @purch_order_item_types.each do |purch_order_item_type| %>
+    <%= render purch_order_item_type %>
+    <p>
+      <%= link_to "Show this purch order item type", purch_order_item_type %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New purch order item type", new_purch_order_item_type_path %>

@@ -1,0 +1,12 @@
+<p>
+  Kepada Yth. <%= @task.user.username %>
+</p>
+
+<p>
+  Anda mempunyai task pending sejak <%= @task.updated_at %>.
+  Mohon untuk diperiksa dengan mengklik <%= link_to 'disini', tasks_path(@task) %>
+</p>
+
+Terima kasih.
+
+<p>E-Procurement PT. SPR Langgak</p>

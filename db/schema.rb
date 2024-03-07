@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_083846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "buyer_plants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "buyer_id"
+    t.uuid "plant_id"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "buyer_purch_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "buyer_id"
+    t.uuid "purch_group_id"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "buyers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "party_id"
     t.string "code"
@@ -51,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state", default: "INACTIVE"
     t.index ["created_by_id"], name: "index_buyers_on_created_by_id"
     t.index ["updated_by_id"], name: "index_buyers_on_updated_by_id"
   end
@@ -118,6 +141,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.datetime "updated_at"
     t.index ["created_by_id"], name: "index_currencies_on_created_by_id"
     t.index ["updated_by_id"], name: "index_currencies_on_updated_by_id"
+  end
+
+  create_table "currency_exchange_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "from_currency_id"
+    t.decimal "from_amount"
+    t.uuid "to_currency_id"
+    t.decimal "to_amount"
+    t.datetime "from_time", precision: nil
+    t.datetime "thru_time", precision: nil
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.string "issuer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "facilities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -254,7 +291,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.string "contract_number"
     t.jsonb "data"
     t.uuid "current_workflow_instance_id"
-    t.string "state", default: "ACTIVE"
+    t.string "state", default: "DRAFT"
     t.boolean "bid_bond"
     t.jsonb "scope_of_supplies"
     t.datetime "announced_at", precision: nil
@@ -322,6 +359,123 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.datetime "updated_at"
     t.index ["created_by_id"], name: "index_purch_groups_on_created_by_id"
     t.index ["updated_by_id"], name: "index_purch_groups_on_updated_by_id"
+  end
+
+  create_table "purch_order_item_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "parent_id"
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.string "sign"
+    t.integer "seq"
+    t.boolean "children_allowed"
+    t.boolean "sales_taxable"
+    t.boolean "system"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "purch_order_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "purch_order_id"
+    t.string "number"
+    t.uuid "purch_reqn_item_id"
+    t.uuid "prcmt_item_id"
+    t.uuid "product_group_id"
+    t.uuid "product_id"
+    t.float "qty"
+    t.uuid "measurement_unit_id"
+    t.decimal "unit_price"
+    t.float "price_unit"
+    t.decimal "subtotal"
+    t.text "desc"
+    t.text "specification"
+    t.text "note"
+    t.jsonb "data"
+    t.uuid "created_by"
+    t.uuid "updated_by"
+    t.date "delivery_date"
+    t.uuid "from_currency"
+    t.decimal "from_amount"
+    t.uuid "to_currency"
+    t.decimal "to_amount"
+    t.uuid "purch_order_item_type"
+    t.decimal "line_total"
+    t.boolean "sales_taxable"
+    t.string "ancestry"
+    t.integer "ancestry_depth"
+    t.string "amount_type"
+    t.integer "seq"
+    t.float "process_qty"
+    t.string "item_type"
+    t.uuid "parent_id"
+    t.uuid "wbsproject_id"
+    t.uuid "cost_center_id"
+    t.decimal "process_unit_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "purch_order_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+  end
+
+  create_table "purch_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "purch_order_type_id"
+    t.string "number"
+    t.date "issued_date"
+    t.string "name"
+    t.uuid "incoterm_id"
+    t.string "incoterm_desc"
+    t.uuid "internal_org_id"
+    t.uuid "purch_org_id"
+    t.uuid "purch_group_id"
+    t.uuid "prcmt_id"
+    t.jsonb "data"
+    t.string "state", default: "DRAFT"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "vendor_id"
+    t.string "referrable_type"
+    t.uuid "referrable_id"
+    t.uuid "payment_term_id"
+    t.string "delivery_location"
+    t.uuid "current_workflow_instance_id"
+    t.boolean "used_up"
+    t.datetime "finished_at", precision: nil
+    t.datetime "discarded_at", precision: nil
+    t.uuid "finished_by_id"
+    t.integer "length_of_work"
+    t.float "payment_term_number"
+    t.string "payment_term_desc"
+    t.string "po_type"
+    t.boolean "contract"
+    t.date "validity_start_date"
+    t.date "commentcement_date"
+    t.text "delivery_detail"
+    t.text "remark"
+    t.text "scope_of_work"
+    t.float "po_to_amount"
+    t.string "account_holder"
+    t.string "account_number"
+    t.string "po_signing"
+    t.boolean "tax_policy"
+    t.uuid "to_currency_id"
+    t.date "rejected_at"
+    t.uuid "cost_center_id"
+    t.uuid "plant_id"
+    t.string "uncommit_remark"
+    t.boolean "is_replicated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "fully_approved_at", precision: nil
+    t.uuid "purch_reqn_id"
   end
 
   create_table "purch_orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -549,6 +703,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.uuid "updated_by_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
     t.index ["created_by_id_id"], name: "index_roles_on_created_by_id_id"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
@@ -600,9 +756,39 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
   create_table "users_roles", id: false, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "role_id"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  create_table "vendor_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vendors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "active_vendor_status_id"
+    t.jsonb "data"
+    t.uuid "vendor_type_id"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "party_id"
   end
 
   create_table "work_acceptance_note_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -648,7 +834,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.string "number"
     t.string "sap_number"
     t.string "name"
-    t.string "state", default: "ACTIVE"
+    t.string "state", default: "DRAFT"
     t.uuid "current_workflow_instance_id"
     t.jsonb "data"
     t.string "wan_type"
@@ -679,6 +865,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_014640) do
     t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "purch_reqn_id"
     t.index ["created_by_id"], name: "index_work_acceptance_notes_on_created_by_id"
     t.index ["number"], name: "index_work_acceptance_notes_on_number"
     t.index ["updated_by_id"], name: "index_work_acceptance_notes_on_updated_by_id"

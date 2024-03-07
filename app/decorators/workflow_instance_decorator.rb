@@ -22,6 +22,10 @@ class WorkflowInstanceDecorator < ApplicationDecorator
     object.state.eql?('REJECTED')
   end
 
+  def approver_position_name
+    updater&.party&.personnel&.position_name
+  end
+
   private
 
   def first_step?

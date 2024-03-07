@@ -1,0 +1,80 @@
+<div id="purch_order">
+  <table class="table">
+
+    <tr>
+      <td><strong>Purch order type:</strong></td>
+      <td><%= purch_order.purch_order_type.name %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Number:</strong></td>
+      <td><%= purch_order.number %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Issued date:</strong></td>
+      <td><%= purch_order.issued_date %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td><%= purch_order.name %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Purch group:</strong></td>
+      <td><%== purch_order.purch_order_items.decorate.first.product_group_text %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Procurement:</strong></td>
+      <td><%== "<b>#{purch_order.prcmt.number}</b> - #{purch_order.prcmt.name}" %></td>
+    </tr>
+
+    <tr>
+      <td><strong>State:</strong></td>
+      <td><%= badge(purch_order.state) %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Created at:</strong></td>
+      <td><%= purch_order.formatted_create %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Updated at:</strong></td>
+      <td><%= purch_order.formatted_update %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Created by:</strong></td>
+      <td><%= purch_order.creator_name %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Updated by:</strong></td>
+      <td><%= purch_order.updater_name %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Vendor:</strong></td>
+      <td><%== "<b>#{purch_order.vendor.code}</b>" %><%= "- #{purch_order.vendor&.party&.full_name}" %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Tax policy:</strong></td>
+      <td><%= badge(purch_order.tax_policy) %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Cost center:</strong></td>
+      <td><%= purch_order.cost_center_id %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Plant:</strong></td>
+      <td><%== "<b>#{purch_order.plant.code}</b> - #{purch_order.plant&.facility&.name}" %></td>
+    </tr>
+
+  </table>
+</div>

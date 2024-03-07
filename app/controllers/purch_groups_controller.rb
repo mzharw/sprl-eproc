@@ -1,18 +1,22 @@
 class PurchGroupsController < ApplicationController
   include Filterable
   include UserTrackable
+  include Partiable
   before_action :set_purch_group, only: %i[show edit update destroy]
 
   # GET /purch_groups or /purch_groups.json
   def index
     @purch_groups = selectable(PurchGroup.joins(:party), 'parties.full_name', :code)
-    @purch_groups = filter(@purch_groups)
-    @purch_groups = @purch_groups.page(params[:page])
-
+    json_groups = current_user.is_superuser? ? @purch_groups : @purch_groups.where(id: current_user.purch_group_ids)
+    json = paginate_json(json_groups, :id, :code, 'parties.full_name as name')
+    @purch_groups = filter(@purch_groups, { name: 'parties.full_name' })
+    @purch_groups = paginate(@purch_groups)
 
     respond_to do |format|
-      format.html
-      format.json { render json: @purch_groups.select(:id, :code, 'parties.full_name as name') }
+      format.html do
+        authorize @purch_groups
+      end
+      format.json { render json: }
     end
   end
 
@@ -29,7 +33,8 @@ class PurchGroupsController < ApplicationController
 
   # POST /purch_groups or /purch_groups.json
   def create
-    @purch_group = PurchGroup.new({ **purch_group_params, **tracker })
+    party_id = org_party(purch_group_params[:name]).id
+    @purch_group = PurchGroup.new({ **purch_group_params.except(:name), **tracker, party_id: })
 
     respond_to do |format|
       if @purch_group.save
@@ -69,11 +74,12 @@ class PurchGroupsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_purch_group
-    @purch_group = PurchGroup.find(params[:id])
+    @purch_group = PurchGroup.includes(:party).find(params[:id])
+    authorize @purch_group
   end
 
   # Only allow a list of trusted parameters through.
   def purch_group_params
-    params.require(:purch_group).permit(:code, :from_date, :thru_date, :description, :party_id)
+    params.require(:purch_group).permit(:code, :from_date, :thru_date, :description, :name, party_attributes: [:full_name])
   end
 end

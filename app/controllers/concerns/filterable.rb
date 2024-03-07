@@ -31,12 +31,15 @@ module Filterable
     ## filter options
     filters = options[:filter]
     filters = [filters] if filters.is_a? String
+    filters = params[:filters] if filters.nil?
 
-    unless filters.nil?
-      filters.each do |k|
-        value = params[k]
-        model = model.where(k => value) unless value.nil?
-      end
+    filter_map = options[:filter_map] || nil
+
+    filters&.each do |k, v|
+      value = v.nil? ? params[k] : v
+      key = filter_map.nil? ? k : filter_map[k.to_sym]
+
+      model = model.where(key => value) unless value.nil?
     end
 
     model
@@ -46,16 +49,28 @@ module Filterable
     collection.page(params[:page])
   end
 
-  def paginate_json(collection)
+  def paginate_json(collection, *select)
     id = params[:id]
     paginated = id ? collection.where(id:) : collection
+    paginated = paginated.select(*select) unless select.empty?
     paginated = paginate(paginated)
+
+    begin
+      total_counts = collection.count
+    rescue
+      total_counts = collection.length
+    end
+
+    unless total_counts.is_a?(Integer)
+      total_counts = total_counts.length
+    end
+
     {
       data: paginated,
       pagination: {
         current_page: params[:page] || 1,
         page_counts: paginated.total_pages,
-        total_counts: collection.count
+        total_counts:
       }
     }
   end

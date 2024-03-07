@@ -1,0 +1,110 @@
+<table class="table" style="border-color: transparent;">
+  <tr>
+    <td style="width: 10px;"><%== @qr_prcmt %></td>
+    <td>
+      <div>
+        <small>SPR Langgak</small>
+        <h1>Procurement</h1>
+        <p><%= @prcmt.number %> ( <%= @prcmt.prcmt_type.name %> )</p>
+      </div>
+    </td>
+    <td>
+      <%= image_tag wicked_pdf_asset_base64('logo.png'), class: 'float-end', style: 'width: 175px' %>
+    </td>
+  </tr>
+</table>
+
+<table class="table" style="border-color: #ebf1f6;">
+  <tr style="background-color: #f9fafe">
+    <td><b>Name</b></td>
+    <td><b>Number</b></td>
+  </tr>
+  <tr>
+    <td><%= @prcmt.name %></td>
+    <td><%= @prcmt.number %></td>
+  </tr>
+  <tr style="background-color: #f9fafe">
+    <td>
+      <b>Subtotal</b>
+    </td>
+    <td>
+      <b>Currency</b>
+    </td>
+  </tr>
+  <tr style="width: 10px !important;">
+    <td>
+      <%= @prcmt.prcmt_items.sum(:est_subtotal) %>
+    </td>
+    <td>
+      <%= @prcmt.purch_reqn.currency.code %>
+    </td>
+  </tr>
+</table>
+
+<table class="table" style="border-color: transparent;">
+  <tr>
+    <td><b>PR Number</b></td>
+    <td><b>Purchasing Group</b></td>
+    <td><b>Bussiness Field</b></td>
+  </tr>
+  <tr>
+    <td>
+      <%= @prcmt.purch_reqn.number %>
+    </td>
+    <td>
+      <%= @prcmt.purch_group_code %>
+    </td>
+    <td>
+      <%= @prcmt.business_field %>
+    </td>
+  </tr>
+</table>
+
+<div style="border-top: 1px solid #ebf1f6; margin: 20px 0 "></div>
+
+<h3 style="margin: 60px 0">Items</h3>
+<table class="table" style="border-color: #ebf1f6">
+  <tr style="background-color: #f9fafe">
+    <th>
+      Item No.
+    </th>
+    <th>
+      Product Group
+    </th>
+    <th>
+      Material
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Quantity
+    </th>
+    <th>
+      UoM
+    </th>
+    <th>
+      Unit Price (Estimation)
+    </th>
+    <th>
+      Subtotal
+    </th>
+    <th>
+      Delivery Date
+    </th>
+  </tr>
+  <% items = @prcmt.prcmt_items.decorate %>
+  <% items.each_with_index do |prcmt_item, index| %>
+    <tr>
+      <td><%= prcmt_item.number %></td>
+      <td><%= prcmt_item.product_group_code %> - <%= prcmt_item.product_group_name %></td>
+      <td><b><%= prcmt_item.product&.code %></b> - <%= prcmt_item.product&.name %></td>
+      <td><%= prcmt_item.desc %></td>
+      <td><%= prcmt_item.qty %></td>
+      <td><%= prcmt_item.uom&.name %></td>
+      <td><%= prcmt_item.est_unit_price %></td>
+      <td><%= prcmt_item.est_subtotal %></td>
+      <td><%= prcmt_item.formatted_delivery %></td>
+    </tr>
+  <% end %>
+</table>

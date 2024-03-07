@@ -1,0 +1,32 @@
+<p>
+  Kepada Yth. <%= @receiver[:display_role] %>
+</p>
+
+<p>
+  Mohon Diperiksa dan Disetujui/Ditolak pengajuan WAN berikut dalam sistem E-Procurement PT. SPR
+  Langgak :
+</p>
+
+<table>
+  <tbody>
+  <tr>
+    <td>Nomor WAN</td>
+    <td>: <%= @model.number %></td>
+  </tr>
+  <tr>
+    <td>Tanggal pengajuan PR</td>
+    <td>: <%= @model.created_at %></td>
+  </tr>
+  <tr>
+    <td>Deskripsi WAN</td>
+    <td>: <%= @model.name %></td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+Untuk informasi lebih lanjut, silahkan <%= link_to 'login', work_acceptance_note_url(@model) %>.
+<br>
+Terima kasih.
+
+<p>E-Procurement PT. SPR Langgak</p>

@@ -1,15 +1,13 @@
-<% content_for :content_header do %>
-  <h1>Facility</h1>
-  <div class="d-flex gap-2">
-    <%= search_filter(facilities_path, 'name', %w[facility_type]) %>
-    <%= link_to new_facility_path do %>
-      <button class="btn btn-secondary">
-        <i class="ti ti-plus"></i>
-      </button>
-    <% end %>
-  </div>
+<% content_for :page_title do %>
+  Facility
 <% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(facilities_path, 'name', %w[facility_type]) %>
+<% end %>
+
 <% content_for :content do %>
   <%= render 'list', facilities: @facilities %>
 <% end %>
+
 <%= render "layouts/wrapper", sidebar: true %>

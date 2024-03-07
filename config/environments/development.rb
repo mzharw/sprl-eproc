@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
@@ -37,22 +39,24 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = ENV['PROD_MAILER_RAISE_DELIV_ERR']&.to_bool
 
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-
-  config.action_mailer.default_url_options = { :host => 'http://localhost:3000/' }
-
+  config.action_mailer.default_url_options = { host: 'http://localhost:3000/' }
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'gmail.com',
-    user_name: 'mazhariwirasena@gmail.com',
-    password: 'ocin cetf mtfb uwnn',
-    authentication: 'plain',
-    enable_starttls_auto: true
+    address: ENV['DEV_SMTP_ADDRESS'],
+    port: ENV['DEV_SMTP_PORT'],
+    domain: ENV['DEV_SMTP_DOMAIN'],
+    user_name: ENV['DEV_SMTP_USER'],
+    password: ENV['DEV_SMTP_PASS'],
+    authentication: ENV['DEV_SMTP_AUTH'],
+    enable_starttls_auto: ENV['DEV_ENABLE_STARTTLS_AUTO']&.to_bool
+  }
+
+  config.action_mailer.default_options = {
+    from: ENV["DEV_SMTP_SENDER"]
   }
 
   # Print deprecation notices to the Rails logger.

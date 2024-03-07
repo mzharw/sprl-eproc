@@ -7,11 +7,14 @@ class CommodityListsController < ApplicationController
   def index
     @commodity_lists = selectable(CommodityList, :number, :description)
     json = paginate_json(@commodity_lists)
+    @commodity_lists = filter(@commodity_lists)
 
     @commodity_lists = paginate(@commodity_lists).decorate
 
     respond_to do |format|
-      format.html
+      format.html do
+        authorize @commodity_lists.object
+      end
       format.json { render json: }
     end
   end
@@ -74,6 +77,7 @@ class CommodityListsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_commodity_list
     @commodity_list = CommodityList.find(params[:id])
+    authorize @commodity_list
   end
 
   # Only allow a list of trusted parameters through.

@@ -44,11 +44,15 @@ gem 'pundit', '~> 2.3'
 
 # gem 'prawn'
 
+gem 'roo'
+
 gem 'rqrcode'
 
 gem 'wicked_pdf'
 
 gem 'wkhtmltopdf-binary'
+
+gem 'whenever', require: false
 
 # Nested forms
 # gem 'cocoon', '~> 1.2'
@@ -95,6 +99,9 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem 'spring'
 
+  gem "capistrano", "~> 3.17", require: false
+
+
 end
 
 group :test do
@@ -114,3 +121,5 @@ gem "draper", "~> 4.0"
 gem "discard", "~> 1.3"
 
 gem "rolify", "~> 6.0"
+
+gem "sidekiq", "~> 7.2"

@@ -1,4 +1,4 @@
-class PrcmtItemDecorator < Draper::Decorator
+class PrcmtItemDecorator < PurchReqnItemDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through

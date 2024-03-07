@@ -1,237 +1,238 @@
-<div id="<%= dom_id prcmt %>">
-  <p>
-    <strong>Prcmt type:</strong>
-    <%= prcmt.prcmt_type_id %>
-  </p>
+<table class="table">
 
-  <p>
-    <strong>Number:</strong>
-    <%= prcmt.number %>
-  </p>
+  <tr>
+    <td><strong>Procurement type:</strong></td>
+    <td><%= prcmt.prcmt_type.name %></td>
+  </tr>
 
-  <p>
-    <strong>Name:</strong>
-    <%= prcmt.name %>
-  </p>
+  <tr>
+    <td><strong>Number:</strong></td>
+    <td><%= prcmt.number %></td>
+  </tr>
 
-  <p>
-    <strong>Scope of work:</strong>
-    <%= prcmt.scope_of_work %>
-  </p>
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td><%= prcmt.name %></td>
+  </tr>
 
-  <p>
-    <strong>Purch org:</strong>
-    <%= prcmt.purch_org_id %>
-  </p>
+  <tr>
+    <td><strong>Scope of work:</strong></td>
+    <td><%= prcmt.scope_of_work %></td>
+  </tr>
 
-  <p>
-    <strong>Purch group:</strong>
-    <%= prcmt.purch_group_id %>
-  </p>
+<!--  <tr>-->
+<!--    <td><strong>Purch org:</strong></td>-->
+<!--    <td><%#= prcmt.purch_org_id %></td>-->
+<!--  </tr>-->
 
-  <p>
-    <strong>Buyer:</strong>
-    <%= prcmt.buyer_id %>
-  </p>
+  <tr>
+    <td><strong>Purchase group:</strong></td>
+    <td><%= prcmt.purch_group_code %></td>
+  </tr>
 
-  <p>
-    <strong>Prebid meeting:</strong>
-    <%= prcmt.prebid_meeting %>
-  </p>
+  <tr>
+    <td><strong>Buyer:</strong></td>
+    <td><%= prcmt.buyer_id %></td>
+  </tr>
 
-  <p>
-    <strong>Prequalification:</strong>
-    <%= prcmt.prequalification %>
-  </p>
+  <tr>
+    <td><strong>Prebid meeting:</strong></td>
+    <td><%= prcmt.prebid_meeting %></td>
+  </tr>
 
-  <p>
-    <strong>Auction:</strong>
-    <%= prcmt.auction %>
-  </p>
+  <tr>
+    <td><strong>Prequalification:</strong></td>
+    <td><%= badge(prcmt.prequalification) %></td>
+  </tr>
 
-  <p>
-    <strong>Bid submission method:</strong>
-    <%= prcmt.bid_submission_method %>
-  </p>
+  <tr>
+    <td><strong>Auction:</strong></td>
+    <td><%= prcmt.auction %></td>
+  </tr>
 
-  <p>
-    <strong>Quotation media:</strong>
-    <%= prcmt.quotation_media %>
-  </p>
+  <tr>
+    <td><strong>Bid submission method:</strong></td>
+    <td><%= prcmt.bid_submission_method %></td>
+  </tr>
 
-  <p>
-    <strong>Quotation validity days:</strong>
-    <%= prcmt.quotation_validity_days %>
-  </p>
+  <tr>
+    <td><strong>Quotation media:</strong></td>
+    <td><%= prcmt.quotation_media %></td>
+  </tr>
 
-  <p>
-    <strong>Eval method:</strong>
-    <%= prcmt.eval_method %>
-  </p>
+  <tr>
+    <td><strong>Quotation validity days:</strong></td>
+    <td><%= prcmt.quotation_validity_days %></td>
+  </tr>
 
-  <p>
-    <strong>Incoterm:</strong>
-    <%= prcmt.incoterm_id %>
-  </p>
+  <tr>
+    <td><strong>Eval method:</strong></td>
+    <td><%= prcmt.eval_method %></td>
+  </tr>
 
-  <p>
-    <strong>Proposed delivery location:</strong>
-    <%= prcmt.proposed_delivery_location %>
-  </p>
+  <tr>
+    <td><strong>Incoterm:</strong></td>
+    <td><%= prcmt.incoterm_id %></td>
+  </tr>
 
-  <p>
-    <strong>Purch order number:</strong>
-    <%= prcmt.purch_order_number %>
-  </p>
+  <tr>
+    <td><strong>Proposed delivery location:</strong></td>
+    <td><%= prcmt.proposed_delivery_location %></td>
+  </tr>
 
-  <p>
-    <strong>Contract number:</strong>
-    <%= prcmt.contract_number %>
-  </p>
+  <tr>
+    <td><strong>Purch order number:</strong></td>
+    <td><%= prcmt.purch_order_number %></td>
+  </tr>
 
-  <p>
-    <strong>Data:</strong>
-    <%= prcmt.data %>
-  </p>
+  <tr>
+    <td><strong>Contract number:</strong></td>
+    <td><%= prcmt.contract_number %></td>
+  </tr>
 
-  <p>
-    <strong>Current workflow instance:</strong>
-    <%= prcmt.current_workflow_instance_id %>
-  </p>
+  <tr>
+    <td><strong>Data:</strong></td>
+    <td><%= prcmt.data %></td>
+  </tr>
 
-  <p>
-    <strong>State:</strong>
-    <%= prcmt.state %>
-  </p>
+  <tr>
+    <td><strong>Current workflow instance:</strong></td>
+    <td><%= prcmt.current_workflow_instance_id %></td>
+  </tr>
 
-  <p>
-    <strong>Created at:</strong>
-    <%= prcmt.created_at %>
-  </p>
+  <tr>
+    <td><strong>State:</strong></td>
+    <td><%= badge(prcmt.state) %></td>
+  </tr>
 
-  <p>
-    <strong>Updated at:</strong>
-    <%= prcmt.updated_at %>
-  </p>
+  <tr>
+    <td><strong>Created at:</strong></td>
+    <td><%= prcmt.formatted_create %></td>
+  </tr>
 
-  <p>
-    <strong>Created by:</strong>
-    <%= prcmt.created_by_id %>
-  </p>
+  <tr>
+    <td><strong>Updated at:</strong></td>
+    <td><%= prcmt.formatted_update %></td>
+  </tr>
 
-  <p>
-    <strong>Updated by:</strong>
-    <%= prcmt.updated_by_id %>
-  </p>
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= prcmt.creator_name %></td>
+  </tr>
 
-  <p>
-    <strong>Bid bond:</strong>
-    <%= prcmt.bid_bond %>
-  </p>
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= prcmt.updater_name %></td>
+  </tr>
 
-  <p>
-    <strong>Scope of supplies:</strong>
-    <%= prcmt.scope_of_supplies %>
-  </p>
+  <tr>
+    <td><strong>Bid bond:</strong></td>
+    <td><%= prcmt.bid_bond %></td>
+  </tr>
 
-  <p>
-    <strong>Announced at:</strong>
-    <%= prcmt.announced_at %>
-  </p>
+  <tr>
+    <td><strong>Scope of supplies:</strong></td>
+    <td><%= prcmt.scope_of_supplies %></td>
+  </tr>
 
-  <p>
-    <strong>Cancelled at:</strong>
-    <%= prcmt.cancelled_at %>
-  </p>
+  <tr>
+    <td><strong>Announced at:</strong></td>
+    <td><%= prcmt.announced_at %></td>
+  </tr>
 
-  <p>
-    <strong>Finished at:</strong>
-    <%= prcmt.finished_at %>
-  </p>
+  <tr>
+    <td><strong>Cancelled at:</strong></td>
+    <td><%= prcmt.cancelled_at %></td>
+  </tr>
 
-  <p>
-    <strong>Desc:</strong>
-    <%= prcmt.desc %>
-  </p>
+  <tr>
+    <td><strong>Finished at:</strong></td>
+    <td><%= prcmt.finished_at %></td>
+  </tr>
 
-  <p>
-    <strong>Internal remark:</strong>
-    <%= prcmt.internal_remark %>
-  </p>
+  <tr>
+    <td><strong>Desc:</strong></td>
+    <td><%= prcmt.desc %></td>
+  </tr>
 
-  <p>
-    <strong>Candidate selection remark:</strong>
-    <%= prcmt.candidate_selection_remark %>
-  </p>
+  <tr>
+    <td><strong>Internal remark:</strong></td>
+    <td><%= prcmt.internal_remark %></td>
+  </tr>
 
-  <p>
-    <strong>Finish remark:</strong>
-    <%= prcmt.finish_remark %>
-  </p>
+  <tr>
+    <td><strong>Candidate selection remark:</strong></td>
+    <td><%= prcmt.candidate_selection_remark %></td>
+  </tr>
 
-  <p>
-    <strong>Prcmt phase evaluation visibility:</strong>
-    <%= prcmt.prcmt_phase_evaluation_visibility %>
-  </p>
+  <tr>
+    <td><strong>Finish remark:</strong></td>
+    <td><%= prcmt.finish_remark %></td>
+  </tr>
 
-  <p>
-    <strong>Cancel remark:</strong>
-    <%= prcmt.cancel_remark %>
-  </p>
+  <tr>
+    <td><strong>Prcmt phase evaluation visibility:</strong></td>
+    <td><%= prcmt.prcmt_phase_evaluation_visibility %></td>
+  </tr>
 
-  <p>
-    <strong>Aanwijzing visibility:</strong>
-    <%= prcmt.aanwijzing_visibility %>
-  </p>
+  <tr>
+    <td><strong>Cancel remark:</strong></td>
+    <td><%= prcmt.cancel_remark %></td>
+  </tr>
 
-  <p>
-    <strong>Bid bond visibility:</strong>
-    <%= prcmt.bid_bond_visibility %>
-  </p>
+  <tr>
+    <td><strong>Aanwijzing visibility:</strong></td>
+    <td><%= prcmt.aanwijzing_visibility %></td>
+  </tr>
 
-  <p>
-    <strong>Est total:</strong>
-    <%= prcmt.est_total %>
-  </p>
+  <tr>
+    <td><strong>Bid bond visibility:</strong></td>
+    <td><%= prcmt.bid_bond_visibility %></td>
+  </tr>
 
-  <p>
-    <strong>Prcmt criterion template:</strong>
-    <%= prcmt.prcmt_criterion_template_id %>
-  </p>
+  <tr>
+    <td><strong>Est total:</strong></td>
+    <td><%= prcmt.est_total %></td>
+  </tr>
 
-  <p>
-    <strong>Internal org:</strong>
-    <%= prcmt.internal_org_id %>
-  </p>
+  <tr>
+    <td><strong>Prcmt criterion template:</strong></td>
+    <td><%= prcmt.prcmt_criterion_template_id %></td>
+  </tr>
 
-  <p>
-    <strong>Plant:</strong>
-    <%= prcmt.plant_id %>
-  </p>
+  <tr>
+    <td><strong>Internal org:</strong></td>
+    <td><%= prcmt.internal_org_id %></td>
+  </tr>
 
-  <p>
-    <strong>Assessment method:</strong>
-    <%= prcmt.assessment_method %>
-  </p>
+  <tr>
+    <td><strong>Plant:</strong></td>
+    <td><%= prcmt.plant_id %></td>
+  </tr>
 
-  <p>
-    <strong>Business class:</strong>
-    <%= prcmt.business_class %>
-  </p>
+  <tr>
+    <td><strong>Assessment method:</strong></td>
+    <td><%= prcmt.assessment_method %></td>
+  </tr>
 
-  <p>
-    <strong>Business field:</strong>
-    <%= prcmt.business_field %>
-  </p>
+  <tr>
+    <td><strong>Business class:</strong></td>
+    <td><%= prcmt.business_class %></td>
+  </tr>
 
-  <p>
-    <strong>Tkdn percentage:</strong>
-    <%= prcmt.tkdn_percentage %>
-  </p>
+  <tr>
+    <td><strong>Business field:</strong></td>
+    <td><%= prcmt.business_field %></td>
+  </tr>
 
-  <p>
-    <strong>Tender location:</strong>
-    <%= prcmt.tender_location %>
-  </p>
+  <tr>
+    <td><strong>Tkdn percentage:</strong></td>
+    <td><%= prcmt.tkdn_percentage %></td>
+  </tr>
 
-</div>
+  <tr>
+    <td><strong>Tender location:</strong></td>
+    <td><%= prcmt.tender_location %></td>
+  </tr>
+
+</table>

@@ -1,0 +1,93 @@
+<%= form_with(model: purch_order, html: { class: 'data-container mt-3' }) do |form| %>
+  <% if purch_order.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(purch_order.errors.count, "error") %> prohibited this purch_order from being saved:
+      </h2>
+      <ul>
+        <% purch_order.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="vendor_id">Vendor</label>
+      <%= selection(form, :vendor_id, vendors_path, :id, :code, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="name">PO Description</label>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="purch_order_type_id">PO Type</label>
+      <%= selection(form, :purch_order_type_id, purch_order_types_path, :id, :name) %>
+    </div>
+
+    <!--    <div class="col-md-6">-->
+    <!--      <label for="purch_org_id">Purchasing Organization</label>-->
+    <%#= selection(form, :purch_org_id, purch_orgs_path, :id, :name) %>
+    <!--    </div>-->
+
+    <div class="col-md-6">
+      <label for="plant_id">Plant</label>
+      <%= selection(form, :plant_id, plants_path, :id, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label>Purchase Type</label>
+      <div class="form-check">
+        <%= form.radio_button :payment_type, 'LUMPSUM', class: 'form-check-input' %>
+        <label class="form-check-label">
+          LUMPSUM
+        </label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :payment_type, 'UNIT_PRICE', class: 'form-check-input' %>
+        <label class="form-check-label">
+          UNIT PRICE
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="tax_policy">Tax Policy</label>
+      <div class="form-check">
+        <%= form.radio_button :tax_policy, true, class: 'form-check-input' %>
+        <label class="form-check-label">
+          Yes
+        </label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :tax_policy, false, class: 'form-check-input' %>
+        <label class="form-check-label">
+          No
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="purch_order_type_id">Purchase Requisition</label>
+      <%= selection(form, :purch_reqn_id, purch_reqns_path, :id, :number, :desc, cascade_to: 'prcmt_id') %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="purch_order_type_id">Procurement</label>
+      <%= selection(form, :prcmt_id, prcmts_path, :id, :number, :name, fetch_to: new_purch_order_path) %>
+    </div>
+
+    <div class="col pt-3">
+      <%= turbo_frame_tag :prcmt_items do %>
+        <%= render 'prcmt_items/list' %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+<% end %>

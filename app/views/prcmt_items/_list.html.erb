@@ -1,0 +1,58 @@
+<% items = @prcmt_items %>
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      Item No.
+    </th>
+    <th>
+      Product Group
+    </th>
+    <th>
+      Material
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Quantity
+    </th>
+    <th>
+      UoM
+    </th>
+    <th>
+      Unit Price (Estimation)
+    </th>
+    <th>
+      Subtotal
+    </th>
+    <th>
+      Delivery Date
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if items.nil? || items.empty? %>
+    <tr>
+      <td colspan="15"> No Entry</td>
+    </tr>
+  <% else %>
+    <% items.each_with_index do |prcmt_item| %>
+      <tr id="<%= prcmt_item.id %>">
+        <%= hidden_field_tag "prcmt_items[]", prcmt_item.id, multiple: true %>
+        <td><%= prcmt_item.number %></td>
+        <td><%= prcmt_item.product_group_code %> - <%= prcmt_item.product_group_name %></td>
+        <td><b><%= prcmt_item.product_code %></b> - <%= prcmt_item.product_name %></td>
+        <td><%= prcmt_item.desc %></td>
+        <td><%= prcmt_item.qty %></td>
+        <td><%= prcmt_item.uom&.name %></td>
+        <td><%= prcmt_item.est_unit_price %></td>
+        <td><%= prcmt_item.est_subtotal %></td>
+        <td><%= prcmt_item.formatted_delivery %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  <% end %>
+<% end %>
+
+<%= render partial: 'shared/table' %>

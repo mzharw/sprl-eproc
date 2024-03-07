@@ -84,7 +84,7 @@
       <%= selection(form, :currency_id, currencies_path, :id, :code, :name) %>
     </div>
     <div class="col-md-6">
-      <%= form.button '', class: 'btn btn-secondary mt-xxl-9', disabled: purch_reqn.new_record? ? false : purch_reqn.submitable? do %>
+      <%= form.button '', class: 'btn btn-secondary mt-xxl-9', disabled: purch_reqn.new_record? ? false : !purch_reqn.submitable? do %>
         <i class="ti ti-device-floppy"></i>
         <%= purch_reqn.new_record? ? 'Save' : 'Update' %>
       <% end %>

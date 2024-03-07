@@ -1,0 +1,41 @@
+<% content_for :table do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      <%= sortable_header('Buyer Code', buyers_path, 'facility.name') %>
+    </th>
+    <th>
+      <%= sortable_header('Buyer Name', buyers_path, :code) %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% buyers.each do |buyer| %>
+    <tr>
+      <td><%= buyer.code %></td>
+      <td><%= buyer.party&.full_name %></td>
+      <td>
+        <%= link_to buyer, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_buyer_path(buyer), class: 'btn btn-sm btn-secondary m-1' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to buyer, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if buyers.empty? %>
+    <tr>
+      <td colspan="6">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: buyers } %>

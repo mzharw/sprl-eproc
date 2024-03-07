@@ -1,4 +1,4 @@
-class WorkAcceptanceNoteItemDecorator < Draper::Decorator
+class WorkAcceptanceNoteItemDecorator < ApplicationDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through

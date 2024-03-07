@@ -1,15 +1,13 @@
-<% content_for :content_header do %>
-  <h1>Procurement</h1>
-  <div class="d-flex gap-3">
-    <%= search_filter(prcmts_path, 'number', %w[desc created_by]) %>
-    <%#= link_to new_prcmt_path do %>
-<!--      <button class="btn btn-secondary">-->
-<!--        <i class="ti ti-plus"></i>-->
-<!--      </button>-->
-    <%# end %>
-  </div>
+<% content_for :page_title do %>
+  Procurement
 <% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(prcmts_path, 'number', %w[tender_name]) %>
+<% end %>
+
 <% content_for :content do %>
   <%= render 'list', prcmts: @prcmts %>
 <% end %>
+
 <%= render "layouts/wrapper", sidebar: true %>

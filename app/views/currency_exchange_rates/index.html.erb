@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  Exchange Rates
+<% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(currency_exchange_rates_path, 'from_currency', %w[to_currency]) %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'list', currency_exchange_rates: @currency_exchange_rates %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>
