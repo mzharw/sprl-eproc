@@ -1,0 +1,48 @@
+<% content_for :table, flush: true do %>
+  <thead class="sticky" style="backdrop-filter: blur(50px);">
+  <tr>
+    <th>
+      <%= sortable_header('Username', users_path, :username) %>
+    </th>
+    <th>
+      <%= sortable_header('Full Name', users_path, :full_name) %>
+    </th>
+    <th>
+      <%= sortable_header('Position Name', users_path, :position_name) %>
+    </th>
+    <th>
+      <%= sortable_header('Email', users_path, :email) %>
+    </th>
+    <th>
+      <%= sortable_header('State', users_path, :state) %>
+    </th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% users.each do |user| %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= user.full_name %></td>
+      <td><%= user.position_name %></td>
+      <td><%= user.email %></td>
+      <td><%= badge(user.state) %></td>
+      <td>
+        <%= link_to user, class: 'm-1 btn btn-sm btn-outline-info' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_user_path(user), class: 'm-1 btn btn-sm btn-secondary' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if users.empty? %>
+    <tr>
+      <td colspan="6">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: users, new: new_user_path } %>

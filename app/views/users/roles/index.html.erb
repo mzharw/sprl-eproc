@@ -1,0 +1,14 @@
+<% content_for :page_title do %>
+  Personnel
+<% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(users_path, 'full_name', %w[username email]) %>
+  <%#= advanced_filter(users_path) %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'users/personnels/list', users: @users %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

@@ -1,0 +1,58 @@
+<%= form_with(model: user, html: { class: 'data-container' }) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:
+      </h2>
+      <ul>
+        <% user.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="username">Username</label>
+      <%= form.text_field :username, class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <label for="full_name">Full Name</label>
+      <%= form.text_field :full_name, class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <label for="position_name">Position Name</label>
+      <%= form.text_field :position_name, class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <label for="email">Email</label>
+      <%= form.text_field :email, class: 'form-control' %>
+    </div>
+    <% if user.new_record? %>
+      <div class="col-md-6">
+        <label for="password">Password</label>
+        <%= form.password_field :password, class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <label for="password_confirmation">Password Confirmation</label>
+        <%= form.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    <% else %>
+      <div class="col-md-6">
+        <label for="state">State</label>
+        <div>
+          <%= form.radio_button :state, 'INACTIVE', class: 'btn-check', id: "warning-outlined" %>
+          <label class="btn btn-sm btn-outline-warning" for="warning-outlined">Inactive</label>
+
+          <%= form.radio_button :state, 'ACTIVE', class: 'btn-check', id: "success-outlined" %>
+          <label class="btn btn-sm btn-outline-success" for="success-outlined">Active</label>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
+<% end %>

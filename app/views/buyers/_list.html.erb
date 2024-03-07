@@ -1,0 +1,53 @@
+<% content_for :table do %>
+  <thead>
+  <tr>
+    <th>
+      <%= sortable_header('Facility', plants_path, 'facility.name') %>
+    </th>
+    <th>
+      <%= sortable_header('Code', plants_path, :code) %>
+    </th>
+    <th>
+      <%= sortable_header('From Date', plants_path, :from_date) %>
+    </th>
+    <th>
+      <%= sortable_header('Thru Date', plants_path, :thru_date) %>
+    </th>
+    <th>
+      <%= sortable_header('Owner Party', plants_path, 'party&.full_name') %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% plants.each do |plant| %>
+    <tr>
+      <td><%= plant.facility&.name %></td>
+      <td><%= plant.code %></td>
+      <td><%= plant.from_date %></td>
+      <td><%= plant.thru_date %></td>
+      <td><%= plant.party&.full_name %></td>
+      <td>
+        <%= link_to plant, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_plant_path(plant), class: 'btn btn-sm btn-secondary m-1' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to plant, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if plants.empty? %>
+    <tr>
+      <td colspan="6">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: plants, new: new_plant_path } %>
