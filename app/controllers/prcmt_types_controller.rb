@@ -4,7 +4,8 @@ class PrcmtTypesController < ApplicationController
 
   # GET /prcmt_types or /prcmt_types.json
   def index
-    @prcmt_types = filter(PrcmtType)
+    @prcmt_types = selectable(PrcmtType, :name)
+    @prcmt_types = filter(@prcmt_types)
     @prcmt_types = paginate(@prcmt_types).decorate
   end
 

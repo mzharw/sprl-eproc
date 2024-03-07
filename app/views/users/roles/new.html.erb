@@ -1,6 +1,6 @@
 <% content_for :content_header do %>
-  <b>Personnel / New</b>
-  <%= link_to users_path do %>
+  <b>User Role / New</b>
+  <%= link_to roles_path do %>
     <button class="btn btn-sm btn-secondary">
       <i class="ti ti-arrow-back-up"></i>
       Back
@@ -9,7 +9,7 @@
 <% end %>
 
 <% content_for :content do %>
-  <%= render "users/personnels/form", user: @user %>
+  <%= render "users/roles/form", role: @role %>
 <% end %>
 
 <%= render "layouts/wrapper", sidebar: true %>

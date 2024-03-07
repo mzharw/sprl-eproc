@@ -15,29 +15,6 @@ class PurchReqnDecorator < ApplicationDecorator
   #     end
   #   end
 
-  def plant_code
-    object.plant&.code
-  end
-
-  def plant_name
-    object.plant&.party&.full_name
-  end
-
-  def cost_center_code
-    object.cost_center&.cost_center_id
-  end
-
-  def cost_center_desc
-    object.cost_center&.desc
-  end
-
-  def purch_group_code
-    object.purch_group&.code
-  end
-
-  def currency_code
-    object.currency&.code
-  end
 
   def items_subtotal
     listed_items.sum(:est_subtotal)
@@ -56,21 +33,13 @@ class PurchReqnDecorator < ApplicationDecorator
     object&.state == 'COMMITTED'
   end
 
-  def workflow_instance
-    object.workflow_instances.last
-  end
-
-  def workflow_state
-    step = workflow_instance&.workflow_step
-    (step&.seq || 0).zero? ? '' : step&.name
-  end
 
   def doc_title(name)
     object.class.doc_title(name)
   end
 
   def listed_items
-    items.where.not(item_type: 'SERVICE_ITEM')
+    items.listed
   end
 
   def decorated_items

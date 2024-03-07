@@ -24,7 +24,7 @@
             </td>
             <td>
               <% unless model.submitted? %>
-                <%= link_to remove_attachment_purch_reqn_path(attachment_name: name, attachment_id: doc.id), data: { turbo_method: :delete, remote: true }, class: 'btn btn-sm btn-danger' do %>
+                <%= link_to remove_attachment_work_acceptance_note_path(attachment_name: name, attachment_id: doc.id), data: { turbo_method: :delete, remote: true }, class: 'btn btn-sm btn-danger' do %>
                   <i class="ti ti-trash"></i>
                 <% end %>
               <% end %>
@@ -39,7 +39,7 @@
           </td>
           <td>
             <% unless model.submitted? %>
-              <%= link_to remove_attachment_purch_reqn_path(attachment_name: name, attachment_id: docs.id), data: { turbo_method: :delete, remote: true }, class: 'btn btn-sm btn-danger' do %>
+              <%= link_to remove_attachment_work_acceptance_note_path(attachment_name: name, attachment_id: docs.id), data: { turbo_method: :delete }, class: 'btn btn-sm btn-danger' do %>
                 <i class="ti ti-trash"></i>
               <% end %>
             <% end %>
@@ -50,7 +50,7 @@
     </tbody>
   </table>
   <div class="input-group file">
-    <%= form.file_field name, class: 'form-control', multiple:, disabled: model.submitted?, direct_upload: true %>
+    <%= form.file_field name, class: 'form-control', disabled: model.submitted?, direct_upload: true %>
     <%= form.button class: 'btn btn-outline-secondary', disabled: model.submitted? do %>
       <i class="ti ti-cloud-upload"></i>
       Upload

@@ -1,0 +1,192 @@
+<%= form_with(model: purch_order_item) do |form| %>
+  <% if purch_order_item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(purch_order_item.errors.count, "error") %> prohibited this purch_order_item from being saved:</h2>
+
+      <ul>
+        <% purch_order_item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :purch_order, style: "display: block" %>
+    <%= form.text_field :purch_order %>
+  </div>
+
+  <div>
+    <%= form.label :number, style: "display: block" %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div>
+    <%= form.label :purch_reqn_item, style: "display: block" %>
+    <%= form.text_field :purch_reqn_item %>
+  </div>
+
+  <div>
+    <%= form.label :prcmt_item, style: "display: block" %>
+    <%= form.text_field :prcmt_item %>
+  </div>
+
+  <div>
+    <%= form.label :product_group, style: "display: block" %>
+    <%= form.text_field :product_group %>
+  </div>
+
+  <div>
+    <%= form.label :product, style: "display: block" %>
+    <%= form.text_field :product %>
+  </div>
+
+  <div>
+    <%= form.label :qty, style: "display: block" %>
+    <%= form.text_field :qty %>
+  </div>
+
+  <div>
+    <%= form.label :measurement_unit, style: "display: block" %>
+    <%= form.text_field :measurement_unit %>
+  </div>
+
+  <div>
+    <%= form.label :unit_price, style: "display: block" %>
+    <%= form.text_field :unit_price %>
+  </div>
+
+  <div>
+    <%= form.label :price_unit, style: "display: block" %>
+    <%= form.text_field :price_unit %>
+  </div>
+
+  <div>
+    <%= form.label :subtotal, style: "display: block" %>
+    <%= form.text_field :subtotal %>
+  </div>
+
+  <div>
+    <%= form.label :desc, style: "display: block" %>
+    <%= form.text_area :desc %>
+  </div>
+
+  <div>
+    <%= form.label :specification, style: "display: block" %>
+    <%= form.text_area :specification %>
+  </div>
+
+  <div>
+    <%= form.label :note, style: "display: block" %>
+    <%= form.text_area :note %>
+  </div>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.text_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :created_by, style: "display: block" %>
+    <%= form.text_field :created_by %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by, style: "display: block" %>
+    <%= form.text_field :updated_by %>
+  </div>
+
+  <div>
+    <%= form.label :delivery_date, style: "display: block" %>
+    <%= form.date_field :delivery_date %>
+  </div>
+
+  <div>
+    <%= form.label :from_currency, style: "display: block" %>
+    <%= form.text_field :from_currency %>
+  </div>
+
+  <div>
+    <%= form.label :from_amount, style: "display: block" %>
+    <%= form.text_field :from_amount %>
+  </div>
+
+  <div>
+    <%= form.label :to_currency, style: "display: block" %>
+    <%= form.text_field :to_currency %>
+  </div>
+
+  <div>
+    <%= form.label :to_amount, style: "display: block" %>
+    <%= form.text_field :to_amount %>
+  </div>
+
+  <div>
+    <%= form.label :purch_order_item_type, style: "display: block" %>
+    <%= form.text_field :purch_order_item_type %>
+  </div>
+
+  <div>
+    <%= form.label :line_total, style: "display: block" %>
+    <%= form.text_field :line_total %>
+  </div>
+
+  <div>
+    <%= form.label :sales_taxable, style: "display: block" %>
+    <%= form.check_box :sales_taxable %>
+  </div>
+
+  <div>
+    <%= form.label :ancestry, style: "display: block" %>
+    <%= form.text_field :ancestry %>
+  </div>
+
+  <div>
+    <%= form.label :ancestry_depth, style: "display: block" %>
+    <%= form.number_field :ancestry_depth %>
+  </div>
+
+  <div>
+    <%= form.label :amount_type, style: "display: block" %>
+    <%= form.text_field :amount_type %>
+  </div>
+
+  <div>
+    <%= form.label :seq, style: "display: block" %>
+    <%= form.number_field :seq %>
+  </div>
+
+  <div>
+    <%= form.label :process_qty, style: "display: block" %>
+    <%= form.text_field :process_qty %>
+  </div>
+
+  <div>
+    <%= form.label :item_type, style: "display: block" %>
+    <%= form.text_field :item_type %>
+  </div>
+
+  <div>
+    <%= form.label :parent, style: "display: block" %>
+    <%= form.text_field :parent %>
+  </div>
+
+  <div>
+    <%= form.label :wbsproject, style: "display: block" %>
+    <%= form.text_field :wbsproject %>
+  </div>
+
+  <div>
+    <%= form.label :cost_center, style: "display: block" %>
+    <%= form.text_field :cost_center %>
+  </div>
+
+  <div>
+    <%= form.label :process_unit_price, style: "display: block" %>
+    <%= form.text_field :process_unit_price %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

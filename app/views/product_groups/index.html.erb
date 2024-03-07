@@ -1,13 +1,13 @@
-<% content_for :content_header do %>
-  <h1>Material (Product) Group</h1>
-  <%= link_to new_product_group_path do %>
-    <button class="btn btn-sm btn-secondary">
-      <i class="ti ti-plus"></i>
-      New entry
-    </button>
-  <% end %>
+<% content_for :page_title do %>
+  Material (Product) Group
 <% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(product_groups_path, 'name', %w[code]) %>
+<% end %>
+
 <% content_for :content do %>
     <%= render 'list', product_groups: @product_groups %>
 <% end %>
+
 <%= render "layouts/wrapper" , sidebar: true %>

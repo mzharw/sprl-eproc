@@ -11,14 +11,13 @@ module Taskable
 
   def create_task
     number = task_number
-    assignees.each do |user|
+    assignees&.each do |user|
       new_task = tasks.new
       new_task.user_id = user.id
       new_task.name = task_name
       new_task.state = 'ONGOING'
       new_task.number = number
       new_task.save
-
     end
   end
 

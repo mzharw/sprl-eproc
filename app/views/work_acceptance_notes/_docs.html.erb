@@ -1,3 +1,2 @@
 <p class="fw-bolder <%= 'required' if required %>"><%= model.doc_title(name) %></p>
-<% multiple = true unless defined? multiple %>
-<%= render partial: 'purch_reqns/docs_form', locals: { model:, name:, multiple: } %>
+<%= render partial: 'docs_form', locals: { model:, name:, multiple: false } %>

@@ -1,0 +1,15 @@
+<% content_for :content_header do %>
+  <b>Purchase Order / New</b>
+  <%= link_to purch_orders_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render "form", purch_order: @purch_order %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

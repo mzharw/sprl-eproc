@@ -1,0 +1,122 @@
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th><%= sortable_header('PO Number', purch_orders_path, :number) %></th>
+    <th><%= sortable_header('Purch Order Type', purch_orders_path, :purch_order_type_id) %></th>
+    <th><%= sortable_header('PR Number', purch_orders_path, :pr_number) %></th>
+    <!--    <th><%#= sortable_header('Issued Date', purch_orders_path, :issued_date) %></th>-->
+    <th><%= sortable_header('Name', purch_orders_path, :name) %></th>
+    <!--    <th><%#= sortable_header('Incoterm', purch_orders_path, :incoterm_id) %></th>-->
+    <!--    <th><%#= sortable_header('Incoterm Desc', purch_orders_path, :incoterm_desc) %></th>-->
+    <!--    <th><%#= sortable_header('Internal Org', purch_orders_path, :internal_org_id) %></th>-->
+    <!--    <th><%#= sortable_header('Purch Org', purch_orders_path, :purch_org_id) %></th>-->
+    <!--    <th><%#= sortable_header('Purch Group', purch_orders_path, :purch_group_id) %></th>-->
+    <!--    <th><%#= sortable_header('Prcmt', purch_orders_path, :prcmt_id) %></th>-->
+    <!--    <th><%#= sortable_header('Data', purch_orders_path, :data) %></th>-->
+    <th><%= sortable_header('State', purch_orders_path, :state) %></th>
+    <th><%= sortable_header('Created At', purch_orders_path, :created_at) %></th>
+    <th><%= sortable_header('Updated At', purch_orders_path, :updated_at) %></th>
+    <th><%= sortable_header('Created By', purch_orders_path, :created_by_id) %></th>
+    <th><%= sortable_header('Updated By', purch_orders_path, :updated_by_id) %></th>
+    <th><%= sortable_header('Vendor', purch_orders_path, :vendor_id) %></th>
+    <!--    <th><%#= sortable_header('Referrable Type', purch_orders_path, :referrable_type) %></th>-->
+    <!--    <th><%#= sortable_header('Referrable', purch_orders_path, :referrable_id) %></th>-->
+    <!--    <th><%#= sortable_header('Payment Term', purch_orders_path, :payment_term_id) %></th>-->
+    <!--    <th><%#= sortable_header('Delivery Location', purch_orders_path, :delivery_location) %></th>-->
+    <!--    <th><%#= sortable_header('Current Workflow Instance', purch_orders_path, :current_workflow_instance_id) %></th>-->
+    <!--    <th><%#= sortable_header('Used Up', purch_orders_path, :used_up) %></th>-->
+    <!--    <th><%#= sortable_header('Finished At', purch_orders_path, :finished_at) %></th>-->
+    <!--    <th><%#= sortable_header('Discarded At', purch_orders_path, :discarded_at) %></th>-->
+    <!--    <th><%#= sortable_header('Finished By', purch_orders_path, :finished_by_id) %></th>-->
+    <!--    <th><%#= sortable_header('Length of Work', purch_orders_path, :length_of_work) %></th>-->
+    <!--    <th><%#= sortable_header('Payment Term Number', purch_orders_path, :payment_term_number) %></th>-->
+    <!--    <th><%#= sortable_header('Payment Term Desc', purch_orders_path, :payment_term_desc) %></th>-->
+    <!--    <th><%#= sortable_header('Po Type', purch_orders_path, :po_type) %></th>-->
+    <!--    <th><%#= sortable_header('Contract', purch_orders_path, :contract) %></th>-->
+    <!--    <th><%#= sortable_header('Validity Start Date', purch_orders_path, :validity_start_date) %></th>-->
+    <!--    <th><%#= sortable_header('Commentcement Date', purch_orders_path, :commentcement_date) %></th>-->
+    <!--    <th><%#= sortable_header('Delivery Detail', purch_orders_path, :delivery_detail) %></th>-->
+    <!--    <th><%#= sortable_header('Remark', purch_orders_path, :remark) %></th>-->
+    <!--    <th><%#= sortable_header('Scope of Work', purch_orders_path, :scope_of_work) %></th>-->
+    <!--    <th><%#= sortable_header('Po To Amount', purch_orders_path, :po_to_amount) %></th>-->
+    <!--    <th><%#= sortable_header('Account Holder', purch_orders_path, :account_holder) %></th>-->
+    <!--    <th><%#= sortable_header('Account Number', purch_orders_path, :account_number) %></th>-->
+    <!--    <th><%#= sortable_header('Po Signing', purch_orders_path, :po_signing) %></th>-->
+    <th><%= sortable_header('Tax Policy', purch_orders_path, :tax_policy) %></th>
+    <!--    <th><%#= sortable_header('To Currency', purch_orders_path, :to_currency_id) %></th>-->
+    <!--    <th><%#= sortable_header('Rejected At', purch_orders_path, :rejected_at) %></th>-->
+    <!--    <th><%#= sortable_header('Cost Center', purch_orders_path, :cost_center_id) %></th>-->
+    <th><%= sortable_header('Plant', purch_orders_path, :plant_id) %></th>
+    <!--    <th><%#= sortable_header('Uncommit Remark', purch_orders_path, :uncommit_remark) %></th>-->
+    <!--    <th><%#= sortable_header('Is Replicated', purch_orders_path, :is_replicated) %></th>-->
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @purch_orders.empty? %>
+    <tr>
+      <td colspan="42">No Entry</td>
+    </tr>
+  <% else %>
+    <% @purch_orders.each do |purch_order| %>
+      <tr>
+        <td><%= purch_order.number %></td>
+        <td><%= purch_order.purch_order_type&.name %></td>
+        <td><%= link_to purch_order.pr_number, purch_reqn_path(purch_order.purch_reqn) %></td>
+        <!--        <td><%#= purch_order.issued_date %></td>-->
+        <td><%= purch_order.name %></td>
+        <!--        <td><%#= purch_order.incoterm_id %></td>-->
+        <!--        <td><%#= purch_order.incoterm_desc %></td>-->
+        <!--        <td><%#= purch_order.internal_org_id %></td>-->
+        <!--        <td><%#= purch_order.purch_org_id %></td>-->
+        <!--        <td><%#= purch_order.purch_group_id %></td>-->
+        <!--        <td><%#= purch_order.prcmt_id %></td>-->
+        <!--        <td><%#= purch_order.data %></td>-->
+        <td><%= badge(purch_order.state) %></td>
+        <td><%= purch_order.formatted_create %></td>
+        <td><%= purch_order.formatted_update %></td>
+        <td><%= purch_order.creator_name %></td>
+        <td><%= purch_order.updater_name %></td>
+        <td><%= purch_order.vendor.code %></td>
+        <!--        <td><%#= purch_order.referrable_type %></td>-->
+        <!--        <td><%#= purch_order.referrable_id %></td>-->
+        <!--        <td><%#= purch_order.payment_term_id %></td>-->
+        <!--        <td><%#= purch_order.delivery_location %></td>-->
+        <!--        <td><%#= purch_order.current_workflow_instance_id %></td>-->
+        <!--        <td><%#= purch_order.used_up %></td>-->
+        <!--        <td><%#= purch_order.finished_at %></td>-->
+        <!--        <td><%#= purch_order.discarded_at %></td>-->
+        <!--        <td><%#= purch_order.finished_by_id %></td>-->
+        <!--        <td><%#= purch_order.length_of_work %></td>-->
+        <!--        <td><%#= purch_order.payment_term_number %></td>-->
+        <!--        <td><%#= purch_order.payment_term_desc %></td>-->
+        <!--        <td><%#= purch_order.po_type %></td>-->
+        <!--        <td><%#= purch_order.contract %></td>-->
+        <!--        <td><%#= purch_order.validity_start_date %></td>-->
+        <!--        <td><%#= purch_order.commentcement_date %></td>-->
+        <!--        <td><%#= purch_order.delivery_detail %></td>-->
+        <!--        <td><%#= purch_order.remark %></td>-->
+        <!--        <td><%#= purch_order.scope_of_work %></td>-->
+        <!--        <td><%#= purch_order.po_to_amount %></td>-->
+        <!--        <td><%#= purch_order.account_holder %></td>-->
+        <!--        <td><%#= purch_order.account_number %></td>-->
+        <!--        <td><%#= purch_order.po_signing %></td>-->
+        <td><%= badge(purch_order.tax_policy) %></td>
+        <!--        <td><%#= purch_order.to_currency_id %></td>-->
+        <!--        <td><%#= purch_order.rejected_at %></td>-->
+        <!--        <td><%#= purch_order.cost_center_id %></td>-->
+        <td><%= purch_order.plant.code %></td>
+        <!--        <td><%#= purch_order.uncommit_remark %></td>-->
+        <!--        <td><%#= purch_order.is_replicated %></td>-->
+        <td>
+          <%= link_to purch_order, class: 'm-1 btn btn-sm btn-outline-info' do %>
+            <i class="ti ti-eye"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: @purch_orders, **link_access(:new, new_purch_order_path, policy(@purch_orders.object).create?) } %>

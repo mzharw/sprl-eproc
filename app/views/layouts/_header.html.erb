@@ -10,41 +10,46 @@
       <%= image_tag "logo.png", width: '120px' %>
     <% end %>
   </div>
-  <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-    <ul class="navbar-nav flex-row ms-auto align-items-center gap-3 justify-content-end">
-      <li>
-        <span class="text-center"><%= current_user&.decorate&.full_name %></span>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link nav-icon-hover cursor-pointer" style="font-size: 1.3rem" data-bs-toggle="dropdown"
-           aria-expanded="false">
-          <i class="ti ti-user-circle"></i>
-        </a>
-        <div class="
+  <% if user_signed_in? %>
+    <div style="text-align: center; width: 100%;">
+      SPRL E-Procurement / <span style="font-weight: 700"><%= yield :page_title %></span>
+    </div>
+    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+      <ul class="navbar-nav flex-row ms-auto align-items-center gap-3 justify-content-end">
+        <li>
+          <span class="text-center"><%= current_user&.decorate&.full_name %></span>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon-hover cursor-pointer" style="font-size: 1.3rem" data-bs-toggle="dropdown"
+             aria-expanded="false">
+            <i class="ti ti-user-circle"></i>
+          </a>
+          <div class="
                   dropdown-menu
                   dropdown-menu-end
                   dropdown-menu-animate-up
                 " aria-labelledby="drop2">
-          <div class="message-bodAy">
-            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-              <i class="ti ti-user fs-6"></i>
-              <p class="mb-0 fs-3">My Profile</p>
-            </a>
-            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-              <i class="ti ti-mail fs-6"></i>
-              <p class="mb-0 fs-3">My Account</p>
-            </a>
-            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-              <i class="ti ti-list-check fs-6"></i>
-              <p class="mb-0 fs-3">My Task</p>
-            </a>
-            <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete },
-                        class: 'btn btn-outline-primary mx-3 mt-2 d-block' %>
+            <div class="message-body">
+              <!--            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">-->
+              <!--              <i class="ti ti-user fs-6"></i>-->
+              <!--              <p class="mb-0 fs-3">My Profile</p>-->
+              <!--            </a>-->
+              <!--            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">-->
+              <!--              <i class="ti ti-mail fs-6"></i>-->
+              <!--              <p class="mb-0 fs-3">My Account</p>-->
+              <!--            </a>-->
+              <%= link_to change_password_user_path(current_user), class: "d-flex align-items-center gap-2 dropdown-item" do %>
+                <i class="ti ti-key fs-6"></i>
+                <p class="mb-0 fs-3">Change password</p>
+              <% end %>
+              <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete },
+                          class: 'btn btn-outline-primary mx-3 mt-2 d-block' %>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
-  </div>
+        </li>
+      </ul>
+    </div>
+  <% end %>
 </header>
 
 <% if content_for?(:'content_header') %>

@@ -3,28 +3,28 @@
 </p>
 
 <p>
-  Mohon review dan koreksi dokumen PR berikut karena telah ditolak :
+  Mohon review dan koreksi dokumen PO berikut karena telah ditolak :
 </p>
 
 <table>
   <tbody>
   <tr>
-    <td>Nomor PR</td>
+    <td>Nomor PO</td>
     <td>: <%= @model.number %></td>
   </tr>
   <tr>
-    <td>Tanggal pengajuan PR</td>
+    <td>Tanggal pengajuan PO</td>
     <td>: <%= @model.created_at %></td>
   </tr>
   <tr>
-    <td>Deskripsi PR</td>
-    <td>: <%= @model.desc %></td>
+    <td>Deskripsi PO</td>
+    <td>: <%= @model.name %></td>
   </tr>
   </tbody>
 </table>
 
 <br>
-Untuk informasi lebih lanjut, silahkan <%= link_to 'login', purch_reqn_url(@model) %>.
+Untuk informasi lebih lanjut, silahkan <%= link_to 'login', purch_order_url(@model) %>.
 <br>
 Terima kasih.
 

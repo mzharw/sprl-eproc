@@ -55,4 +55,10 @@
   <% end %>
   </tbody>
 <% end %>
-<%= render partial: 'shared/table', locals: { model: purch_reqns } %>
+
+<%= render partial: 'shared/table',
+           locals: {
+             model: purch_reqns,
+             **link_access(:new, new_purch_reqn_path, policy(@purch_reqns.object).create?)
+           }
+%>

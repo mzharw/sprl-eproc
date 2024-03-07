@@ -1,0 +1,43 @@
+<%= form_with(model: vendor, html: { class: 'data-container' }) do |form| %>
+  <% if vendor.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(vendor.errors.count, "error") %> prohibited this vendor from being saved:
+      </h2>
+      <ul>
+        <% vendor.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="code">Code</label>
+      <%= form.text_field :code, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="from_date">From Date</label>
+      <%= form.date_field :from_date, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="thru_date">Thru Date</label>
+      <%= form.date_field :thru_date, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="vendor_type_id">Vendor Type</label>
+      <%= selection(form, :vendor_type, vendor_types_path, :id, :name) %>
+    </div>
+
+    <!-- Additional fields from the vendor model -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+<% end %>

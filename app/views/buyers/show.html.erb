@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Buyer / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render @buyer %>
+    <%= link_to buyers_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to edit_buyer_path(@buyer), class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-edit"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
 
-<div>
-  <%= link_to "Edit this buyer", edit_buyer_path(@buyer) %> |
-  <%= link_to "Back to buyers", buyers_path %>
+<% content_for :content do %>
+  <%= render @buyer %>
+<% end %>
 
-  <%= button_to "Destroy this buyer", @buyer, method: :delete %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

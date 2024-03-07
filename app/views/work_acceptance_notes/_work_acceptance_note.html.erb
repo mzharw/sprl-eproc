@@ -1,0 +1,96 @@
+<%# unless work_acceptance_note.submitted? %>
+<!--  <div class="float-end">-->
+    <%#= link_to edit_work_acceptance_note_path, class: 'btn btn-sm btn-secondary' do %>
+<!--      <i class="ti ti-pencil"></i>-->
+<!--      Edit-->
+    <%# end %>
+<!--  </div>-->
+<%# end %>
+<table class="table">
+  <tr>
+    <td>WAN Number</td>
+    <td><%= work_acceptance_note.number %></td>
+  </tr>
+  <tr>
+    <td>WAN Title</td>
+    <td><%= work_acceptance_note.name %></td>
+  </tr>
+  <tr>
+    <td>WAN Type</td>
+    <td><%= work_acceptance_note.wan_type %></td>
+  </tr>
+  <tr>
+    <td>PO Number</td>
+    <td><%= work_acceptance_note.purch_order.number %></td>
+  </tr>
+  <tr>
+    <td>PO Type</td>
+    <td><%= work_acceptance_note.purch_order.purch_order_type.name %></td>
+  </tr>
+  <tr>
+    <td>Vendor Code</td>
+    <td><%= work_acceptance_note.vendor_code %></td>
+  </tr>
+  <tr>
+    <td>Vendor Name</td>
+    <td><%= work_acceptance_note.vendor_name %></td>
+  </tr>
+  <tr>
+    <td>Purchasing Group</td>
+    <td><%== "<b>#{work_acceptance_note.purch_group_code}</b> - #{work_acceptance_note.purch_group_name}" %></td>
+  </tr>
+  <tr>
+    <td>Plant</td>
+    <td><%== "<b>#{work_acceptance_note.plant_code}</b> - #{work_acceptance_note.plant_name}" %></td>
+  </tr>
+  <%= form_with(model: work_acceptance_note) do |form| %>
+    <tr>
+      <td>
+        Delivery Date
+      </td>
+      <td>
+        <%= form.date_field :delivery_date, class: 'form-control', required: true, readonly: work_acceptance_note.submitted? %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        GR/WAN Description
+      </td>
+      <td>
+        <%= form.text_field :desc, class: 'form-control', required: true, readonly: work_acceptance_note.submitted? %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Receiver
+      </td>
+      <td>
+        <%= form.text_field :receiver, class: 'form-control', required: true, readonly: work_acceptance_note.submitted? %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Delivery Details
+      </td>
+      <td>
+        <%= form.text_field :delivery_detail, class: 'form-control', required: true, readonly: work_acceptance_note.submitted? %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Remark
+      </td>
+      <td>
+        <%= form.text_area :remark, class: 'form-control', required: true, readonly: work_acceptance_note.submitted? %>
+      </td>
+    </tr>
+    <% unless work_acceptance_note.submitted? %>
+      <tr>
+        <td></td>
+        <td colspan>
+          <%= form.submit 'Submit', class: 'btn btn-secondary', required: true, readonly: work_acceptance_note.submitted? %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

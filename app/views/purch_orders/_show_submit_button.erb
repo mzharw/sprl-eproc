@@ -1,4 +1,4 @@
-<% unless @purch_reqn.submitted? %>
+<% unless @purch_order.submitted? %>
   <%= form_with(model: model, id: 'submit-button', data: { turbo: false }) do |f| %>
     <%= f.hidden_field :state, value: 'COMMITTED' %>
     <%= f.button class: 'btn btn-sm btn-secondary', disabled: !model.submitable? do %>
@@ -8,17 +8,17 @@
   <% end %>
 <% end %>
 
-<% if @purch_reqn.finished? %>
-  <%= link_to purch_reqn_path(format: :pdf) do %>
+<% if @purch_order.finished? %>
+  <%= link_to purch_order_path(format: :pdf) do %>
     <button class="btn btn-sm btn-primary">
       <i class="ti ti-file-type-pdf"></i>
       Generate PDF
     </button>
   <% end %>
-  <%= link_to purch_reqn_items_path, method: :get do %>
-    <button class="btn btn-sm btn-secondary">
-      Carry out items
-      <i class="ti ti-arrow-right"></i>
-    </button>
-  <% end %>
+  <%#= link_to purch_order_items_path, method: :get do %>
+  <!--    <button class="btn btn-sm btn-secondary">-->
+  <!--      Carry out items-->
+  <!--      <i class="ti ti-arrow-right"></i>-->
+  <!--    </button>-->
+  <%# end %>
 <% end %>

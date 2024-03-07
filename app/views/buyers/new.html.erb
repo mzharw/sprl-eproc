@@ -1,9 +1,15 @@
-<h1>New buyer</h1>
+<% content_for :content_header do %>
+  <b>Buyer / New</b>
+  <%= link_to buyers_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
 
-<%= render "form", buyer: @buyer %>
+<% content_for :content do %>
+  <%= render "form", buyer: @buyer %>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Back to buyers", buyers_path %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

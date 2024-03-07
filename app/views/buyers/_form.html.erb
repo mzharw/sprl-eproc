@@ -1,4 +1,4 @@
-<%= form_with(model: buyer) do |form| %>
+<%= form_with(model: buyer, html: { class: 'data-container' }) do |form| %>
   <% if buyer.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(buyer.errors.count, "error") %> prohibited this buyer from being saved:</h2>
@@ -11,37 +11,48 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :party_id, style: "display: block" %>
-    <%= form.text_field :party_id %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <%= form.label :code %>
+      <%= form.text_field :code, class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :full_name %>
+      <%= form.text_field :full_name, class: 'form-control', value: buyer.full_name, disabled: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :from_date %>
+      <%= form.date_field :from_date, class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :thru_date %>
+      <%= form.date_field :thru_date, class: 'form-control' %>
+    </div>
+    <div>
+      <%= form.label :purch_group_ids, 'Purchase Groups' %>
+      <div class="row">
+        <% PurchGroup.joins(:party).each do |purch_group| %>
+          <div class="d-flex gap-2 col-6">
+            <%= form.check_box :purch_group_ids, { multiple: true, class: 'form-check-input' }, purch_group.id, nil %>
+            <%= form.label :purch_group_ids, purch_group.purch_group_name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <%= form.label :plant_ids, 'Plants' %>
+      <div class="row">
+        <% Plant.joins(:facility).each do |plant| %>
+          <div class="d-flex gap-2 col-6">
+            <%= form.check_box :plant_ids, { multiple: true, class: 'form-check-input' }, plant.id, nil %>
+            <%= form.label :plant_ids, plant.plant_name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div>
-    <%= form.label :code, style: "display: block" %>
-    <%= form.text_field :code %>
-  </div>
-
-  <div>
-    <%= form.label :from_date, style: "display: block" %>
-    <%= form.date_field :from_date %>
-  </div>
-
-  <div>
-    <%= form.label :thru_date, style: "display: block" %>
-    <%= form.date_field :thru_date %>
-  </div>
-
-  <div>
-    <%= form.label :created_at, style: "display: block" %>
-    <%= form.datetime_field :created_at %>
-  </div>
-
-  <div>
-    <%= form.label :updated_at, style: "display: block" %>
-    <%= form.datetime_field :updated_at %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
   </div>
 <% end %>

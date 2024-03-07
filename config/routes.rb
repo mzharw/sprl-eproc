@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :currency_exchange_rates
+  resources :buyer_plants
+  resources :buyer_purch_groups
+  resources :vendor_types
+  resources :vendors
+  resources :purch_order_item_types
+  resources :purch_order_items
+  resources :purch_order_types
+  resources :purch_orders
   resources :prcmt_items
   resources :prcmt_types
   resources :tasks, only: :index
@@ -8,7 +17,11 @@ Rails.application.routes.draw do
   resources :workflow_instance, only: :update
   resources :commodity_lists, path: 'commodity-list'
   resources :work_acceptance_note_items
-  resources :work_acceptance_notes
+  resources :work_acceptance_notes do
+    member do
+      delete 'remove-attachment', to: 'work_acceptance_notes#remove_attachment', as: 'remove_attachment'
+    end
+  end
   resources :facilities
   resources :parties
   resources :buyers, path: 'buyer'
@@ -63,7 +76,14 @@ Rails.application.routes.draw do
     sign_up: 'new'
   }, controllers: { sessions: 'users/sessions' }
 
-  resources :users, path: 'user/personnels'
+  resources :users, path: 'user' do
+    member do
+      get 'change-password', to: 'users#change_password'
+      post 'change-password', to: 'users#change_password'
+    end
+  end
+
+  resources :roles, path: 'roles'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

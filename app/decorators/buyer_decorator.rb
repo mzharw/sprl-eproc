@@ -1,4 +1,4 @@
-class BuyerDecorator < Draper::Decorator
+class BuyerDecorator < ApplicationDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through
@@ -9,5 +9,13 @@ class BuyerDecorator < Draper::Decorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+
+  # def buyer_user
+  #   User.find_by(party_id:)
+  # end
+
+  def full_name
+    object&.party&.full_name
+  end
 
 end

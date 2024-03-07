@@ -3,14 +3,14 @@
 </p>
 
 <p>
-  Mohon Diperiksa dan Disetujui/Ditolak pengajuan Purchase Requisition berikut dalam sistem E-Procurement PT. SPR
+  Mohon Diperiksa dan Disetujui/Ditolak pengajuan Purchase Order berikut dalam sistem E-Procurement PT. SPR
   Langgak :
 </p>
 
 <table>
   <tbody>
   <tr>
-    <td>Nomor PR</td>
+    <td>Nomor PO</td>
     <td>: <%= @model.number %></td>
   </tr>
   <tr>
@@ -18,14 +18,14 @@
     <td>: <%= @model.created_at %></td>
   </tr>
   <tr>
-    <td>Deskripsi PR</td>
-    <td>: <%= @model.desc %></td>
+    <td>Deskripsi PO</td>
+    <td>: <%= @model.name %></td>
   </tr>
   </tbody>
 </table>
 
 <br>
-Untuk informasi lebih lanjut, silahkan <%= link_to 'login', purch_reqn_url(@model) %>.
+Untuk informasi lebih lanjut, silahkan <%= link_to 'login', purch_order_url(@model) %>.
 <br>
 Terima kasih.
 

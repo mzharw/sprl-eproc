@@ -144,18 +144,20 @@
           </div>
         <% else %>
           <div>
-            Currently waiting for <b><%= @purch_reqn.workflow_state %></b> since <%= @purch_reqn.created_at %>
+            Currently waiting for <b><%= @purch_reqn.workflow_state %></b> since <%= @purch_reqn.formatted_create %>
           </div>
-          <div class="btn-group">
-            <%= button_tag class: "btn btn-danger", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-reject' } do %>
-              <i class="ti ti-x"></i>
-              Reject
-            <% end %>
-            <%= button_tag class: "btn btn-secondary", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-approve' } do %>
-              <i class="ti ti-check"></i>
-              Approve
-            <% end %>
-          </div>
+          <% if @purch_reqn.can_approve(current_user, :purch_groups) %>
+            <div class="btn-group">
+              <%= button_tag class: "btn btn-danger", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-reject' } do %>
+                <i class="ti ti-x"></i>
+                Reject
+              <% end %>
+              <%= button_tag class: "btn btn-secondary", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-approve' } do %>
+                <i class="ti ti-check"></i>
+                Approve
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       <% else %>
         <div>Purchase Requisition is not submitted yet.</div>

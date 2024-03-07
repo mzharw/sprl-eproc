@@ -41,8 +41,15 @@
         <%= form.password_field :password_confirmation, class: 'form-control' %>
       </div>
     <% else %>
-      <div class="col-md-6">
-        <label for="state">State</label>
+      <div class="col d-flex flex-wrap gap-2 my-3">
+        <% Role.active.each do |role| %>
+          <div class="d-flex gap-2 col-3">
+            <%= form.check_box :role_ids, { multiple: true, class: 'form-check-input' }, role.id, nil %>
+            <%= form.label :role_ids, role.name %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col">
         <div>
           <%= form.radio_button :state, 'INACTIVE', class: 'btn-check', id: "warning-outlined" %>
           <label class="btn btn-sm btn-outline-warning" for="warning-outlined">Inactive</label>

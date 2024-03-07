@@ -32,8 +32,12 @@ export default class extends Controller {
 
         let filters = options.filters ?? {}
         let dataOptions = JSON.parse(target.dataset.options);
+
         let cascade_to = dataOptions.cascade_to;
-        if (cascade_to && !selectedInputTarget.value) document.getElementById(cascade_to).classList.add('disabled');
+        if (cascade_to && !selectedInputTarget.value) {
+            let cascadeEl = document.getElementById(cascade_to)
+            cascadeEl.classList.add('disabled')
+        }
 
         let path = target.dataset.optionsPath + '.json';
 
@@ -63,7 +67,12 @@ export default class extends Controller {
         }
 
 
-        if (!this.element.classList.contains('disabled')) {
+        if (this.element === target || (this.element !== target && !options.selected) || dependent) {
+            if (dataOptions.fetch_to) {
+                Turbo.cache.clear()
+                selectedInputTarget.value = null
+            }
+
             fetch(path)
                 .then((response) => response.json())
                 .then((result) => {
@@ -75,28 +84,10 @@ export default class extends Controller {
         }
     }
 
-    generateLabel(data, source, element, inputTarget = null) {
-        let text = source[data.text]
-        let inputVal = text
-        if (!!data.desc) {
-            let desc = ` - ${source[data.desc]}`;
-            let label = document.createElement('b')
-            label.textContent = text;
-            element.textContent = '';
-            element.append(label);
-            element.append(desc);
-            inputVal += desc;
-        } else {
-            element.textContent = source[data.text];
-        }
-
-        if (inputTarget) inputTarget.value = inputVal;
-    }
-
     updateOptionsList(results, target, pagination = null, selected = false, dependent = false) {
         const optionsList = target.querySelector('.options-list') ?? this.optionsListTarget;
         const selectedInputTarget = target.querySelector('.selected-input') ?? this.selectedInputTarget;
-        const inputTarget = selected || dependent ? target.querySelector('.selection-search') ?? this.inputTarget : null;
+        const inputTarget = selected || (dependent && !selected) ? target.querySelector('.selection-search') ?? this.inputTarget : null;
         const optionsContainer = target.querySelector('.options-container') ?? this.optionsContainer;
         const data = target.dataset ?? this.element.dataset;
 
@@ -169,18 +160,21 @@ export default class extends Controller {
         let cascadeTo = options.cascade_to
         let dependentOn = options.dependent_on
         let dependent = document.getElementById(dependentOn)
-        let inputTarget = dependent ? dependent.querySelector('.selection-search') ?? this.inputTarget : null;
+        let inputTarget = dependent && close ? dependent.querySelector('.selection-search') ?? this.inputTarget : null;
 
         this.generateLabel(data, option, selectedValueTarget, inputTarget)
-        if (!selectedInputTarget.value) selectedInputTarget.value = option[data.value];
+        selectedInputTarget.value = option[data.value];
 
+        let fetch_to = options.fetch_to
+        if (!!fetch_to) Turbo.visit(`${fetch_to}?${target.id}=${selectedInputTarget.value}`, {
+            frame: target.id, turbo: true, acceptsStreamResponse: true
+        })
 
-        if (dependent) {
+        if (dependent && close) {
             let dependentSelectedInput = dependent.querySelector('.selected-input');
             dependentSelectedInput.value = option[dependentOn]
             this.loadOptions('', dependent, {
-                dependent: true,
-                selected: true
+                dependent: true, selected: true
             })
         }
 
@@ -234,10 +228,17 @@ export default class extends Controller {
         }
     }
 
+    clearFetchTo(url = null, target) {
+        if (url) Turbo.visit(url, {
+            frame: target.id, turbo: true, acceptsStreamResponse: true
+        })
+    }
+
     clearOptions(target = null) {
         const optionsListTarget = target?.querySelector('.options-list') ?? this.optionsListTarget;
         const selectedValueTarget = target?.querySelector('.selected-value') ?? this.selectedValueTarget;
         const selectedInputTarget = target?.querySelector('.selected-input') ?? this.selectedInputTarget;
+        const inputTarget = target?.querySelector('.selection-search') ?? this.inputTarget;
 
         // Remove the "active" class from all options
         optionsListTarget.querySelectorAll(".selection-option").forEach((optionElement) => {
@@ -246,6 +247,15 @@ export default class extends Controller {
 
         selectedValueTarget.textContent = "";
         selectedInputTarget.value = "";
+        inputTarget.value = "";
+
+        const data = target?.dataset ?? this.element.dataset;
+        let options = JSON.parse(data.options);
+
+        let fetchTo = options.fetch_to
+        this.clearFetchTo(fetchTo, target ?? this.element)
+
+        this.loadOptions('', target || this.element, {selected: true})
     }
 
     toggleClearSelection(target = null) {
@@ -253,6 +263,24 @@ export default class extends Controller {
         const selectedValue = (target ? target.querySelector('.selected-value').textContent : this.selectedValueTarget.textContent).trim();
         clearSelectionIcon.classList.toggle('ti-chevron-down', !selectedValue);
         clearSelectionIcon.classList.toggle('ti-x', selectedValue);
+    }
+
+    generateLabel(data, source, element, inputTarget = null) {
+        let text = source[data.text]
+        let inputVal = text
+        if (!!data.desc) {
+            let desc = ` - ${source[data.desc]}`;
+            let label = document.createElement('b')
+            label.textContent = text;
+            element.textContent = '';
+            element.append(label);
+            element.append(desc);
+            inputVal += desc;
+        } else {
+            element.textContent = source[data.text];
+        }
+
+        if (inputTarget) inputTarget.value = inputVal;
     }
 
 }

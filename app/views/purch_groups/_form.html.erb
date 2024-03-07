@@ -2,7 +2,7 @@
   <% if purch_group.errors.any? %>
     <div style="color: red">
       <h2>
-        <%= pluralize(purch_group.errors.count, "error" ) %> prohibited this purch_group from being saved:
+        <%= pluralize(purch_group.errors.count, "error") %> prohibited this purch_group from being saved:
       </h2>
       <ul>
         <% purch_group.errors.each do |error| %>
@@ -28,11 +28,13 @@
     <div class="col-md-6 d-flex flex-column gap-3">
       <div>
         <label for="thru_date">Thru Date</label>
-        <%= form.date_field :thru_date, class: 'form-control' %>  
+        <%= form.date_field :thru_date, class: 'form-control' %>
       </div>
       <div>
-        <label for="party_id">Party</label>
-        <%= selection(form, :party_id, parties_path, :id, :full_name) %>
+        <%= form.fields_for :party do |field| %>
+          <label for="party_id">Name</label>
+          <%= field.text_field :full_name, class: 'form-control' %>
+        <% end %>
       </div>
     </div>
 
@@ -41,8 +43,6 @@
       <%= form.text_area :description, class: 'form-control', rows: 5 %>
     </div>
 
-
-    <!-- Add more fields as needed -->
 
   </div>
 

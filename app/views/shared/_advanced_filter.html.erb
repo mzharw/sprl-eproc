@@ -5,18 +5,24 @@
   <div class="dropdown-menu" id="dropdown-advanced-filter" style="width: 18.7rem">
     <div class="dropdown-header">Sort by</div>
     <%= form_with(url: url, method: :get, class: 'px-3 py-1') do %>
-      <div class="pb-2">
-        <label for="state" class="col-form-label-sm">State</label>
-        <div>
-          <input type="radio" class="btn-check" name="filters[state]" id="warning-outlined" autocomplete="off" value="INACTIVE">
-          <label class="btn btn-sm btn-outline-dark" for="warning-outlined">Inactive</label>
+      <div class="accordion pb-2">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="filter-state-header">
+            <button class="accordion-button collapsed p-2" data-bs-target="#filter-state" aria-controls="filter-state" type="button" data-bs-toggle="collapse">
+              <label for="state" class="col-form-label-sm">State</label>
+            </button>
+          </h2>
+          <div class="accordion-collapse collapse p-3" id="filter-state" aria-labelledby="filter-state-header">
+            <input type="radio" class="btn-check" name="filters[state]" id="warning-outlined" autocomplete="off" value="INACTIVE">
+            <label class="btn btn-sm btn-outline-dark" for="warning-outlined">Inactive</label>
 
-          <input type="radio" class="btn-check" name="filters[state]" id="success-outlined" autocomplete="off" value="ACTIVE" checked>
-          <label class="btn btn-sm btn-outline-dark" for="success-outlined">Active</label>
+            <input type="radio" class="btn-check" name="filters[state]" id="success-outlined" autocomplete="off" value="ACTIVE" checked>
+            <label class="btn btn-sm btn-outline-dark" for="success-outlined">Active</label>
+          </div>
         </div>
       </div>
-      <div class="dropdown-divider"></div>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+      <!--      <div class="dropdown-divider"></div>-->
+      <div class="d-grid d-md-flex justify-content-md-between">
         <button class="btn btn-link link-muted text-decoration-none px-0">Clear</button>
         <button class="btn btn-link link-info text-decoration-none px-0">Apply filters</button>
       </div>

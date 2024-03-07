@@ -1,33 +1,22 @@
 <table class="table">
-
   <tr>
-    <td><strong>Party type:</strong></td>
-    <td><%= party.party_type %></td>
+    <td><strong>Username</strong></td>
+    <td><%= @user.username %></td>
   </tr>
-
   <tr>
-    <td><strong>Full name:</strong></td>
-    <td><%= party&.full_name %></td>
+    <td><strong>Full name</strong></td>
+    <td><%= @user.full_name %></td>
   </tr>
-
   <tr>
-    <td><strong>Created at:</strong></td>
-    <td><%= party.created_at %></td>
+    <td><strong>Username</strong></td>
+    <td><%= @user.position_name %></td>
   </tr>
-
   <tr>
-    <td><strong>Updated at:</strong></td>
-    <td><%= party.updated_at %></td>
+    <td><strong>Email</strong></td>
+    <td><%= @user.email %></td>
   </tr>
-
   <tr>
-    <td><strong>Created by:</strong></td>
-    <td><%= party.creator&.username %></td>
+    <td><strong>State</strong></td>
+    <td><%= badge(@user.state) %></td>
   </tr>
-
-  <tr>
-    <td><strong>Updated by:</strong></td>
-    <td><%= party.updater&.username %></td>
-  </tr>
-
 </table>

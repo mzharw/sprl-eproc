@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parent: one
+  ident_name: MyString
+  name: MyString
+  desc: MyText
+  sign: MyString
+  seq: 1
+  children_allowed: false
+  sales_taxable: false
+  system: false
+
+two:
+  parent: two
+  ident_name: MyString
+  name: MyString
+  desc: MyText
+  sign: MyString
+  seq: 1
+  children_allowed: false
+  sales_taxable: false
+  system: false

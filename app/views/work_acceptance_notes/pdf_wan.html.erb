@@ -1,11 +1,11 @@
 <table class="table" style="border-color: transparent;">
   <tr>
-    <td style="width: 10px;"><%== @qr_purch_reqn %></td>
+    <td style="width: 10px;"><%== @qr_wan %></td>
     <td>
       <div>
         <small>SPR Langgak</small>
-        <h1>Purchase Requisition</h1>
-        <p><%= @purch_reqn.number %> ( <%= @purch_reqn.purch_reqn_type %> )</p>
+        <h1>Work Acceptance Note</h1>
+        <p><%= @work_acceptance_note.number %> ( <%= @work_acceptance_note.wan_type %> )</p>
       </div>
     </td>
     <td>
@@ -20,8 +20,8 @@
     <td><b>Requested Date</b></td>
   </tr>
   <tr>
-    <td><%= @purch_reqn.desc %></td>
-    <td><%= @purch_reqn.formatted_create %></td>
+    <td><%= @work_acceptance_note.desc %></td>
+    <td><%= @work_acceptance_note.formatted_create %></td>
   </tr>
   <tr style="background-color: #f9fafe">
     <td>
@@ -33,42 +33,26 @@
   </tr>
   <tr style="width: 10px !important;">
     <td>
-      <%= @purch_reqn.items_subtotal %>
+      <%= @work_acceptance_note.items.sum(:subtotal) %>
     </td>
     <td>
-      <%= @purch_reqn.currency_code %>
+      <%= @work_acceptance_note.items.first.purch_order_item.purch_reqn.currency.code %>
     </td>
   </tr>
 </table>
 
 <table class="table" style="border-color: transparent;">
   <tr>
-    <td><b>Contract</b></td>
     <td><b>Purchasing Group</b></td>
     <td><b>Plant</b></td>
-    <td><b>Source Found</b></td>
-    <% unless @purch_reqn.fund_source == 'PROJECT_WBS' %>
-      <td><b>Non AFE</b></td>
-    <% end %>
   </tr>
   <tr>
     <td>
-      <%= @purch_reqn.contract ? 'Yes' : 'No' %>
+      <%= @work_acceptance_note.purch_group_code %>
     </td>
     <td>
-      <%= @purch_reqn.purch_group_code %>
+      <%= @work_acceptance_note.plant_code %>
     </td>
-    <td>
-      <%= @purch_reqn.plant_code %>
-    </td>
-    <td>
-      <%= @purch_reqn.fund_source %>
-    </td>
-    <% unless @purch_reqn.fund_source == 'PROJECT_WBS' %>
-      <td>
-        <%= @purch_reqn.cost_center&.desc || '' %>
-      </td>
-    <% end %>
   </tr>
 </table>
 
@@ -79,9 +63,6 @@
   <tr style="background-color: #f9fafe">
     <th>
       Item No.
-    </th>
-    <th>
-      Item Type
     </th>
     <th>
       Product Group
@@ -107,52 +88,20 @@
     <th>
       Delivery Date
     </th>
-    <th>
-      Requisistioner
-    </th>
   </tr>
-  <% items = @purch_reqn.decorated_items %>
-  <% items.each_with_index do |purch_reqn_item, index| %>
+  <% items = @work_acceptance_note.items.decorate %>
+  <% items.each_with_index do |wan_item, index| %>
     <tr>
-      <td><%= index + 1 %></td>
-      <td><%= purch_reqn_item.item_type %></td>
-      <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
-      <td><b><%= purch_reqn_item.product&.code %></b> - <%= purch_reqn_item.product&.name %></td>
-      <td><%= purch_reqn_item.desc %></td>
-      <td><%= purch_reqn_item.qty %></td>
-      <td><%= purch_reqn_item.uom&.name %></td>
-      <td><%= purch_reqn_item.est_unit_price %></td>
-      <td><%= purch_reqn_item.est_subtotal %></td>
-      <td><%= purch_reqn_item.formatted_delivery %></td>
-      <td><%= purch_reqn_item.requisitioner %></td>
+      <td><%= wan_item.number %></td>
+      <td><%= wan_item.product_group_code %> - <%= wan_item.product_group_name %></td>
+      <td><b><%= wan_item.product&.code %></b> - <%= wan_item.product&.name %></td>
+      <td><%= wan_item.desc %></td>
+      <td><%= wan_item.qty %></td>
+      <td><%= wan_item.uom&.name %></td>
+      <td><%= wan_item.unit_price %></td>
+      <td><%= wan_item.subtotal %></td>
+      <td><%= wan_item.formatted_delivery %></td>
     </tr>
-    <% if purch_reqn_item.items.count > 0 %>
-      <tr style="background-color: #f9fafe">
-        <td colspan="11">
-          <!--          <h3 style="margin: 10px 0; text-align: center">Service Items</h3>-->
-          <table class="table" style="border-color: #ebf1f6; margin-bottom: 0px">
-            <tr>
-              <th>Item No.</th>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>UoM</th>
-              <th>Unit Price (Estimation)</th>
-              <th>Subtotal</th>
-            </tr>
-            <% purch_reqn_item.items.each_with_index do |item, i| %>
-              <tr>
-                <td><%= i + 1 %></td>
-                <td><%= item.desc %></td>
-                <td><%= item.qty %></td>
-                <td><%= item.uom&.name %></td>
-                <td><%= item.est_unit_price %></td>
-                <td><%= item.est_subtotal %></td>
-              </tr>
-            <% end %>
-          </table>
-        </td>
-      </tr>
-    <% end %>
   <% end %>
 </table>
 
@@ -166,7 +115,7 @@
     <th>Completed Date</th>
     <th>Coment</th>
   </tr>
-  <% instances = @purch_reqn.workflow_instances %>
+  <% instances = @work_acceptance_note.workflow_instances %>
   <% instances.each do |instance| %>
     <tr style="<%= 'background-color: #ebd6d0' if instance.rejected? %>">
       <td>

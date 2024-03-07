@@ -1,17 +1,17 @@
 <% content_for :table, flush: true do %>
   <thead>
   <tr>
-    <th>No.</th>
     <th><%= sortable_header('Purchase Reqn. No.', prcmts_path, :purch_reqn_no) %></th>
+    <th><%= sortable_header('Procurement No.', prcmts_path, :number) %></th>
     <th><%= sortable_header('Tender Name', prcmts_path, :name) %></th>
     <th><%= sortable_header('Business Field', prcmts_path, :business_field) %></th>
-    <th><%= sortable_header('Scope of Work', prcmts_path, :scope_of_work) %></th>
-    <th><%= sortable_header('Evaluation Method', prcmts_path, :eval_method) %></th>
+    <!--    <th><%#= sortable_header('Scope of Work', prcmts_path, :scope_of_work) %></th>-->
+    <!--    <th><%#= sortable_header('Evaluation Method', prcmts_path, :eval_method) %></th>-->
     <th><%= sortable_header('Prcmt Type', prcmts_path, :prcmt_type_id) %></th>
-    <th><%= sortable_header('State', prcmts_path, :state) %></th>
-    <th><%= sortable_header('Workflow State', prcmts_path, :workflow_state) %></th>
-    <th><%= sortable_header('Retender of', prcmts_path, :retender_of) %></th>
-    <th><%= sortable_header('Cancel Remark', prcmts_path, :cancel_remark) %></th>
+    <!--    <th><%#= sortable_header('State', prcmts_path, :state) %></th>-->
+    <!--    <th><%#= sortable_header('Workflow State', prcmts_path, :workflow_state) %></th>-->
+    <!--    <th><%#= sortable_header('Retender of', prcmts_path, :retender_of) %></th>-->
+    <!--    <th><%#= sortable_header('Cancel Remark', prcmts_path, :cancel_remark) %></th>-->
     <!--      <th><%#= sortable_header('Number', prcmts_path, :number) %></th>-->
     <!--      <th><%#= sortable_header('Purch Org', prcmts_path, :purch_org_id) %></th>-->
     <!--      <th><%#= sortable_header('Purch Group', prcmts_path, :purch_group_id) %></th>-->
@@ -59,17 +59,17 @@
   <% if @prcmts.present? %>
     <% @prcmts.each_with_index do |prcmt, index| %>
       <tr>
-        <td><%= index + 1 %></td>
-        <td></td>
+        <td><%= link_to prcmt.purch_reqn_no, purch_reqn_path(prcmt.purch_reqn.id) %></td>
+        <td><%= prcmt.number %></td>
         <td><%= prcmt.name %></td>
         <td><%= prcmt.business_field %></td>
-        <td><%= prcmt.scope_of_work %></td>
-        <td><%= prcmt.prcmt_type_id %></td>
-        <td><%= prcmt.eval_method %></td>
-        <td><%= prcmt.state %></td>
-        <td></td>
-        <td></td>
-        <td><%= prcmt.cancel_remark %></td>
+        <!--        <td><%#= prcmt.scope_of_work %></td>-->
+        <!--        <td><%#= prcmt.eval_method %></td>-->
+        <td><%= prcmt.prcmt_type.name %></td>
+        <!--        <td><%#= badge(prcmt.state) %></td>-->
+        <!--        <td></td>-->
+        <!--        <td></td>-->
+        <!--        <td><%#= prcmt.cancel_remark %></td>-->
         <!--          <td><%#= prcmt.number %></td>-->
         <!--          <td><%#= prcmt.purch_org_id %></td>-->
         <!--          <td><%#= prcmt.purch_group_id %></td>-->
@@ -114,12 +114,12 @@
           <%= link_to prcmt, class: 'btn btn-sm btn-outline-secondary' do %>
             <i class="ti ti-eye"></i>
           <% end %>
-          <%= link_to edit_prcmt_path(prcmt), class: 'btn btn-sm btn-secondary' do %>
-            <i class="ti ti-edit"></i>
-          <% end %>
-          <%= link_to prcmt, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
-            <i class="ti ti-trash"></i>
-          <% end %>
+          <%#= link_to edit_prcmt_path(prcmt), class: 'btn btn-sm btn-secondary' do %>
+          <!--            <i class="ti ti-edit"></i>-->
+          <%# end %>
+          <%#= link_to prcmt, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+          <!--            <i class="ti ti-trash"></i>-->
+          <%# end %>
         </td>
       </tr>
     <% end %>

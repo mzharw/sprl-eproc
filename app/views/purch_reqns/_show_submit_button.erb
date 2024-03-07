@@ -15,10 +15,12 @@
       Generate PDF
     </button>
   <% end %>
-  <%= link_to purch_reqn_items_path, method: :get do %>
-    <button class="btn btn-sm btn-secondary">
-      Carry out items
-      <i class="ti ti-arrow-right"></i>
-    </button>
+  <% if policy(@purch_reqn.object).carry_out? %>
+    <%= link_to purch_reqn_items_path, method: :get do %>
+      <button class="btn btn-sm btn-secondary">
+        Carry out items
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    <% end %>
   <% end %>
 <% end %>

@@ -7,10 +7,14 @@ class ProductGroupsController < ApplicationController
   def index
     @product_groups = selectable(ProductGroup, :code, :name)
     json = paginate_json(@product_groups)
+
+    @product_groups = filter(@product_groups)
     @product_groups = paginate(@product_groups).decorate
 
     respond_to do |format|
-      format.html
+      format.html do
+        authorize @product_groups.object
+      end
       format.json { render json: }
     end
   end
@@ -73,6 +77,7 @@ class ProductGroupsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_product_group
     @product_group = ProductGroup.find(params[:id])
+    authorize @product_group
   end
 
   # Only allow a list of trusted parameters through.

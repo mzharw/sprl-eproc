@@ -1,0 +1,57 @@
+<%= form_with(model: vendor_type) do |form| %>
+  <% if vendor_type.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(vendor_type.errors.count, "error") %> prohibited this vendor_type from being saved:</h2>
+
+      <ul>
+        <% vendor_type.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :ident_name, style: "display: block" %>
+    <%= form.text_field :ident_name %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :desc, style: "display: block" %>
+    <%= form.text_area :desc %>
+  </div>
+
+  <div>
+    <%= form.label :system, style: "display: block" %>
+    <%= form.check_box :system %>
+  </div>
+
+  <div>
+    <%= form.label :created_at, style: "display: block" %>
+    <%= form.datetime_field :created_at %>
+  </div>
+
+  <div>
+    <%= form.label :updated_at, style: "display: block" %>
+    <%= form.datetime_field :updated_at %>
+  </div>
+
+  <div>
+    <%= form.label :created_by_id, style: "display: block" %>
+    <%= form.text_field :created_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :updated_by_id, style: "display: block" %>
+    <%= form.text_field :updated_by_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

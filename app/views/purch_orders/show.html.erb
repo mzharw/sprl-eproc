@@ -1,0 +1,101 @@
+<% content_for :content_header do %>
+  <b>Purchase Order / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
+    <%= link_to purch_orders_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= render partial: 'show_submit_button', locals: { model: @purch_order } %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <div class="d-flex flex-column gap-2">
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_order" aria-expanded="false" aria-controls="purch_order">
+      Purchase Order
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="purch_order">
+      <%= render @purch_order %>
+    </div>
+
+    <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purch_order_item" aria-expanded="false" aria-controls="purch_order_item">
+      Purchase Order Items
+      <i class="ti ti-caret-down-filled"></i>
+    </a>
+    <div class="data-container collapse show" id="purch_order_item">
+      <div class="d-flex flex-column">
+        <% unless @purch_order.submitted? %>
+          <div class="dropdown align-self-end">
+            <!--            <button class="btn btn-sm btn-secondary dropdown-toggle my-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+            <!--              <i class="ti ti-plus"></i>-->
+            <!--              New Entry-->
+            <!--            </button>-->
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to new_purch_order_item_path(item_type: :material), class: 'dropdown-item' do %>
+                  <i class="ti ti-packages"></i>
+                  Material
+                <% end %>
+              </li>
+              <% if @purch_order.purch_order_type == 'SERVICE' %>
+                <li>
+                  <%= link_to new_purch_order_item_path(item_type: :service), class: 'dropdown-item' do %>
+                    <i class="ti ti-forklift"></i>
+                    Service
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div id="items">
+          <%= render partial: 'purch_order_items/list', locals: { items: @purch_order.purch_order_items.decorate } %>
+        </div>
+      </div>
+    </div>
+
+    <% if @purch_order.workflow_instances %>
+      <a class="p-3 rounded-2 border text-body bg-body w-100" type="button" data-bs-toggle="collapse" data-bs-target="#comment-histories" aria-expanded="false" aria-controls="comment-histories">
+        Comment Histories
+        <i class="ti ti-caret-down-filled"></i>
+      </a>
+      <div class="data-container collapse show" id="comment-histories">
+        <%= render partial: 'purch_reqns/comments', locals: { workflow_instances: @purch_order.workflow_instances } %>
+      </div>
+    <% end %>
+    <div class="alert alert-warning d-flex flex-column gap-3 justify-content-between" role="alert">
+      <% if @purch_order.submitted? %>
+        <% if @purch_order.finished? %>
+          <div>
+            Workflow finished
+          </div>
+        <% else %>
+          <div>
+            Currently waiting for <b><%= @purch_order.workflow_state %></b> since <%= @purch_order.created_at %>
+          </div>
+          <% if @purch_order.can_approve(current_user, :purch_groups) %>
+            <div class="btn-group">
+              <%= button_tag class: "btn btn-danger", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-reject' } do %>
+                <i class="ti ti-x"></i>
+                Reject
+              <% end %>
+              <%= button_tag class: "btn btn-secondary", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-approve' } do %>
+                <i class="ti ti-check"></i>
+                Approve
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div>Purchase Order is not submitted yet.</div>
+      <% end %>
+    </div>
+<% end %>
+
+<%= render partial: 'workflow_instance/approval', locals: { model: @purch_order.workflow_instance, action: :reject } %>
+<%= render partial: 'workflow_instance/approval', locals: { model: @purch_order.workflow_instance, action: :approve } %>
+
+<%= render "layouts/wrapper", sidebar: true %>

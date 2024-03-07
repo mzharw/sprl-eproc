@@ -1,10 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Procurement / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render @prcmt %>
+    <%= link_to prcmts_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to prcmt_path(format: :pdf) do %>
+      <button class="btn btn-sm btn-primary">
+        <i class="ti ti-file-type-pdf"></i>
+        Generate PDF
+      </button>
+    <% end %>
+    <%#= link_to edit_prcmt_path(@prcmt), class: 'btn btn-sm btn-secondary' do %>
+    <!--      <i class="ti ti-edit"></i>-->
+    <!--      Edit-->
+    <%# end %>
+  </div>
+<% end %>
 
-<div>
-  <%= link_to "Edit this prcmt", edit_prcmt_path(@prcmt) %> |
-  <%= link_to "Back to prcmts", prcmts_path %>
+<% content_for :content do %>
+  <div class="d-flex flex-column gap-3">
+    <%= render 'purch_reqn_items/list', items: @prcmt.prcmt_items.decorate %>
+    <%= render @prcmt %>
+  </div>
+<% end %>
 
-  <%= button_to "Destroy this prcmt", @prcmt, method: :delete %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

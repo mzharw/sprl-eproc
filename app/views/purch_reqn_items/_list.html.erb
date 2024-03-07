@@ -1,10 +1,13 @@
 <% items = @purch_reqn_items || items %>
-<% purch_reqn = @purch_reqn || purch_reqn %>
-<% is_submitted = purch_reqn.submitted? %>
+<% purch_reqn = @purch_reqn || purch_reqn || nil %>
+<% is_submitted = purch_reqn.nil? ? true : purch_reqn.submitted? %>
+<% is_form = is_submitted && defined? form %>
+<% carry_out = defined? carry_out_qty %>
+
 <% content_for :table, flush: true do %>
   <thead class="sticky">
   <tr>
-    <% if is_submitted && defined? form %>
+    <% if is_form %>
       <th></th>
     <% end %>
     <th>
@@ -23,8 +26,24 @@
       Description
     </th>
     <th>
-      Quantity
+      <%= 'Initial' if is_form %> Quantity
     </th>
+    <% if is_form %>
+      <th>
+        Available Quantity
+      </th>
+      <th>
+        Input Quantity
+      </th>
+    <% end %>
+    <% if carry_out %>
+      <th>
+        Carried out Quantity
+      </th>
+      <th>
+        Input Quantity
+      </th>
+    <% end %>
     <th>
       UoM
     </th>
@@ -38,7 +57,7 @@
       Delivery Date
     </th>
     <th>
-      Requisistioner
+      Requisitioner
     </th>
     <% unless is_submitted %>
       <th class="sticky">
@@ -48,24 +67,40 @@
   </tr>
   </thead>
   <tbody>
-  <% if items.empty? %>
+  <% if items.nil? || items.empty? %>
     <tr>
       <td colspan="15"> No Entry</td>
     </tr>
   <% else %>
     <% items.each_with_index do |purch_reqn_item, index| %>
       <tr id="<%= purch_reqn_item.id %>">
-        <% if is_submitted && defined? form %>
+        <% if is_form %>
           <td>
             <%= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
           </td>
         <% end %>
         <td><%= purch_reqn_item.number || index + 1 %></td>
-        <td><%= purch_reqn_item.item_type %></td>
+        <td><%= purch_reqn_item.item_type if defined? purch_reqn_item.item_type %></td>
         <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
         <td><b><%= purch_reqn_item.product_code %></b> - <%= purch_reqn_item.product_name %></td>
         <td><%= purch_reqn_item.desc %></td>
         <td><%= purch_reqn_item.qty %></td>
+        <% if is_form %>
+          <td>
+            <%= purch_reqn_item.qty - purch_reqn_item.carried_out_qty %>
+          </td>
+          <td>
+            <%= number_field_tag "items_qty[#{purch_reqn_item.id}]", 0.0, class: 'form-control', max: purch_reqn_item.qty - purch_reqn_item.carried_out_qty, step: 0.1 %>
+          </td>
+        <% end %>
+        <% if carry_out %>
+          <td>
+            <%= purch_reqn_item.carried_out_qty %>
+          </td>
+          <td>
+            <%= carry_out_qty[purch_reqn_item.id].to_f %>
+          </td>
+        <% end %>
         <td><%= purch_reqn_item.uom&.name %></td>
         <td><%= purch_reqn_item.est_unit_price %></td>
         <td><%= purch_reqn_item.est_subtotal %></td>

@@ -1,0 +1,53 @@
+<%= form_with(model: currency_exchange_rate, html: { class: 'data-container' }) do |form| %>
+  <% if currency_exchange_rate.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(currency_exchange_rate.errors.count, "error") %> prohibited this currency_exchange_rate from
+        being
+        saved:</h2>
+
+      <ul>
+        <% currency_exchange_rate.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <%= form.label :from_currency_id, style: "display: block" %>
+      <%= selection(form, :from_currency_id, currencies_path, :id, :code, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :from_amount, style: "display: block" %>
+      <%= form.number_field :from_amount, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :to_currency_id, style: "display: block" %>
+      <%= selection(form, :to_currency_id, currencies_path, :id, :code, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :to_amount, style: "display: block" %>
+      <%= form.text_field :to_amount, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :from_time, style: "display: block" %>
+      <%= form.datetime_field :from_time, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :thru_time, style: "display: block" %>
+      <%= form.datetime_field :thru_time, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :issuer, style: "display: block" %>
+      <%= form.text_field :issuer, class: 'form-control' %>
+    </div>
+
+  </div>
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
+<% end %>

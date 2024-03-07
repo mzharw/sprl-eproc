@@ -3,28 +3,28 @@
 </p>
 
 <p>
-  Mohon review dan koreksi dokumen PO berikut karena telah ditolak :
+  Mohon review dan koreksi dokumen WAN berikut karena telah ditolak :
 </p>
 
 <table>
   <tbody>
   <tr>
-    <td>Nomor PO</td>
+    <td>Nomor WAN</td>
     <td>: <%= @model.number %></td>
   </tr>
   <tr>
-    <td>Tanggal pengajuan PO</td>
+    <td>Tanggal pengajuan WAN</td>
     <td>: <%= @model.created_at %></td>
   </tr>
   <tr>
-    <td>Deskripsi PO</td>
-    <td>: <%= @model.desc %></td>
+    <td>Deskripsi WAN</td>
+    <td>: <%= @model.name %></td>
   </tr>
   </tbody>
 </table>
 
 <br>
-Untuk informasi lebih lanjut, silahkan <%= link_to 'login', purch_order_url(@model) %>.
+Untuk informasi lebih lanjut, silahkan <%= link_to 'login', work_acceptance_note_url(@model) %>.
 <br>
 Terima kasih.
 

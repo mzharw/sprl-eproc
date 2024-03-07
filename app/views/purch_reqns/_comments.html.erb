@@ -10,13 +10,13 @@
   </tr>
   </thead>
   <tbody>
-  <% @purch_reqn.workflow_instances.each do |instance| %>
+  <% workflow_instances.each do |instance| %>
     <tr class="<%= 'table-danger' if instance.rejected? %>">
       <td>
         <%= instance.updater_name %>
       </td>
       <td>
-        <%= instance.updater&.party&.personnel.position_name %>
+        <%= instance.approver_position_name %>
       </td>
       <td>
         <%= instance.step %>

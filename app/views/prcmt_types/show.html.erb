@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Procurement Type / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
 
-<%= render @prcmt_type %>
+    <%= link_to prcmt_types_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+    <%= link_to edit_prcmt_type_path(@prcmt_type), class: 'btn btn-sm btn-secondary' do %>
+      <i class="ti ti-edit"></i>
+      Edit
+    <% end %>
+  </div>
+<% end %>
 
-<div>
-  <%= link_to "Edit this prcmt type", edit_prcmt_type_path(@prcmt_type) %> |
-  <%= link_to "Back to prcmt types", prcmt_types_path %>
+<% content_for :content do %>
+  <%= render @prcmt_type %>
+<% end %>
 
-  <%= button_to "Destroy this prcmt type", @prcmt_type, method: :delete %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

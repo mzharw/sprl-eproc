@@ -6,10 +6,12 @@ class CurrenciesController < ApplicationController
   def index
     @currencies = selectable(Currency, :code, :name)
     @currencies = filter(@currencies)
-    @currencies = @currencies.page(params[:page])
+    @currencies = paginate(@currencies)
 
     respond_to do |format|
-      format.html
+      format.html do
+        authorize @currencies
+      end
       format.json { render json: @currencies }
     end
   end
@@ -70,6 +72,7 @@ class CurrenciesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_currency
     @currency = Currency.find(params[:id])
+    authorize @currency
   end
 
   # Only allow a list of trusted parameters through.

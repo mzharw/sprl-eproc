@@ -11,4 +11,26 @@ module UserTrackable
 
     action
   end
+
+  def set_tracker(collection, *column, **options)
+    collection = set_scope(collection, *column)
+    collection = collection&.where(id: params[:id])&.first
+
+    if collection.nil?
+      flash.alert = 'Item not found. Please try again later'
+      redirect_to options[:redirect_path] || root_path
+    end
+
+    collection
+
+  end
+
+  def set_scope(collection, *column)
+    unless !column.empty? && current_user.is_superuser?
+      # collection = collection.where(plant_id: current_user.plant_ids) if column.include? :plants
+      collection = collection.where(purch_group_id: current_user.purch_group_ids) if column.include? :purch_groups
+    end
+
+    collection
+  end
 end

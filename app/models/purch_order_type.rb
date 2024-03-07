@@ -1,0 +1,2 @@
+class PurchOrderType < ApplicationRecord
+end

@@ -10,7 +10,9 @@ class FacilitiesController < ApplicationController
     @facilities = @facilities.page(params[:page])
 
     respond_to do |format|
-      format.html
+      format.html do
+        authorize @facilities
+      end
       format.json { render json: @facilities }
     end
   end
@@ -69,6 +71,7 @@ class FacilitiesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_facility
     @facility = Facility.find(params[:id])
+    authorize @facility
   end
 
   # Only allow a list of trusted parameters through.

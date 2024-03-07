@@ -1,0 +1,18 @@
+<% unless @work_acceptance_note.submitted? %>
+  <%= form_with(model: model, id: 'submit-button', data: { turbo: false }) do |f| %>
+    <%= f.hidden_field :state, value: 'COMMITTED' %>
+    <%= f.button class: 'btn btn-sm btn-secondary', disabled: !model.submitable? do %>
+      <i class="ti ti-send"></i>
+      Submit
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @work_acceptance_note.finished? %>
+  <%= link_to work_acceptance_note_path(format: :pdf) do %>
+    <button class="btn btn-sm btn-primary">
+      <i class="ti ti-file-type-pdf"></i>
+      Generate PDF
+    </button>
+  <% end %>
+<% end %>

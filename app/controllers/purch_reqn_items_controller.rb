@@ -10,10 +10,13 @@ class PurchReqnItemsController < ApplicationController
       if items.nil? || items.empty?
         flash.alert = 'Please add atleast one item to carry out.'
       else
-        redirect_to new_prcmt_path(purch_reqn: @purch_reqn, items: carry_out_items_params[:items])
+        redirect_to new_prcmt_path(purch_reqn: @purch_reqn,
+                                   items: carry_out_items_params[:items],
+                                   items_qty: carry_out_items_qty_params)
       end
     end
     @purch_reqn_items = PurchReqnItem.where(purch_reqn_id: params[:id]).without_service_item.uncarried.decorate
+    authorize @purch_reqn_items.object
   end
 
   # GET /purch_reqn_items/1 or /purch_reqn_items/1.json
@@ -36,6 +39,8 @@ class PurchReqnItemsController < ApplicationController
       # @purch_reqn_item.purch_group_id = ProductGroup.where(code: 'N').first
       @purch_reqn_item.measurement_unit_id = MeasurementUnit.find_by(ident_name: 'AU').id
     end
+    @purch_reqn_item.currency_id = @purch_reqn&.currency_id
+    # @purch_reqn_item.purch_group_id = @purch_reqn&.purch_group_id
 
     respond_to do |format|
       if @purch_reqn_item.save
@@ -120,5 +125,9 @@ class PurchReqnItemsController < ApplicationController
 
   def carry_out_items_params
     params.fetch(:purch_reqn_item, {}).permit(items: [])
+  end
+
+  def carry_out_items_qty_params
+    params.require(:items_qty).permit!
   end
 end

@@ -7,10 +7,14 @@ class MeasurementUnitsController < ApplicationController
   def index
     @measurement_units = selectable(MeasurementUnit, :symbol, :name)
     json = paginate_json(@measurement_units)
+
+    @measurement_units = filter(@measurement_units)
     @measurement_units = paginate(@measurement_units).decorate
 
     respond_to do |format|
-      format.html
+      format.html do
+        authorize @measurement_units.object
+      end
       format.json { render json: }
     end
   end
@@ -73,6 +77,7 @@ class MeasurementUnitsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_measurement_unit
     @measurement_unit = MeasurementUnit.find(params[:id])
+    authorize @measurement_unit
   end
 
   # Only allow a list of trusted parameters through.

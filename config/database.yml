@@ -78,8 +78,9 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
 production:
   <<: *default
-  database: sprl_eproc_production
-  username: sprl_eproc
-  password: <%= ENV["SPRL_EPROC_DATABASE_PASSWORD"] %>
+  database: <%= ENV["PROD_DATABASE_NAME"] %>
+  username: <%= ENV["PROD_DATABASE_USERNAME"] %>
+  password: <%= ENV["PROD_DATABASE_PASSWORD"] %>

@@ -26,8 +26,11 @@
       <td><%= user.full_name %></td>
       <td><%= user.position_name %></td>
       <td><%= user.email %></td>
-      <td><%= render 'shared/state', state: user.state %></td>
+      <td><%= badge(user.state) %></td>
       <td>
+        <%= link_to user, class: 'm-1 btn btn-sm btn-outline-info' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
         <%= link_to edit_user_path(user), class: 'm-1 btn btn-sm btn-secondary' do %>
           <i class="ti ti-edit"></i>
         <% end %>
@@ -42,4 +45,4 @@
   </tbody>
 <% end %>
 
-<%= render partial: 'shared/table', locals: { model: users } %>
+<%= render partial: 'shared/table', locals: { model: users, new: new_user_path } %>

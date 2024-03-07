@@ -1,0 +1,32 @@
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th><%= sortable_header('Code', vendors_path, :code) %></th>
+    <th><%= sortable_header('Vendor Name', vendors_path, :vendor_name) %></th>
+    <th><%= sortable_header('Vendor Type', vendors_path, :vendor_type) %></th>
+    <th><%= sortable_header('State', vendors_path, :state) %></th>
+    <th><%= sortable_header('From Date', vendors_path, :from_date) %></th>
+    <th><%= sortable_header('Thru Date', vendors_path, :thru_date) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @vendors.empty? %>
+    <tr>
+      <td colspan="11">No Entry</td>
+    </tr>
+  <% else %>
+    <% @vendors.each do |vendor| %>
+      <tr>
+        <td><%= vendor.code %></td>
+        <td><%= vendor.vendor_name %></td>
+        <td><%= vendor.vendor_type.name %></td>
+        <td><%= badge(vendor.state) %></td>
+        <td><%= vendor.from_date %></td>
+        <td><%= vendor.thru_date %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: @vendors, new: new_vendor_path } %>
