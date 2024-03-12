@@ -6,9 +6,9 @@
         <div class="card mb-0">
           <div class="card-body">
             <b class="text-center">Login E-partners</b>
-            <a href="./" class="text-nowrap logo-img text-center d-block py-3 w-100">
+            <%= link_to root_path, class: 'text-nowrap logo-img text-center d-block py-3 w-100' do %>
               <%= image_tag "logo.png" %>
-            </a>
+            <% end %>
             <form>
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
