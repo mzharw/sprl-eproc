@@ -20,8 +20,7 @@ class PurchReqnDecorator < ApplicationDecorator
   end
 
   def submitable?
-    object.state != 'COMMITTED' &&
-      items_subtotal.positive? &&
+    items_subtotal.positive? &&
       object.contract_ex_sp_docs.exists? &&
       object.work_ex_plan_docs.exists? &&
       object.tech_eval_method_docs.exists? &&
