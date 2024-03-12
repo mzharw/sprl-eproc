@@ -15,7 +15,6 @@ class PurchReqnDecorator < ApplicationDecorator
   #     end
   #   end
 
-
   def items_subtotal
     listed_items.sum(:est_subtotal)
   end
@@ -32,7 +31,6 @@ class PurchReqnDecorator < ApplicationDecorator
   def submitted?
     object&.state == 'COMMITTED'
   end
-
 
   def doc_title(name)
     object.class.doc_title(name)

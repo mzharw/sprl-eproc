@@ -33,6 +33,8 @@ en:
     attributes:
       purch_reqn:
         purch_reqn_type: 'Purchase requisition type'
+        desc: 'Description'
+        purch_group: 'Purchasing Group'
       purch_reqn_item:
         product_group: 'List commodity'
         desc: 'Description'

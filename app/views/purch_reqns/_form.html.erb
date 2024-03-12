@@ -15,7 +15,7 @@
   <% end %>
   <div class="row g-3">
     <div class="col-md-6">
-      <label for="pr-type">PR Type <span class="text-danger">*</span></label>
+      <%= label_for('pr-type', 'PR Type', true) %>
       <div class="form-check">
         <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material' %>
         <label class="form-check-label" for="material">
@@ -46,21 +46,21 @@
     </div>
     <div class="col-md-6 d-flex flex-column gap-3">
       <div>
-        <label for="purch_group_id">Purchasing Group</label>
+        <%= label_for('purch_group_id', 'Purchasing Group', true) %>
         <%= selection(form, :purch_group_id, purch_groups_path, :id, :code, :name) %>
       </div>
       <div>
-        <label for="plant_id">Plant</label>
+        <%= label_for('plant_id', 'Plant', true) %>
         <%= selection(form, :plant_id, plants_path, :id, :code, :name) %>
       </div>
     </div>
     <div class="col-md-6 d-flex flex-column gap-3" data-controller="toggler">
       <div>
-        <label for="pr-type">Description</label>
+        <%= label_for('desc', 'Description', true) %>
         <%= form.text_area :desc, id: :description, class: 'form-control' %>
       </div>
       <div>
-        <label for="fund_source">Fund Source</label>
+        <%= label_for('fund_source', 'Fund Source', true) %>
         <div class="form-check">
           <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input toggler-hide', id: 'project-wbs', data: { hide: 'toggle-cost-center', action: 'change->toggler#hide' } %>
           <label class="form-check-label" for="project-wbs">
@@ -84,7 +84,7 @@
       <%= selection(form, :currency_id, currencies_path, :id, :code, :name) %>
     </div>
     <div class="col-md-6">
-      <%= form.button '', class: 'btn btn-secondary mt-xxl-9', disabled: purch_reqn.new_record? ? false : !purch_reqn.submitable? do %>
+      <%= form.button '', class: 'btn btn-secondary mt-xxl-9', disabled: purch_reqn.new_record? ? false : purch_reqn.submitted? do %>
         <i class="ti ti-device-floppy"></i>
         <%= purch_reqn.new_record? ? 'Save' : 'Update' %>
       <% end %>
