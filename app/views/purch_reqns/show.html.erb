@@ -58,14 +58,14 @@
                   Material
                 <% end %>
               </li>
-              <% if @purch_reqn.purch_reqn_type == 'SERVICE' %>
+              <%# if @purch_reqn.purch_reqn_type == 'SERVICE' %>
                 <li>
                   <%= link_to new_purch_reqn_item_path(item_type: :service), class: 'dropdown-item' do %>
                     <i class="ti ti-forklift"></i>
                     Service
                   <% end %>
                 </li>
-              <% end %>
+              <%# end %>
             </ul>
           </div>
         <% end %>

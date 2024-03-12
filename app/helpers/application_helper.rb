@@ -54,6 +54,13 @@ module ApplicationHelper
     end
   end
 
+  def label_for(name, text, required)
+    content_tag(:a, for: name) do
+      concat(text)
+      concat(content_tag(:span, ' *', class: 'text-danger')) if required
+    end
+  end
+
   def selection(*options, **misc)
     render partial: 'shared/selection',
            locals: { form: options[0],
