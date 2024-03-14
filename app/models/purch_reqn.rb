@@ -69,12 +69,12 @@ class PurchReqn < ApplicationRecord
   end
 
   def workflow_after_advanced
-    # PurchReqnMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
+    PurchReqnMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
     update_task(!finished?)
   end
 
   def workflow_after_rejected
-    # PurchReqnMailer.with(model: self).reject_notice.deliver_later
+    PurchReqnMailer.with(model: self).reject_notice.deliver_later
     update_task(false)
   end
 
