@@ -67,11 +67,11 @@ class WorkAcceptanceNote < ApplicationRecord
            else
              false
            end
-    self.assignees = user_assignees(role[:role], :purch_groups)
-    self.task_name = "WAN : #{role[:display_role]} Approval"
+    self.assignees = user_assignees(role[:role], :purch_groups) if role
+    self.task_name = "WAN : #{role[:display_role]} Approval" if role
 
-    role[:assignees] = assignees.pluck(:email)
-    role[:creator] = creator.email
+    role[:assignees] = assignees&.pluck(:email) if role
+    role[:creator] = creator.email if role
     role
   end
 end
