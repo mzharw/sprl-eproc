@@ -83,12 +83,12 @@ class PurchOrder < ApplicationRecord
            else
              false
            end
-    assignees = user_assignees(role[:role], :purch_groups)
-    self.assignees = user_assignees(role[:role], :purch_groups)
-    self.task_name = "Purchase Order : #{role[:display_role]} Approval"
+    assignees = user_assignees(role[:role], :purch_groups) if role
+    self.assignees = user_assignees(role[:role], :purch_groups) if role
+    self.task_name = "Purchase Order : #{role[:display_role]} Approval" if role
 
-    role[:assignees] = assignees.pluck(:email)
-    role[:creator] = creator.email
+    role[:assignees] = assignees&.pluck(:email) if role
+    role[:creator] = creator.email if role
     role
   end
 end
