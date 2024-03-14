@@ -11,7 +11,7 @@ class WorkAcceptanceNoteDecorator < ApplicationDecorator
   #     end
   #   end
   def submitted?
-    object&.state == 'COMMITTED'
+    object&.state != 'DRAFT'
   end
 
   def submitable?

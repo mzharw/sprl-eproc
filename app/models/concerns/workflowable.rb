@@ -13,7 +13,7 @@ module Workflowable
   end
 
   def advance_workflow(instance = nil, rejected = false)
-    return unless state == 'COMMITTED'
+    return unless state == 'COMMITTED' || state == 'SUBMITTED'
 
     is_authorized = instance.nil?
     instance = last_instance
@@ -30,6 +30,8 @@ module Workflowable
 
       create_workflow_instance(seq, instance, is_authorized) unless finished?
       workflow_after_advanced if methods.include?(:workflow_after_advanced)
+
+      update(state: 'COMMITTED') if finished?
     end
 
     return if is_authorized
@@ -46,7 +48,7 @@ module Workflowable
   end
 
   def can_approve(user = nil, *groups, **filter)
-    role = workflow_map[:role] if defined? workflow_map
+    role = (workflow_map[:role] if workflow_map) if defined? workflow_map
 
     approved = user.nil? ? true : user.has_role?(role)
     approved &&= user&.purch_group_ids&.include?(purch_group_id) if groups.include? :purch_groups

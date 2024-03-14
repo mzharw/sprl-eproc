@@ -6,6 +6,7 @@ class CurrencyExchangeRatesController < ApplicationController
   # GET /currency_exchange_rates or /currency_exchange_rates.json
   def index
     @currency_exchange_rates = selectable(CurrencyExchangeRate)
+    json = paginate_json(@currency_exchange_rates.all)
     @currency_exchange_rates = filter(@currency_exchange_rates)
     @currency_exchange_rates = paginate(@currency_exchange_rates).decorate
 
@@ -13,7 +14,7 @@ class CurrencyExchangeRatesController < ApplicationController
       format.html do
         authorize @currency_exchange_rates.object
       end
-      format.json { render json: @currency_exchange_rates }
+      format.json { render json:  }
     end
   end
 

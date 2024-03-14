@@ -6,9 +6,9 @@ class ProductGroupsController < ApplicationController
   # GET /product_groups or /product_groups.json
   def index
     @product_groups = selectable(ProductGroup, :code, :name)
-    json = paginate_json(@product_groups)
-
+    json = paginate_json(@product_groups.all)
     @product_groups = filter(@product_groups)
+
     @product_groups = paginate(@product_groups).decorate
 
     respond_to do |format|

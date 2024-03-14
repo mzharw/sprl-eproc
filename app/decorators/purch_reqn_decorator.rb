@@ -29,7 +29,7 @@ class PurchReqnDecorator < ApplicationDecorator
   end
 
   def submitted?
-    object&.state == 'COMMITTED'
+    object&.state != 'DRAFT'
   end
 
   def doc_title(name)

@@ -6,9 +6,8 @@ class CommodityListsController < ApplicationController
   # GET /commodity_lists or /commodity_lists.json
   def index
     @commodity_lists = selectable(CommodityList, :number, :description)
-    json = paginate_json(@commodity_lists)
+    json = paginate_json(@commodity_lists.all)
     @commodity_lists = filter(@commodity_lists)
-
     @commodity_lists = paginate(@commodity_lists).decorate
 
     respond_to do |format|

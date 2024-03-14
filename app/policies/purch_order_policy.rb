@@ -3,6 +3,10 @@ class PurchOrderPolicy < ApplicationPolicy
     user.is_superuser? || user.has_role?('Buyer')
   end
 
+  def update?
+    user.is_superuser? || user.has_role?('Buyer')
+  end
+
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve

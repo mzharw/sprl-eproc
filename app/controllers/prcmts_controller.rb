@@ -11,8 +11,8 @@ class PrcmtsController < ApplicationController
     @prcmts = selectable(Prcmt.joins(:purch_reqn_items, :prcmt_items).group('prcmts.id'), :number, :name, filter: 'purch_reqn_id', filter_map: { purch_reqn_id: 'purch_reqn_items.purch_reqn_id' })
     @prcmts = set_scope(@prcmts, :purch_groups)
     json = paginate_json(@prcmts.where(prcmt_items: { id: prcmt_item_ids }))
-
     @prcmts = filter(@prcmts, { number: 'prcmts.number', tender_name: 'prcmts.name' })
+
     @prcmts = paginate(@prcmts).decorate
 
     respond_to do |format|

@@ -1,4 +1,4 @@
 class ProductGroup < ApplicationRecord
   include ModelTrackable
-  track_user
+  track_user(true)
 end

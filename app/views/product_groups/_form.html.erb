@@ -1,4 +1,4 @@
-<%= form_with(model: product_group) do |form| %>
+<%= form_with(model: product_group, html: {class: 'data-container'}) do |form| %>
   <% if product_group.errors.any? %>
     <div style="color: red">
       <h2>

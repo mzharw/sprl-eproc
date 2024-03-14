@@ -11,9 +11,9 @@ class PurchReqnsController < ApplicationController
                      .joins(:plant, :creator)
                      .select('purch_reqns.*, plants.code, users.username')
     @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups)
-    json = paginate_json(@purch_reqns)
-
+    json = paginate_json(@purch_reqns.all)
     @purch_reqns = filter(@purch_reqns, { plants_code: 'plants.code', created_by: 'users.username', desc: 'purch_reqns.desc' })
+
     @purch_reqns = paginate(@purch_reqns).decorate
 
     respond_to do |format|

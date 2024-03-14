@@ -1,17 +1,18 @@
 <aside class="left-sidebar text-light py-5" style="background: linear-gradient(to bottom, rgb(214,48,48) 0%, rgb(200,40,40) 25%, rgb(180,35,35) 50%, rgb(150,25,25) 75%, rgb(120,15,15) 100%);">
-  <div class="position-absolute close-btn d-block sidebartoggler cursor-pointer d-flex align-items-center" id="sidebarCollapse" style="margin: 20px; right: 0; top: 0">
-    <i class="ti ti-x fs-8 d-xl-none "></i>
+  <div class="w-100 position-absolute close-btn d-block sidebartoggler cursor-pointer d-flex align-items-center justify-content-center px-3" style="top: 20px" id="sidebarCollapse">
+    <i class="ti ti-circle-x d-xl-none" style="font-size: 1.3rem"></i>
   </div>
+  <p class="text-light text-center"><b>SPR Langgak</b> E-Procurement</p>
   <nav class="sidebar-nav scroll-sidebar">
     <ul id="sidebarnav">
-      <li class="sidebar-item">
-        <%= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
-                  <span>
-                      <i class="ti ti-layout-dashboard"></i>
-                  </span>
-          <span class="hide-menu">Dashboard</span>
-        <% end %>
-      </li>
+      <!--      <li class="sidebar-item">-->
+      <%#= link_to root_path, class: "sidebar-link #{'active' if current_page?(root_path)}" do %>
+      <!--                  <span>-->
+      <!--                      <i class="ti ti-layout-dashboard"></i>-->
+      <!--                  </span>-->
+      <!--          <span class="hide-menu">Dashboard</span>-->
+      <%# end %>
+      <!--      </li>-->
 
       <li class="sidebar-item">
         <%= link_to tasks_path, class: "sidebar-link #{'active' if active?('tasks')}" do %>
@@ -83,14 +84,14 @@
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Master Data</span>
         </li>
-        <li class="sidebar-item">
-          <%= link_to facilities_path, class: "sidebar-link #{'active' if active?('facilities')}" do %>
-                        <span>
-                            <i class="ti ti-building-community"></i>
-                        </span>
-            <span class="hide-menu">Facility</span>
-          <% end %>
-        </li>
+        <!--        <li class="sidebar-item">-->
+        <%#= link_to facilities_path, class: "sidebar-link #{'active' if active?('facilities')}" do %>
+        <!--                        <span>-->
+        <!--                            <i class="ti ti-building-community"></i>-->
+        <!--                        </span>-->
+        <!--            <span class="hide-menu">Facility</span>-->
+        <%# end %>
+        <!--        </li>-->
         <li class="sidebar-item">
           <%= link_to plants_path, class: "sidebar-link #{'active' if active?('plants')}" do %>
                         <span>
@@ -163,6 +164,5 @@
       <% end %>
     </ul>
   </nav>
-  <p class="text-light text-center"><b>SPR Langgak</b> E-Procurement</p>
 
 </aside>

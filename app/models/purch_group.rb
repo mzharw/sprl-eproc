@@ -1,6 +1,6 @@
 class PurchGroup < ApplicationRecord
   include ModelTrackable
-  track_user
+  track_user(true)
 
   belongs_to :party, optional: true
 

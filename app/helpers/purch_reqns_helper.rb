@@ -22,6 +22,8 @@ module PurchReqnsHelper
       case state
       when 'COMMITTED'
         'text-bg-light-success'
+      when 'SUBMITTED'
+        'text-bg-light-secondary'
       when 'FINISHED'
         'text-bg-light-success'
       when 'ACTIVE'
@@ -31,7 +33,7 @@ module PurchReqnsHelper
       when 'ONGOING'
         'text-bg-light-warning'
       when 'DRAFT'
-        'text-bg-light-secondary'
+        'text-bg-light-info'
       when 'REJECTED'
         'text-bg-light-danger'
       else

@@ -1,11 +1,18 @@
 <!-- Header Start -->
-<header class="d-flex py-3 align-items-center <%= 'w-100' unless defined? :full %> px-9 justify-content-between">
+<header class="d-flex py-3 align-items-center <%= 'w-100' unless defined? :full %> px-9 justify-content-between position-relative z-1 bg-white">
   <div class="d-flex gap-2 w-100 align-items-center">
-    <div class="nav-item d-block d-xl-none">
-      <a class="nav-link sidebartoggler link-primary" id="headerCollapse" href="javascript:void(0)">
-        <i class="ti ti-menu-2"></i>
-      </a>
-    </div>
+    <% if user_signed_in? %>
+      <div class="nav-item d-block d-xl-none">
+        <a class="nav-link sidebartoggler link-primary cursor-pointer" id="headerCollapse">
+          <i class="ti ti-menu-2"></i>
+        </a>
+      </div>
+      <div class="nav-item d-none d-xl-block" id="sidebar-toggler">
+        <a class="nav-link link-primary cursor-pointer">
+          <i class="ti ti-menu-2"></i>
+        </a>
+      </div>
+    <% end %>
     <%= link_to root_path, class: 'text-nowrap logo-img' do %>
       <%= image_tag "logo.png", width: '120px' %>
     <% end %>
@@ -48,6 +55,14 @@
           </div>
         </li>
       </ul>
+    </div>
+  <% else %>
+    <div class="w-100 position-fixed d-flex gap-3 flex-wrap justify-content-center">
+      <a href="">Home</a>
+      <a href="">Terms and Conditions</a>
+      <a href="">Registration Procedure</a>
+      <a href="">Contact</a>
+      <a href="">Announcement</a>
     </div>
   <% end %>
 </header>

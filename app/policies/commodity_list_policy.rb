@@ -19,6 +19,10 @@ class CommodityListPolicy < ApplicationPolicy
     user.has_role?('Super Admin')
   end
 
+  def update?
+    user.has_role?('Super Admin')
+  end
+
   def destroy?
     user.has_role?('Super Admin')
   end
