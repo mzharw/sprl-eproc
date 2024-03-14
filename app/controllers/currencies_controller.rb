@@ -5,6 +5,7 @@ class CurrenciesController < ApplicationController
   # GET /currencies or /currencies.json
   def index
     @currencies = selectable(Currency, :code, :name)
+    json = paginate_json(@currencies.all)
     @currencies = filter(@currencies)
     @currencies = paginate(@currencies)
 
@@ -12,7 +13,7 @@ class CurrenciesController < ApplicationController
       format.html do
         authorize @currencies
       end
-      format.json { render json: @currencies }
+      format.json { render json: }
     end
   end
 

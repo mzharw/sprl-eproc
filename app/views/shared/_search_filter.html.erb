@@ -6,13 +6,13 @@
         <i class="ti ti-search"></i>
       </a>
       <ul class="dropdown-menu selection-search-options" id="dropdown-search-filter">
-        <li><h6 class="dropdown-header">Search by :</h6></li>
+        <li><b class="dropdown-header text-body py-1">Search by</b></li>
         <li>
           <a class="dropdown-item <%= 'active' if params[:search_by] == default_column %>" href="<%= url + '&search_by=' + default_column %>"><%= (default_column.sub "_", " ")&.capitalize %></a>
         </li>
         <% columns.each do |column| %>
           <li>
-            <a class="dropdown-item <%= 'active' if params[:search_by] == column %>" href="<%= url + '&search_by=' + column %>"><%= column.capitalize&.sub "_", " " %></a>
+            <a class="dropdown-item <%= 'active' if params[:search_by] == column %>" href="<%= url + '&search_by=' + column %>"><%= (column.capitalize)&.sub("_", " ") %></a>
           </li>
         <% end %>
       </ul>

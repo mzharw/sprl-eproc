@@ -6,8 +6,7 @@ class MeasurementUnitsController < ApplicationController
   # GET /measurement_units or /measurement_units.json
   def index
     @measurement_units = selectable(MeasurementUnit, :symbol, :name)
-    json = paginate_json(@measurement_units)
-
+    json = paginate_json(@measurement_units.all)
     @measurement_units = filter(@measurement_units)
     @measurement_units = paginate(@measurement_units).decorate
 

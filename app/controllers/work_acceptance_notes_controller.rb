@@ -8,10 +8,10 @@ class WorkAcceptanceNotesController < ApplicationController
   # GET /work_acceptance_notes or /work_acceptance_notes.json
   def index
     @work_acceptance_notes = selectable(WorkAcceptanceNote.joins(:purch_reqn))
-    json = paginate_json(@work_acceptance_notes)
-
     @work_acceptance_notes = set_scope(@work_acceptance_notes, :purch_groups)
     @work_acceptance_notes = filter(@work_acceptance_notes, { title: 'name', pr_number: 'purch_reqns.number' })
+    json = paginate_json(@work_acceptance_notes)
+
     @work_acceptance_notes = paginate(@work_acceptance_notes).decorate
 
     respond_to do |format|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_07_083846) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_14_024314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -536,7 +536,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_083846) do
     t.uuid "product_id"
     t.string "desired_vendor"
     t.string "fixed_vendor"
-    t.decimal "qty"
+    t.decimal "qty", default: "0.0"
     t.uuid "measurement_unit_id"
     t.decimal "est_unit_price", default: "0.0"
     t.float "price_unit", default: 0.0
@@ -723,7 +723,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_083846) do
     t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
+    t.text "description"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -884,7 +884,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_083846) do
     t.uuid "discarded_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "workflow_step"
     t.uuid "workflow_step_id"
     t.index ["instance_number"], name: "index_workflow_instances_on_instance_number"
     t.index ["workflow_id"], name: "index_workflow_instances_on_workflow_id"

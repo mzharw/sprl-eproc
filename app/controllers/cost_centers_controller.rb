@@ -5,15 +5,16 @@ class CostCentersController < ApplicationController
 
   # GET /cost_centers or /cost_centers.json
   def index
-    @cost_centers = selectable(CostCenter, :cost_center_id, '"desc"')
-    @cost_centers = filter(@cost_centers, { description: '"desc"' })
-    @cost_centers = @cost_centers.page(params[:page])
+    @cost_centers = selectable(CostCenter.includes(:purch_group), :cost_center_id, '"desc"')
+    json = paginate_json(@cost_centers)
+    @cost_centers = filter(@cost_centers, { description: '"desc"', purch_group: 'purch_groups.code' })
+    @cost_centers = paginate(@cost_centers)
 
     respond_to do |format|
       format.html do
         authorize @cost_centers
       end
-      format.json { render json: @cost_centers }
+      format.json { render json: }
     end
   end
 

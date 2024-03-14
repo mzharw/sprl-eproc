@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   include ModelTrackable
-  track_user
+  track_user(true)
 
   belongs_to :measurement_unit
   belongs_to :product_group

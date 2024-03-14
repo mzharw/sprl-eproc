@@ -69,12 +69,12 @@ class PurchReqn < ApplicationRecord
   end
 
   def workflow_after_advanced
-    PurchReqnMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
+    # PurchReqnMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
     update_task(!finished?)
   end
 
   def workflow_after_rejected
-    PurchReqnMailer.with(model: self).reject_notice.deliver_later
+    # PurchReqnMailer.with(model: self).reject_notice.deliver_later
     update_task(false)
   end
 
@@ -137,11 +137,11 @@ class PurchReqn < ApplicationRecord
              false
            end
 
-    self.assignees = user_assignees(role[:role], :purch_groups, :plants)
-    self.task_name = "Purchase Requisition : #{role[:display_role]} Approval"
+    self.assignees = user_assignees(role[:role], :purch_groups, :plants) if role
+    self.task_name = "Purchase Requisition : #{role[:display_role]} Approval" if role
 
-    role[:assignees] = assignees.pluck(:email)
-    role[:creator] = creator.email
+    role[:assignees] = assignees.pluck(:email) if role
+    role[:creator] = creator.email if role
     role
   end
 

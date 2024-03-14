@@ -7,8 +7,8 @@ class PurchOrdersController < ApplicationController
   def index
     @purch_orders = selectable(PurchOrder.joins(:purch_reqn_items, :purch_reqn).group('purch_orders.id', 'purch_reqns.number'), [:number, :desc], filter: 'purch_reqn_id')
     @purch_orders = set_scope(@purch_orders, :purch_groups)
-
     json = paginate_json(@purch_orders.where.not(fully_approved_at: nil))
+
     @purch_orders = filter(@purch_orders, { number: 'purch_orders.number', pr_number: 'purch_reqns.number' })
     @purch_orders = paginate(@purch_orders).decorate
 

@@ -6,14 +6,15 @@ class FacilitiesController < ApplicationController
   # GET /facilities or /facilities.json
   def index
     @facilities = selectable(Facility)
+    json = paginate_json(@facilities.all)
     @facilities = filter(@facilities)
-    @facilities = @facilities.page(params[:page])
+    @facilities = paginate(@facilities)
 
     respond_to do |format|
       format.html do
         authorize @facilities
       end
-      format.json { render json: @facilities }
+      format.json { render json: }
     end
   end
 
