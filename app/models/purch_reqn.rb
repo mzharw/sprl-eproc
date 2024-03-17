@@ -44,6 +44,7 @@ class PurchReqn < ApplicationRecord
   validates :purch_org_id, presence: true
   validates :desc, presence: true
   validates :fund_source, presence: true
+  validates :cost_center_id, presence: true, if: :cost_center_fund_source?
 
   DOCS = {
     contract_docs: 'Contract Document',
@@ -93,6 +94,10 @@ class PurchReqn < ApplicationRecord
   end
 
   private
+
+  def cost_center_fund_source?
+    fund_source == 'COST_CENTER'
+  end
 
   def reject!
     rejected = dup

@@ -72,7 +72,7 @@ class WorkAcceptanceNotesController < ApplicationController
 
   # POST /work_acceptance_notes or /work_acceptance_notes.json
   def create
-    items = PurchOrderItem.where(id: wan_items_params)
+    items = PurchOrderItem.where(id: params[:purch_order_items])
     purch_reqn = items.first&.purch_reqn
     @work_acceptance_note = WorkAcceptanceNote.new({ **work_acceptance_note_params, **tracker,
                                                      plant_id: purch_reqn&.plant_id, purch_group_id: purch_reqn&.purch_group_id, purch_reqn_id: purch_reqn&.id })
@@ -121,7 +121,12 @@ class WorkAcceptanceNotesController < ApplicationController
       if @work_acceptance_note.update(work_acceptance_note_params)
         unless doc.blank?
           format.turbo_stream do
-            flash.now[:notice] = 'Document was updated successfully'
+            files_uploaded = !work_acceptance_note_params[doc].last.empty?
+            if files_uploaded
+              flash.now[:notice] = 'Document was updated successfully'
+            else
+              flash.now[:alert] = 'Please upload at least one document to proceed'
+            end
             render turbo_stream: [
               turbo_stream.append('toasts', partial: 'shared/toast'),
               turbo_stream.replace(doc, partial: 'docs_form', locals: { model: @work_acceptance_note, name: doc }),
@@ -190,9 +195,5 @@ class WorkAcceptanceNotesController < ApplicationController
                                                  :payment_term_number, :payment_term_desc, :request_type_code, :request_type,
                                                  :delivery_date, :desc, :receiver, :delivery_detail, :remark, :released_at,
                                                  :rejected_at, :discard_at, :cancel_remark, :reference_by_id, :attachment)
-  end
-
-  def wan_items_params
-    params.require(:purch_order_items)
   end
 end

@@ -39,3 +39,6 @@ en:
         product_group: 'List commodity'
         desc: 'Description'
         expected_delivery_date: 'Delivery date'
+      work_acceptance_note:
+        desc: 'WAN name'
+        wan_type: 'WAN type'

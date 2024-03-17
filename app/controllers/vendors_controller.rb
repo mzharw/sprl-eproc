@@ -4,7 +4,7 @@ class VendorsController < ApplicationController
   # GET /vendors or /vendors.json
   def index
     @vendors = selectable(Vendor.joins(:party, :vendor_type), :code, 'parties.full_name')
-    @vendors = filter(@vendors, { vendor_name: 'parties.full_name', vendor_type: 'vendor_type.name' })
+    @vendors = filter(@vendors, { vendor_name: 'parties.full_name', vendor_type: 'vendor_type.name' }, 'vendors.created_at', 'DESC')
     json = paginate_json(@vendors.select(:id, :code, 'parties.full_name as name'))
 
     @vendors = paginate(@vendors).decorate

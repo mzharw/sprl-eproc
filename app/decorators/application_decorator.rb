@@ -35,7 +35,7 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def plant_name
-    object&.plant&.party&.full_name
+    object&.plant&.facility&.name
   end
 
   def cost_center_code
@@ -101,6 +101,29 @@ class ApplicationDecorator < Draper::Decorator
 
   def workflow_approver
     object&.workflow_instances&.pluck(:updated_by_id)&.uniq
+  end
+
+  def format_number(value, options = {})
+    options = { precision: 2, delimiter: ',', separator: '.' }.merge(options)
+
+    number = value.to_s.gsub(/[^0-9.-]/, '').to_f
+
+    if number.nan?
+      "0.00"
+    else
+      formatted_number = number_with_precision(number, precision: options[:precision], delimiter: options[:delimiter], separator: options[:separator])
+      formatted_number
+    end
+  end
+
+  def number_with_precision(number, options = {})
+    options = { precision: 3, delimiter: ',', separator: '.' }.merge(options)
+
+    parts = number.to_s.split('.')
+    whole, fraction = parts[0], parts[1]
+
+    whole = whole.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1#{options[:delimiter]}")
+    [whole, fraction.to_s[0..(options[:precision] - 1)].ljust(options[:precision], '0')].compact.join(options[:separator])
   end
 
   private

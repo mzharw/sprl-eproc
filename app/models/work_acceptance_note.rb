@@ -17,6 +17,11 @@ class WorkAcceptanceNote < ApplicationRecord
   has_many :items, class_name: 'WorkAcceptanceNoteItem', foreign_key: :work_acceptance_note_id
   has_one_attached :attachment
 
+  validates :desc, presence: true
+  validates :wan_type, presence: true
+  validates :purch_reqn_id, presence: true
+  validates :purch_order_id, presence: true
+
   DOCS = {
     attachment: 'Attachment',
   }.freeze

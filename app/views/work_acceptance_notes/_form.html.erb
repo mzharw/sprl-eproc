@@ -1,4 +1,4 @@
-<%= form_with(model: work_acceptance_note, html: { class: 'data-container' }) do |form| %>
+<%= form_with(model: work_acceptance_note, html: { class: 'data-container' }, data: { turbo: false }) do |form| %>
   <% if work_acceptance_note.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(work_acceptance_note.errors.count, "error") %> prohibited this work_acceptance_note from being
@@ -13,12 +13,12 @@
   <% end %>
   <div class="row g-3">
     <div class="col-md-6">
-      <label for="name">WAN Name</label>
+      <%= label_for('name', 'WAN Name', true) %>
       <%= form.text_field :name, class: 'form-control' %>
     </div>
 
     <div class="col-md-6">
-      <label>WAN Type</label>
+      <%= label_for('wan_type', 'WAN type', true) %>
       <div class="form-check">
         <%= form.radio_button :wan_type, 'MATERIAL', class: 'form-check-input' %>
         <label class="form-check-label" for="wan_type_material">Goods</label>
@@ -30,17 +30,17 @@
     </div>
 
     <div class="col-md-6">
-      <label for="purch_reqn_id">Purchase Requisition</label>
+      <%= label_for('purch_reqn_id', 'Purchase Requisition', true) %>
       <%= selection(form, :purch_reqn_id, purch_reqns_path, :id, :number, :desc, cascade_to: 'purch_order_id') %>
     </div>
 
     <div class="col-md-6">
-      <label for="vendor_id">Vendor</label>
+      <%= label_for('vendor_id', 'Vendor', true) %>
       <%= selection(form, :vendor_id, vendors_path, :id, :code, :name) %>
     </div>
 
     <div class="col-md-6">
-      <label for="purch_order_id">Purchase Order</label>
+      <%= label_for('purch_order_id', 'Purchase Order', true) %>
       <%= selection(form, :purch_order_id, purch_orders_path, :id, :number, :name, fetch_to: new_work_acceptance_note_path) %>
     </div>
 

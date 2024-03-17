@@ -25,7 +25,7 @@
     <th>Created By</th>
     <th>Subtotal</th>
     <th>Created at</th>
-    <th>Cancel Remark</th>
+<!--    <th>Cancel Remark</th>-->
   </tr>
   </thead>
   <tbody>
@@ -44,8 +44,8 @@
       <td><%= badge(purch_reqn.state) %></td>
       <td><%= purch_reqn.creator_name %></td>
       <td><%= purch_reqn.items_subtotal %></td>
-      <td><%= purch_reqn.created_at %></td>
-      <td><%= purch_reqn.cancel_remark %></td>
+      <td><%= purch_reqn.formatted_create %></td>
+<!--      <td><%#= purch_reqn.cancel_remark %></td>-->
     </tr>
   <% end %>
   <% if purch_reqns.empty? %>

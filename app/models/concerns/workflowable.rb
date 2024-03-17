@@ -13,7 +13,7 @@ module Workflowable
   end
 
   def advance_workflow(instance = nil, rejected = false)
-    return unless state == 'COMMITTED' || state == 'SUBMITTED'
+    return unless state == 'SUBMITTED'
 
     is_authorized = instance.nil?
     instance = last_instance
