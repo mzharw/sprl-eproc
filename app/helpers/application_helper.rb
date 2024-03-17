@@ -95,7 +95,7 @@ module ApplicationHelper
   end
 
   def user_tasks_count
-    Task.ongoing.count || 0
+    Task.where(user_id: current_user.id).ongoing.count || 0
   end
 
   def link_access(name, path, access)
