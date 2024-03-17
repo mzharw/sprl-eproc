@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = filter(Task)
+    @tasks = filter(Task.where(user_id: current_user.id))
     @tasks = paginate(@tasks).decorate
   end
 
@@ -60,13 +60,14 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:id, :user_id, :number, :name, :taskable_id, :taskable_type, :data, :state, :created_by_id, :updated_by_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:id, :user_id, :number, :name, :taskable_id, :taskable_type, :data, :state, :created_by_id, :updated_by_id)
+  end
 end
