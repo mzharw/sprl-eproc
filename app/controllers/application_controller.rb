@@ -19,9 +19,11 @@ class ApplicationController < ActionController::Base
 
   def validate_user!
     if user_signed_in?
-      sign_out current_user if current_user.state == 'INACTIVE'
-      flash[:alert] = "Your password is successfully changed yet account is inactive. Please contact administrator to proceed."
-      redirect_to new_user_session_path
+      if current_user.state == 'INACTIVE'
+        flash[:alert] = "Your password is successfully changed yet account is inactive. Please contact administrator to proceed."
+        sign_out current_user
+        redirect_to new_user_session_path
+      end
     end
   end
 
