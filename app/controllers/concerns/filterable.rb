@@ -49,9 +49,17 @@ module Filterable
     paged = collection.page(params[:page])
 
     if params[:per].present?
-      paged = params[:per] == 'all' ? paged.per(collection.count) : paged.per(params[:per])
+      if params[:per] == 'all'
+        begin
+          count = collection.count
+        rescue
+          count = collection.length
+        end
+        paged.per(count)
+      else
+        paged = paged.per(params[:per])
+      end
     end
-
     paged
   end
 

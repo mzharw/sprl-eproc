@@ -66,7 +66,6 @@ export default class extends Controller {
             }
         }
 
-
         if (this.element === target || (this.element !== target && !options.selected) || dependent) {
             if (dataOptions.fetch_to) {
                 Turbo.cache.clear()
@@ -93,8 +92,14 @@ export default class extends Controller {
 
         optionsList.innerHTML = "";
         if (results.length > 0) {
-            results.forEach((result) => {
+            let parsedData = JSON.parse(data.options), defCol, defVal;
 
+            if (parsedData.default) {
+                defCol = Object.keys(parsedData.default)[0]
+                defVal = parsedData.default[defCol]
+            }
+
+            results.forEach((result) => {
                 const optionElement = document.createElement("div");
                 optionElement.classList.add("selection-option");
                 this.generateLabel(data, result, optionElement, inputTarget)
@@ -104,8 +109,10 @@ export default class extends Controller {
 
                 optionsList.appendChild(optionElement);
 
+                let defaultCheck = defVal && defCol
+
                 // Check if the option is selected and add the "active" class
-                if (result[data.value] === selectedInputTarget.value) {
+                if (result[data.value] === selectedInputTarget.value || (defaultCheck && result[defCol] === defVal)) {
                     optionElement.classList.add("active");
                     this.selectOption(result, target, false);
                 }
