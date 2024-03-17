@@ -95,7 +95,9 @@ module ApplicationHelper
   end
 
   def user_tasks_count
-    Task.where(user_id: current_user.id).ongoing.count || 0
+    task = Task.all
+    task = Task.where(user_id: current_user.id) unless current_user.is_superadmin?
+    task.ongoing.count || 0
   end
 
   def link_access(name, path, access)

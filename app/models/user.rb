@@ -25,6 +25,10 @@ class User < ApplicationRecord
     has_any_role? 'Super Admin', 'General Manager', 'Manager SCM'
   end
 
+  def is_superadmin?
+    has_role? 'Super Admin'
+  end
+
   def self.find_for_authentication(warden)
     active.find_by(username: warden[:username])
   end
