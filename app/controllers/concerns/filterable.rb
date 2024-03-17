@@ -51,15 +51,17 @@ module Filterable
     if params[:per].present?
       if params[:per] == 'all'
         begin
-          count = collection.count
+          all = collection.count
         rescue
-          count = collection.length
+          all = collection.length
         end
-        paged.per(count)
+
+        paged = paged.per(all)
       else
         paged = paged.per(params[:per])
       end
     end
+
     paged
   end
 
