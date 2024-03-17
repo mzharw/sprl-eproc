@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :buyer_purch_groups, through: :buyer
   has_many :buyer_plants, through: :buyer
 
+  scope :active, -> { where(state: 'ACTIVE') }
+
   validates :password, confirmation: true,
             unless: Proc.new { |a| a.password.blank? }
 
@@ -21,6 +23,10 @@ class User < ApplicationRecord
 
   def is_superuser?
     has_any_role? 'Super Admin', 'General Manager', 'Manager SCM'
+  end
+
+  def self.find_for_authentication(warden)
+    active.find_by(username: warden[:username])
   end
 
   # Include default devise modules. Others available are:
