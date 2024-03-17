@@ -9,7 +9,7 @@ class PurchGroupsController < ApplicationController
     @purch_groups = selectable(PurchGroup.joins(:party), 'parties.full_name', :code)
     json_groups = current_user.is_superuser? ? @purch_groups : @purch_groups.where(id: current_user.purch_group_ids)
     json = paginate_json(json_groups, :id, :code, 'parties.full_name as name')
-    @purch_groups = filter(@purch_groups, { name: 'parties.full_name' })
+    @purch_groups = filter(@purch_groups, { name: 'parties.full_name' }, 'purch_groups.created_at', :asc)
     @purch_groups = paginate(@purch_groups)
 
     respond_to do |format|

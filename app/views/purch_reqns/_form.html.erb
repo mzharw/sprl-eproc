@@ -38,7 +38,7 @@
         </label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :contract, false, class: 'form-check-input', id: 'contract-false' %>
+        <%= form.radio_button :contract, false, class: 'form-check-input', id: 'contract-false', checked: true %>
         <label class="form-check-label" for="contract-false">
           No
         </label>
@@ -80,8 +80,8 @@
       <%= selection(form, :cost_center_id, cost_centers_path, :id, :cost_center_id, :desc) %>
     </div>
     <div class="col-md-6">
-      <label for="currency_id">Currency</label>
-      <%= selection(form, :currency_id, currencies_path, :id, :code, :name) %>
+      <%= label_for('currency_id', 'Currency', true) %>
+      <%= selection(form, :currency_id, currencies_path, :id, :code, :name, default: { code: 'IDR' }) %>
     </div>
     <div class="col-md-6">
       <%= form.button '', class: 'btn btn-secondary mt-xxl-9', disabled: purch_reqn.new_record? ? false : purch_reqn.submitted? do %>

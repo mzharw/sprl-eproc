@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = selectable(User.joins(party: :personnel).eager_load(party: :personnel).distinct)
-    @users = filter(@users, { full_name: 'parties.full_name', position_name: 'personnels.position_name' })
+    @users = filter(@users, { full_name: 'parties.full_name', position_name: 'personnels.position_name' }, 'personnels.created_at', :desc)
     @users = paginate(@users).decorate
 
     authorize @users.object

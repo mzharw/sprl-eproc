@@ -39,6 +39,8 @@ class PurchReqn < ApplicationRecord
   # belongs_to :prcmt, foreign_key: :prcmt_id
 
   validates :purch_reqn_type, presence: { message: 'is required' }
+  validates :currency, presence: { message: 'is required' }
+  validates :contract, inclusion: { in: [true, false] }
   validates :purch_org_id, presence: true
   validates :desc, presence: true
   validates :fund_source, presence: true
