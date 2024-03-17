@@ -35,7 +35,7 @@ class PrcmtsController < ApplicationController
         qr_prcmt = RQRCode::QRCode.new(prcmt_url)
         @qr_prcmt = qr_prcmt.as_svg(**svg_config)
 
-        render pdf: 'prcmt',
+        render pdf: "PRCMT_#{@prcmt&.number}",
                template: 'prcmts/pdf_prcmt',
                formats: [:html],
                disposition: :inline,

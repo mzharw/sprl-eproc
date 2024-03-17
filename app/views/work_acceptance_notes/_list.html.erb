@@ -78,7 +78,7 @@
         <td><%= work_acceptance_note.reference_by_id %></td> -->
       <td>
         <div class="d-flex">
-          <%= link_to work_acceptance_note_path(work_acceptance_note), class: 'btn btn-sm link-success' do %>
+          <%= link_to work_acceptance_note_path(work_acceptance_note), class: 'btn btn-sm link-success', data: { turbo: false } do %>
             <i class="ti ti-eye"></i>
           <% end %>
         </div>

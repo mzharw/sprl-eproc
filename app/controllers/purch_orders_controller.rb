@@ -40,7 +40,7 @@ class PurchOrdersController < ApplicationController
           end
         end
 
-        render pdf: 'purch_order',
+        render pdf: "PO_#{@purch_order&.number}",
                template: 'purch_orders/pdf_purch_order',
                formats: [:html],
                disposition: :inline,

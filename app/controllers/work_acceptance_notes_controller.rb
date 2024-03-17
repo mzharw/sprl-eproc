@@ -42,7 +42,7 @@ class WorkAcceptanceNotesController < ApplicationController
           end
         end
 
-        render pdf: 'wan',
+        render pdf: "WAN_#{@work_acceptance_note&.number}",
                template: 'work_acceptance_notes/pdf_wan',
                formats: [:html],
                disposition: :inline,
@@ -116,23 +116,25 @@ class WorkAcceptanceNotesController < ApplicationController
 
   # PATCH/PUT /work_acceptance_notes/1 or /work_acceptance_notes/1.json
   def update
-    doc = WorkAcceptanceNote.check_docs(work_acceptance_note_params)
+    doc = WorkAcceptanceNote.check_docs(work_acceptance_note_params) unless work_acceptance_note_params.nil?
+
     respond_to do |format|
-      if @work_acceptance_note.update(work_acceptance_note_params)
-        unless doc.blank?
-          format.turbo_stream do
-            files_uploaded = !work_acceptance_note_params[doc].last.empty?
-            if files_uploaded
-              flash.now[:notice] = 'Document was updated successfully'
-            else
+      if !work_acceptance_note_params.nil? && @work_acceptance_note.update(work_acceptance_note_params)
+        format.turbo_stream do
+          if work_acceptance_note_params.has_key?(:remark)
+            flash.now[:notice] = 'Work acceptance note was successfully updated.'
+          else
+            if doc.nil?
               flash.now[:alert] = 'Please upload at least one document to proceed'
+            else
+              flash.now[:notice] = 'Document was updated successfully'
             end
-            render turbo_stream: [
-              turbo_stream.append('toasts', partial: 'shared/toast'),
-              turbo_stream.replace(doc, partial: 'docs_form', locals: { model: @work_acceptance_note, name: doc }),
-              turbo_stream.replace('submit-button', partial: 'show_submit_button', locals: { model: @work_acceptance_note }),
-            ]
           end
+          render turbo_stream: [
+            turbo_stream.append('toasts', partial: 'shared/toast'),
+            turbo_stream.replace('attachment', partial: 'docs_form', locals: { model: @work_acceptance_note, name: 'attachment' }),
+            turbo_stream.replace('submit-button', partial: 'show_submit_button', locals: { model: @work_acceptance_note }),
+          ]
         end
         format.html do
           redirect_to work_acceptance_note_url(@work_acceptance_note),
@@ -140,6 +142,18 @@ class WorkAcceptanceNotesController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @work_acceptance_note }
       else
+        format.turbo_stream do
+          if doc.nil?
+            flash.now[:alert] = 'Please upload at least one document to proceed'
+          else
+            flash.now[:notice] = 'Document was updated successfully'
+          end
+          render turbo_stream: [
+            turbo_stream.append('toasts', partial: 'shared/toast'),
+            turbo_stream.replace('attachment', partial: 'docs_form', locals: { model: @work_acceptance_note, name: 'attachment' }),
+            turbo_stream.replace('submit-button', partial: 'show_submit_button', locals: { model: @work_acceptance_note }),
+          ]
+        end
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @work_acceptance_note.errors, status: :unprocessable_entity }
       end
@@ -151,21 +165,21 @@ class WorkAcceptanceNotesController < ApplicationController
     attachment = @work_acceptance_note.send(attachment_name)
 
     respond_to do |format|
-      if attachment.purge
-        format.turbo_stream do
-          flash.now[:notice] = 'Document was removed successfully!'
-          render turbo_stream: [
-            turbo_stream.append('toasts', partial: 'shared/toast'),
-            turbo_stream.replace(attachment_name, partial: 'docs_form', locals: { model: @work_acceptance_note, name: attachment_name }),
-            turbo_stream.replace('submit-button', partial: 'show_submit_button', locals: { model: @work_acceptance_note }),
-          ]
-        end
-        # format.html { redirect_to work_acceptance_notes_url(@work_acceptance_note), notice: 'Attachment was successfully deleted.' }
-        # format.json { render :show, status: :ok, location: @work_acceptance_note }
-      else
-        # format.html { render :show, status: :unprocessable_entity }
-        # format.json { render json: @work_acceptance_note.errors, status: :unprocessable_entity }
+      attachment.purge
+      # if attachment.purge
+      format.turbo_stream do
+        flash.now[:notice] = 'Document was removed successfully!'
+        render turbo_stream: [
+          turbo_stream.append('toasts', partial: 'shared/toast'),
+          turbo_stream.replace(attachment_name, partial: 'docs_form', locals: { model: @work_acceptance_note, name: attachment_name }),
+          turbo_stream.replace('submit-button', partial: 'show_submit_button', locals: { model: @work_acceptance_note }),
+        ]
       end
+      # format.html { redirect_to work_acceptance_notes_url(@work_acceptance_note), notice: 'Attachment was successfully deleted.' }
+      # format.json { render :show, status: :ok, location: @work_acceptance_note }
+      # else
+      # format.html { render :show, status: :unprocessable_entity }
+      # format.json { render json: @work_acceptance_note.errors, status: :unprocessable_entity }
     end
   end
 
@@ -189,11 +203,13 @@ class WorkAcceptanceNotesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def work_acceptance_note_params
-    params.require(:work_acceptance_note).permit(:number, :sap_number, :name, :state, :current_workflow_instance_id,
-                                                 :data, :wan_type, :internal_org_id, :purch_org_id, :purch_group_id, :plant_id,
-                                                 :purch_order_id, :vendor_id, :to_currency, :incoterm_id, :incoterm_desc,
-                                                 :payment_term_number, :payment_term_desc, :request_type_code, :request_type,
-                                                 :delivery_date, :desc, :receiver, :delivery_detail, :remark, :released_at,
-                                                 :rejected_at, :discard_at, :cancel_remark, :reference_by_id, :attachment)
+    if params.has_key?(:work_acceptance_note)
+      params.require(:work_acceptance_note).permit(:number, :sap_number, :name, :state, :current_workflow_instance_id,
+                                                   :data, :wan_type, :internal_org_id, :purch_org_id, :purch_group_id, :plant_id,
+                                                   :purch_order_id, :vendor_id, :to_currency, :incoterm_id, :incoterm_desc,
+                                                   :payment_term_number, :payment_term_desc, :request_type_code, :request_type,
+                                                   :delivery_date, :desc, :receiver, :delivery_detail, :remark, :released_at,
+                                                   :rejected_at, :discard_at, :cancel_remark, :reference_by_id, :attachment)
+    end
   end
 end

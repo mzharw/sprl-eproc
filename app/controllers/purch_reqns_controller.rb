@@ -44,7 +44,7 @@ class PurchReqnsController < ApplicationController
           end
         end
 
-        render pdf: 'purch_reqn',
+        render pdf: "PR_#{@purch_reqn&.number}",
                template: 'purch_reqns/pdf_purch_reqn',
                formats: [:html],
                disposition: :inline,

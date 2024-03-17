@@ -17,7 +17,7 @@ class WorkAcceptanceNote < ApplicationRecord
   has_many :items, class_name: 'WorkAcceptanceNoteItem', foreign_key: :work_acceptance_note_id
   has_one_attached :attachment
 
-  validates :desc, presence: true
+  validates :name, presence: true
   validates :wan_type, presence: true
   validates :purch_reqn_id, presence: true
   validates :purch_order_id, presence: true
@@ -38,12 +38,12 @@ class WorkAcceptanceNote < ApplicationRecord
   end
 
   def workflow_after_advanced
-    WanMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
+    # WanMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
     update_task(!finished?)
   end
 
   def workflow_after_rejected
-    WanMailer.with(model: self).reject_notice.deliver_later
+    # WanMailer.with(model: self).reject_notice.deliver_later
     update_task(false)
   end
 
