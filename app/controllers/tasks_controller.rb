@@ -4,7 +4,9 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = filter(Task.where(user_id: current_user.id))
+    task = Task.all
+    task = Task.where(user_id: current_user.id) unless current_user.is_superadmin?
+    @tasks = filter(task)
     @tasks = paginate(@tasks).decorate
   end
 
