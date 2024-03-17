@@ -38,12 +38,12 @@ class WorkAcceptanceNote < ApplicationRecord
   end
 
   def workflow_after_advanced
-    # WanMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
+    WanMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
     update_task(!finished?)
   end
 
   def workflow_after_rejected
-    # WanMailer.with(model: self).reject_notice.deliver_later
+    WanMailer.with(model: self).reject_notice.deliver_later
     update_task(false)
   end
 
