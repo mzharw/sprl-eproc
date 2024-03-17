@@ -76,7 +76,7 @@
       </div>
     </div>
     <div class="col-md-6 toggle-cost-center">
-      <label for="cost_center_id">Cost Center</label>
+      <%= label_for('cost_center_id', 'Cost Center', true) %>
       <%= selection(form, :cost_center_id, cost_centers_path, :id, :cost_center_id, :desc) %>
     </div>
     <div class="col-md-6">

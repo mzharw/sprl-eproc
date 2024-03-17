@@ -110,7 +110,12 @@ class PurchReqnsController < ApplicationController
       if @purch_reqn.update(purch_reqn_params)
         unless doc.blank?
           format.turbo_stream do
-            flash.now[:notice] = 'Document was updated successfully'
+            files_uploaded = !purch_reqn_params[doc].last.empty?
+            if files_uploaded
+              flash.now[:notice] = 'Document was updated successfully'
+            else
+              flash.now[:alert] = 'Please upload at least one document to proceed'
+            end
             render turbo_stream: [
               turbo_stream.append('toasts', partial: 'shared/toast'),
               turbo_stream.replace(doc, partial: 'docs_form', locals: { model: @purch_reqn, name: doc }),

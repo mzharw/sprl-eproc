@@ -20459,7 +20459,7 @@ thead tr th.sticky {
 }
 
 thead {
-    z-index: 2;
+    /*z-index: 2;*/
     transform: translateY(-1px);
 }
 
