@@ -54,7 +54,7 @@ module ApplicationHelper
     end
   end
 
-  def label_for(name, text, required)
+  def label_for(name, text, required = false)
     content_tag(:a, for: name) do
       concat(text)
       concat(content_tag(:span, ' *', class: 'text-danger')) if required

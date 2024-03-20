@@ -1,6 +1,6 @@
 class PurchOrderPolicy < ApplicationPolicy
   def index?
-    (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Purchase Order')
+    (user.is_superuser? || user.has_role?('Buyer')) || user.has_role?('Purchase Order')
   end
 
   def create?
@@ -11,8 +11,8 @@ class PurchOrderPolicy < ApplicationPolicy
     (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Purchase Order')
   end
 
-  def show?
-    (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Purchase Order')
+  def index?
+    (user.is_superuser? || user.has_role?('Buyer')) || user.has_role?('Purchase Order')
   end
 
   def edit?

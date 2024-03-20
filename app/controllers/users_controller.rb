@@ -19,14 +19,19 @@ class UsersController < ApplicationController
 
   def change_password
     if request.post?
-      if @user.valid_password? params[:password]
+      if policy(current_user).edit? || @user.valid_password?(params[:password])
         new_password = params[:new_password]
         new_password_confirmation = params[:new_password_confirmation]
         if !new_password.empty? && !new_password_confirmation.empty? && new_password == new_password_confirmation
-          password = params[:new_password]
-          @user.update({ password: })
-          flash.notice = 'Successfully changed password.'
-          return redirect_to root_path
+
+          if new_password.length >= 6
+            password = params[:new_password]
+            @user.update({ password: })
+            flash.notice = 'Successfully changed password.'
+            return redirect_to policy(current_user).edit? ? edit_user_path : root_path
+          else
+            flash.alert = 'Password is too short (minimum is 6 characters).'
+          end
         else
           flash.alert = 'New password are mismatched.'
         end
