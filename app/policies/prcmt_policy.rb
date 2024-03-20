@@ -1,7 +1,7 @@
 class PrcmtPolicy < ApplicationPolicy
 
   def index?
-    (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Procurement')
+    (user.is_superuser? || user.has_role?('Buyer')) || user.has_role?('Procurement')
   end
 
   def create?
@@ -12,13 +12,14 @@ class PrcmtPolicy < ApplicationPolicy
     (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Procurement')
   end
 
-  def show?
-    (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Procurement')
+  def index?
+    (user.is_superuser? || user.has_role?('Buyer')) || user.has_role?('Procurement')
   end
 
   def edit?
     (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Procurement')
   end
+
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve

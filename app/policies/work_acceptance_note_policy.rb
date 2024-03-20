@@ -1,6 +1,6 @@
 class WorkAcceptanceNotePolicy < ApplicationPolicy
   def index?
-    (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Work Acceptance Note')
+    (user.is_superuser? || user.has_role?('Buyer')) || user.has_role?('Work Acceptance Note')
   end
 
   def create?
@@ -11,8 +11,8 @@ class WorkAcceptanceNotePolicy < ApplicationPolicy
     (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Work Acceptance Note')
   end
 
-  def show?
-    (user.is_superuser? || user.has_role?('Buyer')) && user.has_role?('Work Acceptance Note')
+  def index?
+    (user.is_superuser? || user.has_role?('Buyer')) || user.has_role?('Work Acceptance Note')
   end
 
   def edit?
