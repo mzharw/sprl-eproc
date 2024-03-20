@@ -29,7 +29,7 @@
         <% klass = model.respond_to?(:klass) ? model.klass : model.object.klass %>
         <% query_params = request.query_parameters %>
       </a>
-      <%= model&.entry_name %>
+      <%= defined?(entry_name) ? entry_name : model&.entry_name %>
       <ul class="dropdown-menu" id="pagination-show-page">
         <li>
           <% query_params[:per] = 5 %>

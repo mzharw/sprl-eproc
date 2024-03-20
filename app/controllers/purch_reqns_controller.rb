@@ -13,8 +13,10 @@ class PurchReqnsController < ApplicationController
     @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups)
     json = paginate_json(@purch_reqns.all)
     @purch_reqns = filter(@purch_reqns, { plants_code: 'plants.code', created_by: 'users.username', desc: 'purch_reqns.desc' })
+    authorize @purch_reqns
 
     @purch_reqns = paginate(@purch_reqns).decorate
+
 
     respond_to do |format|
       format.html
@@ -181,7 +183,9 @@ class PurchReqnsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_purch_reqn
-    @purch_reqn = set_tracker(PurchReqn, :plants, :purch_groups, redirect_path: purch_reqns_path)
+    @purch_reqn = PurchReqn.all
+    authorize @purch_reqn
+    @purch_reqn = set_tracker(@purch_reqn, :plants, :purch_groups, redirect_path: purch_reqns_path)
     return if @purch_reqn.nil?
 
     @purch_reqn = PurchReqnDecorator.new(@purch_reqn)
@@ -196,7 +200,7 @@ class PurchReqnsController < ApplicationController
                   :justification, :budget_soure, :reason, :contract_type, :risk_category,
                   :explanation, :previous_contract_number, :previous_contract_title,
                   :local_of_content, :rejected_at, :cancel_remark,
-                  :contract_reference_id, :prcmt_id,
+                  :contract_reference_id, :prcmt_id, :wbsproject_id,
                   contract_docs: [],
                   contract_ex_sp_docs: [],
                   memo_scm_manager_docs: [],

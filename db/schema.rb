@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_14_024314) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_122548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -682,6 +682,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_024314) do
     t.uuid "discarded_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "wbsproject_id"
     t.index ["cost_center_id"], name: "index_purch_reqns_on_cost_center_id"
     t.index ["created_by_id"], name: "index_purch_reqns_on_created_by_id"
     t.index ["currency_id"], name: "index_purch_reqns_on_currency_id"
@@ -705,6 +706,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_024314) do
     t.datetime "updated_at", null: false
     t.uuid "created_by_id"
     t.uuid "updated_by_id"
+    t.boolean "system", default: false
     t.index ["created_by_id_id"], name: "index_roles_on_created_by_id_id"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
@@ -789,6 +791,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_024314) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "party_id"
+  end
+
+  create_table "wbsprojects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "parent_id"
+    t.string "ctrl_name"
+    t.string "position"
+    t.string "payroll_id"
+    t.string "wbs_id"
+    t.text "desc"
+    t.string "object_number"
+    t.string "istat"
+    t.string "usr03"
+    t.string "short_status"
+    t.string "long_status"
+    t.string "pack_short_status"
+    t.string "pack_long_status"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "responsible_cc_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "work_acceptance_note_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

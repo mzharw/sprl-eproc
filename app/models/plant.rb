@@ -5,6 +5,8 @@ class Plant < ApplicationRecord
   has_many :buyer_plants
   has_many :buyers, through: :buyer_plants
 
+  validates :code, presence: true, uniqueness: true
+
   def plant_name
     "#{code} - #{facility&.name}"
   end

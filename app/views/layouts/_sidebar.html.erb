@@ -29,40 +29,50 @@
         <% end %>
       </li>
 
-      <li class="sidebar-item">
-        <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if active?('purch_reqns', 'purch_reqn_items')}" do %>
+      <% if current_user.has_role? 'Purchase Requisition' %>
+        <li class="sidebar-item">
+          <%= link_to purch_reqns_path, class: "sidebar-link #{'active' if active?('purch_reqns', 'purch_reqn_items')}" do %>
                               <span>
                                   <i class="ti ti-shopping-cart"></i>
                               </span>
-          <span class="hide-menu">Purchase Requisition</span>
-        <% end %>
-      </li>
+            <span class="hide-menu">Purchase Requisition</span>
+          <% end %>
+        </li>
+      <% end %>
 
-      <li class="sidebar-item">
-        <%= link_to prcmts_path, class: "sidebar-link #{'active' if active?('prcmts')}" do %>
+      <% if current_user.has_role? 'Procurement' %>
+        <li class="sidebar-item">
+          <%= link_to prcmts_path, class: "sidebar-link #{'active' if active?('prcmts')}" do %>
                               <span>
                                   <i class="ti ti-briefcase"></i>
                               </span>
-          <span class="hide-menu">Procurement</span>
-        <% end %>
-      </li>
+            <span class="hide-menu">Procurement</span>
+          <% end %>
+        </li>
+      <% end %>
 
-      <li class="sidebar-item">
-        <%= link_to purch_orders_path, class: "sidebar-link #{'active' if active?('purch_orders')}" do %>
+
+      <% if current_user.has_role? 'Purchase Order' %>
+        <li class="sidebar-item">
+          <%= link_to purch_orders_path, class: "sidebar-link #{'active' if active?('purch_orders')}" do %>
                               <span>
                                   <i class="ti ti-truck-delivery"></i>
                               </span>
-          <span class="hide-menu">Purchase Order</span>
-        <% end %>
-      </li>
-      <li class="sidebar-item">
-        <%= link_to work_acceptance_notes_path, class: "sidebar-link #{'active' if active?('work_acceptance_notes')}" do %>
+            <span class="hide-menu">Purchase Order</span>
+          <% end %>
+        </li>
+      <% end %>
+
+      <% if current_user.has_role? 'Work Acceptance Note' %>
+        <li class="sidebar-item">
+          <%= link_to work_acceptance_notes_path, class: "sidebar-link #{'active' if active?('work_acceptance_notes')}" do %>
                               <span>
                                   <i class="ti ti-eye-edit"></i>
                               </span>
-          <span class="hide-menu">Work Acceptance Note</span>
-        <% end %>
-      </li>
+            <span class="hide-menu">Work Acceptance Note</span>
+          <% end %>
+        </li>
+      <% end %>
 
       <%# sidebar_item('ti ti-shopping-cart', 'Purchase Requisition', 'purch_reqns', [
         { icon: 'file-invoice', title: 'Purchase Requisition', path: 'purch_reqns', active: 'purch_reqn_items' },
@@ -101,6 +111,14 @@
           <% end %>
         </li>
         <li class="sidebar-item">
+          <%= link_to wbsprojects_path, class: "sidebar-link #{'active' if active?('wbsprojects')}" do %>
+                        <span>
+                            <i class="ti ti-coins "></i>
+                        </span>
+            <span class="hide-menu">AFE Projects</span>
+          <% end %>
+        </li>
+        <li class="sidebar-item">
           <%= link_to cost_centers_path, class: "sidebar-link #{'active' if active?('cost_centers')}" do %>
                         <span>
                             <i class="ti ti-building-bank"></i>
@@ -124,22 +142,10 @@
             <span class="hide-menu">Measurement Unit</span>
           <% end %>
         </li>
-        <li class="sidebar-item">
-          <%= link_to products_path, class: "sidebar-link #{'active' if active?('products')}" do %>
-                        <span>
-                            <i class="ti ti-package"></i>
-                        </span>
-            <span class="hide-menu">Material (Product)</span>
-          <% end %>
-        </li>
-        <li class="sidebar-item">
-          <%= link_to product_groups_path, class: "sidebar-link #{'active' if active?('product_groups')}" do %>
-                        <span>
-                            <i class="ti ti-packages"></i>
-                        </span>
-            <span class="hide-menu">Material (Product) Group</span>
-          <% end %>
-        </li>
+        <%= sidebar_item('ti ti-box', 'Material Management', 'products', [
+          { icon: 'package', title: 'Product', path: 'products' },
+          { icon: 'packages', title: 'Product Group', path: 'product_groups' },
+        ]) %>
         <li class="sidebar-item">
           <%= link_to purch_groups_path, class: "sidebar-link #{'active' if active?('purch_groups')}" do %>
                               <span>

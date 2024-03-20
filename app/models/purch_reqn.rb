@@ -18,6 +18,7 @@ class PurchReqn < ApplicationRecord
   belongs_to :purch_group, foreign_key: :purch_group_id
   belongs_to :plant, foreign_key: :plant_id
   belongs_to :cost_center, foreign_key: :cost_center_id, optional: true
+  belongs_to :wbsproject, foreign_key: :wbsproject_id, optional: true
   belongs_to :currency, foreign_key: :currency_id, optional: true
   has_many_attached :contract_docs
   has_many_attached :contract_ex_sp_docs
@@ -45,6 +46,7 @@ class PurchReqn < ApplicationRecord
   validates :desc, presence: true
   validates :fund_source, presence: true
   validates :cost_center_id, presence: true, if: :cost_center_fund_source?
+  validates :wbsproject_id, presence: true, if: :project_afe_fund_source?
 
   DOCS = {
     contract_docs: 'Contract Document',
@@ -97,6 +99,10 @@ class PurchReqn < ApplicationRecord
 
   def cost_center_fund_source?
     fund_source == 'COST_CENTER'
+  end
+
+  def project_afe_fund_source?
+    fund_source == 'PROJECT_WBS'
   end
 
   def reject!

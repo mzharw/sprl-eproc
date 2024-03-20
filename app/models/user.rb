@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   validates :password, confirmation: true,
             unless: Proc.new { |a| a.password.blank? }
+  validates :username, uniqueness: true, presence: true
 
   def before_add_method(role) end
 

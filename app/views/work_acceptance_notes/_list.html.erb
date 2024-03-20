@@ -93,4 +93,4 @@
   </tbody>
 <% end %>
 
-<%= render partial: 'shared/table', locals: { model: work_acceptance_notes, **link_access(:new, new_work_acceptance_note_path, policy(@work_acceptance_notes.object).create?) } %>
+<%= render partial: 'shared/table', locals: { model: work_acceptance_notes, entry_name: 'Work Acceptance Notes', **link_access(:new, new_work_acceptance_note_path, policy(@work_acceptance_notes.object).create?) } %>

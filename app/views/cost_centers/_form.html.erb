@@ -16,7 +16,7 @@
 
   <div class="row g-3">
     <div class="col-md-6">
-      <label for="cost_center_id">ID</label>
+      <label for="cost_center_id">Cost Center ID</label>
       <%= form.text_field :cost_center_id, class: 'form-control' %>
     </div>
 
@@ -47,7 +47,7 @@
 
     <div class="col-md-6">
       <label for="purch_group_id">Purchasing Group</label>
-      <%= selection(form, :purch_group_id, purch_groups_path, :id, :code) %>
+      <%= selection(form, :purch_group_id, purch_groups_path, :id, :code, :name) %>
     </div>
 
     <!-- Add more fields as needed -->

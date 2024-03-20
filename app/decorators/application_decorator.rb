@@ -46,6 +46,14 @@ class ApplicationDecorator < Draper::Decorator
     object&.cost_center&.desc
   end
 
+  def wbsproject_code
+    object&.wbsproject&.wbs_id
+  end
+
+  def wbsproject_desc
+    object&.wbsproject&.desc
+  end
+
   def purch_group_code
     object&.purch_group&.code
   end

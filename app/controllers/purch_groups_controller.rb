@@ -26,6 +26,7 @@ class PurchGroupsController < ApplicationController
   # GET /purch_groups/new
   def new
     @purch_group = PurchGroup.new
+    @purch_group.build_party
   end
 
   # GET /purch_groups/1/edit

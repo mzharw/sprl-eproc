@@ -6,6 +6,7 @@ class PurchOrdersController < ApplicationController
   # GET /purch_orders or /purch_orders.json
   def index
     @purch_orders = selectable(PurchOrder.joins(:purch_reqn_items, :purch_reqn).group('purch_orders.id', 'purch_reqns.number'), [:number, :desc], filter: 'purch_reqn_id')
+    authorize @purch_orders
     @purch_orders = set_scope(@purch_orders, :purch_groups)
     json = paginate_json(@purch_orders.where.not(fully_approved_at: nil))
 
@@ -142,6 +143,7 @@ class PurchOrdersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_purch_order
     @purch_order = set_tracker(PurchOrder, :purch_groups, redirect_path: purch_orders_path)
+    authorize @purch_order
 
     @purch_order = PurchOrderDecorator.new(@purch_order)
   end

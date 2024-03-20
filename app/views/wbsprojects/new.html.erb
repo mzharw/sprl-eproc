@@ -1,0 +1,18 @@
+<% content_for :content_header do %>
+  <b>AFE Project / New </b>
+  <div class="d-flex gap-2 flex-wrap">
+
+    <%= link_to wbsprojects_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'form', wbsproject: @wbsproject %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

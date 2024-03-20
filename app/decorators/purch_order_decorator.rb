@@ -12,6 +12,14 @@ class PurchOrderDecorator < ApplicationDecorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+  def items_subtotal_num
+    purch_order_items.sum(:subtotal)
+  end
+
+  def items_subtotal
+    format_number(items_subtotal_num)
+  end
+
   def submitted?
     object&.state != 'DRAFT'
   end

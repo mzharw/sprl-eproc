@@ -43,7 +43,7 @@
   </tr>
   <tr style="width: 10px !important;">
     <td>
-      <%= @purch_order.purch_order_items.sum(:subtotal) %>
+      <%= @purch_order.items_subtotal %>
     </td>
     <td>
       <%= "#{@purch_order.vendor_code} - #{@purch_order.vendor_name}" %>
@@ -91,7 +91,7 @@
     <!--      Requisistioner-->
     <!--    </th>-->
   </tr>
-  <% items = @purch_order.purch_order_items %>
+  <% items = @purch_order.purch_order_items.decorate %>
   <% items.each_with_index do |purch_order_item, index| %>
     <tr>
       <td><%= purch_order_item.number %></td>

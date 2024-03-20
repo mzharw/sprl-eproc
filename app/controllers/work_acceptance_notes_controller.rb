@@ -8,6 +8,7 @@ class WorkAcceptanceNotesController < ApplicationController
   # GET /work_acceptance_notes or /work_acceptance_notes.json
   def index
     @work_acceptance_notes = selectable(WorkAcceptanceNote.joins(:purch_reqn))
+    authorize @work_acceptance_notes
     @work_acceptance_notes = set_scope(@work_acceptance_notes, :purch_groups)
     @work_acceptance_notes = filter(@work_acceptance_notes, { title: 'name', pr_number: 'purch_reqns.number' })
     json = paginate_json(@work_acceptance_notes)
@@ -198,6 +199,7 @@ class WorkAcceptanceNotesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_work_acceptance_note
     @work_acceptance_note = set_tracker(WorkAcceptanceNote, :purch_groups, redirect_path: work_acceptance_notes_path)
+    authorize @work_acceptance_note
     @work_acceptance_note = WorkAcceptanceNoteDecorator.new(@work_acceptance_note)
   end
 

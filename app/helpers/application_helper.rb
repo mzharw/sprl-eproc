@@ -61,6 +61,14 @@ module ApplicationHelper
     end
   end
 
+  def text_for(left, right, separator = '-')
+    content_tag(:div) do
+      concat(content_tag(:b, left))
+      concat(" #{separator} ")
+      concat(right)
+    end
+  end
+
   def selection(*options, **misc)
     render partial: 'shared/selection',
            locals: { form: options[0],

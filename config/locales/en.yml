@@ -42,3 +42,7 @@ en:
       work_acceptance_note:
         name: 'WAN name'
         wan_type: 'WAN type'
+      wbsproject:
+        wbs_id: 'AFE ID'
+      buyer:
+        party_id: 'Personnel'

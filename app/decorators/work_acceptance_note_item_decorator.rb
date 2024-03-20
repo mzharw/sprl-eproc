@@ -9,5 +9,12 @@ class WorkAcceptanceNoteItemDecorator < ApplicationDecorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+  def subtotal
+    format_number(object&.subtotal)
+  end
+
+  def unit_price
+    format_number(object&.unit_price)
+  end
 
 end

@@ -1,0 +1,49 @@
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th>
+      <%= sortable_header('AFE ID', wbsprojects_path, :wbs_id) %>
+    </th>
+    <th>
+      <%= sortable_header('Description', wbsprojects_path, :desc) %>
+    </th>
+    <th>
+      <%= sortable_header('Controllers Name', wbsprojects_path, :ctrl_name) %>
+    </th>
+    <th>
+      <%= sortable_header('Payroll ID', wbsprojects_path, :payroll_id) %>
+    </th>
+    <th>
+      Action
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% wbsprojects.each do |wbsproject| %>
+    <tr>
+      <td><%= wbsproject.wbs_id %></td>
+      <td><%= wbsproject.ctrl_name %></td>
+      <td><%= wbsproject.desc %></td>
+      <td><%= wbsproject.payroll_id %></td>
+      <td>
+        <%= link_to wbsproject, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+          <i class="ti ti-eye"></i>
+        <% end %>
+        <%= link_to edit_wbsproject_path(wbsproject), class: 'btn btn-sm btn-secondary m-1' do %>
+          <i class="ti ti-edit"></i>
+        <% end %>
+        <%= link_to wbsproject, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+          <i class="ti ti-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if wbsprojects.empty? %>
+    <tr>
+      <td colspan="7">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: wbsprojects, entry_name: 'AFE Projects', new: new_wbsproject_path } %>

@@ -32,7 +32,7 @@ class PurchReqnItemDecorator < PurchReqnDecorator
     product_group&.name
   end
 
-  def est_price
+  def est_unit_price
     format_number(object&.est_unit_price || 0)
   end
 
