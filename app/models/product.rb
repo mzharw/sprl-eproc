@@ -4,4 +4,8 @@ class Product < ApplicationRecord
 
   belongs_to :measurement_unit
   belongs_to :product_group
+
+  validates :code, presence: true, uniqueness: true
+  validates :product_type, presence: true
+  validates :name, presence: true
 end

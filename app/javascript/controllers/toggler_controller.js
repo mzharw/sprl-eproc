@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus";
+import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
     static targets = ['toggler'];
@@ -14,11 +14,15 @@ export default class extends Controller {
     show(event) {
         const data = event.target.dataset;
         this.switch(data.show, true);
+
+        if (data.hide) this.hide(event)
     }
 
     hide(event) {
         const data = event.target.dataset;
         this.switch(data.hide, false);
+
+        if (data.show) this.show(event)
     }
 
     switch(target, action) {

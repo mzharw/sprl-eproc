@@ -1,9 +1,9 @@
 <% content_for :table, flush: true do %>
   <thead class="sticky">
   <tr>
-<!--    <th>-->
-      <%#= sortable_header('Ident Name', measurement_units_path, :ident_name) %>
-<!--    </th>-->
+    <!--    <th>-->
+    <%#= sortable_header('Ident Name', measurement_units_path, :ident_name) %>
+    <!--    </th>-->
     <th>
       <%= sortable_header('Name', measurement_units_path, :name) %>
     </th>
@@ -23,9 +23,9 @@
   <% if @measurement_units.present? %>
     <% @measurement_units.each do |measurement_unit| %>
       <tr>
-<!--        <td>-->
-          <%#= measurement_unit.ident_name %>
-<!--        </td>-->
+        <!--        <td>-->
+        <%#= measurement_unit.ident_name %>
+        <!--        </td>-->
         <td>
           <%= measurement_unit.name %>
         </td>
@@ -45,10 +45,9 @@
           <%= link_to edit_measurement_unit_path(measurement_unit), class: 'btn btn-sm m-1 btn-secondary' do %>
             <i class="ti ti-edit"></i>
           <% end %>
-          <%= link_to measurement_unit, class: 'btn btn-sm m-1 btn-danger', data: { turbo_method: :delete,
-                                                                                    confirm: 'Are you sure?' } do %>
-            <i class="ti ti-trash"></i>
-          <% end %>
+          <%#= link_to measurement_unit, class: 'btn btn-sm m-1 btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+<!--            <i class="ti ti-trash"></i>-->
+          <%# end %>
         </td>
       </tr>
     <% end %>

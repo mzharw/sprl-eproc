@@ -11,6 +11,14 @@ class PrcmtDecorator < ApplicationDecorator
   #     end
   #   end
 
+  def items_subtotal_num
+    prcmt_items.sum(:est_subtotal)
+  end
+
+  def items_subtotal
+    format_number(items_subtotal_num)
+  end
+
   def purch_reqn_no
     purch_reqn&.number
   end

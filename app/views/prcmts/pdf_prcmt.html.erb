@@ -33,7 +33,7 @@
   </tr>
   <tr style="width: 10px !important;">
     <td>
-      <%= @prcmt.prcmt_items.sum(:est_subtotal) %>
+      <%= @prcmt.items_subtotal %>
     </td>
     <td>
       <%= @prcmt.purch_reqn.currency.code %>

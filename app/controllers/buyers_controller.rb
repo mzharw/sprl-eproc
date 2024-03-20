@@ -28,6 +28,10 @@ class BuyersController < ApplicationController
   def create
     @buyer = Buyer.new(buyer_params)
 
+    user_id = params[:buyer][:user_id]
+    user = User.find(user_id) unless user_id.empty?
+    @buyer.party_id = user&.party&.id
+
     respond_to do |format|
       if @buyer.save
         format.html { redirect_to buyer_url(@buyer), notice: "Buyer was successfully created." }
@@ -41,7 +45,7 @@ class BuyersController < ApplicationController
 
   # PATCH/PUT /buyers/1 or /buyers/1.json
   def update
-    purch_group_ids = purch_groups_params[:purch_group_ids]
+    purch_group_ids = purch_groups_params[:purch_group_ids] || []
     existing_purch_groups = @buyer.buyer_purch_groups.pluck(:purch_group_id)
     purch_groups_to_remove = existing_purch_groups - purch_group_ids
     new_purch_group_ids = purch_group_ids - existing_purch_groups
@@ -52,7 +56,7 @@ class BuyersController < ApplicationController
       end
     end
 
-    plant_ids = plants_params[:plant_ids]
+    plant_ids = plants_params[:plant_ids] || []
     existing_plants = @buyer.buyer_plants.pluck(:plant_id)
     plants_to_remove = existing_plants - plant_ids
     new_plant_ids = plant_ids - existing_plants
@@ -61,6 +65,11 @@ class BuyersController < ApplicationController
       new_plant_ids.each do |plant_id|
         @buyer.buyer_plants.create(plant_id:)
       end
+    end
+
+    access_roles = access_roles_params
+    access_roles.each do |role, state|
+      state.to_i != 0 ? current_user.add_role(role) : current_user.remove_role(role)
     end
 
     respond_to do |format|
@@ -103,5 +112,9 @@ class BuyersController < ApplicationController
 
   def plants_params
     params.require(:buyer).permit(plant_ids: [])
+  end
+
+  def access_roles_params
+    params.require(:access_roles).permit!
   end
 end

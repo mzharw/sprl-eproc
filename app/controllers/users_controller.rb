@@ -6,12 +6,14 @@ class UsersController < ApplicationController
   def index
     @users = selectable(User.joins(party: :personnel).eager_load(party: :personnel).distinct)
     @users = filter(@users, { full_name: 'parties.full_name', position_name: 'personnels.position_name' }, 'personnels.created_at', :desc)
+    json = paginate_json(@users.left_joins(party: :buyer).where(buyers: { id: nil }), :id, :party_id, 'parties.full_name as full_name')
     @users = paginate(@users).decorate
 
     authorize @users.object
 
     respond_to do |format|
       format.html { render 'users/personnels/index' }
+      format.json { render json: }
     end
   end
 

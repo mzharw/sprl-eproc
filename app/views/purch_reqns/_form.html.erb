@@ -62,13 +62,13 @@
       <div>
         <%= label_for('fund_source', 'Fund Source', true) %>
         <div class="form-check">
-          <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input toggler-hide', id: 'project-wbs', data: { hide: 'toggle-cost-center', action: 'change->toggler#hide' } %>
+          <%= form.radio_button :fund_source, 'PROJECT_WBS', class: 'form-check-input toggler-hide', id: 'project-wbs', data: { show: 'toggle-project-afe', hide: 'toggle-cost-center', action: 'change->toggler#hide' }, checked: true %>
           <label class="form-check-label" for="project-wbs">
             Project AFE
           </label>
         </div>
         <div class="form-check">
-          <%= form.radio_button :fund_source, 'COST_CENTER', class: 'form-check-input toggler-show', id: 'cost-center', data: { show: 'toggle-cost-center', action: 'change->toggler#show' } %>
+          <%= form.radio_button :fund_source, 'COST_CENTER', class: 'form-check-input toggler-show', id: 'cost-center', data: { show: 'toggle-cost-center', hide: 'toggle-project-afe', action: 'change->toggler#show' } %>
           <label class="form-check-label" for="cost-center">
             Cost Center
           </label>
@@ -78,6 +78,10 @@
     <div class="col-md-6 toggle-cost-center">
       <%= label_for('cost_center_id', 'Cost Center', true) %>
       <%= selection(form, :cost_center_id, cost_centers_path, :id, :cost_center_id, :desc) %>
+    </div>
+    <div class="col-md-6 toggle-project-afe">
+      <%= label_for('wbsproject_id', 'Project AFE', true) %>
+      <%= selection(form, :wbsproject_id, wbsprojects_path, :id, :wbs_id, :desc) %>
     </div>
     <div class="col-md-6">
       <%= label_for('currency_id', 'Currency', true) %>

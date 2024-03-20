@@ -12,6 +12,7 @@ class PrcmtsController < ApplicationController
     @prcmts = set_scope(@prcmts, :purch_groups)
     json = paginate_json(@prcmts.where(prcmt_items: { id: prcmt_item_ids }))
     @prcmts = filter(@prcmts, { number: 'prcmts.number', tender_name: 'prcmts.name' })
+    authorize @prcmts
 
     @prcmts = paginate(@prcmts).decorate
 
@@ -160,6 +161,7 @@ class PrcmtsController < ApplicationController
     @prcmt = set_tracker(Prcmt, :purch_groups, redirect_path: prcmts_path)
     return if @prcmt.nil?
 
+    authorize @prcmt
     @prcmt = PrcmtDecorator.new(@prcmt)
     @purch_reqn = @prcmt.purch_reqn.decorate
   end

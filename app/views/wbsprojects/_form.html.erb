@@ -1,0 +1,46 @@
+<%= form_with(model: wbsproject, html: { class: 'data-container' }) do |form| %>
+  <% if wbsproject.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(wbsproject.errors.count, "error") %> prohibited this wbsproject from being saved:</h2>
+
+      <ul>
+        <% wbsproject.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row g-3">
+
+    <div class="col-md-6">
+      <%= form.label :wbs_id, 'AFE ID' %>
+      <%= form.text_field :wbs_id, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :ctrl_name, 'Controller name' %>
+      <%= form.text_field :ctrl_name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :position %>
+      <%= form.text_field :position, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :payroll_id, 'Payroll ID' %>
+      <%= form.text_field :payroll_id, class: 'form-control' %>
+    </div>
+
+
+    <div class="col-md-6">
+      <%= form.label :desc %>
+      <%= form.text_area :desc, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.submit 'Submit', class: 'btn btn-secondary mt-9' %>
+    </div>
+
+  </div>
+<% end %>

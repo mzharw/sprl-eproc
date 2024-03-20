@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parent_id: 
+  ctrl_name: MyString
+  position: MyString
+  payroll_id: MyString
+  wbs_id: MyString
+  desc: MyText
+  object_number: MyString
+  istat: MyString
+  usr03: MyString
+  short_status: MyString
+  long_status: MyString
+  pack_short_status: MyString
+  pack_long_status: MyString
+  created_by_id: 
+  updated_by_id: 
+  responsible_cc_id: 
+
+two:
+  parent_id: 
+  ctrl_name: MyString
+  position: MyString
+  payroll_id: MyString
+  wbs_id: MyString
+  desc: MyText
+  object_number: MyString
+  istat: MyString
+  usr03: MyString
+  short_status: MyString
+  long_status: MyString
+  pack_short_status: MyString
+  pack_long_status: MyString
+  created_by_id: 
+  updated_by_id: 
+  responsible_cc_id: 

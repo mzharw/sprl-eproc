@@ -8,12 +8,11 @@ class CostCentersController < ApplicationController
     @cost_centers = selectable(CostCenter.includes(:purch_group), :cost_center_id, '"desc"')
     json = paginate_json(@cost_centers)
     @cost_centers = filter(@cost_centers, { description: '"desc"', purch_group: 'purch_groups.code' })
-    @cost_centers = paginate(@cost_centers)
+    authorize @cost_centers
+    @cost_centers = paginate(@cost_centers).decorate
 
     respond_to do |format|
-      format.html do
-        authorize @cost_centers
-      end
+      format.html
       format.json { render json: }
     end
   end
@@ -71,7 +70,7 @@ class CostCentersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_cost_center
-    @cost_center = CostCenter.find(params[:id])
+    @cost_center = CostCenterDecorator.new(CostCenter.find(params[:id]))
     authorize @cost_center
   end
 

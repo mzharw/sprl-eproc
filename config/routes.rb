@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :wbsprojects
   resources :currency_exchange_rates
   resources :buyer_plants
   resources :buyer_purch_groups

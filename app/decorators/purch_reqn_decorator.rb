@@ -14,6 +14,12 @@ class PurchReqnDecorator < ApplicationDecorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+  def fund_source
+    source = 'Cost Center' if object&.fund_source == 'COST_CENTER'
+    source = 'Project AFE' if object&.fund_source == 'PROJECT_WBS'
+
+    source
+  end
 
   def items_subtotal
     format_number(items_subtotal_num)

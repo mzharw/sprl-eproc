@@ -16,10 +16,17 @@
       <%= form.label :code %>
       <%= form.text_field :code, class: 'form-control' %>
     </div>
-    <div class="col-md-6">
-      <%= form.label :full_name %>
-      <%= form.text_field :full_name, class: 'form-control', value: buyer.full_name, disabled: true %>
-    </div>
+    <% if buyer.new_record? %>
+      <div class="col-md-6">
+        <%= form.label :personnel %>
+        <%= selection(form, :user_id, users_path, :id, :full_name) %>
+      </div>
+    <% else %>
+      <div class="col-md-6">
+        <%= form.label :full_name %>
+        <%= form.text_field :full_name, class: 'form-control', value: buyer&.full_name, disabled: true %>
+      </div>
+    <% end %>
     <div class="col-md-6">
       <%= form.label :from_date %>
       <%= form.date_field :from_date, class: 'form-control' %>
@@ -28,28 +35,54 @@
       <%= form.label :thru_date %>
       <%= form.date_field :thru_date, class: 'form-control' %>
     </div>
-    <div>
-      <%= form.label :purch_group_ids, 'Purchase Groups' %>
-      <div class="row">
-        <% PurchGroup.joins(:party).each do |purch_group| %>
-          <div class="d-flex gap-2 col-6">
-            <%= form.check_box :purch_group_ids, { multiple: true, class: 'form-check-input' }, purch_group.id, nil %>
-            <%= form.label :purch_group_ids, purch_group.purch_group_name %>
+    <% unless buyer.new_record? %>
+      <div>
+        <%= form.label :purch_group_ids, 'Purchase Groups' %>
+        <div class="row">
+          <% PurchGroup.joins(:party).each do |purch_group| %>
+            <div class="d-flex gap-2 col-6">
+              <%= form.check_box :purch_group_ids, { multiple: true, class: 'form-check-input' }, purch_group.id, nil %>
+              <%= form.label :purch_group_ids, purch_group.purch_group_name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        <%= form.label :plant_ids, 'Plants' %>
+        <div class="row">
+          <% Plant.joins(:facility).each do |plant| %>
+            <div class="d-flex gap-2 col-6">
+              <%= form.check_box :plant_ids, { multiple: true, class: 'form-check-input' }, plant.id, nil %>
+              <%= form.label :plant_ids, plant.plant_name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        <%= label_tag :access_roles, 'Module Access' %>
+        <%= fields_for :access_roles do |role| %>
+          <div class="row">
+            <div class="d-flex gap-2 col-6">
+              <%= role.check_box 'Purchase Requisition', { class: 'form-check-input', checked: current_user.has_role?('Purchase Requisition') } %>
+              <%= role.label 'Purchase Requisition' %>
+            </div>
+            <div class="d-flex gap-2 col-6">
+              <%= role.check_box 'Procurement', { class: 'form-check-input', checked: current_user.has_role?('Procurement') } %>
+              <%= role.label 'Procurement' %>
+            </div>
+            <div class="d-flex gap-2 col-6">
+              <%= role.check_box 'Purchase Order', { class: 'form-check-input', checked: current_user.has_role?('Purchase Order') } %>
+              <%= role.label 'Purchase Order' %>
+            </div>
+            <div class="d-flex gap-2 col-6">
+              <%= role.check_box 'Work Acceptance Note', { class: 'form-check-input', checked: current_user.has_role?('Work Acceptance Note') } %>
+              <%= role.label 'Work Acceptance Note' %>
+            </div>
           </div>
         <% end %>
       </div>
-    </div>
-    <div>
-      <%= form.label :plant_ids, 'Plants' %>
-      <div class="row">
-        <% Plant.joins(:facility).each do |plant| %>
-          <div class="d-flex gap-2 col-6">
-            <%= form.check_box :plant_ids, { multiple: true, class: 'form-check-input' }, plant.id, nil %>
-            <%= form.label :plant_ids, plant.plant_name %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
+
   </div>
 
   <div>

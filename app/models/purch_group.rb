@@ -7,6 +7,8 @@ class PurchGroup < ApplicationRecord
   has_many :buyer_purch_groups
   has_many :buyers, through: :buyer_purch_groups
 
+  validates :code, presence: true, uniqueness: true
+
   def purch_group_name
     "#{code} - #{party&.full_name}"
   end

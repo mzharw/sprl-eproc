@@ -22,7 +22,7 @@
 
     <div class="col-md-6">
       <label for="product_group_id">Product Group</label>
-      <%= selection(form, :product_group_id, product_groups_path, :id, :code) %>
+      <%= selection(form, :product_group_id, product_groups_path, :id, :code, :name) %>
     </div>
 
     <div class="col-md-6">
@@ -37,7 +37,7 @@
 
     <div class="col-md-6">
       <label for="measurement_unit_id">Measurement Unit</label>
-      <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :name) %>
+      <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :symbol, :name) %>
     </div>
 
     <div class="col-md-6">

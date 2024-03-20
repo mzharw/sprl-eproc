@@ -25,11 +25,11 @@
   </tr>
   <tr>
     <td>Purchasing Group</td>
-    <td><%= purch_reqn.purch_group_code %></td>
+    <td><%= purch_reqn.purch_group_code %> - <%= purch_reqn.purch_group_name %></td>
   </tr>
   <tr>
     <td>Plant</td>
-    <td><%= purch_reqn.plant_code %></td>
+    <td><%= purch_reqn.plant_code %> - <%= purch_reqn.plant_name %></td>
   </tr>
   <tr>
     <td>Date PR</td>
@@ -43,10 +43,18 @@
     <td>Source Found</td>
     <td><%= purch_reqn.fund_source %></td>
   </tr>
-  <tr>
-    <td>Non AFE</td>
-    <td><%= purch_reqn.cost_center&.desc || '' %></td>
-  </tr>
+  <% if purch_reqn.cost_center %>
+    <tr>
+      <td>Non AFE</td>
+      <td><%= purch_reqn.cost_center_code %> - <%= purch_reqn.cost_center_desc %></td>
+    </tr>
+  <% end %>
+  <% if purch_reqn.wbsproject %>
+    <tr>
+      <td>Project AFE</td>
+      <td><%= text_for(purch_reqn.wbsproject_code, purch_reqn.wbsproject_desc) %></td>
+    </tr>
+  <% end %>
   <tr>
     <td>Currency</td>
     <td><%= purch_reqn.currency_code %></td>

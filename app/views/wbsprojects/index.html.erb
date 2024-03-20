@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  AFE Projects
+<% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(wbsprojects_path, 'description', %w[afe_id]) %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'list', wbsprojects: @wbsprojects %>
+<% end %>
+
+<%= render "layouts/wrapper" , sidebar: true %>

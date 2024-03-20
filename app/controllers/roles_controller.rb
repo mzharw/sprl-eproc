@@ -4,7 +4,7 @@ class RolesController < ApplicationController
   before_action :set_role, only: %i[edit update show]
 
   def index
-    @roles = selectable(Role)
+    @roles = selectable(Role.user_role)
     @roles = filter(@roles)
     @roles = paginate(@roles)
 

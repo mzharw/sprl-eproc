@@ -119,4 +119,4 @@
   </tbody>
 <% end %>
 
-<%= render partial: 'shared/table', locals: { model: @purch_orders, **link_access(:new, new_purch_order_path, policy(@purch_orders.object).create?) } %>
+<%= render partial: 'shared/table', locals: { model: @purch_orders, entry_name: 'Purchase Orders', **link_access(:new, new_purch_order_path, policy(@purch_orders.object).create?) } %>

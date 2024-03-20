@@ -47,7 +47,9 @@
     <td><b>Purchasing Group</b></td>
     <td><b>Plant</b></td>
     <td><b>Source Found</b></td>
-    <% unless @purch_reqn.fund_source == 'PROJECT_WBS' %>
+    <% if @purch_reqn.fund_source == 'PROJECT_WBS' %>
+      <td><b>Project AFE</b></td>
+    <% else %>
       <td><b>Non AFE</b></td>
     <% end %>
   </tr>
@@ -64,9 +66,13 @@
     <td>
       <%= @purch_reqn.fund_source %>
     </td>
-    <% unless @purch_reqn.fund_source == 'PROJECT_WBS' %>
+    <% if @purch_reqn.fund_source == 'PROJECT_WBS' %>
       <td>
-        <%= @purch_reqn.cost_center&.desc || '' %>
+        <%= text_for(@purch_reqn.wbsproject_code, @purch_reqn.wbsproject_desc) %>
+      </td>
+    <% else %>
+      <td>
+        <%= text_for(@purch_reqn.cost_center_code, @purch_reqn.cost_center_desc) %>
       </td>
     <% end %>
   </tr>
