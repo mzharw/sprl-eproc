@@ -5,4 +5,7 @@ class WorkAcceptanceNoteItem < ApplicationRecord
   belongs_to :product_group
   belongs_to :cost_center
   belongs_to :purch_order_item
+
+  validates :qty, numericality: { greater_than: 0 }
+  validates :unit_price, numericality: { greater_than: 0 }
 end

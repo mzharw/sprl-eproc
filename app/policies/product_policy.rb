@@ -19,6 +19,26 @@ class ProductPolicy < ApplicationPolicy
     user.has_role?('Super Admin')
   end
 
+  def new_item?
+    user.has_role?('Super Admin')
+  end
+
+  def edit_item?
+    user.has_role?('Super Admin')
+  end
+
+  def create_item?
+    user.has_role?('Super Admin')
+  end
+
+  def update_item?
+    user.has_role?('Super Admin')
+  end
+
+  def delete_item?
+    user.has_role?('Super Admin')
+  end
+
   def update?
     user.has_role?('Super Admin')
   end

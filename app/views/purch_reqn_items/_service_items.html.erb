@@ -3,39 +3,43 @@
   <tr>
     <th>Item No.</th>
     <th>Description</th>
-    <th>Quantity</th>
     <th>UoM</th>
-    <th>Unit Price (Estimation)</th>
-    <th>Subtotal</th>
-    <th>Action</th>
+    <th>Unit Price</th>
+    <% unless @purch_reqn_item.new_record? %>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    <% end %>
+    <!--    <th>Action</th>-->
   </tr>
   </thead>
   <tbody>
-  <% if items.empty? %>
+  <% if defined?(items) ? items.nil? ? true : items.empty? : true %>
     <tr>
       <td colspan="15"> No Entry</td>
     </tr>
   <% else %>
-    <% items.each_with_index do |purch_reqn_item, index| %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><%= purch_reqn_item.desc %></td>
-        <td><%= purch_reqn_item.qty %></td>
-        <td><%= purch_reqn_item.uom&.name %></td>
-        <td><%= purch_reqn_item.est_unit_price %></td>
-        <td><%= purch_reqn_item.est_subtotal %></td>
+    <% items.each_with_index do |item, index| %>
+      <tr data-controller="counter">
         <td>
-          <% unless purch_reqn_item.purch_reqn.submitted? %>
-            <div class="d-flex">
-              <%= link_to purch_reqn_item_path(item_id: purch_reqn_item), class: 'btn btn-sm link-success' do %>
-                <i class="ti ti-eye"></i>
-              <% end %>
-              <%= button_to destroy_purch_reqn_item_path(item_id: purch_reqn_item), class: 'btn btn-sm link-danger', method: :delete do %>
-                <i class="ti ti-trash"></i>
-              <% end %>
-            </div>
-          <% end %>
+          <%= index + 1 %>
+          <%= hidden_field_tag "product_items[]", item.id, multiple: true %>
+          <%= hidden_field_tag "product_items_number[#{item.id}]", item.number, multiple: true %>
         </td>
+        <td><%= item.respond_to?(:description) ? item.description : item.desc %></td>
+        <td><%= item.uom&.name %></td>
+        <td>
+          <% unit_price = item.respond_to?(:unit_price) ? item.unit_price : item.est_unit_price %>
+          <%= number_field_tag "product_items_unit_price[#{item.id}]", unit_price, class: 'form-control', step: 0.1, data: { 'counter-target': 'multiplier' } unless @purch_reqn_item.new_record? %>
+          <%= unit_price if @purch_reqn_item.new_record? %>
+        </td>
+        <% unless @purch_reqn_item.new_record? %>
+          <td>
+            <%= number_field_tag "product_items_qty[#{item.id}]", defined?(@items_qty) ? @items_qty[item.id] : 0.0, class: 'form-control', step: 0.1, required: true, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
+          </td>
+          <td>
+            <%= number_field_tag "product_items_subtotal[#{item.id}]", 0.0, class: 'form-control', step: 0.1, data: { 'counter-target': 'counter' } %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   <% end %>

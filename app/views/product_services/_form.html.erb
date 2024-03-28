@@ -1,0 +1,53 @@
+<%= form_with(model: service, url: service.new_record? ? product_services_path : product_service_path, html: { class: 'data-container' }) do |form| %>
+  <% if service.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:
+      </h2>
+      <ul>
+        <% service.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="product_type">Service Type</label>
+      <%= form.text_field :product_type, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="service_group_id">Service Group</label>
+      <%= selection(form, :product_group_id, product_service_groups_path, :id, :code, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="code">Code</label>
+      <%= form.text_field :code, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="name">Name</label>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="measurement_unit_id">Measurement Unit</label>
+      <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :symbol, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="desc">Description</label>
+      <%= form.text_area :desc, class: 'form-control', rows: 5 %>
+    </div>
+
+    <!-- Add more fields as needed -->
+
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+<% end %>

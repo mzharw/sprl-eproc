@@ -142,9 +142,11 @@
             <span class="hide-menu">Measurement Unit</span>
           <% end %>
         </li>
-        <%= sidebar_item('ti ti-box', 'Material Management', 'products', [
-          { icon: 'package', title: 'Product', path: 'products' },
-          { icon: 'packages', title: 'Product Group', path: 'product_groups' },
+        <%= sidebar_item('ti ti-box', 'Product Management', 'products', [
+          { icon: 'package', title: 'Material', path: 'products' },
+          { icon: 'packages', title: 'Material Group', path: 'product_groups' },
+          { icon: 'package', title: 'Service', path: 'product_services' },
+          { icon: 'packages', title: 'Service Group', path: 'product_service_groups' },
         ]) %>
         <li class="sidebar-item">
           <%= link_to purch_groups_path, class: "sidebar-link #{'active' if active?('purch_groups')}" do %>

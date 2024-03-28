@@ -1,0 +1,42 @@
+<% content_for :table, flush: true do %>
+  <thead class="sticky">
+  <tr>
+    <th><%= sortable_header('Code', product_service_groups_path, :code) %></th>
+    <th><%= sortable_header('Name', product_service_groups_path, :name) %></th>
+    <th><%= sortable_header('Description', product_service_groups_path, :desc) %></th>
+    <th><%= sortable_header('Created By', product_service_groups_path, :created_by_id) %></th>
+    <th><%= sortable_header('Updated By', product_service_groups_path, :updated_by_id) %></th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @service_groups.present? %>
+    <% @service_groups.each do |product_group| %>
+      <tr>
+        <td><%= product_group.code %></td>
+        <td><%= product_group.name %></td>
+        <td><%= product_group.desc %></td>
+        <td><%= product_group.creator&.username %></td>
+        <td><%= product_group.updater&.username %></td>
+        <td>
+          <%= link_to product_service_group_path(product_group), class: 'm-1 btn btn-sm btn-outline-secondary' do %>
+            <i class="ti ti-eye"></i>
+          <% end %>
+          <%= link_to edit_product_service_group_path(product_group), class: 'm-1 btn btn-sm btn-secondary' do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+          <%= link_to product_service_group_path(product_group), class: 'm-1 btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+            <i class="ti ti-trash"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="6">No Entry</td>
+    </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table', locals: { model: @service_groups, new: new_product_service_group_path } %>

@@ -1,0 +1,36 @@
+<%= form_with(model: @product_item, url: @product_item.new_record? ? item_product_service_path : update_item_product_service_path(item_id: @product_item), html: { class: 'data-container' }) do |form| %>
+  <% if @product_item.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(@product_item.errors.count, "error") %> prohibited this service item from being saved:
+      </h2>
+      <ul>
+        <% @product_item.errors.each do |error| %>
+          <li>
+            <%= error.full_message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="number">Item Number</label>
+      <%= form.number_field :number, class: 'form-control', default: 1 %>
+    </div>
+    <div class="col-md-6">
+      <label for="unit_price">Unit Price</label>
+      <%= form.number_field :unit_price, class: 'form-control', step: 0.1, default: 0 %>
+    </div>
+    <div class="col-md-6">
+      <label for="measurement_unit_id">UoM</label>
+      <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :symbol, :name) %>
+    </div>
+    <div class="col-md-6">
+      <label for="desc">Description</label>
+      <%= form.text_area :description, class: 'form-control', rows: 5 %>
+    </div>
+  </div>
+  <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
+
+<% end %>

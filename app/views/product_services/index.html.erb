@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  Service
+<% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(product_services_path, 'name', %w[code product_type]) %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'list', services: @services %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

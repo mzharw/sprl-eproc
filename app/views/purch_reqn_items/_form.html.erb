@@ -1,4 +1,4 @@
-<% type = params[:item_type] || purch_reqn_item.item_type %>
+<% type = purch_reqn_item.item_type || params[:item_type] %>
 <% is_service = type&.downcase == 'service' %>
 <% is_material = type&.downcase == 'material' %>
 <% is_service_item = type&.downcase == 'service_item' %>
@@ -41,16 +41,15 @@
         <div class="col-md-6">
           <label for="product_group_id"><%= type&.capitalize %> Classification</label>
           <%= selection(form, :product_group_id, product_groups_path, :id, :code, :name, cascade_to: 'product_id') if is_material %>
-          <%= selection(form, :product_group_id, product_groups_path, :id, :code, :name) if is_service %>
+          <%= selection(form, :product_group_id, product_service_groups_path, :id, :code, :name, cascade_to: 'product_id') if is_service %>
         </div>
       <% end %>
 
-      <% if is_material %>
-        <div class="col-md-6">
-          <label for="product_id"><%= type&.capitalize %></label>
-          <%= selection(form, :product_id, products_path, :id, :code, :name, dependent_on: 'measurement_unit_id') %>
-        </div>
-      <% end %>
+      <div class="col-md-6">
+        <label for="product_id"><%= type&.capitalize %></label>
+        <%= selection(form, :product_id, products_path, :id, :code, :name, dependent_on: 'measurement_unit_id') if is_material %>
+        <%= selection(form, :product_id, product_services_path, :id, :code, :name, dependent_on: 'measurement_unit_id', fetch_to: purch_reqn_item.new_record? ? new_purch_reqn_item_path(item_type: 'SERVICE') : purch_reqn_item_path) if is_service %>
+      </div>
 
       <!--    <div class="col-md-6">-->
       <!--      <label for="desired_vendor">Desired Vendor</label>-->
@@ -102,7 +101,7 @@
 
           <div>
             <label for="est_unit_price">Unit Price</label>
-            <%= form.number_field :est_unit_price, class: 'form-control', step: 0.1, default: 0, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
+            <%= form.number_field :est_unit_price, class: 'form-control est_unit_price', step: 0.1, default: 0, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
           </div>
 
           <div>
@@ -125,23 +124,16 @@
       </div>
     </div>
 
+    <% if is_service %>
+      <div id="items" class="my-3">
+        <%= render partial: 'service_items' %>
+      </div>
+    <% end %>
+
     <%= form.button '', class: 'btn btn-secondary mt-xxl-9' do %>
       <i class="ti ti-device-floppy"></i>
       <%= is_new ? 'Save' : 'Update' %>
     <% end %>
   <% end %>
 
-  <% if is_service && !is_new %>
-    <div class="data-container gap-3 d-flex flex-column">
-      <div class="align-self-end">
-        <%= link_to new_service_purch_reqn_item_path(item_type: 'service_item'), class: "btn btn-sm btn-secondary" do %>
-          <i class="ti ti-plus"></i>
-          Add item
-        <% end %>
-      </div>
-      <div id="items">
-        <%= render 'service_items', items: purch_reqn_item.items %>
-      </div>
-    </div>
-  <% end %>
 </div>

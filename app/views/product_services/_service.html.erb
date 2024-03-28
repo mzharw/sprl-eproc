@@ -1,0 +1,53 @@
+<table class="table">
+
+  <tr>
+    <td><strong>Service type:</strong></td>
+    <td><%= service.product_type %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Service group:</strong></td>
+    <td><%= service.product_group.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Code:</strong></td>
+    <td><%= service.code %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td><%= service.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Measurement unit:</strong></td>
+    <td><%= service.measurement_unit.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created at:</strong></td>
+    <td><%= service.created_at %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated at:</strong></td>
+    <td><%= service.updated_at %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= service.creator&.username %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= service.updater&.username %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Desc:</strong></td>
+    <td><%= service.desc %></td>
+  </tr>
+
+</table>

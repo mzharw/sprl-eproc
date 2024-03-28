@@ -25,10 +25,30 @@ class PurchReqnItemsController < ApplicationController
   # GET /purch_reqn_items/new
   def new
     @purch_reqn_item = PurchReqnItem.new
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        items = Product.find(params[:product_id]).product_items if params.has_key?(:product_id)
+        render turbo_stream: [
+          turbo_stream.update('items', partial: 'service_items', locals: { items: })
+        ]
+      end
+    end
   end
 
   # GET /purch_reqn_items/1/edit
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        items = @purch_reqn_item.service_items
+        render turbo_stream: [
+          turbo_stream.update('items', partial: 'service_items', locals: { items: })
+        ]
+      end
+    end
+  end
 
   # POST /purch_reqn_items or /purch_reqn_items.json
   def create
@@ -48,6 +68,24 @@ class PurchReqnItemsController < ApplicationController
           service = @purch_reqn_item.service
           service.update(est_subtotal: service.service_items.sum(:est_subtotal))
         end
+
+        if @purch_reqn_item.item_type == 'SERVICE'
+          product_items = @purch_reqn_item.product.product_items
+          product_items.each do |item|
+            product_item = PurchReqnItem.new(**tracker)
+            product_item.purch_reqn_id = @purch_reqn_item.purch_reqn_id
+            product_item.parent_id = @purch_reqn_item.id
+            product_item.measurement_unit_id = item.measurement_unit_id
+            product_item.product_id = item.product_id
+            product_item.product_group_id = item.product&.product_group_id
+            product_item.est_unit_price = item.unit_price
+            product_item.item_type = 'SERVICE_ITEM'
+            product_item.desc = item.description
+            product_item.number = item.number
+            product_item.save
+          end
+        end
+
         format.html do
           notice = 'Items was sucessfully updated'
           if @purch_reqn_item.item_type == 'MATERIAL'
@@ -71,6 +109,47 @@ class PurchReqnItemsController < ApplicationController
         if @purch_reqn_item.item_type == 'SERVICE_ITEM'
           service = @purch_reqn_item.service
           service.update(est_subtotal: service.service_items.sum(:est_subtotal))
+        end
+
+        if @purch_reqn_item.item_type == 'SERVICE'
+          error_items = {
+            qty_not_found: [],
+            zero_qty: [],
+            exceeding_qty: []
+          }
+
+          error_messages = {
+            qty_not_found: 'Item qty not found for item number:',
+            zero_qty: 'Qty cannot be zero for item number:',
+            exceeding_qty: 'The requested quantity exceeds the carriable qty for item number:'
+          }.freeze
+
+          if params.has_key?(:product_items)
+            items_id = params[:product_items]
+            items_qty = params[:product_items_qty]
+            items_subtotal = params[:product_items_subtotal]
+            items_number = params[:product_items_number]
+
+            items_id.each do |item|
+              item_qty = items_qty[item]
+
+              error_items[:qty_not_found].push(items_number[item]) if item_qty.nil?
+              error_items[:zero_qty].push(items_number[item]) if item_qty.to_f.zero?
+            end
+
+            error_message = (error_messages.map do |k, m|
+              items = error_items[k]
+              items.empty? ? nil : "#{m} #{items.join(', ')}"
+            end).reject(&:blank?).join('\n')
+
+            unless error_message.blank?
+              flash.now[:alert] = error_message
+
+              @items_qty = items_qty
+              render(action: :new, status: :unprocessable_entity)
+              return
+            end
+          end
         end
         format.html do
           redirect_to purch_reqn_item_url(item_id: @purch_reqn_item), notice: 'Item was successfully updated.'

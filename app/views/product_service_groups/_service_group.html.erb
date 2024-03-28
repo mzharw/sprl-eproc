@@ -1,0 +1,28 @@
+<table class="table">
+
+  <tr>
+    <td><strong>Code:</strong></td>
+    <td><%= product_group.code %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td><%= product_group.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Desc:</strong></td>
+    <td><%= product_group.desc %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Created by:</strong></td>
+    <td><%= product_group.creator&.username %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Updated by:</strong></td>
+    <td><%= product_group.updater&.username %></td>
+  </tr>
+
+</table>

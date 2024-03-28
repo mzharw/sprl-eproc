@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_122548) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -330,6 +330,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_122548) do
     t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_service", default: false
+  end
+
+  create_table "product_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id"
+    t.uuid "measurement_unit_id"
+    t.text "description"
+    t.decimal "unit_price", default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.integer "number"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -343,6 +356,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_122548) do
     t.uuid "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_service", default: false
     t.index ["created_by_id"], name: "index_products_on_created_by_id"
     t.index ["updated_by_id"], name: "index_products_on_updated_by_id"
   end
@@ -711,6 +725,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_122548) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
     t.index ["updated_by_id_id"], name: "index_roles_on_updated_by_id_id"
+  end
+
+  create_table "service_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.text "desc"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "service_type"
+    t.uuid "service_group_id"
+    t.string "code"
+    t.string "name"
+    t.uuid "measurement_unit_id"
+    t.text "desc"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
