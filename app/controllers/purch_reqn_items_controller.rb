@@ -88,11 +88,11 @@ class PurchReqnItemsController < ApplicationController
 
         format.html do
           notice = 'Items was sucessfully updated'
-          if @purch_reqn_item.item_type == 'MATERIAL'
+          # if @purch_reqn_item.item_type == 'MATERIAL'
             redirect_to(purch_reqn_url(params[:id]), notice:)
-          else
-            redirect_to purch_reqn_item_path(item_id: @purch_reqn_item), notice:
-          end
+          # else
+          #   redirect_to purch_reqn_item_path(item_id: @purch_reqn_item), notice:
+          # end
         end
         format.json { render :show, status: :created, location: @purch_reqn_item }
       else
