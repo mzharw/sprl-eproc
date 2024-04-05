@@ -6,7 +6,7 @@ class WanMailer < ApplicationMailer
     creator = @receiver[:creator]
     title = @model.finished? ? 'Fully Approved' : 'Started'
 
-    mail(to: -> { assignees }, cc: creator, subject: "#{title} WAN")
+    mail(to: assignees, cc: creator, subject: "#{title} WAN")
   end
 
   def reject_notice
@@ -16,6 +16,6 @@ class WanMailer < ApplicationMailer
                    .with_any_role('Section Head User', 'Manager of User')
                    .pluck(:email)
     creator = @model.creator.email
-    mail(to: creator, cc: -> { user_ccs }, subject: 'Rejected WAN')
+    mail(to: creator, cc: user_ccs, subject: 'Rejected WAN')
   end
 end

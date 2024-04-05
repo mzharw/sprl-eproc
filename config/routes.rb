@@ -27,8 +27,19 @@ Rails.application.routes.draw do
   resources :parties
   resources :buyers, path: 'buyer'
   resources :measurement_units, path: 'uom'
-  resources :products, path: 'product'
-  resources :product_groups, path: 'product-group'
+  resources :products, path: 'material'
+  resources :product_groups, path: 'material-group'
+  resources :product_services, path: 'product-service' do
+    member do
+      get 'items', to: 'product_services#items'
+      get 'item', to: 'product_services#new_item'
+      post 'item', to: 'product_services#create_item'
+      get 'item/:item_id', to: 'product_services#edit_item', as: 'edit_item'
+      patch 'item/:item_id', to: 'product_services#update_item', as: 'update_item'
+      delete 'item/:item_id', to: 'product_services#delete_item', as: 'delete_item'
+    end
+  end
+  resources :product_service_groups, path: 'product-service-group'
   resources :prcmts, path: 'procurement'
   resources :contract_references
   resources :currencies, path: 'currency'
@@ -55,14 +66,14 @@ Rails.application.routes.draw do
       match '/', to: 'purch_reqn_items#index', via: [:get, :post], as: :purch_reqn_items
     end
     scope 'item' do
-      get ':item_type', to: 'purch_reqn_items#new', as: :new_purch_reqn_item
-      post ':item_type', to: 'purch_reqn_items#create', as: :create_purch_reqn_item
+      get '/new/:item_type', to: 'purch_reqn_items#new', as: :new_purch_reqn_item
+      post '/new/:item_type', to: 'purch_reqn_items#create', as: :create_purch_reqn_item
       scope ':item_id' do
         patch '/', to: 'purch_reqn_items#update', as: :update_purch_reqn_item
         delete '/', to: 'purch_reqn_items#destroy', as: :destroy_purch_reqn_item
-        get 'view', to: 'purch_reqn_items#edit', as: :purch_reqn_item
-        get ':item_type', to: 'purch_reqn_items#new', as: :new_service_purch_reqn_item
-        post ':item_type', to: 'purch_reqn_items#create', as: :create_service_purch_reqn_item
+        get '/', to: 'purch_reqn_items#edit', as: :purch_reqn_item
+        get 'new/:item_type', to: 'purch_reqn_items#new', as: :new_service_purch_reqn_item
+        post 'new/:item_type', to: 'purch_reqn_items#create', as: :create_service_purch_reqn_item
       end
     end
   end

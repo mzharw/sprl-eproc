@@ -40,6 +40,10 @@ class PurchReqnItemDecorator < PurchReqnDecorator
     format_number(object&.est_subtotal || 0)
   end
 
+  def est_subtotal_num
+    object&.est_subtotal || 0
+  end
+
   def product_group_text
     "<b>#{product_group_code}</b> - #{product_group_name}"
   end

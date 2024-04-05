@@ -6,7 +6,7 @@ class PurchOrderMailer < ApplicationMailer
     creator = @receiver[:creator]
     title = @model.finished? ? 'Fully Approved' : 'Started'
 
-    mail(to: -> { assignees }, cc: creator, subject: "#{title} Purchase Order")
+    mail(to: assignees, cc: creator, subject: "#{title} Purchase Order")
   end
 
   def reject_notice
@@ -16,6 +16,6 @@ class PurchOrderMailer < ApplicationMailer
                    .with_any_role('Section Head User', 'Budget Controller', 'Manager of User', 'Manager SCM', 'Manager of Finance', 'General Manager')
                    .pluck(:email)
     creator = @model.creator.email
-    mail(to: creator, cc: -> { user_ccs }, subject: 'Rejected Purchase Order')
+    mail(to: creator, cc: user_ccs, subject: 'Rejected Purchase Order')
   end
 end

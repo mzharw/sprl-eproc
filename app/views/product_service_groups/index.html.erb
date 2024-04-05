@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  Service Group
+<% end %>
+
+<% content_for :filter do %>
+  <%= search_filter(product_service_groups_path, 'name', %w[code]) %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render 'list', service_groups: @service_groups %>
+<% end %>
+
+<%= render "layouts/wrapper" , sidebar: true %>

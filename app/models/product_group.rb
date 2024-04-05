@@ -4,4 +4,7 @@ class ProductGroup < ApplicationRecord
 
   validates :code, presence: true, uniqueness: true
   validates :name, presence: true
+
+  scope :service, -> { where(is_service: true) }
+  scope :material, -> { where(is_service: false) }
 end

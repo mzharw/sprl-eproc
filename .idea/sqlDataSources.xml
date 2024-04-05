@@ -11,6 +11,18 @@
             <array />
           </option>
           <option name="outLayout" value="File per object by schema.groovy" />
+          <option name="autoSync" value="false" />
+        </State>
+        <State>
+          <option name="id" value="94e63b29-da2f-4e0c-9a75-e5576e2837cc" />
+          <option name="name" value="DDL data source" />
+          <option name="dbmsName" value="POSTGRES" />
+          <option name="urls">
+            <array>
+              <option value="file://D:/full_backup_sprl_verp_prd_040923.sql" />
+            </array>
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
         </State>
       </list>
     </option>

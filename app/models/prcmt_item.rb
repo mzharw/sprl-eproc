@@ -7,5 +7,8 @@ class PrcmtItem < ApplicationRecord
   has_one :purch_reqn, through: :purch_reqn_item
   has_one :purch_order_item
 
+  validates :qty, numericality: { greater_than: 0 }
+  validates :est_unit_price, numericality: { greater_than: 0 }
+
   scope :unpurchased, -> { left_joins(:purch_order_item).where(purch_order_items: { id: nil }) }
 end

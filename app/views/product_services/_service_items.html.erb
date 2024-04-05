@@ -1,0 +1,39 @@
+<% content_for :table, flush: true do %>
+  <thead>
+  <tr>
+    <th>Item Number</th>
+    <th>Description</th>
+    <th>UoM</th>
+    <th>Unit Price (Estimation)</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if items.empty? %>
+    <tr>
+      <td colspan="15"> No Entry</td>
+    </tr>
+  <% else %>
+    <% items.each_with_index do |product_item, index| %>
+      <tr>
+        <td><%= product_item.number %></td>
+        <td><%= product_item.description %></td>
+        <td><%= product_item.uom&.name %></td>
+        <td><%= product_item.unit_price %></td>
+        <td>
+          <div class="d-flex">
+            <%= link_to edit_item_product_service_path(item_id: product_item), class: 'btn btn-sm link-success' do %>
+              <i class="ti ti-pencil"></i>
+            <% end %>
+            <%= button_to delete_item_product_service_path(item_id: product_item), class: 'btn btn-sm link-danger', method: :delete do %>
+              <i class="ti ti-trash"></i>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+<% end %>
+
+<%= render partial: 'shared/table' %>

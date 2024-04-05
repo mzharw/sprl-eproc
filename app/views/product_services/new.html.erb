@@ -1,0 +1,15 @@
+<% content_for :content_header do %>
+  <b>Service / New</b>
+  <%= link_to product_services_path do %>
+    <button class="btn btn-sm btn-secondary">
+      <i class="ti ti-arrow-back-up"></i>
+      Back
+    </button>
+  <% end %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render "form", service: @service %>
+<% end %>
+
+<%= render "layouts/wrapper", sidebar: true %>

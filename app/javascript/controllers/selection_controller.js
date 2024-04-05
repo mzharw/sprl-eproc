@@ -39,6 +39,10 @@ export default class extends Controller {
             cascadeEl.classList.add('disabled')
         }
 
+        if (dataOptions.params) {
+            filters = {...filters, ...dataOptions.params}
+        }
+
         let path = target.dataset.optionsPath + '.json';
 
         let firstUsed = false
@@ -69,7 +73,8 @@ export default class extends Controller {
         if (this.element === target || (this.element !== target && !options.selected) || dependent) {
             if (dataOptions.fetch_to) {
                 Turbo.cache.clear()
-                selectedInputTarget.value = null
+
+                if (!dataOptions.dependent_on) selectedInputTarget.value = null;
             }
 
             fetch(path)
@@ -89,6 +94,8 @@ export default class extends Controller {
         const inputTarget = selected || (dependent && !selected) ? target.querySelector('.selection-search') ?? this.inputTarget : null;
         const optionsContainer = target.querySelector('.options-container') ?? this.optionsContainer;
         const data = target.dataset ?? this.element.dataset;
+        let dataOptions = JSON.parse(data.options);
+
 
         optionsList.innerHTML = "";
         if (results.length > 0) {
@@ -198,6 +205,13 @@ export default class extends Controller {
                     }
                 })
             }
+        }
+
+        if (options.dependent_in) {
+            Object.keys(options.dependent_in).forEach((key) => {
+                console.log(options.dependent_in[key], option)
+                document.querySelector(`.${key}`).value = option[options.dependent_in[key]]
+            })
         }
 
         // Remove the "active" class from all options
