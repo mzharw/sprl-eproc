@@ -18,17 +18,17 @@
 <% content_for :content do %>
   <%= render @service %>
 
-  <div class="data-container gap-3 d-flex flex-column">
-    <div class="align-self-end">
-      <%= link_to item_product_service_path, class: "btn btn-sm btn-secondary" do %>
-        <i class="ti ti-plus"></i>
-        Add item
-      <% end %>
-    </div>
-    <div id="items">
-      <%= render 'service_items', items: @service.product_items %>
-    </div>
-  </div>
+<!--  <div class="data-container gap-3 d-flex flex-column">-->
+<!--    <div class="align-self-end">-->
+      <%#= link_to item_product_service_path, class: "btn btn-sm btn-secondary" do %>
+<!--        <i class="ti ti-plus"></i>-->
+<!--        Add item-->
+      <%# end %>
+<!--    </div>-->
+<!--    <div id="items">-->
+      <%#= render 'service_items', items: @service.product_items %>
+<!--    </div>-->
+<!--  </div>-->
 <% end %>
 
 <%= render "layouts/wrapper", sidebar: true %>

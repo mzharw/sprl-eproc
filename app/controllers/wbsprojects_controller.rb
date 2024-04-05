@@ -8,11 +8,10 @@ class WbsprojectsController < ApplicationController
     @wbsprojects = selectable(Wbsproject.all, :wbs_id, '"desc"')
     json = paginate_json(@wbsprojects)
     @wbsprojects = filter(@wbsprojects, { description: '"desc"', afe_id: :wbs_id })
-    authorize @wbsprojects
     @wbsprojects = paginate(@wbsprojects).decorate
 
     respond_to do |format|
-      format.html
+      format.html { authorize @wbsprojects.object }
       format.json { render json: }
     end
   end
