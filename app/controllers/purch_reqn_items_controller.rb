@@ -54,11 +54,11 @@ class PurchReqnItemsController < ApplicationController
   def create
     @purch_reqn_item = PurchReqnItem.new({ **purch_reqn_item_params, **tracker, purch_reqn_id: params[:id] })
     @purch_reqn_item.parent_id = params[:item_id] if (@purch_reqn_item.item_type == 'SERVICE_ITEM')
-    if @purch_reqn_item.item_type == 'SERVICE'
-      @purch_reqn_item.qty = 1
-      # @purch_reqn_item.purch_group_id = ProductGroup.where(code: 'N').first
-      @purch_reqn_item.measurement_unit_id = MeasurementUnit.find_by(ident_name: 'AU').id
-    end
+    # if @purch_reqn_item.item_type == 'SERVICE'
+    #   @purch_reqn_item.qty = 1
+    #   # @purch_reqn_item.purch_group_id = ProductGroup.where(code: 'N').first
+    #   @purch_reqn_item.measurement_unit_id = MeasurementUnit.find_by(ident_name: 'AU').id
+    # end
     @purch_reqn_item.currency_id = @purch_reqn&.currency_id
     # @purch_reqn_item.purch_group_id = @purch_reqn&.purch_group_id
 
