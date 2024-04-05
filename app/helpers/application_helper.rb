@@ -103,8 +103,9 @@ module ApplicationHelper
   end
 
   def user_tasks_count
-    task = Task.all
-    task = Task.where(user_id: current_user.id) unless current_user.is_superadmin?
+    # task = Task.all
+    # task = Task.where(user_id: current_user.id) unless current_user.is_superadmin?
+    task = Task.where(user_id: current_user.id)
     task.ongoing.count || 0
   end
 
