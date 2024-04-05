@@ -102,12 +102,12 @@
 
         <div>
           <label for="est_unit_price">Unit Price</label>
-          <%= form.number_field :est_unit_price, class: 'form-control est_unit_price', step: 0.1, default: 0, value: purch_reqn_item.est_unit_price_num, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
+          <%= form.number_field :est_unit_price, class: 'form-control est_unit_price', step: 0.1, default: 0, value: is_new ? 0 : purch_reqn_item.est_unit_price_num, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
         </div>
 
         <div>
           <label for="est_subtotal">Total</label>
-          <%= form.number_field :est_subtotal, class: 'form-control', step: 0.1, value: purch_reqn_item.est_subtotal_num, data: { 'counter-target': 'counter' } %>
+          <%= form.number_field :est_subtotal, class: 'form-control', step: 0.1, value: is_new ? 0 : purch_reqn_item.est_subtotal_num, data: { 'counter-target': 'counter' } %>
         </div>
       </div>
       <%# end %>
