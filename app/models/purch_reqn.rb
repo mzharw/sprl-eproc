@@ -150,7 +150,7 @@ class PurchReqn < ApplicationRecord
              false
            end
 
-    self.assignees = user_assignees(role[:role], :purch_groups, :plants) if role
+    self.assignees = user_assignees(role[:role], :purch_groups) if role
     self.task_name = "Purchase Requisition : #{role[:display_role]} Approval" if role
 
     role[:assignees] = assignees&.pluck(:email) if role
