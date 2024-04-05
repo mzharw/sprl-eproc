@@ -112,12 +112,12 @@
         </div>
       <%# end %>
 
-      <% if is_service %>
-        <div class="col-md-6 <%= 'd-none' if is_new %>">
-          <label for="est_subtotal">Total</label>
-          <%= form.number_field :est_subtotal, class: 'form-control', readonly: true, value: is_new ? 0.00 : purch_reqn_item.est_subtotal_num %>
-        </div>
-      <% end %>
+      <%# if is_service %>
+<!--        <div class="col-md-6 <%#= 'd-none' if is_new %>">-->
+<!--          <label for="est_subtotal">Total</label>-->
+          <%#= form.number_field :est_subtotal, class: 'form-control', readonly: true, value: is_new ? 0.00 : purch_reqn_item.est_subtotal_num %>
+<!--        </div>-->
+      <%# end %>
 
       <div class="col-md-6">
         <label for="desc">Description</label>
