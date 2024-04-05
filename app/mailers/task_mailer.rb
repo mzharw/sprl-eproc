@@ -12,6 +12,6 @@ class TaskMailer < ApplicationMailer
       cc = [cc, *users.pluck(:email)] unless users.nil?
     end
 
-    mail(to: task.user.email, cc:, subject: "Task #{task.number} is still ongoing")
+    mail(to: task.user.email, cc: -> { cc }, subject: "Task #{task.number} is still ongoing")
   end
 end
