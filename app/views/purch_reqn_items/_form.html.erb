@@ -70,10 +70,10 @@
       <% end %>
 
       <%# if is_material || is_service_item %>
-        <div class="col-md-6">
-          <label for="measurement_unit_id">UoM</label>
-          <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :symbol, :name) %>
-        </div>
+      <div class="col-md-6">
+        <label for="measurement_unit_id">UoM</label>
+        <%= selection(form, :measurement_unit_id, measurement_units_path, :id, :symbol, :name) %>
+      </div>
       <%# end %>
 
       <% unless is_service_item %>
@@ -94,29 +94,29 @@
       <!--    </div>-->
 
       <%# if is_material || is_service_item %>
-        <div class="d-flex flex-row gap-3 w-50" data-controller="counter">
-          <div>
-            <label for="qty">Quantity</label>
-            <%= form.number_field :qty, class: 'form-control', data: { action: "change->counter#updateCounter", 'counter-target': 'multiplier' } %>
-          </div>
-
-          <div>
-            <label for="est_unit_price">Unit Price</label>
-            <%= form.number_field :est_unit_price, class: 'form-control est_unit_price', step: 0.1, default: 0, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
-          </div>
-
-          <div>
-            <label for="est_subtotal">Total</label>
-            <%= form.number_field :est_subtotal, class: 'form-control', step: 0.1, data: { 'counter-target': 'counter' } %>
-          </div>
+      <div class="d-flex flex-row gap-3 w-50" data-controller="counter">
+        <div>
+          <label for="qty">Quantity</label>
+          <%= form.number_field :qty, class: 'form-control', data: { action: "change->counter#updateCounter", 'counter-target': 'multiplier' } %>
         </div>
+
+        <div>
+          <label for="est_unit_price">Unit Price</label>
+          <%= form.number_field :est_unit_price, class: 'form-control est_unit_price', step: 0.1, default: 0, value: purch_reqn_item.est_unit_price_num, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
+        </div>
+
+        <div>
+          <label for="est_subtotal">Total</label>
+          <%= form.number_field :est_subtotal, class: 'form-control', step: 0.1, value: purch_reqn_item.est_subtotal_num, data: { 'counter-target': 'counter' } %>
+        </div>
+      </div>
       <%# end %>
 
       <%# if is_service %>
-<!--        <div class="col-md-6 <%#= 'd-none' if is_new %>">-->
-<!--          <label for="est_subtotal">Total</label>-->
-          <%#= form.number_field :est_subtotal, class: 'form-control', readonly: true, value: is_new ? 0.00 : purch_reqn_item.est_subtotal_num %>
-<!--        </div>-->
+      <!--        <div class="col-md-6 <%#= 'd-none' if is_new %>">-->
+      <!--          <label for="est_subtotal">Total</label>-->
+      <%#= form.number_field :est_subtotal, class: 'form-control', readonly: true, value: is_new ? 0.00 : purch_reqn_item.est_subtotal_num %>
+      <!--        </div>-->
       <%# end %>
 
       <div class="col-md-6">
@@ -126,9 +126,9 @@
     </div>
 
     <%# if is_service %>
-<!--      <div id="items" class="my-3">-->
-        <%#= render partial: 'service_items' %>
-<!--      </div>-->
+    <!--      <div id="items" class="my-3">-->
+    <%#= render partial: 'service_items' %>
+    <!--      </div>-->
     <%# end %>
 
     <%= form.button '', class: 'btn btn-secondary mt-xxl-9' do %>

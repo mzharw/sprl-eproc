@@ -32,12 +32,16 @@ class PurchReqnItemDecorator < PurchReqnDecorator
     product_group&.name
   end
 
+  def est_unit_price_num
+    object&.est_unit_price || 0
+  end
+
   def est_unit_price
-    format_number(object&.est_unit_price || 0)
+    format_number(est_unit_price_num)
   end
 
   def est_subtotal
-    format_number(object&.est_subtotal || 0)
+    format_number(est_subtotal_num)
   end
 
   def est_subtotal_num
