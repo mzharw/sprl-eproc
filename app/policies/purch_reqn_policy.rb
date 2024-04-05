@@ -5,11 +5,11 @@ class PurchReqnPolicy < ApplicationPolicy
   end
 
   def create?
-    (user.is_superuser? || user.has_role?('Buyer', 'User')) && user.has_role?('Purchase Requisition')
+    (user.is_superuser? || user.has_any_role?('Buyer', 'User')) && user.has_role?('Purchase Requisition')
   end
 
   def update?
-    (user.is_superuser? || user.has_role?('Buyer', 'User')) && user.has_role?('Purchase Requisition')
+    (user.is_superuser? || user.has_any_role?('Buyer', 'User')) && user.has_role?('Purchase Requisition')
   end
 
   def show?
@@ -17,7 +17,7 @@ class PurchReqnPolicy < ApplicationPolicy
   end
 
   def edit?
-    (user.is_superuser? || user.has_role?('Buyer', 'User')) && user.has_any_role?('Purchase Requisition')
+    (user.is_superuser? || user.has_any_role?('Buyer', 'User')) && user.has_any_role?('Purchase Requisition')
   end
 
   def carry_out?
