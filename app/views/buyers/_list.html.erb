@@ -2,10 +2,10 @@
   <thead class="sticky">
   <tr>
     <th>
-      <%= sortable_header('Buyer Code', buyers_path, 'facility.name') %>
+      <%= sortable_header('Buyer Code', buyers_path, :code) %>
     </th>
     <th>
-      <%= sortable_header('Buyer Name', buyers_path, :code) %>
+      <%= sortable_header('Buyer Name', buyers_path, :name) %>
     </th>
     <th>
       Action

@@ -21,7 +21,7 @@
     <% items.each_with_index do |item, index| %>
       <tr data-controller="counter">
         <td>
-          <%= index + 1 %>
+          <%= item.number || index + 1 %>
           <%= hidden_field_tag "product_items[]", item.id, multiple: true %>
           <%= hidden_field_tag "product_items_number[#{item.id}]", item.number, multiple: true %>
         </td>
@@ -29,15 +29,15 @@
         <td><%= item.uom&.name %></td>
         <td>
           <% unit_price = item.respond_to?(:unit_price) ? item.unit_price : item.est_unit_price %>
-          <%= number_field_tag "product_items_unit_price[#{item.id}]", unit_price, class: 'form-control', step: 0.1, data: { 'counter-target': 'multiplier' } unless @purch_reqn_item.new_record? %>
+          <%= number_field_tag "product_items_unit_price[#{item.id}]", unit_price, class: 'form-control', step: 0.1, readonly: true, data: { 'counter-target': 'multiplier' } unless @purch_reqn_item.new_record? %>
           <%= unit_price if @purch_reqn_item.new_record? %>
         </td>
         <% unless @purch_reqn_item.new_record? %>
           <td>
-            <%= number_field_tag "product_items_qty[#{item.id}]", defined?(@items_qty) ? @items_qty[item.id] : 0.0, class: 'form-control', step: 0.1, required: true, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
+            <%= number_field_tag "product_items_qty[#{item.id}]", defined?(@items_qty) ? @items_qty[item.id] : item.qty || 0.0, class: 'form-control', step: 0.1, required: true, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand' } %>
           </td>
           <td>
-            <%= number_field_tag "product_items_subtotal[#{item.id}]", 0.0, class: 'form-control', step: 0.1, data: { 'counter-target': 'counter' } %>
+            <%= number_field_tag "product_items_subtotal[#{item.id}]", item.est_subtotal || 0.0, class: 'form-control', step: 0.1, data: { 'counter-target': 'counter' } %>
           </td>
         <% end %>
       </tr>

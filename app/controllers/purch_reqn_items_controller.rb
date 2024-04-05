@@ -124,7 +124,8 @@ class PurchReqnItemsController < ApplicationController
             exceeding_qty: 'The requested quantity exceeds the carriable qty for item number:'
           }.freeze
 
-          if params.has_key?(:product_items)
+          service_items = @purch_reqn_item.service_items
+          if params.has_key?(:product_items) && service_items
             items_id = params[:product_items]
             items_qty = params[:product_items_qty]
             items_subtotal = params[:product_items_subtotal]
@@ -149,6 +150,12 @@ class PurchReqnItemsController < ApplicationController
               render(action: :new, status: :unprocessable_entity)
               return
             end
+
+            items_id.each do |id|
+              service_items.find(id).update(qty: items_qty[id], est_subtotal: items_subtotal[id])
+            end
+
+            @purch_reqn_item.update!(est_subtotal: @purch_reqn_item.service_items.sum(:est_subtotal))
           end
         end
         format.html do

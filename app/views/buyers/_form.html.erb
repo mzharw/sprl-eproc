@@ -63,19 +63,19 @@
         <%= fields_for :access_roles do |role| %>
           <div class="row">
             <div class="d-flex gap-2 col-6">
-              <%= role.check_box 'Purchase Requisition', { class: 'form-check-input', checked: current_user.has_role?('Purchase Requisition') } %>
+              <%= role.check_box 'Purchase Requisition', { class: 'form-check-input', checked: buyer.user.has_role?('Purchase Requisition') } %>
               <%= role.label 'Purchase Requisition' %>
             </div>
             <div class="d-flex gap-2 col-6">
-              <%= role.check_box 'Procurement', { class: 'form-check-input', checked: current_user.has_role?('Procurement') } %>
+              <%= role.check_box 'Procurement', { class: 'form-check-input', checked: buyer.user.has_role?('Procurement') } %>
               <%= role.label 'Procurement' %>
             </div>
             <div class="d-flex gap-2 col-6">
-              <%= role.check_box 'Purchase Order', { class: 'form-check-input', checked: current_user.has_role?('Purchase Order') } %>
+              <%= role.check_box 'Purchase Order', { class: 'form-check-input', checked: buyer.user.has_role?('Purchase Order') } %>
               <%= role.label 'Purchase Order' %>
             </div>
             <div class="d-flex gap-2 col-6">
-              <%= role.check_box 'Work Acceptance Note', { class: 'form-check-input', checked: current_user.has_role?('Work Acceptance Note') } %>
+              <%= role.check_box 'Work Acceptance Note', { class: 'form-check-input', checked: buyer.user.has_role?('Work Acceptance Note') } %>
               <%= role.label 'Work Acceptance Note' %>
             </div>
           </div>

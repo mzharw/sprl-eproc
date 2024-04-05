@@ -69,7 +69,7 @@ class BuyersController < ApplicationController
 
     access_roles = access_roles_params
     access_roles.each do |role, state|
-      state.to_i != 0 ? current_user.add_role(role) : current_user.remove_role(role)
+      state.to_i != 0 ? @buyer.user.add_role(role) : @buyer.user.remove_role(role)
     end
 
     respond_to do |format|

@@ -105,7 +105,7 @@
           </div>
 
           <div>
-            <label for="est_subtotal">Subtotal</label>
+            <label for="est_subtotal">Total</label>
             <%= form.number_field :est_subtotal, class: 'form-control', step: 0.1, data: { 'counter-target': 'counter' } %>
           </div>
         </div>
@@ -113,8 +113,8 @@
 
       <% if is_service %>
         <div class="col-md-6 <%= 'd-none' if is_new %>">
-          <label for="est_subtotal">Subtotal</label>
-          <%= form.number_field :est_subtotal, class: 'form-control', data: { 'counter-target': 'counter' }, readonly: true, default: 0 %>
+          <label for="est_subtotal">Total</label>
+          <%= form.number_field :est_subtotal, class: 'form-control', readonly: true, value: is_new ? 0.00 : purch_reqn_item.est_subtotal_num %>
         </div>
       <% end %>
 

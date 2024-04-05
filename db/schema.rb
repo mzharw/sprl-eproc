@@ -727,29 +727,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
     t.index ["updated_by_id_id"], name: "index_roles_on_updated_by_id_id"
   end
 
-  create_table "service_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "code"
-    t.string "name"
-    t.text "desc"
-    t.uuid "created_by_id"
-    t.uuid "updated_by_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "service_type"
-    t.uuid "service_group_id"
-    t.string "code"
-    t.string "name"
-    t.uuid "measurement_unit_id"
-    t.text "desc"
-    t.uuid "created_by_id"
-    t.uuid "updated_by_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.string "number"

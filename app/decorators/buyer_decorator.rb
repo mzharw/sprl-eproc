@@ -18,4 +18,8 @@ class BuyerDecorator < ApplicationDecorator
     object&.party&.full_name
   end
 
+  def user
+    User.find_by(party_id:)
+  end
+
 end

@@ -28,5 +28,12 @@
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/sprl_eproc_production</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="sprl_eproc_old@localhost" uuid="19a8c619-9981-486b-af43-df4ef9f0b07e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/sprl_eproc_old</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

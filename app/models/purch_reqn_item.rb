@@ -10,7 +10,7 @@ class PurchReqnItem < ApplicationRecord
   belongs_to :currency, optional: true
   belongs_to :service, class_name: 'PurchReqnItem', foreign_key: :parent_id, optional: true
 
-  has_many :service_items, class_name: 'PurchReqnItem', foreign_key: :parent_id
+  has_many :service_items, -> { order(number: :asc) }, class_name: 'PurchReqnItem', foreign_key: :parent_id
   has_many :prcmt_items, class_name: 'PrcmtItem', foreign_key: :purch_reqn_item_id
   has_many :purch_order_items, class_name: 'PurchOrderItem', foreign_key: :purch_reqn_item_id
 
