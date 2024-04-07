@@ -17,4 +17,12 @@ class CurrencyExchangeRateDecorator < ApplicationDecorator
   def to_currency_text
     "<b>#{to_currency.code}</b> - #{to_currency.name}"
   end
+
+  def to_amount_f
+    format_number(to_amount)
+  end
+
+  def from_amount_f
+    format_number(from_amount)
+  end
 end
