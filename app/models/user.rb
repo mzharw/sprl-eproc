@@ -13,6 +13,14 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, presence: true
 
+  def email_changed?
+    false
+  end
+
+  def will_save_change_to_email?
+    false
+  end
+
   def before_add_method(role) end
 
   def purch_group_ids
