@@ -13,9 +13,9 @@
     <th>
       <%= sortable_header('Description', measurement_units_path, :desc) %>
     </th>
-    <th>
-      <%= sortable_header('Dimid', measurement_units_path, :dimid) %>
-    </th>
+<!--    <th>-->
+      <%#= sortable_header('Dimid', measurement_units_path, :dimid) %>
+<!--    </th>-->
     <th>Action</th>
   </tr>
   </thead>
@@ -35,9 +35,9 @@
         <td>
           <%= measurement_unit.desc %>
         </td>
-        <td>
-          <%= measurement_unit.dimid %>
-        </td>
+<!--        <td>-->
+          <%#= measurement_unit.dimid %>
+<!--        </td>-->
         <td>
           <%= link_to measurement_unit, class: 'btn btn-sm m-1 btn-outline-secondary' do %>
             <i class="ti ti-eye"></i>
@@ -45,9 +45,9 @@
           <%= link_to edit_measurement_unit_path(measurement_unit), class: 'btn btn-sm m-1 btn-secondary' do %>
             <i class="ti ti-edit"></i>
           <% end %>
-          <%#= link_to measurement_unit, class: 'btn btn-sm m-1 btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
-<!--            <i class="ti ti-trash"></i>-->
-          <%# end %>
+          <%= link_to measurement_unit, class: 'btn btn-sm m-1 btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+            <i class="ti ti-trash"></i>
+          <% end %>
         </td>
       </tr>
     <% end %>
