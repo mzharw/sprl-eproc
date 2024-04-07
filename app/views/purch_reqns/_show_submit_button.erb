@@ -1,4 +1,4 @@
-<% if !@purch_reqn.submitted? && (current_user.has_role? 'Buyer' || current_user.is_superuser?) %>
+<% if !@purch_reqn.submitted? && (current_user.has_any_role?('Buyer', 'User') || current_user.is_superuser?) %>
   <%= form_with(model: model, id: 'submit-button', data: { turbo: false }) do |f| %>
     <%= f.hidden_field :state, value: 'SUBMITTED' %>
     <%= f.button class: 'btn btn-sm btn-secondary', disabled: !model.submitable? do %>
