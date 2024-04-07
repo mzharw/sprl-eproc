@@ -15,7 +15,6 @@ class BuyersController < ApplicationController
   def show
   end
 
-  # GET /buyers/new
   def new
     @buyer = Buyer.new
   end
@@ -31,6 +30,7 @@ class BuyersController < ApplicationController
     user_id = params[:buyer][:user_id]
     user = User.find(user_id) unless user_id.empty?
     @buyer.party_id = user&.party&.id
+    @buyer.code = user&.username
 
     respond_to do |format|
       if @buyer.save

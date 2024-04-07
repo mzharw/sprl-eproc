@@ -7,7 +7,7 @@ class Buyer < ApplicationRecord
   has_many :buyer_plants
   has_many :plants, through: :buyer_plants
 
-  validates :code, presence: true, uniqueness: true
+  # validates :code, presence: true, uniqueness: true
   validates :party_id, presence: true, on: :create
 
   accepts_nested_attributes_for :party
