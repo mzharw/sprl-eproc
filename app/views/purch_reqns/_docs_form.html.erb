@@ -18,7 +18,7 @@
       <% docs&.each do |doc| %>
         <tr>
           <td>
-            <%= link_to doc.filename, rails_blob_path(doc) %>
+            <%= link_to doc.filename, rails_blob_path(doc), download: true %>
             <%= form.hidden_field name, multiple: true, value: doc.signed_id %>
           </td>
           <td>
