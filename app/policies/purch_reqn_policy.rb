@@ -12,6 +12,10 @@ class PurchReqnPolicy < ApplicationPolicy
     (user.is_superuser? || user.has_any_role?('Buyer', 'User')) && user.has_role?('Purchase Requisition')
   end
 
+  def remove_attachment?
+    (user.is_superuser? || user.has_any_role?('Buyer', 'User')) && user.has_role?('Purchase Requisition')
+  end
+
   def show?
     (user.is_superuser? || user.has_any_role?('Buyer', 'General User', 'User')) || user.has_any_role?('Purchase Requisition')
   end
