@@ -31,5 +31,3 @@ WickedPdf.config = {
 
 WickedPdf.config ||= {}
 WickedPdf.config.merge!({ layout: "pdf.html.erb", })
-
-config.assets.precompile += %w[blueprint/screen.css pdf.css jquery.ui.datepicker.js pdf.js]
