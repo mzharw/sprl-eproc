@@ -11,6 +11,7 @@ module Taskable
 
   def create_task
     number = task_number
+    assignees
     assignees&.each do |user|
       new_task = tasks.new
       new_task.user_id = user.id

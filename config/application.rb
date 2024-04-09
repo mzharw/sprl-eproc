@@ -18,6 +18,7 @@ module SprlEproc
     config.form_with_generates_remote_forms = true
 
     config.active_job.queue_adapter = :sidekiq
+    config.assets.precompile += %w[blueprint/screen.css pdf.css jquery.ui.datepicker.js pdf.js]
 
     # Configuration for the application, engines, and railties goes here.
     #

@@ -17,7 +17,7 @@
   <div class="row g-3">
     <div class="col-md-6">
       <label for="rolename">Name</label>
-      <%= form.text_field :name, class: 'form-control' %>
+      <%= form.text_field :name, class: 'form-control', readonly: !role.new_record? %>
     </div>
     <div class="col-md-6">
       <label for="state">State</label>
