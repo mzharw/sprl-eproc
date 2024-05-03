@@ -1,0 +1,93 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Classification</strong></td>
+          <td><%= get_value(v, 'business_classification', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Sub-Classification</strong></td>
+          <td><%= get_value(v, 'business_sub_classification', 'code') %> - <%= get_value(v, 'business_sub_classification', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Sub Sub-Classification</strong></td>
+          <td><%= get_value(v, 'business_sub_sub_classification', 'code') %> - <%= get_value(v, 'business_sub_sub_classification', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Sub-Sub Sub-Classification</strong></td>
+          <td><%= get_value(v, 'business_sub_sub_sub_classification', 'code') %> - <%= get_value(v, 'business_sub_sub_sub_classification', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Work Package Name</strong></td>
+          <td><%= get_value(v, 'contract_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Work Package Location</strong></td>
+          <td><%= get_value(v, 'contract_location') %></td>
+        </tr>
+        <tr>
+          <td><strong>Contract Owner</strong></td>
+          <td><%= get_value(v, 'contract_owner') %></td>
+        </tr>
+        <tr>
+          <td><strong>Province</strong></td>
+          <td><%= vendor_province(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>City</strong></td>
+          <td><%= vendor_city(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Subdistrict</strong></td>
+          <td><%= vendor_sub(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Postal Code</strong></td>
+          <td><%= vendor_postcode(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Address</strong></td>
+          <td><%= vendor_address(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Contact Person</strong></td>
+          <td><%= get_value(v, 'contact_person', 'full_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Phone Number</strong></td>
+          <td><%= get_value(v, 'contact_person', 'phone_number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Contract Number</strong></td>
+          <td><%= get_value(v, 'contract_number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Valid From Date</strong></td>
+          <td><%= get_value(v, 'from_date') %></td>
+        </tr>
+        <tr>
+          <td><strong>Completion Date</strong></td>
+          <td><%= get_value(v, 'thru_date') %></td>
+        </tr>
+        <tr>
+          <td><strong>Currency</strong></td>
+          <td><%= get_value(v, 'currency', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Contract Value</strong></td>
+          <td><%= format_number(get_value(v, 'contract_value')) %></td>
+        </tr>
+        <tr>
+          <td><strong>Berita Acara Serah Terima</strong></td>
+          <td><%= link_to 'View attachment file', get_value(v, 'contract_handover_letter_file', 'ext_url') %></td>
+        </tr>
+        <tr>
+          <td><strong>Portofolio Testimony</strong></td>
+          <td><%= link_to 'View attachment file', get_value(v, 'testimony_file', 'ext_url') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

@@ -20,9 +20,10 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
+  primary:
+    <<: *default
+    database: sprl_eproc
   # database: sprl_eproc_development
-  database: sprl_eproc
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.

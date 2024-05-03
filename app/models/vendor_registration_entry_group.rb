@@ -1,0 +1,2 @@
+class VendorRegistrationEntryGroup < ApplicationRecord
+end

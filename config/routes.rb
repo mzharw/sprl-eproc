@@ -6,7 +6,19 @@ Rails.application.routes.draw do
   resources :buyer_plants
   resources :buyer_purch_groups
   resources :vendor_types
-  resources :vendors
+  resources :vendors do
+    collection do
+      get 'company_types', to: 'vendors#company_types'
+    end
+  end
+  scope 'regions' do
+    get 'countries', to: 'regions#country'
+    get 'provinces', to: 'regions#province'
+    get 'cities', to: 'regions#city'
+    get 'subdistricts', to: 'regions#subdistrict'
+    get 'postalcode', to: 'regions#postalcode'
+  end
+  resources :banks, only: :index
   resources :purch_order_item_types
   resources :purch_order_items
   resources :purch_order_types

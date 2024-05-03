@@ -1,0 +1,37 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Account Holder Name</strong></td>
+          <td><%= get_value(v, 'account_holder_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Account Number</strong></td>
+          <td><%= get_value(v, 'account_number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Currency</strong></td>
+          <td><%= get_value(v, 'currency', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Bank</strong></td>
+          <td><%= get_value(v, 'bank', 'full_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Branch Office</strong></td>
+          <td><%= get_value(v, 'branch_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Bank Address</strong></td>
+          <td><%= get_value(v, 'bank_address') %></td>
+        </tr>
+        <tr>
+          <td><strong>Bank Statement Letter</strong></td>
+          <td><%= link_to 'View attachment file', get_value(v, 'bank_statement_file', 'ext_url') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

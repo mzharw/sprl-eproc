@@ -1,0 +1,29 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Username</strong></td>
+          <td><%= get_value(v, 'username') %></td>
+        </tr>
+        <tr>
+          <td><strong>Full Name</strong></td>
+          <td><%= get_value(v, 'full_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Emails</strong></td>
+          <td><%= vendor_emails(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Phone Number</strong></td>
+          <td><%= get_value(v, 'mobile_number', 'number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Primary Data</strong></td>
+          <td><%= badge(get_value(v, 'is_primary')) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

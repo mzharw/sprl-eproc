@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app_id: 
+  legal_org_cred_type_id: 
+  legal_org_cred_type_cat_id: 
+  created_by_id: 
+  updated_by_id: 
+
+two:
+  app_id: 
+  legal_org_cred_type_id: 
+  legal_org_cred_type_cat_id: 
+  created_by_id: 
+  updated_by_id: 

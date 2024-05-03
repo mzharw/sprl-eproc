@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app_id: 
+  vendor_id: 
+  scope_of_supply_id: 
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  created_by_id: 
+  updated_by_id: 
+  desc: MyText
+
+two:
+  app_id: 
+  vendor_id: 
+  scope_of_supply_id: 
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  created_by_id: 
+  updated_by_id: 
+  desc: MyText

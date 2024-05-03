@@ -1,0 +1,43 @@
+<% if defined?(country_id) && country_id %>
+  <div>
+    <label for="province_id">Province</label>
+    <%= selection_tag(:province_id, provinces_path, :id, :code, :name, cascade_to: 'city_id') %>
+  </div>
+  <div>
+    <label for="city_id">City</label>
+    <%= selection_tag(:city_id, cities_path, :id, :code, :name, cascade_to: 'sub_district_id') %>
+  </div>
+  <div>
+    <label for="sub_district_id">Sub-District</label>
+    <%= selection_tag(:sub_district_id, subdistricts_path, :id, :code, :name) %>
+  </div>
+  <div>
+    <label for="postal_code">Postal Code</label>
+    <%= text_field :postal_code, '', class: 'form-control' %>
+  </div>
+  <div>
+    <label for="address">Address</label>
+    <%= text_area :address, '', class: 'form-control' %>
+  </div>
+<% else %>
+  <div>
+    <label for="province_id">Province</label>
+    <%= text_field :province_id, '', class: 'form-control' %>
+  </div>
+  <div>
+    <label for="city_id">City</label>
+    <%= text_field :city_id, '', class: 'form-control' %>
+  </div>
+  <div>
+    <label for="sub_district_id">Sub-District</label>
+    <%= text_field :sub_district_id, '', class: 'form-control' %>
+  </div>
+  <div>
+    <label for="postal_code">Postal Code</label>
+    <%= text_field :postal_code, '', class: 'form-control' %>
+  </div>
+  <div>
+    <label for="address">Address</label>
+    <%= text_area :address, '', class: 'form-control' %>
+  </div>
+<% end %>

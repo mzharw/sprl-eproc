@@ -1,0 +1,2 @@
+class PartyFacilityRole < ApplicationRecord
+end
