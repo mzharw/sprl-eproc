@@ -114,7 +114,6 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    chronic (0.10.2)
     chunky_png (1.4.0)
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
@@ -144,8 +143,13 @@ GEM
     erb-formatter (0.4.3)
       syntax_tree (~> 6.0)
     erubi (1.12.0)
+    et-orbi (1.2.11)
+      tzinfo
     execjs (2.9.1)
     ffi (1.16.3)
+    fugit (1.11.0)
+      et-orbi (~> 1, >= 1.2.11)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -227,6 +231,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
+    raabro (1.4.0)
     racc (1.7.3)
     rack (3.0.8)
     rack-session (2.0.0)
@@ -323,6 +328,10 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.19.0)
+    sidekiq-cron (1.12.0)
+      fugit (~> 1.8)
+      globalid (>= 1.0.1)
+      sidekiq (>= 6)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -361,8 +370,6 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    whenever (1.0.0)
-      chronic (>= 0.6.3)
     wicked_pdf (2.7.0)
       activesupport
     wkhtmltopdf-binary (0.12.6.6)
@@ -401,12 +408,12 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   sidekiq (~> 7.2)
+  sidekiq-cron (~> 1.12)
   sprockets-rails
   stimulus-rails
   turbo-rails
   tzinfo-data
   web-console
-  whenever
   wicked_pdf
   wkhtmltopdf-binary
 

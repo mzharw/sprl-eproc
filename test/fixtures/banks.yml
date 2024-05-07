@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  party_id: 
+  code: MyString
+  from_date: 2024-04-30
+  thru_date: 2024-04-30
+  swift_code: MyString
+  country_id: 
+  other_country: MyString
+  bank_type_id: 
+  district_id: 
+  other_district: MyString
+  postal_address: MyString
+  is_primary: false
+
+two:
+  party_id: 
+  code: MyString
+  from_date: 2024-04-30
+  thru_date: 2024-04-30
+  swift_code: MyString
+  country_id: 
+  other_country: MyString
+  bank_type_id: 
+  district_id: 
+  other_district: MyString
+  postal_address: MyString
+  is_primary: false

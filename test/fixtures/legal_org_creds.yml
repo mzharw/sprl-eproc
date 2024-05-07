@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app_id: 
+  legal_org_id: 
+  legal_org_cred_type_id: 
+  number: MyString
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  created_by_id: 
+  updated_by_id: 
+  doc_id: 
+  other_legal_org_cred_type: MyString
+
+two:
+  app_id: 
+  legal_org_id: 
+  legal_org_cred_type_id: 
+  number: MyString
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  created_by_id: 
+  updated_by_id: 
+  doc_id: 
+  other_legal_org_cred_type: MyString

@@ -1,5 +1,6 @@
 class PurchReqnItem < ApplicationRecord
   include ModelTrackable
+  include ModelDryable
   track_user
   # track_number(:number, group: :purch_reqn_id)
 
@@ -21,6 +22,8 @@ class PurchReqnItem < ApplicationRecord
   before_validation :validate_service, if: -> { item_type == 'SERVICE' }
   before_validation :validate_service_item, if: -> { item_type == 'SERVICE_ITEM' }
 
+  before_validation :validate_value
+
   validates :qty, numericality: { greater_than: 0 }, if: -> { item_type == 'MATERIAL' }
   validates :est_unit_price, numericality: { greater_than: 0 }, if: -> { item_type == 'MATERIAL' }
 
@@ -40,6 +43,12 @@ class PurchReqnItem < ApplicationRecord
   # belongs_to :purch_reqn_item_noncontract
 
   private
+
+  def validate_value
+    self.qty = str_parser(qty)
+    self.est_unit_price = str_parser(est_unit_price)
+    self.est_subtotal = self.qty * est_unit_price
+  end
 
   def validate_all
     errors.add(:desc, 'is required') unless desc.present?

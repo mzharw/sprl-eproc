@@ -1,0 +1,2 @@
+class LegalOrgBoardType < ApplicationRecord
+end

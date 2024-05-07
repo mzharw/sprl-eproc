@@ -1,0 +1,36 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Classification</strong></td>
+          <td>
+            <%= get_value(v, 'business_classification', 'code') %> - <%= get_value(v, 'business_classification', 'name') %>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Sub-Classification</strong></td>
+          <td><%= get_value(v, 'business_sub_classification', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Sub Sub-Classification</strong></td>
+          <td><%= get_value(v, 'business_sub_sub_classification', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Sub-Sub Sub-Classification</strong></td>
+          <td><%= get_value(v, 'business_sub_sub_sub_classification', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Detail Competency</strong></td>
+          <td><%= get_value(v, 'desc') %></td>
+        </tr>
+        <tr>
+          <td><strong>Attachment</strong></td>
+          <td></td>
+<!--          <td><%#= link_to 'View attachment file', get_value(v, 'files', 'ext_url') %></td>-->
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

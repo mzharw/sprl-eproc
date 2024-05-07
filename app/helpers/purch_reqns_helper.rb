@@ -37,10 +37,10 @@ module PurchReqnsHelper
       when 'REJECTED'
         'text-bg-light-danger'
       else
-        if state
-          'text-success'
+        if state || state == true
+          'text-bg-success'
         else
-          'text-danger'
+          'text-bg-danger'
         end
       end
 

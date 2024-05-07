@@ -25,7 +25,7 @@
 </table>
 
 <br>
-Untuk informasi lebih lanjut, silahkan <%= link_to 'login', work_acceptance_note_url(@model) %>.
+Untuk informasi lebih lanjut, silahkan <%= link_to 'login', Rails.application.routes.url_helpers.work_acceptance_note_url(@model, host: ActionMailer::Base.default_url_options[:host]) %>.
 <br>
 Terima kasih.
 

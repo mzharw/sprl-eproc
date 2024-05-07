@@ -49,7 +49,8 @@ class PurchOrder < ApplicationRecord
   def workflow_map
     last_instance = workflow_instances.last
     self.assignees = User.where(username: 'admin')
-    role = case last_instance.workflow_step.seq
+    seq = last_instance.workflow_step.seq
+    role = case seq
            when 1
              {
                role: 'Section Head User',
@@ -83,12 +84,14 @@ class PurchOrder < ApplicationRecord
            else
              false
            end
+
     assignees = user_assignees(role[:role], :purch_groups) if role
-    self.assignees = user_assignees(role[:role], :purch_groups) if role
+    self.assignees = assignees
     self.task_name = "Purchase Order : #{role[:display_role]} Approval" if role
 
     role[:assignees] = assignees&.pluck(:email) if role
     role[:creator] = creator.email if role
+    role[:seq] = seq if role
     role
   end
 end

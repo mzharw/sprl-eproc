@@ -1,0 +1,2 @@
+class LegalCred < ApplicationRecord
+end

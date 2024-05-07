@@ -1,0 +1,25 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Tax Document Type</strong></td>
+          <td><%= get_value(v, 'tax_doc_type', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Tax Document Number</strong></td>
+          <td><%= get_value(v, 'number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Issued Date</strong></td>
+          <td><%= format_datetime(get_value(v, 'issued_date'), false) %></td>
+        </tr>
+        <tr>
+          <td><strong>Tax Document Attachment</strong></td>
+          <td><%= link_to 'View attachment file', get_value(v, 'doc_file', 'ext_url') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

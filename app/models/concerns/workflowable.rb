@@ -47,21 +47,30 @@ module Workflowable
     last_instance.workflow_step.seq >= num && last_instance.state == 'FINISHED'
   end
 
-  def can_approve(user = nil, *groups, **filter)
+  def can_approve(user = nil, *groups)
     role = (workflow_map[:role] if workflow_map) if defined? workflow_map
 
-    approved = user.nil? ? true : user.has_role?(role)
-    approved &&= user&.purch_group_ids&.include?(purch_group_id) if groups.include? :purch_groups
-    approved &&= user&.plant_ids&.include?(plant_id) if groups.include? :plants
+    if user&.is_superuser?
+      true
+    else
+      approved = user.nil? ? true : user.has_role?(role)
+      unless user&.is_finance_manager? || user&.is_scm_manager?
+        approved &&= user&.purch_group_ids&.include?(purch_group_id) if groups.include? :purch_groups
+        approved &&= user&.plant_ids&.include?(plant_id) if groups.include? :plants
+      end
+      approved
+    end
 
-    user.is_superuser? ? true : approved
   end
 
   def user_assignees(role, *groups)
-    @users = User.with_role(role)
-    @users = @users.joins(:buyer_purch_groups).where(buyer_purch_groups: { purch_group_id: }) if groups.include? :purch_groups
-    @users = @users.joins(:buyer_plants).where(buyer_plants: { plant_id: }) if groups.include? :plants
-    @users
+    @users = User
+    unless ['Buyer', 'Manager of Finance', 'SCM Manager'].include?(role)
+      @users = @users.joins(:buyer_purch_groups).where(buyer_purch_groups: { purch_group_id: }) if groups.include? :purch_groups
+      @users = @users.joins(:buyer_plants).where(buyer_plants: { plant_id: }) if groups.include? :plants
+    end
+
+    @users.with_any_role(*role, 'Super Admin', 'General Manager')
   end
 
   private

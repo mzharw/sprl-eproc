@@ -12,10 +12,10 @@
   <% end %>
 
   <div class="row g-3">
-<!--    <div class="col-md-6">-->
-      <%#= form.label :code %>
-      <%#= form.text_field :code, class: 'form-control' %>
-<!--    </div>-->
+    <!--    <div class="col-md-6">-->
+    <%#= form.label :code %>
+    <%#= form.text_field :code, class: 'form-control' %>
+    <!--    </div>-->
     <% if buyer.new_record? %>
       <div class="col-md-6">
         <%= form.label :personnel %>
@@ -39,7 +39,7 @@
       <div>
         <%= form.label :purch_group_ids, 'Purchase Groups' %>
         <div class="row">
-          <% PurchGroup.joins(:party).each do |purch_group| %>
+          <% @purch_group.each do |purch_group| %>
             <div class="d-flex gap-2 col-6">
               <%= form.check_box :purch_group_ids, { multiple: true, class: 'form-check-input' }, purch_group.id, nil %>
               <%= form.label :purch_group_ids, purch_group.purch_group_name %>

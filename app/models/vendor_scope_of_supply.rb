@@ -1,0 +1,2 @@
+class VendorScopeOfSupply < ApplicationRecord
+end

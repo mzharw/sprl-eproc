@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :content_header do %>
+  <b>Vendor / Overview </b>
+  <div class="d-flex gap-2 flex-wrap">
+    <%= link_to vendors_path do %>
+      <button class="btn btn-sm btn-light-warning">
+        <i class="ti ti-arrow-back-up"></i>
+        Back
+      </button>
+    <% end %>
+  </div>
+<% end %>
 
-<%= render @vendor %>
+<% content_for :content do %>
+  <%= render @vendor %>
+<% end %>
 
-<div>
-  <%= link_to "Edit this vendor", edit_vendor_path(@vendor) %> |
-  <%= link_to "Back to vendors", vendors_path %>
-
-  <%= button_to "Destroy this vendor", @vendor, method: :delete %>
-</div>
+<%= render "layouts/wrapper", sidebar: true %>

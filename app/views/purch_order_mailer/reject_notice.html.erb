@@ -24,7 +24,7 @@
 </table>
 
 <br>
-Untuk informasi lebih lanjut, silahkan <%= link_to 'login', purch_order_url(@model) %>.
+Untuk informasi lebih lanjut, silahkan <%= link_to 'login', Rails.application.routes.url_helpers.purch_order_url(@model, host: ActionMailer::Base.default_url_options[:host]) %>.
 <br>
 Terima kasih.
 

@@ -1,0 +1,61 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Affiliation Type</strong></td>
+          <td><%= get_value(v, 'affiliation_type', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Description</strong></td>
+          <td><%= get_value(v, 'desc') %></td>
+        </tr>
+        <tr>
+          <td><strong>Share percentage</strong></td>
+          <td><%= get_value(v, 'share_percentage') %> %</td>
+        </tr>
+        <tr>
+          <td><strong>Vendor Name</strong></td>
+          <td><%= get_value(v, 'full_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Province</strong></td>
+          <td><%= vendor_province(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>City</strong></td>
+          <td><%= vendor_city(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Subdistrict</strong></td>
+          <td><%= vendor_sub(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Postal Code</strong></td>
+          <td><%= vendor_postcode(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Address</strong></td>
+          <td><%= vendor_address(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Phone Number</strong></td>
+          <td><%= vendor_phone(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Fax Number</strong></td>
+          <td><%= vendor_fax(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Email</strong></td>
+          <td><%= vendor_emails(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Affiliate Statement</strong></td>
+          <td><%= get_value(v, 'affiliate_statement') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

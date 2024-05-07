@@ -58,7 +58,8 @@ class WorkAcceptanceNote < ApplicationRecord
   def workflow_map
     last_instance = workflow_instances.last
     self.assignees = User.where(username: 'admin')
-    role = case last_instance.workflow_step.seq
+    seq = last_instance.workflow_step.seq
+    role = case seq
            when 1
              {
                role: 'Section Head User',
@@ -77,6 +78,7 @@ class WorkAcceptanceNote < ApplicationRecord
 
     role[:assignees] = assignees&.pluck(:email) if role
     role[:creator] = creator.email if role
+    role[:seq] = seq if role
     role
   end
 end

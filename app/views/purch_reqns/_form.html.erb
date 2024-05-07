@@ -17,13 +17,13 @@
     <div class="col-md-6">
       <%= label_for('pr-type', 'PR Type', true) %>
       <div class="form-check">
-        <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material' %>
+        <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material', disabled: !purch_reqn.new_record? %>
         <label class="form-check-label" for="material">
           Material
         </label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service' %>
+        <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service', disabled: !purch_reqn.new_record? %>
         <label class="form-check-label" for="service">
           Service
         </label>

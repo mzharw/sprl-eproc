@@ -1,0 +1,11 @@
+<%= generate_links('Administration Data',
+                   'General': :general, 'Company Profile': :profile, 'Deed': :deed, 'Shareholder': :shareholder, 'BOD & BOC': :boards,
+                   'Affiliate & Alliance Company': :affiliates, 'Business Permit': :permits, 'Person in Charge': :pic, 'Statement Letter': :letters) %>
+<%= generate_links('Competency and Experience',
+                   'Classification': :classification, 'Competency and Experience': :experience) %>
+<%= generate_links('Financial',
+                   'Bank Accounts': :bank, 'Financial Statements': :statements, 'Tax Documents': :taxes) %>
+<%= generate_links('Specific',
+                   'PSC Partnership': :psc, 'SKT Migas': :skt, 'Agency/Distributor Appointment': :distributor, 'Goods Manufactures': :goods,
+                   'Subject to Bellow Actual/Threatened': :threatened, 'Appreciation of Domestic Products': :domestic, 'CSMS Certificate': :csms) %>
+<%= generate_links('Others', 'Document Exception': :exception) %>

@@ -81,6 +81,17 @@ module ApplicationHelper
                      results: [] }
   end
 
+  def selection_tag(*options, **misc)
+    render partial: 'shared/selection',
+           locals: { select_name: options[0],
+                     options_path: options[1],
+                     value: options[2],
+                     text: options[3],
+                     desc: options[4],
+                     options: misc.to_json,
+                     results: [] }
+  end
+
   def sortable_header(text, path, column)
     order_by = params[:sort_by]
     order_dir = params[:dir]
@@ -114,6 +125,41 @@ module ApplicationHelper
     link[name] = path if access
 
     link
+  end
+
+  def format_number(value, options = {})
+    options = { precision: 2, delimiter: ',', separator: '.' }.merge(options)
+
+    number = value.to_s.gsub(/[^0-9.-]/, '').to_f
+
+    if number.nan?
+      "0.00"
+    else
+      formatted_number = number_with_precision(number, precision: options[:precision], delimiter: options[:delimiter], separator: options[:separator])
+      formatted_number
+    end
+  end
+
+  def number_with_precision(number, options = {})
+    options = { precision: 3, delimiter: ',', separator: '.' }.merge(options)
+
+    parts = number.to_s.split('.')
+    whole, fraction = parts[0], parts[1]
+
+    whole = whole.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1#{options[:delimiter]}")
+    [whole, fraction.to_s[0..(options[:precision] - 1)].ljust(options[:precision], '0')].compact.join(options[:separator])
+  end
+
+  def format_datetime(timestamp, use_time = true)
+    date = timestamp&.to_date
+    time = timestamp&.to_time
+
+    date_str = date&.strftime("%d %B %Y")
+    time_str = time&.strftime("%I:%M %p")
+
+    date = "#{date_str}"
+    date = "#{date} #{time_str}" if use_time
+    date
   end
 
   private

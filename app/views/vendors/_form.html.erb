@@ -1,44 +1,180 @@
-<%= form_with(model: vendor, html: { class: 'data-container' }) do |form| %>
-  <% if vendor.errors.any? %>
-    <div style="color: red">
-      <h2>
-        <%= pluralize(vendor.errors.count, "error") %> prohibited this vendor from being saved:
-      </h2>
-      <ul>
-        <% vendor.errors.each do |error| %>
-          <li>
-            <%= error.full_message %>
-          </li>
-        <% end %>
-      </ul>
+<%= form_with(model: vendor, html: { class: 'data-container', data: { turbo: false } }) do |form| %>
+  <% if defined? @validation_errors %>
+    <% if @validation_errors.any? %>
+      <div style="color: red">
+        <ul>
+          <% @validation_errors.each do |error| %>
+            <li>
+              <%= error %> is required
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="d-flex justify-content-between gap-4 py-4 border-bottom">
+    <div class="col-md-12">
+      <label for="vendor_type_id">Vendor Type</label>
+      <%= selection(form, :vendor_type_id, vendor_types_path, :id, :name, default: { ident_name: 'NON_PROCURE' }, readonly: true) %>
     </div>
+  </div>
+  <%= fields_for :pic do |pic| %>
+    <% user = current_user.decorate %>
+    <div class="row gap-4 py-4 border-bottom">
+      <div class="col-md-6">
+        <label for="full_name">PIC Full Name</label>
+        <%= pic.text_field :full_name, class: 'form-control', value: user.full_name, readonly: true %>
+      </div>
+      <div class="col-md-6">
+        <label for="phone_number">PIC Phone Number</label>
+        <%= pic.text_field :phone_number, class: 'form-control', placeholder: '+62xx-xxxx' %>
+      </div>
+      <div class="col-md-6">
+        <label for="pic_full_name">PIC Email</label>
+        <%= pic.text_field :email, class: 'form-control', value: user.email, readonly: true %>
+      </div>
+      <div class="col-md-6">
+        <label for="pic_full_name">PIC Position</label>
+        <%= pic.text_field :position, class: 'form-control', value: user.position_name, readonly: true %>
+      </div>
+      <div class="col-md-6">
+        <label for="pic_full_name">PIC Department</label>
+        <%= pic.text_field :department, class: 'form-control', value: nil, readonly: true %>
+      </div>
   <% end %>
 
-  <div class="row g-3">
-    <div class="col-md-6">
-      <label for="code">Code</label>
-      <%= form.text_field :code, class: 'form-control' %>
-    </div>
-
-    <div class="col-md-6">
-      <label for="vendor_type_id">Vendor Type</label>
-      <%= selection(form, :vendor_type_id, vendor_types_path, :id, :name) %>
-    </div>
-
-
-    <div class="col-md-6">
-      <label for="from_date">From Date</label>
-      <%= form.date_field :from_date, class: 'form-control' %>
-    </div>
-
-    <div class="col-md-6">
-      <label for="thru_date">Thru Date</label>
-      <%= form.date_field :thru_date, class: 'form-control' %>
-    </div>
-
-    <!-- Additional fields from the vendor model -->
-
   </div>
+  <div class="row row-gap-3 py-4 border-bottom">
+    <div class="col-md-6">
+      <label for="code">Vendor Name</label>
+      <%= form.text_field :vendor_name, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="company_type_id">Company Type</label>
+      <%= selection(form, :company_type_id, company_types_vendors_path, :id, :name) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="president_director">President Director</label>
+      <%= form.text_field :president_director, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between gap-4 py-4 border-bottom">
+    <div class="d-flex flex-column w-50 gap-2">
+      <div>
+        <label for="phone_number">Phone Number</label>
+        <%= form.text_field :phone_number, class: 'form-control', placeholder: '+62xx-xxxx' %>
+      </div>
+      <div>
+        <label for="fax_number">Fax Number</label>
+        <%= form.text_field :fax_number, class: 'form-control', placeholder: '+62xx-xxxx' %>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <%= form.email_field :email, class: 'form-control' %>
+      </div>
+      <div>
+        <label for="website">Website</label>
+        <%= form.text_field :website, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="d-flex flex-column w-50 gap-2">
+      <div>
+        <label for="country">Country</label>
+        <%= selection(form, :country_id, countries_path, :id, :code, :name, fetch_to: new_vendor_path) %>
+      </div>
+      <div id="country">
+        <%= render 'country' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between gap-4 py-4 border-bottom">
+    <%= fields_for :tax do |tax| %>
+      <div class="d-flex flex-column w-50 gap-2">
+        <div>
+          <label for="tax_identification_number">Tax Identification Number</label>
+          <%= tax.text_field :tax_identification_number, class: 'form-control' %>
+        </div>
+        <div>
+          <label for="postal_code">Tax Identification Attachment</label>
+          <div class="input-group file">
+            <%= tax.file_field :tax_identification_attachment, class: 'form-control', direct_upload: true %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= fields_for :pkp do |pkp| %>
+      <div class="d-flex flex-column w-50 gap-2">
+        <div>
+          <label for="pkp_number">PKP Number</label>
+          <%= pkp.text_field :pkp_number, class: 'form-control' %>
+        </div>
+        <div>
+          <label for="pkp_attachment">PKP Attachment</label>
+          <div class="input-group file">
+            <%= pkp.file_field :pkp_attachment, class: 'form-control', direct_upload: true %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= fields_for :bank do |bank| %>
+    <div class="d-flex justify-content-between gap-4 py-4 border-bottom">
+      <div class="d-flex flex-column w-50 gap-2">
+        <div>
+          <label for="bank_id">Bank</label>
+          <%= selection(bank, :bank_id, banks_path, :id, :code, :name) %>
+        </div>
+        <div>
+          <label for="account_number">Account Number</label>
+          <%= bank.text_field :account_number, class: 'form-control' %>
+        </div>
+        <div>
+          <label for="account_holder_name">Account Holder Name</label>
+          <%= bank.text_field :account_holder_name, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="d-flex flex-column w-50 gap-2">
+        <div>
+          <label for="address">Bank Address</label>
+          <%= bank.text_area :address, class: 'form-control' %>
+        </div>
+        <div>
+          <label for="branch_office">Branch Office</label>
+          <%= bank.text_field :branch_office, class: 'form-control' %>
+        </div>
+        <div>
+          <label for="currency_id">Currency</label>
+          <%= selection(bank, :currency_id, currencies_path, :id, :code, :name) %>
+        </div>
+        <div>
+          <label for="bank_statement_attachment">Bank Statement Attachment</label>
+          <div class="input-group file">
+            <%= bank.file_field :bank_statement_attachment, class: 'form-control', direct_upload: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= fields_for :justification do |justification| %>
+    <div class="d-flex justify-content-between gap-4 py-4 border-bottom">
+      <div class="d-flex flex-column w-50 gap-2">
+        <div>
+          <label for="justification">Justification</label>
+          <%= justification.text_field :justification, class: 'form-control' %>
+        </div>
+        <div>
+          <label for="justification_attachment">Justification Attachment</label>
+          <div class="input-group file">
+            <%= justification.file_field :justification_attachment, class: 'form-control', direct_upload: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <%= form.submit 'Submit', class: 'btn btn-secondary mt-xxl-9' %>
 <% end %>

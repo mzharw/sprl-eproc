@@ -21,6 +21,9 @@ class BuyersController < ApplicationController
 
   # GET /buyers/1/edit
   def edit
+    @purch_group = PurchGroup.joins(:party)
+    # @purch_group = @purch_group.where(code: %w[FIN FINGA]) if @buyer.user.has_role? 'Manager of Finance'
+    # @purch_group = @purch_group.where(code: %w[SCMP SCML]) if @buyer.user.has_role? 'Manager SCM'
   end
 
   # POST /buyers or /buyers.json

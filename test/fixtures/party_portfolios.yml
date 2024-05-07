@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app_id: 
+  party_id: 
+  scope_of_supply_id: 
+  name: MyString
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  testimony: MyText
+  testimony_doc_id: 
+  project_owner: MyString
+  project_number: MyString
+  project_location: MyString
+  currency_id: 
+  project_value: 9.99
+  project_handover_letter_number: MyString
+  project_handover_letter_doc_id: 
+  created_by_id: 
+  updated_by_id: 
+
+two:
+  app_id: 
+  party_id: 
+  scope_of_supply_id: 
+  name: MyString
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  testimony: MyText
+  testimony_doc_id: 
+  project_owner: MyString
+  project_number: MyString
+  project_location: MyString
+  currency_id: 
+  project_value: 9.99
+  project_handover_letter_number: MyString
+  project_handover_letter_doc_id: 
+  created_by_id: 
+  updated_by_id: 
