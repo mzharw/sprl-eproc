@@ -1,0 +1,2 @@
+module LatihansHelper
+end

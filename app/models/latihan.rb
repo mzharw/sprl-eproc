@@ -1,0 +1,3 @@
+class Latihan < ApplicationRecord
+
+end
