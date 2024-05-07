@@ -13,7 +13,8 @@ export default class extends Controller {
             normalizeZeros: true,  // appends or removes zeros at ends
             radix: '.',  // fractional delimiter
             mapToRadix: ['.'],  // symbols to process as radix
-            max: this.numberInputTarget.max ?? 0,
+            max: this.numberInputTarget.max || null,
+            min: 0,
             autofix: true,
         })
     }

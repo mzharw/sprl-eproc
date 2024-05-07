@@ -4,6 +4,7 @@ class Plant < ApplicationRecord
 
   has_many :buyer_plants
   has_many :buyers, through: :buyer_plants
+  has_many :purch_reqns
 
   validates :code, presence: true, uniqueness: true
 
