@@ -1,7 +1,7 @@
 import {Controller} from "@hotwired/stimulus";
 
 export default class extends Controller {
-    static targets = ["input", "optionsList", "selectedValue", "optionsContainer", "clearSelection", "selectedInput"];
+    static targets = ["input", "optionsList", "selectedValue", "selectedContainer", "optionsContainer", "clearSelection", "selectedInput"];
 
     connect() {
         this.loadOptions('', this.element, {
@@ -24,6 +24,7 @@ export default class extends Controller {
     }
 
     loadOptions(query = '', target = this.element, options = {}) {
+
         const selectedInputTarget = target.querySelector('.selected-input') ?? this.selectedInputTarget;
         let selected = options.selected ?? false;
         let dependent = options.dependent ?? false;
@@ -32,6 +33,8 @@ export default class extends Controller {
 
         let filters = options.filters ?? {}
         let dataOptions = JSON.parse(target.dataset.options);
+
+        if (!!dataOptions.disabled || !!dataOptions.readonly) this.selectedContainerTarget.classList.add('disabled')
 
         let cascade_to = dataOptions.cascade_to;
         if (cascade_to && !selectedInputTarget.value) {
@@ -157,9 +160,16 @@ export default class extends Controller {
     }
 
     toggleOptions() {
-        if (!this.element.classList.contains('disabled')) {
+        let dataOptions = JSON.parse(this.element.dataset.options)
+        let disabled = !!dataOptions.disabled
+        let readonly = !!dataOptions.readonly
+
+        if (!this.element.classList.contains('disabled') && !disabled && !readonly) {
             const optionsContainer = this.optionsContainerTarget;
             optionsContainer.classList.toggle("show-options");
+        } else {
+            if (disabled) this.selectedInputTarget.disabled = true;
+            if (readonly) this.selectedInputTarget.readonly = true;
         }
     }
 
@@ -193,15 +203,16 @@ export default class extends Controller {
         }
 
         if (close && cascadeTo && !!option[data.value]) {
-            const target = document.getElementById(cascadeTo);
-            target.classList.remove('disabled')
+            const cascadeTarget = document.getElementById(cascadeTo);
+            cascadeTarget.classList.remove('disabled')
 
-            if (target) {
-                this.clearOptions(target)
-                this.toggleClearSelection(target)
-                this.loadOptions('', target, {
+            console.log(target, 'THIS')
+            if (cascadeTarget) {
+                this.clearOptions(cascadeTarget)
+                this.toggleClearSelection(cascadeTarget)
+                this.loadOptions('', cascadeTarget, {
                     filters: {
-                        [this.element.id]: option[data.value]
+                        [target.id]: option[data.value]
                     }
                 })
             }
@@ -209,7 +220,7 @@ export default class extends Controller {
 
         if (options.dependent_in) {
             Object.keys(options.dependent_in).forEach((key) => {
-                console.log(options.dependent_in[key], option)
+                // console.log(options.dependent_in[key], option)
                 document.querySelector(`.${key}`).value = option[options.dependent_in[key]]
             })
         }

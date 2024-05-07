@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  party_id: 
+  facility_id: 
+  party_facility_role_id: 
+  is_primary: false
+  from_date: 2024-04-23
+  thru_date: 2024-04-23
+  created_by_id: 
+  updated_by_id: 
+
+two:
+  party_id: 
+  facility_id: 
+  party_facility_role_id: 
+  is_primary: false
+  from_date: 2024-04-23
+  thru_date: 2024-04-23
+  created_by_id: 
+  updated_by_id: 

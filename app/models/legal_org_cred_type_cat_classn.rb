@@ -1,0 +1,2 @@
+class LegalOrgCredTypeCatClassn < ApplicationRecord
+end

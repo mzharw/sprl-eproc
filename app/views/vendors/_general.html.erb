@@ -1,0 +1,45 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Country</strong></td>
+          <td><%= vendor_country(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Province</strong></td>
+          <td><%= vendor_province(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>City</strong></td>
+          <td><%= vendor_city(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Subdistrict</strong></td>
+          <td><%= vendor_sub(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Postal Code</strong></td>
+          <td><%= vendor_postcode(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Address</strong></td>
+          <td><%= vendor_address(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Phone Number</strong></td>
+          <td><%= vendor_phone(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Fax Number</strong></td>
+          <td><%= vendor_fax(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Company emails</strong></td>
+          <td><%= vendor_emails(v) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

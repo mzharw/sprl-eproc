@@ -1,0 +1,2 @@
+class PartyPortfolio < ApplicationRecord
+end

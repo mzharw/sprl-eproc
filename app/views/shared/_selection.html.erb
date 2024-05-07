@@ -1,5 +1,5 @@
 <div data-controller="selection" id="<%= select_name %>" data-options-path="<%= options_path %>" data-value="<%= value %>" data-text="<%= text %>" data-desc="<%= desc %>" data-options="<%= options %>" class="selection-wrapper">
-  <div data-action="click->selection#toggleOptions" class="preview-container">
+  <div data-action="click->selection#toggleOptions" class="preview-container" data-selection-target="selectedContainer">
     <div class="selected-value overflow-hidden text-nowrap" data-selection-target="selectedValue"></div>
     <i class="ti selection-clear" data-action="click->selection#clearSelection" data-selection-target="clearSelection"></i>
   </div>
@@ -9,7 +9,11 @@
     <!--      <span class="visually-hidden">Loading...</span>-->
     <!--    </div>-->
     <input type="text" class="form-control selection-search" data-selection-target="input" data-action="input->selection#filterOptions" placeholder="Search" value="">
-    <%= form.hidden_field select_name, class: 'selected-input', data: { "selection-target": "selectedInput" } %>
+    <% if defined?(form) %>
+      <%= form.hidden_field select_name, class: 'selected-input', data: { "selection-target": "selectedInput" } %>
+    <% else %>
+      <%= hidden_field_tag select_name, '', class: 'selected-input', data: { "selection-target": "selectedInput" } %>
+    <% end %>
     <div data-selection-target="optionsList" class="options-list"></div>
   </div>
 </div>

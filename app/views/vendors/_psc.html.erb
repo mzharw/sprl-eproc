@@ -1,0 +1,41 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>KKKS Name</strong></td>
+          <td><%= get_value(v, 'kkks_partner_full_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Valid From</strong></td>
+          <td><%= format_datetime(get_value(v, 'from_date')) %></td>
+        </tr>
+        <tr>
+          <td><strong>Completion Date</strong></td>
+          <td><%= format_datetime(get_value(v, 'thru_date')) %></td>
+        </tr>
+        <tr>
+          <td><strong>Contact Person</strong></td>
+          <td><%= get_value(v, 'contact_person', 'full_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Phone Number</strong></td>
+          <td><%= get_value(v, 'phone_number','number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Fax Number</strong></td>
+          <td><%= get_value(v, 'fax_number') %></td>
+        </tr>
+        <tr>
+          <td><strong>SPDA Number</strong></td>
+          <td><%= get_value(v, 'spda_number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Supporting Document</strong></td>
+          <td><%= link_to 'View attachment file', get_value(v, 'doc_file', 'ext_url') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

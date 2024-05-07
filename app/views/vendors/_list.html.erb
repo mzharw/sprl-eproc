@@ -1,12 +1,16 @@
 <% content_for :table, flush: true do %>
   <thead class="sticky">
   <tr>
-    <th><%= sortable_header('Code', vendors_path, :code) %></th>
-    <th><%= sortable_header('Vendor Name', vendors_path, :vendor_name) %></th>
     <th><%= sortable_header('Vendor Type', vendors_path, :vendor_type) %></th>
+    <th><%= sortable_header('Vendor Name', vendors_path, :vendor_name) %></th>
+    <th>K3S Name Origin</th>
+    <th>Company Type</th>
+    <th>CIVD Reg. ID</th>
+    <th><%= sortable_header('Registration No.', vendors_path, :code) %></th>
     <th><%= sortable_header('State', vendors_path, :state) %></th>
-    <th><%= sortable_header('From Date', vendors_path, :from_date) %></th>
-    <th><%= sortable_header('Thru Date', vendors_path, :thru_date) %></th>
+    <!--    <th><%#= sortable_header('From Date', vendors_path, :from_date) %></th>-->
+    <!--    <th><%#= sortable_header('Thru Date', vendors_path, :thru_date) %></th>-->
+    <td>Action</td>
   </tr>
   </thead>
   <tbody>
@@ -17,12 +21,26 @@
   <% else %>
     <% @vendors.each do |vendor| %>
       <tr>
-        <td><%= vendor.code %></td>
-        <td><%= vendor.vendor_name %></td>
         <td><%= vendor.vendor_type.name %></td>
+        <td><%= vendor.vendor_name %></td>
+        <td><%= vendor.vendor_k3s %></td>
+        <td><%= vendor.vendor_company_type %></td>
+        <td><%= vendor.vendor_civd_reg_id %></td>
+        <td><%= vendor.code %></td>
         <td><%= badge(vendor.state) %></td>
-        <td><%= vendor.from_date %></td>
-        <td><%= vendor.thru_date %></td>
+        <!--        <td><%#= vendor.from_date %></td>-->
+        <!--        <td><%#= vendor.thru_date %></td>-->
+        <td>
+          <%= link_to vendor, class: 'btn btn-sm btn-outline-secondary m-1' do %>
+            <i class="ti ti-eye"></i>
+          <% end %>
+          <%#= link_to edit_vendor_path(vendor), class: 'btn btn-sm btn-secondary m-1' do %>
+<!--            <i class="ti ti-edit"></i>-->
+          <%# end %>
+          <%#= link_to vendor, class: 'btn btn-sm btn-danger m-1', data: { turbo_method: :delete } do %>
+<!--            <i class="ti ti-trash"></i>-->
+          <%# end %>
+        </td>
       </tr>
     <% end %>
   <% end %>

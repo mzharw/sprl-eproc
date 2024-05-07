@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  vendor_id: 
+  purch_org_id: 
+  state: MyString
+  vendor_type_id: 
+  unit_internal_org_id: 
+
+two:
+  number: MyString
+  vendor_id: 
+  purch_org_id: 
+  state: MyString
+  vendor_type_id: 
+  unit_internal_org_id: 

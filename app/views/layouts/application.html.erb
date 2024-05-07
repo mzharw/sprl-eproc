@@ -10,7 +10,7 @@
   <%= javascript_importmap_tags %>
 </head>
 
-<body>
+<body style="background-color: #f9fafe;">
 <%= yield %>
 <%= turbo_frame_tag 'toasts', class: "toast-container bottom-0 end-0 p-3" do %>
   <%= render partial: 'shared/toast' %>

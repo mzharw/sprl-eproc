@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_30_192041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,36 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "bank_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "banks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "party_id"
+    t.string "code"
+    t.date "from_date"
+    t.date "thru_date"
+    t.string "swift_code"
+    t.uuid "country_id"
+    t.string "other_country"
+    t.uuid "bank_type_id"
+    t.uuid "district_id"
+    t.string "other_district"
+    t.string "postal_address"
+    t.boolean "is_primary"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "buyer_plants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -171,6 +201,127 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
     t.index ["updated_by_id"], name: "index_facilities_on_updated_by_id"
   end
 
+  create_table "legal_creds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.date "from_date"
+    t.date "thru_date"
+    t.string "company_head"
+    t.date "registration_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "legal_org_type_id"
+    t.uuid "legal_org_scale_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_board_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_boards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_org_id"
+    t.uuid "legal_org_board_type_id"
+    t.boolean "is_company_head"
+    t.string "title"
+    t.uuid "party_id"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "citizenship_type_id"
+    t.uuid "signature_sample_id"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_cred_type_cat_classns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_org_cred_type_id"
+    t.uuid "legal_org_cred_type_cat_id"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_cred_type_cats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_cred_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_creds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_org_id"
+    t.uuid "legal_org_cred_type_id"
+    t.string "number"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "doc_id"
+    t.string "other_legal_org_cred_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_scales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_org_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legal_orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "party_id"
+    t.date "from_date"
+    t.date "thru_date"
+    t.string "company_head"
+    t.date "registration_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "legal_org_type_id"
+    t.uuid "legal_org_scale_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "measurement_units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "ident_name"
     t.string "name"
@@ -198,6 +349,79 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
     t.index ["discarded_at"], name: "index_parties_on_discarded_at"
     t.index ["party_type"], name: "index_parties_on_party_type"
     t.index ["updated_by_id"], name: "index_parties_on_updated_by_id"
+  end
+
+  create_table "party_bank_accts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "party_id"
+    t.uuid "bank_id"
+    t.string "branch_name"
+    t.string "acct_name"
+    t.string "acct_number"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "currency_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "party_facilities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "party_id"
+    t.uuid "facility_id"
+    t.uuid "party_facility_role_id"
+    t.boolean "is_primary"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "party_facility_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.boolean "system"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "party_pics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "party_id"
+    t.uuid "pic_id"
+    t.boolean "is_primary"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.boolean "system"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "party_portfolios", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "party_id"
+    t.uuid "scope_of_supply_id"
+    t.string "name"
+    t.date "from_date"
+    t.date "thru_date"
+    t.text "testimony"
+    t.uuid "testimony_doc_id"
+    t.string "project_owner"
+    t.string "project_number"
+    t.string "project_location"
+    t.uuid "currency_id"
+    t.decimal "project_value"
+    t.string "project_handover_letter_number"
+    t.uuid "project_handover_letter_doc_id"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "personnels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -708,6 +932,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
     t.index ["updated_by_id"], name: "index_purch_reqns_on_updated_by_id"
   end
 
+  create_table "regions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "region_type"
+    t.uuid "parent_id"
+    t.string "code"
+    t.string "name"
+    t.string "postal_code"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "ident_name"
@@ -725,6 +961,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
     t.index ["updated_by_id_id"], name: "index_roles_on_updated_by_id_id"
+  end
+
+  create_table "scope_of_supplies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "scope_of_supply_type"
+    t.uuid "parent_id"
+    t.string "code"
+    t.string "name"
+    t.text "desc"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.string "commodity_code"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -779,6 +1029,64 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_230609) do
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  create_table "vendor_registration_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "vendor_registration_id"
+    t.uuid "vendor_registration_form_id"
+    t.uuid "vendor_registration_entry_group_id"
+    t.uuid "ident_uuid"
+    t.uuid "approved_by_id"
+    t.uuid "rejected_by_id"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.uuid "entryable_id"
+    t.string "entry_type"
+    t.string "plurality"
+    t.string "entryable_type"
+    t.text "comment"
+    t.json "data"
+    t.datetime "approved_at", precision: nil
+    t.datetime "rejected_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vendor_registration_entry_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "vendor_registration_form_type_id"
+    t.uuid "parent_id"
+    t.string "ident_name"
+    t.string "name"
+    t.text "desc"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vendor_registrations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "number"
+    t.uuid "vendor_id"
+    t.uuid "purch_org_id"
+    t.string "state"
+    t.uuid "vendor_type_id"
+    t.uuid "unit_internal_org_id"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vendor_scope_of_supplies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "vendor_id"
+    t.uuid "scope_of_supply_id"
+    t.date "from_date"
+    t.date "thru_date"
+    t.uuid "created_by_id"
+    t.uuid "updated_by_id"
+    t.text "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "vendor_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  app_id: 
+  legal_org_id: 
+  legal_org_board_type_id: 
+  is_company_head: false
+  title: MyString
+  party_id: 
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  citizenship_type_id: 
+  signature_sample_id: 
+  created_by_id: 
+  updated_by_id: 
+
+two:
+  app_id: 
+  legal_org_id: 
+  legal_org_board_type_id: 
+  is_company_head: false
+  title: MyString
+  party_id: 
+  from_date: 2024-04-21
+  thru_date: 2024-04-21
+  citizenship_type_id: 
+  signature_sample_id: 
+  created_by_id: 
+  updated_by_id: 

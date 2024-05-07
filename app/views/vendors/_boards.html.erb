@@ -1,0 +1,41 @@
+<% vendor.each_with_index do |v, i| %>
+  <div class="d-flex">
+    <div class="bg-primary-subtle align-content-center border-end text-center" style="width: 35px"><%= i + 1 %></div>
+    <div class="w-100">
+      <table class="table">
+        <tr>
+          <td style="width: 150px"><strong>Board Type</strong></td>
+          <td><%= get_value(v, 'board_membership_type', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Primary Data</strong></td>
+          <td><%= badge(get_value(v, 'is_company_head')) %></td>
+        </tr>
+        <tr>
+          <td><strong>Full Name</strong></td>
+          <td><%= get_value(v, 'full_name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Citizenship</strong></td>
+          <td><%= get_value(v, 'nationality', 'name') %></td>
+        </tr>
+        <tr>
+          <td><strong>Position</strong></td>
+          <td><%= get_value(v, 'position_title') %></td>
+        </tr>
+        <tr>
+          <td><strong>Email</strong></td>
+          <td><%= vendor_emails(v) %></td>
+        </tr>
+        <tr>
+          <td><strong>Phone Number</strong></td>
+          <td><%= get_value(v, 'phone_number', 'number') %></td>
+        </tr>
+        <tr>
+          <td><strong>Signature Sample Attachment</strong></td>
+          <td><%= link_to 'View attachment file', get_value(v, 'files', 'ext_url') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

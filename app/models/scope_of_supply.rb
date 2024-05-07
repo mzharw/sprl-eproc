@@ -1,0 +1,2 @@
+class ScopeOfSupply < ApplicationRecord
+end
