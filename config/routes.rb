@@ -3,7 +3,6 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  resources :latihans
   authenticate :user, lambda { |u| u.has_role? 'Super Admin' } do
     mount Sidekiq::Web => '/sidekiq'
   end
