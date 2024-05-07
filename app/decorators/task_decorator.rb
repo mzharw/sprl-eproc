@@ -10,4 +10,15 @@ class TaskDecorator < ApplicationDecorator
   #     end
   #   end
 
+  def taskable_desc
+    taskable = object&.taskable
+
+    return taskable.desc if taskable.respond_to? :desc
+    return taskable.name if taskable.respond_to? :name
+  end
+
+  def taskable_number
+    object&.taskable&.number
+  end
+
 end

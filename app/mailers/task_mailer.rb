@@ -5,13 +5,13 @@ class TaskMailer < ApplicationMailer
     taskable = task.taskable
 
     unless taskable.nil?
-      cc = [taskable.creator_email]
-      users = User.with_any_role?('Super Admin', 'General Manager', 'Reminder')
-                  .where(purch_group_id: taskable.purch_group_id)
-      users = users.where(plant_id: taskable.plant_id) if taskable.respond_to?(:plant_id)
-      cc = [cc, *users.pluck(:email)] unless users.nil?
+      users = User.with_any_role('Super Admin', 'General Manager', 'Reminder')
+      to = task.user.email
+      cc = users.pluck(:email) unless users.nil?
+      bcc = User.with_role('Super Admin').pluck(:email)
+
+      mail(to:, cc:, bcc:, subject: "Task #{task.number} is still ongoing")
     end
 
-    mail(to: task.user.email, cc: -> { cc }, subject: "Task #{task.number} is still ongoing")
   end
 end

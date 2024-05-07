@@ -198,15 +198,17 @@
 </table>
 
 <h3 style="margin: 60px 0">Approver Signature</h3>
-<table style="border-color: #ebf1f6">
-  <% @approver_qrs.each do |id, qr| %>
-    <tr>
-      <td style="width: 30px; height: 30px; padding: 20px">
-        <%== qr %>
-        <div style="text-align: center; padding-top: 100px">
-          <%= instances.where(updated_by_id: id).first.updater_name %>
+<table style="width: 100%; border-color: transparent;">
+  <tr>
+    <td>
+      <% @approver_qrs.each do |id, qr| %>
+        <div style="border: 1px solid #ebf1f6; position: relative; display: inline-block; padding: 20px;">
+          <%== qr %>
+          <div style=" padding-top: 100px; text-align: center;">
+            <%= instances.where(updated_by_id: id).first.updater_name %>
+          </div>
         </div>
-      </td>
-    </tr>
-  <% end %>
+      <% end %>
+    </td>
+  </tr>
 </table>

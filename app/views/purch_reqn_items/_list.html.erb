@@ -89,8 +89,8 @@
           <td>
             <%= purch_reqn_item.qty - purch_reqn_item.carried_out_qty %>
           </td>
-          <td>
-            <%= number_field_tag "items_qty[#{purch_reqn_item.id}]", 0.0, class: 'form-control', max: purch_reqn_item.qty - purch_reqn_item.carried_out_qty, step: 0.1 %>
+          <td data-controller="input">
+            <%= text_field_tag "items_qty[#{purch_reqn_item.id}]", 0.0, class: 'form-control', max: purch_reqn_item.qty - purch_reqn_item.carried_out_qty, step: 0.1, data: { 'input-target': 'numberInput' } %>
           </td>
         <% end %>
         <% if carry_out %>

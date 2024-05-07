@@ -4,7 +4,7 @@
 
 <p>
   Anda mempunyai task pending sejak <%= @task.updated_at %>.
-  Mohon untuk diperiksa dengan mengklik <%= link_to 'disini', tasks_path(@task) %>
+  Mohon untuk diperiksa dengan mengklik <%= link_to 'disini', Rails.application.routes.url_helpers.tasks_path(@task, host: ActionMailer::Base.default_url_options[:host]) %>
 </p>
 
 Terima kasih.

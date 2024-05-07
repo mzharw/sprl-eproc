@@ -11,6 +11,19 @@ export default class extends Controller {
     }
 
     updateCounter(el) {
-        this.counterTarget.value = this.multiplierTarget.value * this.multiplicandTarget.value
+        let value = this.parse(this.multiplierTarget.value) * this.parse(this.multiplicandTarget.value)
+        if (this.counterTarget.type == 'text') {
+            value = value.toLocaleString(undefined, {
+                style: 'decimal',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })
+        }
+
+        this.counterTarget.value = value
+    }
+
+    parse(value) {
+        return parseFloat((value).replace(/,/g, ''))
     }
 }

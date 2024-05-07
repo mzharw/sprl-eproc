@@ -7,16 +7,13 @@ class PurchReqnsController < ApplicationController
 
   # GET /purch_reqns or /purch_reqns.json
   def index
-    @purch_reqns = PurchReqn
-                     .joins(:plant, :creator)
-                     .select('purch_reqns.*, plants.code, users.username')
-    @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups)
+    @purch_reqns = PurchReqn.joins(:plant, :creator).select('purch_reqns.*, plants.code, users.username')
+    @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups) unless current_user.is_scm_manager? || current_user.is_finance_manager? || current_user.is_buyer?
     json = paginate_json(@purch_reqns.all)
     @purch_reqns = filter(@purch_reqns, { plants_code: 'plants.code', created_by: 'users.username', desc: 'purch_reqns.desc' })
     authorize @purch_reqns
 
     @purch_reqns = paginate(@purch_reqns).decorate
-
 
     respond_to do |format|
       format.html
@@ -49,7 +46,7 @@ class PurchReqnsController < ApplicationController
         render pdf: "PR_#{@purch_reqn&.number}",
                template: 'purch_reqns/pdf_purch_reqn',
                formats: [:html],
-               disposition: :inline,
+               disposition: :attachment,
                layout: 'pdf'
       end
     end
@@ -109,7 +106,7 @@ class PurchReqnsController < ApplicationController
         @purch_reqn.cost_center_id = nil
       end
 
-      if @purch_reqn.update(purch_reqn_params)
+      if @purch_reqn.update(purch_reqn_params.except(:purch_reqn_type))
         unless doc.blank?
           format.turbo_stream do
             files_uploaded = !purch_reqn_params[doc].last.empty?

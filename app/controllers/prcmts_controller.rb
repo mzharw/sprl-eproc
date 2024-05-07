@@ -39,7 +39,7 @@ class PrcmtsController < ApplicationController
         render pdf: "PRCMT_#{@prcmt&.number}",
                template: 'prcmts/pdf_prcmt',
                formats: [:html],
-               disposition: :inline,
+               disposition: :attachment,
                layout: 'pdf'
       end
     end

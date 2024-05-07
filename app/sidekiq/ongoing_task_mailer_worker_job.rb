@@ -1,6 +1,5 @@
 class OngoingTaskMailerWorkerJob
   include Sidekiq::Job
-
   def perform(*args)
     Task.ongoing.find_each do |task|
       # Send email for the ongoing task

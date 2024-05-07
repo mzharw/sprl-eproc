@@ -1,6 +1,12 @@
 # frozen_string_literal: true
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  authenticate :user, lambda { |u| u.has_role? 'Super Admin' } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :wbsprojects
   resources :currency_exchange_rates
   resources :buyer_plants

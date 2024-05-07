@@ -46,7 +46,7 @@ class WorkAcceptanceNotesController < ApplicationController
         render pdf: "WAN_#{@work_acceptance_note&.number}",
                template: 'work_acceptance_notes/pdf_wan',
                formats: [:html],
-               disposition: :inline,
+               disposition: :attachment,
                layout: 'pdf'
       end
     end
@@ -81,27 +81,27 @@ class WorkAcceptanceNotesController < ApplicationController
     respond_to do |format|
       if @work_acceptance_note.save
         items.each do |item|
-          WorkAcceptanceNoteItem.create({
-                                          work_acceptance_note_id: @work_acceptance_note.id,
-                                          purch_order_item_id: item.id,
-                                          commodity_list_id: item.purch_reqn_item.commodity_list_id,
-                                          product_group_id: item.product_group_id,
-                                          product_id: item.product_id,
-                                          number: item.number,
-                                          qty: item.qty,
-                                          measurement_unit_id: item.measurement_unit_id,
-                                          unit_price: item.unit_price,
-                                          subtotal: item.subtotal,
-                                          cost_center_id: purch_reqn&.cost_center_id,
-                                          delivery_date: item.delivery_date,
-                                          desc: item.desc,
-                                          specification: item.specification,
-                                          note: item.note,
-                                          data: item.data
-                                          # wbsproject_id: item.wbsproject_id,
-                                          # parent_id: item.parent_id,
-                                          # item_type: item.item_type,
-                                        })
+          item = WorkAcceptanceNoteItem.create({
+                                                 work_acceptance_note_id: @work_acceptance_note.id,
+                                                 purch_order_item_id: item.id,
+                                                 commodity_list_id: item.purch_reqn_item.commodity_list_id,
+                                                 product_group_id: item.product_group_id,
+                                                 product_id: item.product_id,
+                                                 number: item.number,
+                                                 qty: item.qty,
+                                                 measurement_unit_id: item.measurement_unit_id,
+                                                 unit_price: item.unit_price,
+                                                 subtotal: item.subtotal,
+                                                 cost_center_id: purch_reqn&.cost_center_id,
+                                                 delivery_date: item.delivery_date,
+                                                 desc: item.desc,
+                                                 specification: item.specification,
+                                                 note: item.note,
+                                                 data: item.data
+                                                 # wbsproject_id: item.wbsproject_id,
+                                                 # parent_id: item.parent_id,
+                                                 # item_type: item.item_type,
+                                               })
         end
         format.html do
           redirect_to work_acceptance_note_url(@work_acceptance_note),

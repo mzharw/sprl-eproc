@@ -57,14 +57,30 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update({ **user_params, **tracker(:update) })
-        @user.roles.clear
-        roles = user_roles_params[:role_ids]
-        roles = Role.where(id: roles)
-        unless roles.empty?
-          roles.each do |role|
-            @user.add_role(role.name)
+        user_roles = Role.user_role
+        user_roles_ids = user_roles.ids
+
+        existing_roles = user_roles_ids & @user.roles.ids
+        modified_roles = user_roles_params[:role_ids] || []
+
+        ids_to_remove = existing_roles - modified_roles
+        ids_to_add = modified_roles - existing_roles
+
+        roles_to_remove = user_roles.where(id: ids_to_remove).pluck(:name)
+        roles_to_add = user_roles.where(id: ids_to_add).pluck(:name)
+
+        unless roles_to_remove.empty?
+          roles_to_remove.each do |role|
+            @user.remove_role(role)
           end
         end
+
+        unless roles_to_add.empty?
+          roles_to_add.each do |role|
+            @user.add_role(role)
+          end
+        end
+
         @user.party.update({ **party_params, **tracker(:update) })
         @user.personnel.update({ **personnel_params, **tracker(:update) })
         format.html { redirect_to edit_user_url(@user), notice: 'User was successfully updated.' }

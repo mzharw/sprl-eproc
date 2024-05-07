@@ -52,7 +52,6 @@ gem 'wicked_pdf'
 
 gem 'wkhtmltopdf-binary'
 
-gem 'whenever', require: false
 
 # Nested forms
 # gem 'cocoon', '~> 1.2'
@@ -123,3 +122,5 @@ gem "discard", "~> 1.3"
 gem "rolify", "~> 6.0"
 
 gem "sidekiq", "~> 7.2"
+
+gem "sidekiq-cron", "~> 1.12"

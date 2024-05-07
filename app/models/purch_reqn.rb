@@ -115,7 +115,8 @@ class PurchReqn < ApplicationRecord
 
   def workflow_map
     last_instance = workflow_instances.last
-    role = case last_instance.workflow_step.seq
+    seq = last_instance.workflow_step.seq
+    role = case seq
            when 1
              {
                role: 'Section Head User',
@@ -155,6 +156,7 @@ class PurchReqn < ApplicationRecord
 
     role[:assignees] = assignees&.pluck(:email) if role
     role[:creator] = creator.email if role
+    role[:seq] = seq if role
     role
   end
 

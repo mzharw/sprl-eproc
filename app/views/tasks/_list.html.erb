@@ -2,10 +2,16 @@
   <thead class="sticky">
   <tr>
     <th>
-      <%= sortable_header('Number', tasks_path, :number) %>
+      <%= sortable_header('Task Number', tasks_path, :number) %>
     </th>
     <th>
       <%= sortable_header('Name', tasks_path, :name) %>
+    </th>
+    <th>
+      Number
+    </th>
+    <th>
+      Description
     </th>
     <th>
       <%= sortable_header('State', tasks_path, :state) %>
@@ -26,6 +32,8 @@
     <tr>
       <td><%= task.number %></td>
       <td><%= task.name %></td>
+      <td><%= task.taskable_number %></td>
+      <td><%= task.taskable_desc %></td>
       <td><%= badge(task.state) %></td>
       <td><%= task.formatted_create %></td>
       <td><%= task.formatted_update %></td>

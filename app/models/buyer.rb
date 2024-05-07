@@ -1,5 +1,6 @@
 class Buyer < ApplicationRecord
   belongs_to :party, optional: true
+  has_one :user, through: :party
 
   has_many :buyer_purch_groups
   has_many :purch_groups, through: :buyer_purch_groups

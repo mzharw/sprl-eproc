@@ -35,8 +35,20 @@ class User < ApplicationRecord
     has_any_role? 'Super Admin', 'General Manager', 'Manager SCM'
   end
 
+  def is_finance_manager?
+    has_role? 'Manager of Finance'
+  end
+
+  def is_scm_manager?
+    has_role? 'Manager SCM'
+  end
+
   def is_superadmin?
     has_role? 'Super Admin'
+  end
+
+  def is_buyer?
+    has_role? 'Buyer'
   end
 
   def self.find_for_authentication(warden)

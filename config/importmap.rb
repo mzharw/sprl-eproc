@@ -11,4 +11,4 @@ pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "apexcharts" # @3.44.0
 pin "jquery" # @3.7.1
 pin "activestorage", to: "activestorage.esm.js"
-
+pin "imask", to: "https://ga.jspm.io/npm:imask@7.6.0/esm/index.js"
