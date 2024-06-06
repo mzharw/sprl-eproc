@@ -19,7 +19,17 @@ module Filterable
     order_by = (order_by.split('.').length > 1 ? order_by : "#{model.table_name}.#{order_by}") unless order_by_column.nil?
     # OpenStruct.new({ order_by:, order_dir:, search:, search_by: })
 
-    model = model.where("lower(#{search_by}) LIKE ?", "%#{search}%") if params.key? :search_by
+    if params.key? :search_by
+      col = search_by.split('.')[-1]
+      if %w[created_at updated_at].include?(col)
+        if search.present?
+          search = Date.parse(search)
+          model = model.where(col => search.beginning_of_day..search.end_of_day)
+        end
+      else
+        model = model.where("lower(#{search_by}) LIKE ?", "%#{search}%")
+      end
+    end
     model.order("#{order_by} #{order_dir || 'DESC'}")
   end
 

@@ -57,17 +57,17 @@
       <%#= form.text_field :desired_vendor, class: 'form-control' %>
       <!--    </div>-->
 
-      <% unless is_service_item %>
-        <div class="col-md-6">
-          <label for="specification">Specification</label>
-          <%= form.text_field :specification, class: 'form-control' %>
-        </div>
+      <%# unless is_service_item %>
+<!--        <div class="col-md-6">-->
+<!--          <label for="specification">Specification</label>-->
+          <%#= form.text_field :specification, class: 'form-control' %>
+<!--        </div>-->
 
-        <div class="col-md-6">
-          <label for="requisitioner">Requisitioner</label>
-          <%= form.text_field :requisitioner, class: 'form-control' %>
-        </div>
-      <% end %>
+<!--        <div class="col-md-6">-->
+<!--          <label for="requisitioner">Requisitioner</label>-->
+          <%#= form.text_field :requisitioner, class: 'form-control' %>
+<!--        </div>-->
+      <%# end %>
 
       <%# if is_material || is_service_item %>
       <div class="col-md-6">
@@ -120,7 +120,7 @@
       <%# end %>
 
       <div class="col-md-6">
-        <label for="desc">Description</label>
+        <label for="desc">Item Name (Specification)</label>
         <%= form.text_area :desc, class: 'form-control', rows: 5 %>
       </div>
     </div>

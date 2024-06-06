@@ -42,6 +42,10 @@ class PurchReqnDecorator < ApplicationDecorator
     object&.state != 'DRAFT'
   end
 
+  def have_been_rejected?
+    object&.workflow_instances.exists?(state: 'REJECTED')
+  end
+
   def doc_title(name)
     object.class.doc_title(name)
   end

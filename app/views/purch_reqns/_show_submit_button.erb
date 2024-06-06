@@ -1,9 +1,16 @@
 <% if !@purch_reqn.submitted? && (current_user.has_any_role?('Buyer', 'User') || current_user.is_superuser?) %>
-  <%= form_with(model: model, id: 'submit-button', data: { turbo: false }) do |f| %>
-    <%= f.hidden_field :state, value: 'SUBMITTED' %>
-    <%= f.button class: 'btn btn-sm btn-secondary', disabled: !model.submitable? do %>
+  <% if @purch_reqn.have_been_rejected? %>
+    <%= button_tag class: "btn btn-sm btn-secondary", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-submit' } do %>
       <i class="ti ti-send"></i>
       Submit
+    <% end %>
+  <% else %>
+    <%= form_with(model: model, id: 'submit-button', data: { turbo: false }) do |f| %>
+      <%= f.hidden_field :state, value: 'SUBMITTED' %>
+      <%= f.button class: 'btn btn-sm btn-secondary', disabled: !model.submitable? do %>
+        <i class="ti ti-send"></i>
+        Submit
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

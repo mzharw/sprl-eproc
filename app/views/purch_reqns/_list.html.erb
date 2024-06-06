@@ -7,45 +7,65 @@
     <th>
       <%= sortable_header('PR Type', purch_reqns_path, :purch_reqn_type) %>
     </th>
-    <th>
-      <%= sortable_header('Contract', purch_reqns_path, :contract) %>
-    </th>
-    <th>
-      <%= sortable_header('Description', purch_reqns_path, :desc) %>
-    </th>
 <!--    <th>-->
-      <%#= sortable_header('Plant Code', purch_reqns_path, :plants_code) %>
+      <%#= sortable_header('Contract', purch_reqns_path, :contract) %>
 <!--    </th>-->
+    <th>
+      <%= sortable_header('Title', purch_reqns_path, :desc) %>
+    </th>
+    <!--    <th>-->
+    <%#= sortable_header('Plant Code', purch_reqns_path, :plants_code) %>
+    <!--    </th>-->
     <th>Plant</th>
-<!--    <th>Non AFE Code</th>-->
+    <!--    <th>Non AFE Code</th>-->
     <th>Fund Source</th>
-    <th>Purchasing Group</th>
+    <th>Purchasing Group Code</th>
     <th>Workflow State</th>
-    <th>State</th>
-    <th>Username</th>
+    <th>
+      <%= sortable_header('State', purch_reqns_path, :state) %>
+    </th>
+    <th>
+      HSSE Risk
+    </th>
+    <th>
+      <%= sortable_header('Username', purch_reqns_path, :created_by) %>
+    </th>
     <th>Subtotal</th>
-    <th>Created at</th>
-<!--    <th>Cancel Remark</th>-->
+    <th>
+      <%= sortable_header('Created At', purch_reqns_path, :created_at) %>
+    </th>
+<!--    <th>Action</th>-->
+    <!--    <th>Cancel Remark</th>-->
   </tr>
   </thead>
   <tbody>
   <% purch_reqns.each do |purch_reqn| %>
-    <tr>
+    <tr class="<%= 'highlighted' if purch_reqn.state === 'FINISHED' %>">
       <td><%= link_to purch_reqn.number, purch_reqn %></td>
       <td><%= purch_reqn.purch_reqn_type %></td>
-      <td><%= badge(purch_reqn.contract) %></td>
+<!--      <td><%#= badge(purch_reqn.contract) %></td>-->
       <td><%= purch_reqn.desc %></td>
-<!--      <td><%#= purch_reqn.plant_code %></td>-->
+      <!--      <td><%#= purch_reqn.plant_code %></td>-->
       <td><%= purch_reqn.plant_name %></td>
-<!--      <td><%#= purch_reqn.cost_center_code %></td>-->
+      <!--      <td><%#= purch_reqn.cost_center_code %></td>-->
       <td><%= purch_reqn.fund_source %></td>
-      <td><%= purch_reqn.purch_group_name %></td>
+      <td><%= purch_reqn.purch_group_code %></td>
       <td><%= purch_reqn.workflow_state %></td>
       <td><%= badge(purch_reqn.state) %></td>
+      <td><%= badge(purch_reqn.hsse_risk) %></td>
       <td><%= purch_reqn.creator_name %></td>
       <td><%= purch_reqn.items_subtotal %></td>
       <td><%= purch_reqn.formatted_create %></td>
-<!--      <td><%#= purch_reqn.cancel_remark %></td>-->
+<!--      <td>-->
+        <%# if purch_reqn.finished? %>
+          <%#= link_to purch_reqn_path(purch_reqn, format: :pdf) do %>
+<!--            <button class="btn btn-sm btn-primary">-->
+<!--              <i class="ti ti-file-type-pdf"></i>-->
+<!--            </button>-->
+          <%# end %>
+        <%# end %>
+<!--      </td>-->
+      <!--      <td><%#= purch_reqn.cancel_remark %></td>-->
     </tr>
   <% end %>
   <% if purch_reqns.empty? %>

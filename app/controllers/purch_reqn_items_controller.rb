@@ -5,15 +5,13 @@ class PurchReqnItemsController < ApplicationController
   # GET /purch_reqn_items or /purch_reqn_items.json
   def index
     @purch_reqn = PurchReqnDecorator.new(PurchReqn.find(params[:id]))
-    items = carry_out_items_params[:items]
+    # items = carry_out_items_params[:items]
     if request.post?
-      if items.nil? || items.empty?
-        flash.alert = 'Please add atleast one item to carry out.'
-      else
-        redirect_to new_prcmt_path(purch_reqn: @purch_reqn,
-                                   items: carry_out_items_params[:items],
-                                   items_qty: carry_out_items_qty_params)
-      end
+      # if items.nil? || items.empty?
+      #   flash.alert = 'Please add atleast one item to carry out.'
+      # else
+      redirect_to new_prcmt_path(purch_reqn: @purch_reqn, items_qty: carry_out_items_qty_params)
+      # end
     end
     @purch_reqn_items = PurchReqnItem.where(purch_reqn_id: params[:id]).without_service_item.uncarried.decorate
     authorize @purch_reqn_items.object
@@ -106,7 +104,13 @@ class PurchReqnItemsController < ApplicationController
   # PATCH/PUT /purch_reqn_items/1 or /purch_reqn_items/1.json
   def update
     respond_to do |format|
-      if @purch_reqn_item.update({ **purch_reqn_item_params, **tracker(:update) })
+      purch_reqn_item = purch_reqn_item_params
+      purch_reqn_item['est_unit_price'] = purch_reqn_item['est_unit_price'].delete(',')
+      purch_reqn_item['qty'] = purch_reqn_item['qty'].delete(',')
+
+      # binding.pry
+
+      if @purch_reqn_item.update({ **purch_reqn_item, **tracker(:update) })
         if @purch_reqn_item.item_type == 'SERVICE_ITEM'
           service = @purch_reqn_item.service
           service.update(est_subtotal: service.service_items.sum(:est_subtotal))

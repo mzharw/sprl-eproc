@@ -20456,7 +20456,11 @@ thead,
 tbody,
 th.sticky,
 td.sticky {
-    background: white !important;
+    background: white;
+}
+
+tr.highlighted td {
+    background: #ffffd0;
 }
 
 thead tr th.sticky {

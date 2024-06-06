@@ -29,18 +29,39 @@
         </label>
       </div>
     </div>
+    <!--    <div class="col-md-6">-->
+    <!--      <label for="pr-type">Contact Reference</label>-->
+    <!--      <div class="form-check">-->
+    <%#= form.radio_button :contract, true, class: 'form-check-input', id: 'contract-true' %>
+    <!--        <label class="form-check-label" for="contract-true">-->
+    <!--          Yes-->
+    <!--        </label>-->
+    <!--      </div>-->
+    <!--      <div class="form-check">-->
+    <%#= form.radio_button :contract, false, class: 'form-check-input', id: 'contract-false', checked: true %>
+    <!--        <label class="form-check-label" for="contract-false">-->
+    <!--          No-->
+    <!--        </label>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="col-md-6">
-      <label for="pr-type">Contact Reference</label>
+      <%= label_for('hsse_risk', 'HSSE Risk', true) %>
       <div class="form-check">
-        <%= form.radio_button :contract, true, class: 'form-check-input', id: 'contract-true' %>
-        <label class="form-check-label" for="contract-true">
-          Yes
+        <%= form.radio_button :hsse_risk, 'HIGH', class: 'form-check-input', id: 'high' %>
+        <label class="form-check-label" for="high">
+          High
         </label>
       </div>
       <div class="form-check">
-        <%= form.radio_button :contract, false, class: 'form-check-input', id: 'contract-false', checked: true %>
-        <label class="form-check-label" for="contract-false">
-          No
+        <%= form.radio_button :hsse_risk, 'MEDIUM', class: 'form-check-input', id: 'medium' %>
+        <label class="form-check-label" for="medium">
+          Medium
+        </label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :hsse_risk, 'LOW', class: 'form-check-input', id: 'low' %>
+        <label class="form-check-label" for="low">
+          Low
         </label>
       </div>
     </div>
@@ -56,7 +77,7 @@
     </div>
     <div class="col-md-6 d-flex flex-column gap-3" data-controller="toggler">
       <div>
-        <%= label_for('desc', 'Description', true) %>
+        <%= label_for('desc', 'Title', true) %>
         <%= form.text_area :desc, id: :description, class: 'form-control' %>
       </div>
       <div>

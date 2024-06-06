@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    task = Task.where(user_id: current_user.id)
+    task = Task.ongoing.where(user_id: current_user.id)
     @tasks = filter(task)
     @tasks = paginate(@tasks).decorate
   end

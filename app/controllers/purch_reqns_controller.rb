@@ -7,10 +7,10 @@ class PurchReqnsController < ApplicationController
 
   # GET /purch_reqns or /purch_reqns.json
   def index
-    @purch_reqns = PurchReqn.joins(:plant, :creator).select('purch_reqns.*, plants.code, users.username')
+    @purch_reqns = PurchReqn.joins(:plant, creator: :party).select('purch_reqns.*', 'plants.code', 'parties.full_name')
     @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups) unless current_user.is_scm_manager? || current_user.is_finance_manager? || current_user.is_buyer?
     json = paginate_json(@purch_reqns.all)
-    @purch_reqns = filter(@purch_reqns, { plants_code: 'plants.code', created_by: 'users.username', desc: 'purch_reqns.desc' })
+    @purch_reqns = filter(@purch_reqns, { plants_code: 'plants.code', created_by: 'parties.full_name', desc: 'purch_reqns.desc', state: 'purch_reqns.state', created_at: 'purch_reqns.created_at' })
     authorize @purch_reqns
 
     @purch_reqns = paginate(@purch_reqns).decorate
@@ -94,6 +94,7 @@ class PurchReqnsController < ApplicationController
   # PATCH/PUT /purch_reqns/1 or /purch_reqns/1.json
   def update
     doc = PurchReqn.check_docs(purch_reqn_params)
+
     respond_to do |format|
       if @purch_reqn.submitted? && doc
         format.turbo_stream do
@@ -106,7 +107,12 @@ class PurchReqnsController < ApplicationController
         @purch_reqn.cost_center_id = nil
       end
 
+      comment = params['purch_reqn']['comment']
+      instance = @purch_reqn.decorate.workflow_instance
+      instance.update(updated_by_id: current_user.id, comment:, state: 'FINISHED')
+
       if @purch_reqn.update(purch_reqn_params.except(:purch_reqn_type))
+
         unless doc.blank?
           format.turbo_stream do
             files_uploaded = !purch_reqn_params[doc].last.empty?
@@ -197,7 +203,7 @@ class PurchReqnsController < ApplicationController
                   :justification, :budget_soure, :reason, :contract_type, :risk_category,
                   :explanation, :previous_contract_number, :previous_contract_title,
                   :local_of_content, :rejected_at, :cancel_remark,
-                  :contract_reference_id, :prcmt_id, :wbsproject_id,
+                  :contract_reference_id, :prcmt_id, :wbsproject_id, :hsse_risk,
                   contract_docs: [],
                   contract_ex_sp_docs: [],
                   memo_scm_manager_docs: [],

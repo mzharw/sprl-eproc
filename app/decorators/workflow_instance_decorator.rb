@@ -10,9 +10,9 @@ class WorkflowInstanceDecorator < ApplicationDecorator
   #     end
   #   end
 
-  def comment
-    first_step? ? 'Workflow Started' : object&.comment
-  end
+  # def comment
+  #   first_step? ? 'Workflow Started' : object&.comment
+  # end
 
   def step
     first_step? ? 'Workflow Started' : object&.workflow_step&.name
