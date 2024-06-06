@@ -7,9 +7,9 @@
 <% content_for :table, flush: true do %>
   <thead class="sticky">
   <tr>
-    <% if is_form %>
-      <th></th>
-    <% end %>
+    <%# if is_form %>
+<!--      <th></th>-->
+    <%# end %>
     <th>
       Item No.
     </th>
@@ -23,7 +23,7 @@
       Material
     </th>
     <th>
-      Description
+      Item Name (Specification)
     </th>
     <th>
       <%= 'Initial' if is_form %> Quantity
@@ -56,9 +56,9 @@
     <th>
       Delivery Date
     </th>
-    <th>
-      Requisitioner
-    </th>
+<!--    <th>-->
+<!--      Requisitioner-->
+<!--    </th>-->
     <% unless is_submitted %>
       <th class="sticky">
         Action
@@ -74,11 +74,11 @@
   <% else %>
     <% items.each_with_index do |purch_reqn_item, index| %>
       <tr id="<%= purch_reqn_item.id %>">
-        <% if is_form %>
-          <td>
-            <%= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
-          </td>
-        <% end %>
+        <%# if is_form %>
+<!--          <td>-->
+            <%#= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
+<!--          </td>-->
+        <%# end %>
         <td><%= purch_reqn_item.number || index + 1 %></td>
         <td><%= purch_reqn_item.item_type if defined? purch_reqn_item.item_type %></td>
         <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
@@ -90,7 +90,9 @@
             <%= purch_reqn_item.qty - purch_reqn_item.carried_out_qty %>
           </td>
           <td data-controller="input">
-            <%= text_field_tag "items_qty[#{purch_reqn_item.id}]", 0.0, class: 'form-control', max: purch_reqn_item.qty - purch_reqn_item.carried_out_qty, step: 0.1, data: { 'input-target': 'numberInput' } %>
+            <%= purch_reqn_item.qty %>
+            <%#= text_field_tag "items_qty[#{purch_reqn_item.id}]", 0.0, class: 'form-control', max: purch_reqn_item.qty - purch_reqn_item.carried_out_qty, step: 0.1, data: { 'input-target': 'numberInput' } %>
+            <%= hidden_field_tag "items_qty[#{purch_reqn_item.id}]", purch_reqn_item.qty, data: { 'input-target': 'numberInput' } %>
           </td>
         <% end %>
         <% if carry_out %>
@@ -105,7 +107,7 @@
         <td><%= purch_reqn_item.est_unit_price %></td>
         <td><%= purch_reqn_item.est_subtotal %></td>
         <td><%= purch_reqn_item.formatted_delivery %></td>
-        <td><%= purch_reqn_item.requisitioner %></td>
+<!--        <td><%#= purch_reqn_item.requisitioner %></td>-->
         <% unless is_submitted %>
           <td>
             <div class="d-flex">

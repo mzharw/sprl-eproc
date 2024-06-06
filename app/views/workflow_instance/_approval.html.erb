@@ -9,11 +9,14 @@
   <% end %>
   <%= render 'shared/modal_confirmation', id: modal_confirm_id, back: "##{modal_id}" %>
 
+  <%= form.hidden_field :state, value: 'SUBMITTED' if action == :submit %>
+
   <% content_for :modal_button, flush: true do %>
-    <%= button_tag type: :button, class: "btn btn-#{action == :approve ? 'success' : 'danger'}", data: { 'bs-toggle': 'modal', 'bs-target': "##{modal_confirm_id}" } do %>
+    <%= button_tag type: :button, class: "btn btn-#{action == :reject ? 'danger' : 'secondary'}", data: { 'bs-toggle': 'modal', 'bs-target': "##{modal_confirm_id}" } do %>
       <%= action.capitalize %>
     <% end %>
   <% end %>
+
   <% content_for :modal_body, flush: true do %>
     <label for="comment" class="form-label">Comment</label>
     <%= form.text_area :comment, class: 'form-control' %>

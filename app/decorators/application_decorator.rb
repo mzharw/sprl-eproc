@@ -13,11 +13,15 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def creator_name
-    object.creator&.username
+    object.creator&.decorate&.full_name
   end
 
   def updater_name
-    object.updater&.username
+    object.updater&.decorate&.full_name
+  end
+
+  def updater_position
+    object.updater&.decorate&.position_name
   end
 
   def formatted_create

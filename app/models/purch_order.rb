@@ -34,6 +34,7 @@ class PurchOrder < ApplicationRecord
 
   def workflow_after_finished
     update(fully_approved_at: DateTime.now)
+    purch_reqn.update!(state: 'FINISHED')
   end
 
   private

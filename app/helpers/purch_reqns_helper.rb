@@ -36,6 +36,12 @@ module PurchReqnsHelper
         'text-bg-light-info'
       when 'REJECTED'
         'text-bg-light-danger'
+      when 'HIGH'
+        'text-bg-light-danger'
+      when 'MEDIUM'
+        'text-bg-light-warning'
+      when 'LOW'
+        'text-bg-light-primary'
       else
         if state || state == true
           'text-bg-success'

@@ -48,7 +48,7 @@ class PrcmtsController < ApplicationController
   # GET /prcmts/new
   def new
     purch_reqn_id = params[:purch_reqn]
-    item_ids = params[:items]
+    item_ids = params[:items] || PurchReqn.find(purch_reqn_id).items.ids
     items_qty = params[:items_qty]
 
     unless item_ids.nil?
@@ -68,7 +68,7 @@ class PrcmtsController < ApplicationController
 
       @prmct_items = {}
       @purch_reqn_items.each do |item|
-        item_qty = items_qty[item.id]
+        item_qty = items_qty[item.id].delete(',').to_f
 
         error_items[:qty_not_found].push(item.number) if item_qty.nil?
         error_items[:zero_qty].push(item.number) if item_qty.to_f.zero?

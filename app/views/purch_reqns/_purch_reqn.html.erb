@@ -15,12 +15,12 @@
     <td>Purchase Requisition Type</td>
     <td><%= purch_reqn.purch_reqn_type %></td>
   </tr>
+<!--  <tr>-->
+<!--    <td>Contract</td>-->
+<!--    <td><%#= badge(purch_reqn.contract) %></td>-->
+<!--  </tr>-->
   <tr>
-    <td>Contract</td>
-    <td><%= badge(purch_reqn.contract) %></td>
-  </tr>
-  <tr>
-    <td>Description</td>
+    <td>Title</td>
     <td><%= purch_reqn.desc %></td>
   </tr>
   <tr>
@@ -30,6 +30,10 @@
   <tr>
     <td>Plant</td>
     <td><%= purch_reqn.plant_code %> - <%= purch_reqn.plant_name %></td>
+  </tr>
+  <tr>
+    <td>HSSE Risk</td>
+    <td><%= badge(purch_reqn.hsse_risk) %></td>
   </tr>
   <tr>
     <td>Date PR</td>

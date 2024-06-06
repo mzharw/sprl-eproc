@@ -25,9 +25,10 @@ class WorkflowInstance < ApplicationRecord
     end
   end
 
-  def update_step(action, author, comment = '')
+  def update_step(action, author, comment = nil)
     state = action.eql?('reject') ? 'REJECTED' : 'FINISHED'
-    update(updated_by_id: author, state:, comment:)
+    comment = comment.nil? ? {} : { comment: }
+    update(updated_by_id: author, state:, **comment)
   end
 
   private

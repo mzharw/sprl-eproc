@@ -59,12 +59,12 @@
                 <% end %>
               </li>
               <%# if @purch_reqn.purch_reqn_type == 'SERVICE' %>
-                <li>
-                  <%= link_to new_purch_reqn_item_path(item_type: :service), class: 'dropdown-item' do %>
-                    <i class="ti ti-forklift"></i>
-                    Service
-                  <% end %>
-                </li>
+              <li>
+                <%= link_to new_purch_reqn_item_path(item_type: :service), class: 'dropdown-item' do %>
+                  <i class="ti ti-forklift"></i>
+                  Service
+                <% end %>
+              </li>
               <%# end %>
             </ul>
           </div>
@@ -81,49 +81,49 @@
     </a>
     <div class="data-container collapse show" id="documents">
       <div class="row g-5">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :contract_docs, required: false %>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :contract_ex_sp_docs, required: true %>
         </div>
 
-        <div class="col-md-6">
-          <%= render 'docs', model: @purch_reqn, name: :memo_scm_manager_docs, required: false %>
-        </div>
+        <!--        <div class="col-md-12">-->
+        <%#= render 'docs', model: @purch_reqn, name: :memo_scm_manager_docs, required: false %>
+        <!--        </div>-->
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :work_ex_plan_docs, required: true %>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :owner_estimate_docs, required: true %>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :tech_eval_method_docs, required: true %>
         </div>
 
-        <div class="col-md-6">
-          <%= render 'docs', model: @purch_reqn, name: :det_landing_cost_docs, required: false %>
-        </div>
+        <!--        <div class="col-md-12">-->
+        <%#= render 'docs', model: @purch_reqn, name: :det_landing_cost_docs, required: false %>
+        <!--        </div>-->
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :inspect_eval_method_docs, required: false %>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :risk_assessment_docs, required: false %>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <%= render 'docs', model: @purch_reqn, name: :justify_memo_docs, required: false %>
         </div>
 
-        <div class="col-md-6">
-          <%= render 'docs', model: @purch_reqn, name: :res_util_justify_docs, required: false %>
-        </div>
+        <!--        <div class="col-md-12">-->
+        <%#= render 'docs', model: @purch_reqn, name: :res_util_justify_docs, required: false %>
+        <!--        </div>-->
       </div>
     </div>
 
@@ -165,7 +165,8 @@
     </div>
 <% end %>
 
-<%= render partial: 'workflow_instance/approval', locals: { model: @purch_reqn.workflow_instance, action: :reject } %>
-<%= render partial: 'workflow_instance/approval', locals: { model: @purch_reqn.workflow_instance, action: :approve } %>
+<%= render partial: 'workflow_instance/approval', locals: { model: @purch_reqn, action: :submit } if @purch_reqn.have_been_rejected? %>
+<%= render partial: 'workflow_instance/approval', locals: { model: @purch_reqn.workflow_instance, action: :reject } if @purch_reqn.submitted? %>
+<%= render partial: 'workflow_instance/approval', locals: { model: @purch_reqn.workflow_instance, action: :approve } if @purch_reqn.submitted? %>
 
 <%= render "layouts/wrapper", sidebar: true %>

@@ -19,7 +19,7 @@ module Workflowable
     instance = last_instance
 
     if rejected
-      create_workflow_instance(0) if instance_rejected?(instance)
+      create_workflow_instance(0, instance) if instance_rejected?(instance)
       workflow_after_rejected
       reject!
     else
@@ -90,8 +90,10 @@ module Workflowable
 
   ## Workflow Instances
   def create_workflow_instance(seq, instance = nil, authorized = false)
-    number = instance&.instance_number
-    author = instance&.updated_by_id
+    # comment = instance&.rejected_comment
+
+    number = seq.zero? ? nil : instance&.instance_number
+    author = seq.zero? ? nil : instance&.updated_by_id
 
     created_by_id = author unless author.nil? && authorized
     created_by_id = self.created_by_id if created_by_id.nil?

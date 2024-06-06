@@ -16,18 +16,20 @@
 
 <table class="table" style="border-color: #ebf1f6;">
   <tr style="background-color: #f9fafe">
-    <td><b>Description</b></td>
+    <td><b>Title</b></td>
     <td><b>Requested Date</b></td>
+    <td><b>Requested By</b></td>
   </tr>
   <tr>
     <td><%= @purch_reqn.desc %></td>
     <td><%= @purch_reqn.formatted_create %></td>
+    <td><%= current_user.party.full_name %></td>
   </tr>
   <tr style="background-color: #f9fafe">
     <td>
       <b>Subtotal</b>
     </td>
-    <td>
+    <td colspan="3">
       <b>Currency</b>
     </td>
   </tr>
@@ -35,7 +37,7 @@
     <td>
       <%= @purch_reqn.items_subtotal %>
     </td>
-    <td>
+    <td colspan="3">
       <%= @purch_reqn.currency_code %>
     </td>
   </tr>
@@ -43,7 +45,7 @@
 
 <table class="table" style="border-color: transparent;">
   <tr>
-    <td><b>Contract</b></td>
+<!--    <td><b>Contract</b></td>-->
     <td><b>Purchasing Group</b></td>
     <td><b>Plant</b></td>
     <td><b>Source Found</b></td>
@@ -54,9 +56,9 @@
     <% end %>
   </tr>
   <tr>
-    <td>
-      <%= @purch_reqn.contract ? 'Yes' : 'No' %>
-    </td>
+<!--    <td>-->
+      <%#= @purch_reqn.contract ? 'Yes' : 'No' %>
+<!--    </td>-->
     <td>
       <%= @purch_reqn.purch_group_code %>
     </td>
@@ -86,17 +88,17 @@
     <th>
       Item No.
     </th>
-    <th>
-      Item Type
-    </th>
+    <!--    <th>-->
+    <!--      Item Type-->
+    <!--    </th>-->
     <th>
       Product Group
     </th>
+    <!--    <th>-->
+    <!--      Material-->
+    <!--    </th>-->
     <th>
-      Material
-    </th>
-    <th>
-      Description
+      Item Name (Specification)
     </th>
     <th>
       Quantity
@@ -113,24 +115,24 @@
     <th>
       Delivery Date
     </th>
-    <th>
-      Requisistioner
-    </th>
+    <!--    <th>-->
+    <!--      Requisistioner-->
+    <!--    </th>-->
   </tr>
   <% items = @purch_reqn.decorated_items %>
   <% items.each_with_index do |purch_reqn_item, index| %>
     <tr>
       <td><%= purch_reqn_item.number %></td>
-      <td><%= purch_reqn_item.item_type %></td>
+      <!--      <td><%#= purch_reqn_item.item_type %></td>-->
       <td><%= purch_reqn_item.product_group_code %> - <%= purch_reqn_item.product_group_name %></td>
-      <td><b><%= purch_reqn_item.product&.code %></b> - <%= purch_reqn_item.product&.name %></td>
+      <!--      <td><b><%#= purch_reqn_item.product&.code %></b> - <%#= purch_reqn_item.product&.name %></td>-->
       <td><%= purch_reqn_item.desc %></td>
       <td><%= purch_reqn_item.qty %></td>
       <td><%= purch_reqn_item.uom&.name %></td>
       <td><%= purch_reqn_item.est_unit_price %></td>
       <td><%= purch_reqn_item.est_subtotal %></td>
       <td><%= purch_reqn_item.formatted_delivery %></td>
-      <td><%= purch_reqn_item.requisitioner %></td>
+      <!--      <td><%#= purch_reqn_item.requisitioner %></td>-->
     </tr>
     <% if purch_reqn_item.items.count > 0 %>
       <tr style="background-color: #f9fafe">
@@ -202,10 +204,20 @@
   <tr>
     <td>
       <% @approver_qrs.each do |id, qr| %>
-        <div style="border: 1px solid #ebf1f6; position: relative; display: inline-block; padding: 20px;">
-          <%== qr %>
-          <div style=" padding-top: 100px; text-align: center;">
-            <%= instances.where(updated_by_id: id).first.updater_name %>
+        <div style="border: 1px solid #ebf1f6; display: inline-block; top: 0; width: 200px; padding-bottom: 50px">
+          <div style="padding: 30px; ">
+            <%== qr %>
+          </div>
+          <div style="text-align: center; height: 20px; background-color: transparent; margin-top: 50px; ">
+            <% approver = instances.where(updated_by_id: id) %>
+            <b>
+              <%= approver.first.updater_name %>
+            </b>
+            <p>
+              <small>
+                <%= approver.first.updater_position.titleize %>
+              </small>
+            </p>
           </div>
         </div>
       <% end %>

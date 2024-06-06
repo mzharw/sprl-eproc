@@ -41,9 +41,10 @@ class PurchReqn < ApplicationRecord
 
   validates :purch_reqn_type, presence: { message: 'is required' }
   validates :currency, presence: { message: 'is required' }
-  validates :contract, inclusion: { in: [true, false] }
+  # validates :contract, inclusion: { in: [true, false] }
   validates :purch_org_id, presence: true
   validates :desc, presence: true
+  validate :hsse_risk_presence_if_touched
   validates :fund_source, presence: true
   validates :cost_center_id, presence: true, if: :cost_center_fund_source?
   validates :wbsproject_id, presence: true, if: :project_afe_fund_source?
@@ -92,7 +93,7 @@ class PurchReqn < ApplicationRecord
       item_subtotal = (item_subtotal.to_f / rate.from_amount) * rate.to_amount unless rate.nil?
     end
 
-    5 if item_subtotal < 50000000
+    6 if item_subtotal < 50000000
   end
 
   private
@@ -103,6 +104,12 @@ class PurchReqn < ApplicationRecord
 
   def project_afe_fund_source?
     fund_source == 'PROJECT_WBS'
+  end
+
+  def hsse_risk_presence_if_touched
+    if hsse_risk_changed? && hsse_risk.blank?
+      errors.add(:hsse_risk, "can't be blank")
+    end
   end
 
   def reject!
@@ -129,20 +136,25 @@ class PurchReqn < ApplicationRecord
              }
            when 3
              {
+               role: 'Head of HSE',
+               display_role: 'Head of HSE'
+             }
+           when 4
+             {
                role: 'Manager of User',
                display_role: 'Manager of User'
              }
-           when 4
+           when 5
              {
                role: 'Manager SCM',
                display_role: 'Manager SCM'
              }
-           when 5
+           when 6
              {
                role: 'Manager of Finance',
                display_role: 'Manager of Finance'
              }
-           when 6
+           when 7
              {
                role: 'General Manager',
                display_role: 'General Manager'

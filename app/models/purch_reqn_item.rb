@@ -61,8 +61,8 @@ class PurchReqnItem < ApplicationRecord
   end
 
   def validate_stamps
-    errors.add(:specification, 'is required') unless specification.present?
-    errors.add(:requisitioner, 'is required') unless requisitioner.present?
+    # errors.add(:specification, 'is required') unless specification.present?
+    # errors.add(:requisitioner, 'is required') unless requisitioner.present?
     errors.add(:expected_delivery_date, 'is required') unless expected_delivery_date.present?
   end
 

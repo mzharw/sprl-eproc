@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_121007) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_173011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -927,6 +927,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_121007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "wbsproject_id"
+    t.string "hsse_risk"
     t.index ["cost_center_id"], name: "index_purch_reqns_on_cost_center_id"
     t.index ["created_by_id"], name: "index_purch_reqns_on_created_by_id"
     t.index ["currency_id"], name: "index_purch_reqns_on_currency_id"
@@ -1236,6 +1237,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_121007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "workflow_step_id"
+    t.string "rejected_comment"
     t.index ["instance_number"], name: "index_workflow_instances_on_instance_number"
     t.index ["workflow_id"], name: "index_workflow_instances_on_workflow_id"
     t.index ["workflowable_type", "workflowable_id"], name: "index_workflow_instances_on_workflowable"
