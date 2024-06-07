@@ -51,7 +51,8 @@ class PurchReqnItemsController < ApplicationController
   # POST /purch_reqn_items or /purch_reqn_items.json
   def create
     @purch_reqn_item = PurchReqnItem.new({ **purch_reqn_item_params, **tracker, purch_reqn_id: params[:id] })
-
+    @purch_reqn_item['est_unit_price'] = purch_reqn_item_params['est_unit_price'].delete(',')
+    @purch_reqn_item['qty'] = purch_reqn_item_params['qty'].delete(',')
     @purch_reqn_item.parent_id = params[:item_id] if (@purch_reqn_item.item_type == 'SERVICE_ITEM')
     # if @purch_reqn_item.item_type == 'SERVICE'
     #   @purch_reqn_item.qty = 1
