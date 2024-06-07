@@ -24,6 +24,6 @@ export default class extends Controller {
     }
 
     parse(value) {
-        return parseFloat((value).replace(/,/g, ''))
+        return parseFloat((value).replace(/,/g, '')) || 0
     }
 }

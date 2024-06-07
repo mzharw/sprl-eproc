@@ -58,15 +58,15 @@
       <!--    </div>-->
 
       <%# unless is_service_item %>
-<!--        <div class="col-md-6">-->
-<!--          <label for="specification">Specification</label>-->
-          <%#= form.text_field :specification, class: 'form-control' %>
-<!--        </div>-->
+      <!--        <div class="col-md-6">-->
+      <!--          <label for="specification">Specification</label>-->
+      <%#= form.text_field :specification, class: 'form-control' %>
+      <!--        </div>-->
 
-<!--        <div class="col-md-6">-->
-<!--          <label for="requisitioner">Requisitioner</label>-->
-          <%#= form.text_field :requisitioner, class: 'form-control' %>
-<!--        </div>-->
+      <!--        <div class="col-md-6">-->
+      <!--          <label for="requisitioner">Requisitioner</label>-->
+      <%#= form.text_field :requisitioner, class: 'form-control' %>
+      <!--        </div>-->
       <%# end %>
 
       <%# if is_material || is_service_item %>
@@ -97,17 +97,17 @@
       <div class="d-flex flex-row gap-3 w-50" data-controller="counter">
         <div data-controller="input">
           <label for="qty">Quantity</label>
-          <%= form.text_field :qty, class: 'form-control', data: { action: "change->counter#updateCounter", 'counter-target': 'multiplier', 'input-target': 'numberInput' } %>
+          <%= form.text_field :qty, class: 'form-control', value: is_new ? nil : purch_reqn_item.qty, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplier', 'input-target': 'numberInput' } %>
         </div>
 
         <div data-controller="input">
           <label for="est_unit_price">Unit Price</label>
-          <%= form.text_field :est_unit_price, class: 'form-control est_unit_price', step: 0.1, default: 0, value: is_new ? 0 : purch_reqn_item.est_unit_price_num, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand', 'input-target': 'numberInput' } %>
+          <%= form.text_field :est_unit_price, class: 'form-control est_unit_price', step: 0.1, default: 0, value: is_new ? nil : purch_reqn_item.est_unit_price_num, data: { action: "change->counter#updateCounter", 'counter-target': 'multiplicand', 'input-target': 'numberInput' } %>
         </div>
 
         <div data-controller="input">
           <label for="est_subtotal">Total</label>
-          <%= form.text_field :est_subtotal, class: 'form-control', step: 0.1, value: is_new ? 0 : purch_reqn_item.est_subtotal_num, data: { 'counter-target': 'counter', 'input-target': 'numberInput' } %>
+          <%= form.text_field :est_subtotal, class: 'form-control', step: 0.1, value: is_new ? nil : purch_reqn_item.est_subtotal_num, data: { 'counter-target': 'counter', 'input-target': 'numberInput' } %>
         </div>
       </div>
       <%# end %>
