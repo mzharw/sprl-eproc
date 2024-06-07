@@ -20463,6 +20463,10 @@ tr.highlighted td {
     background: #ffffd0;
 }
 
+thead.sticky {
+    z-index: 3;
+}
+
 thead tr th.sticky {
     z-index: 3;
 }

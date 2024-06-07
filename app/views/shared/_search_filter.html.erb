@@ -12,16 +12,16 @@
         </li>
         <% columns.each do |column| %>
           <li>
-            <a class="dropdown-item <%= 'active' if params[:search_by] == column %>" href="<%= url + '&search_by=' + column %>"><%= (column.capitalize)&.sub("_", " ") %></a>
+            <a class="dropdown-item <%= 'active' if params[:search_by] == column %>" href="<%= url + '&search_by=' + column %>"><%= binding.local_variable_defined?(column) ? binding.local_variable_get(column) : (column.capitalize)&.sub("_", " ") %></a>
           </li>
         <% end %>
       </ul>
     </div>
     <% if %w[created_at updated_At].include? params[:search_by] %>
-      <input type="submit" hidden />
+      <input type="submit" hidden/>
       <input type="date" class="form-control selection-search bg-transparent" style="padding-left: 50px; border: none; box-shadow: none; width: 77vw" aria-label="search" name="search" value="<%= !params[:search].blank? ? params[:search] : Time.now.strftime("%Y-%m-%d") %>">
     <% else %>
-      <input type="text" class="form-control selection-search bg-transparent" style="padding-left: 50px; border: none; box-shadow: none" aria-label="search" placeholder="Search <%= ((params[:search_by] || (default_column))&.sub "_", " ")&.downcase %>" name="search" value="<%= params[:search] %>">
+      <input type="text" class="form-control selection-search bg-transparent" style="padding-left: 50px; border: none; box-shadow: none" aria-label="search" placeholder="Search <%= ((binding.local_variable_defined?(params[:search_by]) ? binding.local_variable_get(params[:search_by]) : (default_column))&.sub "_", " ")&.downcase %>" name="search" value="<%= params[:search] %>">
     <% end %>
   <% end %>
 </div>
