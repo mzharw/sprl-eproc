@@ -3,7 +3,7 @@
 <% end %>
 
 <%= content_for :filter do %>
-  <%= search_filter(purch_reqns_path, 'number', %w[desc created_by created_at state]) %>
+  <%= search_filter(purch_reqns_path, 'number', %w[desc created_by created_at state], desc: 'Title') %>
 <% end %>
 
 <% content_for :content do %>

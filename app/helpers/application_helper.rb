@@ -103,9 +103,9 @@ module ApplicationHelper
            locals: { text:, path:, link_params:, column:, order_by:, order_dir:, css_class: }
   end
 
-  def search_filter(_path, default_column, columns = [])
+  def search_filter(_path, default_column, columns = [], **titlemap)
     url = get_url('search_by')
-    render partial: 'shared/search_filter', locals: { url:, default_column:, columns: }
+    render partial: 'shared/search_filter', locals: { url:, default_column:, columns:, **titlemap }
   end
 
   def advanced_filter(_path, param = 'filters')
