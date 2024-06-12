@@ -14,21 +14,6 @@
     </div>
   <% end %>
   <div class="row g-3">
-    <div class="col-md-6">
-      <%= label_for('pr-type', 'PR Type', true) %>
-      <div class="form-check">
-        <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material', disabled: !purch_reqn.new_record? %>
-        <label class="form-check-label" for="material">
-          Material
-        </label>
-      </div>
-      <div class="form-check">
-        <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service', disabled: !purch_reqn.new_record? %>
-        <label class="form-check-label" for="service">
-          Service
-        </label>
-      </div>
-    </div>
     <!--    <div class="col-md-6">-->
     <!--      <label for="pr-type">Contact Reference</label>-->
     <!--      <div class="form-check">-->
@@ -44,25 +29,65 @@
     <!--        </label>-->
     <!--      </div>-->
     <!--    </div>-->
-    <div class="col-md-6">
-      <%= label_for('hsse_risk', 'HSSE Risk', true) %>
-      <div class="form-check">
-        <%= form.radio_button :hsse_risk, 'HIGH', class: 'form-check-input', id: 'high' %>
-        <label class="form-check-label" for="high">
-          High
-        </label>
-      </div>
-      <div class="form-check">
-        <%= form.radio_button :hsse_risk, 'MEDIUM', class: 'form-check-input', id: 'medium' %>
-        <label class="form-check-label" for="medium">
-          Medium
-        </label>
-      </div>
-      <div class="form-check">
-        <%= form.radio_button :hsse_risk, 'LOW', class: 'form-check-input', id: 'low' %>
-        <label class="form-check-label" for="low">
-          Low
-        </label>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col">
+          <%= label_for('pr-type', 'PR Type', true) %>
+          <div class="form-check">
+            <%= form.radio_button :purch_reqn_type, 'MATERIAL', class: 'form-check-input', id: 'material', disabled: !purch_reqn.new_record? %>
+            <label class="form-check-label" for="material">
+              Material
+            </label>
+          </div>
+          <div class="form-check">
+            <%= form.radio_button :purch_reqn_type, 'SERVICE', class: 'form-check-input', id: 'service', disabled: !purch_reqn.new_record? %>
+            <label class="form-check-label" for="service">
+              Service
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <%= label_for('hsse_risk', 'HSSE Risk', true) %>
+          <div class="form-check">
+            <%= form.radio_button :hsse_risk, 'HIGH', class: 'form-check-input', id: 'high' %>
+            <label class="form-check-label" for="high">
+              High
+            </label>
+          </div>
+          <div class="form-check">
+            <%= form.radio_button :hsse_risk, 'MEDIUM', class: 'form-check-input', id: 'medium' %>
+            <label class="form-check-label" for="medium">
+              Medium
+            </label>
+          </div>
+          <div class="form-check">
+            <%= form.radio_button :hsse_risk, 'LOW', class: 'form-check-input', id: 'low' %>
+            <label class="form-check-label" for="low">
+              Low
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <%= label_for('term_of_payment', 'Term of Payment', true) %>
+          <div class="form-check">
+            <%= form.radio_button :term_of_payment, 'PARTIAL', class: 'form-check-input', id: 'partial' %>
+            <label class="form-check-label" for="partial">
+              Partial
+            </label>
+          </div>
+          <div class="form-check">
+            <%= form.radio_button :term_of_payment, 'FULL', class: 'form-check-input', id: 'full' %>
+            <label class="form-check-label" for="full">
+              Full
+            </label>
+          </div>
+          <div class="form-check">
+            <%= form.radio_button :term_of_payment, 'SP3', class: 'form-check-input', id: 'sp3' %>
+            <label class="form-check-label" for="sp3">
+              SP3
+            </label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-6 d-flex flex-column gap-3">

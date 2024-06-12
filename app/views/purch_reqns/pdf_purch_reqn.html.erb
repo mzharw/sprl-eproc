@@ -203,19 +203,18 @@
 <table style="width: 100%; border-color: transparent;">
   <tr>
     <td>
-      <% @approver_qrs.each do |id, qr| %>
+      <% @approver.each do |approver| %>
         <div style="border: 1px solid #ebf1f6; display: inline-block; top: 0; width: 200px; padding-bottom: 50px">
           <div style="padding: 30px; ">
-            <%== qr %>
+            <%== @approver_qrs[approver.id] %>
           </div>
           <div style="text-align: center; height: 20px; background-color: transparent; margin-top: 50px; ">
-            <% approver = instances.where(updated_by_id: id) %>
             <b>
-              <%= approver.first.updater_name %>
+              <%= approver.full_name %>
             </b>
             <p>
               <small>
-                <%= approver.first.updater_position.titleize %>
+                <%= approver.position_name.titleize %>
               </small>
             </p>
           </div>

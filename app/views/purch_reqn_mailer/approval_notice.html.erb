@@ -1,10 +1,10 @@
 <p>
-  Kepada Yth. <%= @receiver[:display_role] %>
+  Kepada Yth. <%= @model.finished? ? 'Bagian Pengadaan,' : @receiver[:display_role] %>
 </p>
 
 <p>
-  Mohon Diperiksa dan Disetujui/Ditolak pengajuan Purchase Requisition berikut dalam sistem E-Procurement PT. SPR
-  Langgak :
+  <%= @model.finished? ? 'Proses persetujuan terhadap PR berikut ini : ' : 'Mohon Diperiksa dan Disetujui/Ditolak pengajuan Purchase Requisition berikut dalam sistem E-Procurement PT. SPR
+  Langgak :' %>
 </p>
 
 <table>
@@ -25,7 +25,11 @@
 </table>
 
 <br>
-Untuk informasi lebih lanjut, silahkan <%= link_to 'login', Rails.application.routes.url_helpers.purch_reqn_url(@model, host: ActionMailer::Base.default_url_options[:host]) %>.
+<% if @model.finished? %>
+  Telah selesai dan disetujui oleh pihak terkait, silakan <%= link_to 'login', Rails.application.routes.url_helpers.purch_reqn_url(@model, host: ActionMailer::Base.default_url_options[:host]) %> untuk diproses di pengadaan
+<% else %>
+  Untuk informasi lebih lanjut, silahkan <%= link_to 'login', Rails.application.routes.url_helpers.purch_reqn_url(@model, host: ActionMailer::Base.default_url_options[:host]) %>.
+<% end %>
 <br>
 Terima kasih.
 

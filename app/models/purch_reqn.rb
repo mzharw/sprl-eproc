@@ -44,10 +44,10 @@ class PurchReqn < ApplicationRecord
   # validates :contract, inclusion: { in: [true, false] }
   validates :purch_org_id, presence: true
   validates :desc, presence: true
-  validate :hsse_risk_presence_if_touched
   validates :fund_source, presence: true
   validates :cost_center_id, presence: true, if: :cost_center_fund_source?
   validates :wbsproject_id, presence: true, if: :project_afe_fund_source?
+  validate :appended_columns
 
   DOCS = {
     contract_docs: 'Contract Document',
@@ -75,13 +75,16 @@ class PurchReqn < ApplicationRecord
   end
 
   def workflow_after_advanced
+
     PurchReqnMailer.with(receiver: workflow_map, model: self).approval_notice.deliver_later if workflow_map
     update_task(!finished?)
   end
 
   def workflow_after_rejected
+    self.assignees = workflow_map
+    self.task_name = 'Purchase Requisition : Revising Rejected'
     PurchReqnMailer.with(model: self).reject_notice.deliver_later
-    update_task(false)
+    update_task(true, creator)
   end
 
   def last_step
@@ -106,9 +109,13 @@ class PurchReqn < ApplicationRecord
     fund_source == 'PROJECT_WBS'
   end
 
-  def hsse_risk_presence_if_touched
+  def appended_columns
     if hsse_risk_changed? && hsse_risk.blank?
       errors.add(:hsse_risk, "can't be blank")
+    end
+
+    if term_of_payment_changed? && term_of_payment.blank?
+      errors.add(:term_of_payment, "can't be blank")
     end
   end
 
@@ -163,13 +170,16 @@ class PurchReqn < ApplicationRecord
              false
            end
 
-    self.assignees = user_assignees(role[:role], :purch_groups) if role
-    self.task_name = "Purchase Requisition : #{role[:display_role]} Approval" if role
+    if role
+      self.assignees = user_assignees(role[:role], :purch_groups)
+      self.task_name = "Purchase Requisition : #{role[:display_role]} Approval"
 
-    role[:assignees] = assignees&.pluck(:email) if role
-    role[:creator] = creator.email if role
-    role[:seq] = seq if role
-    role
+      role[:assignees] = user_assignees(role[:role], :purch_groups, exclusive: true)&.pluck(:email)
+      role[:creator] = creator.email
+      role[:seq] = seq
+
+      role
+    end
   end
 
 end

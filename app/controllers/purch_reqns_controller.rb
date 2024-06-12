@@ -8,7 +8,7 @@ class PurchReqnsController < ApplicationController
   # GET /purch_reqns or /purch_reqns.json
   def index
     @purch_reqns = PurchReqn.joins(:plant, creator: :party).select('purch_reqns.*', 'plants.code', 'parties.full_name')
-    @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups) unless current_user.is_scm_manager? || current_user.is_finance_manager? || current_user.is_buyer?
+    @purch_reqns = set_scope(@purch_reqns, :plants, :purch_groups) unless current_user.is_scm_manager? || current_user.is_finance_manager? || current_user.is_buyer? || current_user.is_hse_user?
     json = paginate_json(@purch_reqns.all)
     @purch_reqns = filter(@purch_reqns, { plants_code: 'plants.code', created_by: 'parties.full_name', desc: 'purch_reqns.desc', state: 'purch_reqns.state', created_at: 'purch_reqns.created_at' })
     authorize @purch_reqns
@@ -36,12 +36,15 @@ class PurchReqnsController < ApplicationController
         @qr_purch_reqn = qr_purch_reqn.as_svg(**svg_config)
 
         @approver_qrs = {}
-        @purch_reqn.workflow_approver.each do |id|
+        @approver = User.where(id: @purch_reqn.workflow_approver).with_role('Manager of Finance')
+        @approver.pluck(:id).each do |id|
           unless id.nil?
             qr = RQRCode::QRCode.new(user_url(id:))
             @approver_qrs[id] = qr.as_svg(**svg_config)
           end
         end
+
+        @approver = @approver.decorate
 
         render pdf: "PR_#{@purch_reqn&.number}",
                template: 'purch_reqns/pdf_purch_reqn',
@@ -203,7 +206,7 @@ class PurchReqnsController < ApplicationController
                   :justification, :budget_soure, :reason, :contract_type, :risk_category,
                   :explanation, :previous_contract_number, :previous_contract_title,
                   :local_of_content, :rejected_at, :cancel_remark,
-                  :contract_reference_id, :prcmt_id, :wbsproject_id, :hsse_risk,
+                  :contract_reference_id, :prcmt_id, :wbsproject_id, :hsse_risk, :term_of_payment,
                   contract_docs: [],
                   contract_ex_sp_docs: [],
                   memo_scm_manager_docs: [],

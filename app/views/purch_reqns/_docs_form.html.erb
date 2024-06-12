@@ -3,6 +3,7 @@
     <thead>
     <tr>
       <th>Attachment</th>
+      <th>File Size</th>
       <th>Action</th>
     </tr>
     </thead>
@@ -10,7 +11,7 @@
     <% docs = model.send(name) %>
     <% if docs&.empty? %>
       <tr>
-        <td colspan="2">
+        <td colspan="3">
           No Entry
         </td>
       </tr>
@@ -20,6 +21,9 @@
           <td>
             <%= link_to doc.filename, rails_blob_path(doc), download: true %>
             <%= form.hidden_field name, multiple: true, value: doc.signed_id %>
+          </td>
+          <td>
+            <%= number_to_human_size(doc.byte_size) %>
           </td>
           <td>
             <% unless model.submitted? %>

@@ -3,7 +3,19 @@ class PurchReqnItemPolicy < ApplicationPolicy
     user.is_superuser? || user.has_role?('Buyer')
   end
 
+  def new?
+    user.is_superuser? || user.has_role?('Buyer')
+  end
+
+  def edit?
+    user.is_superuser? || user.has_role?('Buyer')
+  end
+
   def update?
+    user.is_superuser? || user.has_role?('Buyer')
+  end
+
+  def destroy?
     user.is_superuser? || user.has_role?('Buyer')
   end
 

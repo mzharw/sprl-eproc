@@ -6,7 +6,7 @@ class PurchReqnMailer < ApplicationMailer
     seq = @receiver[:seq]
 
     to = seq == 1 ? @receiver[:assignees] : [*@receiver[:creator], *User.with_role('Buyer').pluck(:email)]
-    cc = seq == 1 ? @receiver[:creator] : @receiver[:assignees]
+    cc = seq == 1 || @model.finished? ? @receiver[:creator] : @receiver[:assignees]
     title = @model.finished? ? 'Fully Approved' : 'Started'
     bcc = User.with_role('Super Admin').pluck(:email)
 

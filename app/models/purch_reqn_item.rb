@@ -47,7 +47,7 @@ class PurchReqnItem < ApplicationRecord
   def validate_value
     self.qty = str_parser(qty)
     self.est_unit_price = str_parser(est_unit_price)
-    self.est_subtotal = self.qty * est_unit_price
+    self.est_subtotal = qty && est_unit_price ? qty * est_unit_price : 0
   end
 
   def validate_all
