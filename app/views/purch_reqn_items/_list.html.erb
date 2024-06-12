@@ -8,7 +8,7 @@
   <thead class="sticky">
   <tr>
     <%# if is_form %>
-<!--      <th></th>-->
+    <!--      <th></th>-->
     <%# end %>
     <th>
       Item No.
@@ -56,9 +56,9 @@
     <th>
       Delivery Date
     </th>
-<!--    <th>-->
-<!--      Requisitioner-->
-<!--    </th>-->
+    <!--    <th>-->
+    <!--      Requisitioner-->
+    <!--    </th>-->
     <% unless is_submitted %>
       <th class="sticky">
         Action
@@ -75,9 +75,9 @@
     <% items.each_with_index do |purch_reqn_item, index| %>
       <tr id="<%= purch_reqn_item.id %>">
         <%# if is_form %>
-<!--          <td>-->
-            <%#= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
-<!--          </td>-->
+        <!--          <td>-->
+        <%#= form.check_box :items, { class: 'form-check-input', multiple: true }, purch_reqn_item.id, nil %>
+        <!--          </td>-->
         <%# end %>
         <td><%= purch_reqn_item.number || index + 1 %></td>
         <td><%= purch_reqn_item.item_type if defined? purch_reqn_item.item_type %></td>
@@ -107,7 +107,7 @@
         <td><%= purch_reqn_item.est_unit_price %></td>
         <td><%= purch_reqn_item.est_subtotal %></td>
         <td><%= purch_reqn_item.formatted_delivery %></td>
-<!--        <td><%#= purch_reqn_item.requisitioner %></td>-->
+        <!--        <td><%#= purch_reqn_item.requisitioner %></td>-->
         <% unless is_submitted %>
           <td>
             <div class="d-flex">
@@ -126,4 +126,4 @@
   <% end %>
 <% end %>
 
-<%= render partial: 'shared/table' %>
+<%= render partial: 'shared/table', flush: true %>

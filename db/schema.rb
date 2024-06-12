@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_06_173011) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_12_153517) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -928,6 +928,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_173011) do
     t.datetime "updated_at", null: false
     t.uuid "wbsproject_id"
     t.string "hsse_risk"
+    t.string "term_of_payment"
     t.index ["cost_center_id"], name: "index_purch_reqns_on_cost_center_id"
     t.index ["created_by_id"], name: "index_purch_reqns_on_created_by_id"
     t.index ["currency_id"], name: "index_purch_reqns_on_currency_id"

@@ -80,51 +80,29 @@
       <i class="ti ti-caret-down-filled"></i>
     </a>
     <div class="data-container collapse show" id="documents">
-      <div class="row g-5">
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :contract_docs, required: false %>
-        </div>
-
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :contract_ex_sp_docs, required: true %>
-        </div>
-
-        <!--        <div class="col-md-12">-->
-        <%#= render 'docs', model: @purch_reqn, name: :memo_scm_manager_docs, required: false %>
-        <!--        </div>-->
-
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :work_ex_plan_docs, required: true %>
-        </div>
-
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :owner_estimate_docs, required: true %>
-        </div>
-
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :tech_eval_method_docs, required: true %>
-        </div>
-
-        <!--        <div class="col-md-12">-->
-        <%#= render 'docs', model: @purch_reqn, name: :det_landing_cost_docs, required: false %>
-        <!--        </div>-->
-
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :inspect_eval_method_docs, required: false %>
-        </div>
-
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :risk_assessment_docs, required: false %>
-        </div>
-
-        <div class="col-md-12">
-          <%= render 'docs', model: @purch_reqn, name: :justify_memo_docs, required: false %>
-        </div>
-
-        <!--        <div class="col-md-12">-->
-        <%#= render 'docs', model: @purch_reqn, name: :res_util_justify_docs, required: false %>
-        <!--        </div>-->
-      </div>
+      <% content_for :table, flush: true do %>
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>Document Type</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render 'docs', model: @purch_reqn, name: :contract_docs, required: false, number: 1 %>
+        <%= render 'docs', model: @purch_reqn, name: :contract_ex_sp_docs, required: true, number: 2 %>
+        <%#= render 'docs', model: @purch_reqn, name: :memo_scm_manager_docs, required: false, number: 1 %>
+        <%= render 'docs', model: @purch_reqn, name: :work_ex_plan_docs, required: true, number: 3 %>
+        <%= render 'docs', model: @purch_reqn, name: :owner_estimate_docs, required: true, number: 4 %>
+        <%= render 'docs', model: @purch_reqn, name: :tech_eval_method_docs, required: true, number: 5 %>
+        <%#= render 'docs', model: @purch_reqn, name: :det_landing_cost_docs, required: false, number: 1 %>
+        <%= render 'docs', model: @purch_reqn, name: :inspect_eval_method_docs, required: false, number: 6 %>
+        <%= render 'docs', model: @purch_reqn, name: :risk_assessment_docs, required: false, number: 7 %>
+        <%= render 'docs', model: @purch_reqn, name: :justify_memo_docs, required: false, number: 8 %>
+        <%#= render 'docs', model: @purch_reqn, name: :res_util_justify_docs, required: false, number: 1 %>
+        </tbody>
+      <% end %>
+      <%= render "shared/table" %>
     </div>
 
     <% if @purch_reqn.workflow_instances %>

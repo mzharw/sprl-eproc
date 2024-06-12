@@ -16,7 +16,12 @@
               </div>
               <div class="mb-4">
                 <label for="password" class="form-label">Password</label>
-                <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+                <div class="input-group" data-controller="password">
+                  <%= f.password_field :password, autocomplete: "current-password", class: 'form-control', data: { 'password-target': 'input' } %>
+                  <button class="btn btn-light-gray border" type="button" data-password-target="button" data-action="click->password#toggle">
+                    <i class="ti ti-eye"></i>
+                  </button>
+                </div>
               </div>
               <div class="d-flex align-items-center justify-content-between mb-4">
                 <div class="form-check">

@@ -1,2 +1,7 @@
-<p class="fw-bolder <%= 'required' if required %>"><%= model.doc_title(name) %></p>
-<%= render partial: 'purch_reqns/docs_form', locals: { model:, name: } %>
+<tr>
+  <td><%= number %></td>
+  <td><p class="fw-bolder <%= 'required' if required %>"><%= model.doc_title(name) %></p></td>
+  <td>
+    <%= render partial: 'purch_reqns/docs_form', locals: { model:, name: } %>
+  </td>
+</tr>

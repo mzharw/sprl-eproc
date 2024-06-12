@@ -32,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def is_superuser?
-    has_any_role? 'Super Admin', 'General Manager', 'Manager SCM'
+    has_any_role? 'Super Admin', 'General Manager'
   end
 
   def is_finance_manager?
@@ -49,6 +49,10 @@ class User < ApplicationRecord
 
   def is_buyer?
     has_role? 'Buyer'
+  end
+
+  def is_hse?
+    has_role? 'Head of HSE'
   end
 
   def self.find_for_authentication(warden)

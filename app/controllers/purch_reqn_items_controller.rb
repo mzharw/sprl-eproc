@@ -23,6 +23,7 @@ class PurchReqnItemsController < ApplicationController
   # GET /purch_reqn_items/new
   def new
     @purch_reqn_item = PurchReqnItem.new
+    authorize @purch_reqn_item
 
     respond_to do |format|
       format.html
@@ -206,7 +207,9 @@ class PurchReqnItemsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_purch_reqn_item
-    @purch_reqn_item = PurchReqnItemDecorator.new(PurchReqnItem.find(params[:item_id]))
+    @purch_reqn_item = PurchReqnItem.find(params[:item_id])
+    authorize @purch_reqn_item
+    @purch_reqn_item = PurchReqnItemDecorator.new(@purch_reqn_item)
   end
 
   # Only allow a list of trusted parameters through.

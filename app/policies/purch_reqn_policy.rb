@@ -1,7 +1,7 @@
 class PurchReqnPolicy < ApplicationPolicy
 
   def index?
-    (user.is_superuser? || user.has_any_role?('Buyer', 'General User', 'User')) || user.has_any_role?('Purchase Requisition')
+    (user.is_superuser? || user.has_any_role?('Buyer', 'General User', 'User', 'Head of HSE')) || user.has_any_role?('Purchase Requisition')
   end
 
   def create?
@@ -17,7 +17,7 @@ class PurchReqnPolicy < ApplicationPolicy
   end
 
   def show?
-    (user.is_superuser? || user.has_any_role?('Buyer', 'General User', 'User')) || user.has_any_role?('Purchase Requisition')
+    (user.is_superuser? || user.has_any_role?('Buyer', 'General User', 'User', 'Head of HSE')) || user.has_any_role?('Purchase Requisition')
   end
 
   def edit?

@@ -2,16 +2,18 @@ module Taskable
   extend ActiveSupport::Concern
   attr_accessor :assignees, :task_name
 
-  def update_task(create = true)
+  def update_task(create = true, assignee = nil)
     end_task
-    create_task if create
+    create_task(assignee) if create
   end
 
   private
 
-  def create_task
+  def create_task(assignee)
     number = task_number
-    assignees&.each do |user|
+    assigner = assignee.nil? ? assignees : assignee
+    assigner = [assigner] if assigner.is_a? User
+    assigner&.each do |user|
       new_task = tasks.new
       new_task.user_id = user.id
       new_task.name = task_name

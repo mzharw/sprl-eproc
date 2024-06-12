@@ -54,7 +54,11 @@ module Workflowable
       true
     else
       approved = user.nil? ? true : user.has_role?(role)
-      unless user&.is_finance_manager? || user&.is_scm_manager?
+      grouped = user&.is_finance_manager? && role == 'Manager of Finance'
+      grouped ||= user&.is_scm_manager? && role == 'Manager SCM'
+      grouped ||= user&.is_hse? && role == 'Head of HSE'
+
+      unless grouped
         approved &&= user&.purch_group_ids&.include?(purch_group_id) if groups.include? :purch_groups
         approved &&= user&.plant_ids&.include?(plant_id) if groups.include? :plants
       end
@@ -63,14 +67,15 @@ module Workflowable
 
   end
 
-  def user_assignees(role, *groups)
+  def user_assignees(role, *groups, **options)
     @users = User
-    unless ['Buyer', 'Manager of Finance', 'SCM Manager'].include?(role)
+    unless ['Buyer', 'Manager of Finance', 'SCM Manager', 'Head of HSE'].include?(role)
       @users = @users.joins(:buyer_purch_groups).where(buyer_purch_groups: { purch_group_id: }) if groups.include? :purch_groups
       @users = @users.joins(:buyer_plants).where(buyer_plants: { plant_id: }) if groups.include? :plants
     end
 
-    @users.with_any_role(*role, 'Super Admin', 'General Manager')
+    @users = @users.select('users.*', 'roles.name AS role_name')
+    options.[]('exclusive') ? @users.with_any_role(*role) : @users.with_any_role(*role, 'Super Admin', 'General Manager')
   end
 
   private
