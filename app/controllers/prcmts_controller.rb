@@ -8,7 +8,9 @@ class PrcmtsController < ApplicationController
   # GET /prcmts or /prcmts.json
   def index
     prcmt_item_ids = PrcmtItem.unpurchased.pluck(:id)
-    @prcmts = selectable(Prcmt.joins(:purch_reqn_items, :prcmt_items).group('prcmts.id'), :number, :name, filter: 'purch_reqn_id', filter_map: { purch_reqn_id: 'purch_reqn_items.purch_reqn_id' })
+    @prcmts = Prcmt.joins(:purch_reqn_items, :prcmt_items).group('prcmts.id')
+    @prcmts = @prcmts.where(status: 'FINISHED') if request.format.json?
+    @prcmts = selectable(@prcmts, :number, :name, filter: 'purch_reqn_id', filter_map: { purch_reqn_id: 'purch_reqn_items.purch_reqn_id' })
     @prcmts = set_scope(@prcmts, :purch_groups)
     json = paginate_json(@prcmts.where(prcmt_items: { id: prcmt_item_ids }))
     @prcmts = filter(@prcmts, { number: 'prcmts.number', tender_name: 'prcmts.name' })
@@ -48,11 +50,12 @@ class PrcmtsController < ApplicationController
   # GET /prcmts/new
   def new
     purch_reqn_id = params[:purch_reqn]
-    item_ids = params[:items] || PurchReqn.find(purch_reqn_id).items.ids
+    # item_ids = params[:items] || PurchReqn.find(purch_reqn_id).items.ids
+    item_ids = params[:items]
     items_qty = params[:items_qty]
 
     unless item_ids.nil?
-      @purch_reqn_items = PurchReqnItem.uncarried.where(id: item_ids).decorate
+      @purch_reqn_items = PurchReqnItem.where(id: item_ids).decorate
 
       error_items = {
         qty_not_found: [],
@@ -86,6 +89,29 @@ class PrcmtsController < ApplicationController
       unless @purch_reqn_items.empty? || error_message.blank?
         flash.alert = error_message
         redirect_to purch_reqn_items_path(@purch_reqn)
+      end
+
+      curr = Currency.find_by(code: 'IDR')
+      currency_id = @purch_reqn.currency_id
+
+      item_subtotal = @purch_reqn_items.object.sum(:est_subtotal)
+
+      unless currency_id == curr.id
+        rate = CurrencyExchangeRate.where(from_currency_id: curr.id).find_by(to_currency_id: currency_id)
+        item_subtotal = (item_subtotal.to_f / rate.from_amount) * rate.to_amount unless rate.nil?
+      end
+
+      if item_subtotal > 50_000_000_000
+        @warranty = 'OFFER'
+      elsif item_subtotal > 10_000_000_000
+        @warranty = 'IMPLEMENTATION'
+      end
+
+      @classes = 'SMALL'
+      if item_subtotal > 10_000_000_000
+        @classes = 'LARGE'
+      elsif item_subtotal > 5_000_000_000
+        @classes = 'MEDIUM'
       end
 
     end
@@ -133,8 +159,13 @@ class PrcmtsController < ApplicationController
 
   # PATCH/PUT /prcmts/1 or /prcmts/1.json
   def update
+
+    status = 'CANCELED' if action_params[:action] == 'cancel'
+    status = 'FAILED' if action_params[:action] == 'fail'
+    status = 'FINISHED' if action_params[:action] == 'finish'
+
     respond_to do |format|
-      if @prcmt.update(prcmt_params)
+      if @prcmt.update(status:)
         format.html { redirect_to prcmt_url(@prcmt), notice: 'Prcmt was successfully updated.' }
         format.json { render :show, status: :ok, location: @prcmt }
       else
@@ -177,7 +208,11 @@ class PrcmtsController < ApplicationController
                                   :candidate_selection_remark, :finish_remark, :prcmt_phase_evaluation_visibility,
                                   :cancel_remark, :aanwijzing_visibility, :bid_bond_visibility, :est_total, :prcmt_criterion_template_id,
                                   :internal_org_id, :plant_id, :assessment_method, :business_class, :business_field, :tkdn_percentage,
-                                  :tender_location)
+                                  :tender_location, :hsse_risk, :location, :classes, :warranty)
+  end
+
+  def action_params
+    params.require(:prcmt).permit(:action)
   end
 
   def prcmt_items_params

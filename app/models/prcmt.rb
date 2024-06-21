@@ -18,6 +18,10 @@ class Prcmt < ApplicationRecord
   validates :prequalification, inclusion: { in: [true, false] }
   validates :bid_submission_method, presence: true
   validates :assessment_method, presence: true
+
+  def is_active?
+    status == 'ACTIVE'
+  end
   # validates :procurement_criterion, presence: true
   # validates :e_auction, presence: true
 end
