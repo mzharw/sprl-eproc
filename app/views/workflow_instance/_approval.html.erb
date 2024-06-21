@@ -2,24 +2,34 @@
   <% modal_id = "approval-modal-#{action}" %>
   <% modal_confirm_id = "#{action}-confirm" %>
   <%= form.hidden_field :action, value: action %>
+
   <% content_for :confirm_button, flush: true do %>
     <%= form.button class: "btn btn-secondary", data: { 'bs-dismiss': "modal" } do %>
       <i class="ti ti-save"></i> Continue
     <% end %>
   <% end %>
-  <%= render 'shared/modal_confirmation', id: modal_confirm_id, back: "##{modal_id}" %>
 
+  <%= render 'shared/modal_confirmation', id: modal_confirm_id, back: "##{modal_id}" %>
   <%= form.hidden_field :state, value: 'SUBMITTED' if action == :submit %>
 
+  <% btn_classes = "btn btn-#{[:reject, :fail].include?(action) ? 'danger' : (action == :cancel ? 'warning' : 'secondary')}" %>
   <% content_for :modal_button, flush: true do %>
-    <%= button_tag type: :button, class: "btn btn-#{action == :reject ? 'danger' : 'secondary'}", data: { 'bs-toggle': 'modal', 'bs-target': "##{modal_confirm_id}" } do %>
-      <%= action.capitalize %>
+    <% if [:approve, :reject, :submit].include?(action) %>
+      <%= button_tag type: :button, class: btn_classes, data: { 'bs-toggle': 'modal', 'bs-target': "##{modal_confirm_id}" } do %>
+        <%= action.capitalize %>
+      <% end %>
+    <% else %>
+      <%= button_tag type: :submit, class: btn_classes do %>
+        <%= action.capitalize %>
+      <% end %>
     <% end %>
   <% end %>
 
-  <% content_for :modal_body, flush: true do %>
-    <label for="comment" class="form-label">Comment</label>
-    <%= form.text_area :comment, class: 'form-control' %>
+  <% if [:approve, :reject, :submit].include?(action) %>
+    <% content_for :modal_body, flush: true do %>
+      <label for="comment" class="form-label">Comment</label>
+      <%= form.text_area :comment, class: 'form-control' %>
+    <% end %>
   <% end %>
   <%= render 'shared/modal', id: modal_id, title: "#{action.capitalize} Purchase Requisition" %>
 <% end %>

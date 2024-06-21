@@ -46,7 +46,21 @@
 
     <div class="col-md-6">
       <label for="purch_group_id">Purchasing Group</label>
-      <%= selection(form, :purch_group_id, purch_groups_path, :id, :code, :name) %>
+      <%= selection(form, :purch_group_id, purch_groups_path, :id, :code, :name, default: { id: @purch_reqn.purch_group_id }, readonly: true) %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="hsse_risk">HSSE Risk</label>
+      <%= form.text_field :hsse_risk, class: 'form-control', value: @purch_reqn.hsse_risk, readonly: true %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="location">Delivery Location / Jobs</label>
+      <%= form.text_field :location, class: 'form-control', list: 'location' %>
+      <datalist id="location">
+        <option value="Lapangan Langgak">
+        <option value="Kantor Jakarta">
+      </datalist>
     </div>
 
     <div class="col-md-6">
@@ -76,6 +90,19 @@
         <label class="form-check-label" for="prequalification_no">No</label>
       </div>
     </div>
+
+
+    <div class="col-md-6">
+      <label>Class (Golongan)</label>
+      <%= form.text_field :classes, class: 'form-control', value: @classes, readonly: true %>
+    </div>
+
+    <% if @warranty %>
+      <div class="col-md-6">
+        <label>Warranty (Jaminan)</label>
+        <%= form.text_field :warranty, class: 'form-control', value: @warranty, readonly: true %>
+      </div>
+    <% end %>
 
     <div class="col-md-6">
       <label>E-Auction</label>

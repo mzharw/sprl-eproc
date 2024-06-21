@@ -1,8 +1,8 @@
 <% content_for :table, flush: true do %>
   <thead>
   <tr>
-    <th><%= sortable_header('Purchase Reqn. No.', prcmts_path, :purch_reqn_no) %></th>
     <th><%= sortable_header('Procurement No.', prcmts_path, :number) %></th>
+    <th><%= sortable_header('Procurement Status', prcmts_path, :status) %></th>
     <th><%= sortable_header('Tender Name', prcmts_path, :name) %></th>
     <th><%= sortable_header('Business Field', prcmts_path, :business_field) %></th>
     <!--    <th><%#= sortable_header('Scope of Work', prcmts_path, :scope_of_work) %></th>-->
@@ -52,15 +52,16 @@
     <!--      <th><%#= sortable_header('Business Class', prcmts_path, :business_class) %></th>-->
     <!--      <th><%#= sortable_header('Tkdn Percentage', prcmts_path, :tkdn_percentage) %></th>-->
     <!--      <th><%#= sortable_header('Tender Location', prcmts_path, :tender_location) %></th>-->
-    <th>Action</th>
+    <th><%= sortable_header('Purchase Reqn. No.', prcmts_path, :purch_reqn_no) %></th>
+    <!--    <th>Action</th>-->
   </tr>
   </thead>
   <tbody>
   <% if @prcmts.present? %>
     <% @prcmts.each_with_index do |prcmt, index| %>
       <tr>
-        <td><%= link_to prcmt.purch_reqn_no, purch_reqn_path(prcmt.purch_reqn.id) %></td>
-        <td><%= prcmt.number %></td>
+        <td><%= link_to prcmt.number, prcmt %></td>
+        <td><%= badge(prcmt.status) %></td>
         <td><%= prcmt.name %></td>
         <td><%= prcmt.business_field %></td>
         <!--        <td><%#= prcmt.scope_of_work %></td>-->
@@ -110,17 +111,19 @@
         <!--          <td><%#= prcmt.business_class %></td>-->
         <!--          <td><%#= prcmt.tkdn_percentage %></td>-->
         <!--          <td><%#= prcmt.tender_location %></td>-->
-        <td>
-          <%= link_to prcmt, class: 'btn btn-sm btn-outline-secondary' do %>
-            <i class="ti ti-eye"></i>
-          <% end %>
-          <%#= link_to edit_prcmt_path(prcmt), class: 'btn btn-sm btn-secondary' do %>
-          <!--            <i class="ti ti-edit"></i>-->
-          <%# end %>
-          <%#= link_to prcmt, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
-          <!--            <i class="ti ti-trash"></i>-->
-          <%# end %>
-        </td>
+        <!--        <td>-->
+        <%#= link_to prcmt, class: 'btn btn-sm btn-outline-secondary' do %>
+        <!--            <i class="ti ti-eye"></i>-->
+        <%# end %>
+        <%#= link_to edit_prcmt_path(prcmt), class: 'btn btn-sm btn-secondary' do %>
+        <!--            <i class="ti ti-edit"></i>-->
+        <%# end %>
+        <%#= link_to prcmt, class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, confirm: 'Are you sure?' } do %>
+        <!--            <i class="ti ti-trash"></i>-->
+        <%# end %>
+        <!--        </td>-->
+        <td><%= link_to prcmt.purch_reqn_no, purch_reqn_path(prcmt.purch_reqn.id) %></td>
+
       </tr>
     <% end %>
   <% else %>

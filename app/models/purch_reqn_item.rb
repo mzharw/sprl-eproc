@@ -28,10 +28,11 @@ class PurchReqnItem < ApplicationRecord
   validates :est_unit_price, numericality: { greater_than: 0 }, if: -> { item_type == 'MATERIAL' }
 
   scope :without_service_item, -> { where.not(item_type: 'SERVICE_ITEM') }
-  scope :uncarried, -> {
-    left_joins(:prcmt_item)
+  scope :uncarried, lambda {
+    left_joins(prcmt_item: :prcmt)
       .group(:id)
-      .having('purch_reqn_items.qty - COALESCE(SUM(prcmt_items.qty), 0) > 0')
+      .where.not(prcmts: { status: %w[ACTIVE FINISHED] })
+      # .having('purch_reqn_items.qty - COALESCE(SUM(prcmt_items.qty), 0) > 0')
   }
   scope :unpurchased, -> { left_joins(:purch_order_items).where(purch_order_items: { id: nil }) }
   scope :committed, -> { joins(:purch_reqn).where(purch_reqn: { state: 'COMMITTED' }) }

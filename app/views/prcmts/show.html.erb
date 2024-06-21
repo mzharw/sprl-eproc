@@ -25,6 +25,31 @@
   <div class="d-flex flex-column gap-3">
     <%= render 'purch_reqn_items/list', items: @prcmt.prcmt_items.decorate %>
     <%= render @prcmt %>
+    <div class="alert alert-warning d-flex flex-column gap-3 justify-content-between" role="alert">
+      <% if @prcmt.is_active? %>
+        <% if @purch_reqn.can_approve(current_user, :purch_groups) %>
+          <div class="btn-group">
+            <%= button_tag class: "btn btn-danger", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-fail' } do %>
+              <i class="ti ti-x"></i>
+              Fail
+            <% end %>
+            <%= button_tag class: "btn btn-warning", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-cancel' } do %>
+              <i class="ti ti-exclamation-circle"></i>
+              Cancel
+            <% end %>
+            <%= button_tag class: "btn btn-secondary", data: { 'bs-toggle': 'modal', 'bs-target': '#approval-modal-finish' } do %>
+              <i class="ti ti-check"></i>
+              Finish
+            <% end %>
+          </div>
+        <% end %>
+        <%= render partial: 'workflow_instance/approval', locals: { model: @prcmt, action: :fail } %>
+        <%= render partial: 'workflow_instance/approval', locals: { model: @prcmt, action: :cancel } %>
+        <%= render partial: 'workflow_instance/approval', locals: { model: @prcmt, action: :finish } %>
+      <% else %>
+        <div>Procurement is <%= @prcmt.status.downcase %></div>
+      <% end %>
+    </div>
   </div>
 <% end %>
 

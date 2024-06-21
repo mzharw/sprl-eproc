@@ -10,7 +10,7 @@ class PurchReqnItemsController < ApplicationController
       # if items.nil? || items.empty?
       #   flash.alert = 'Please add atleast one item to carry out.'
       # else
-      redirect_to new_prcmt_path(purch_reqn: @purch_reqn, items_qty: carry_out_items_qty_params)
+      redirect_to new_prcmt_path(purch_reqn: @purch_reqn, items_qty: carry_out_items_qty_params, items: carry_out_items_params.[](:items))
       # end
     end
     @purch_reqn_items = PurchReqnItem.where(purch_reqn_id: params[:id]).without_service_item.uncarried.decorate

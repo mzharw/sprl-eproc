@@ -16,17 +16,23 @@
 
   <div class="row g-3">
     <div class="col-md-6">
+      <label for="purch_order_type_id">Bid Number</label>
+      <%= selection(form, :prcmt_id, prcmts_path, :id, :number, :name, fetch_to: new_purch_order_path) %>
+    </div>
+
+
+    <div class="col-md-6">
       <label for="vendor_id">Vendor</label>
       <%= selection(form, :vendor_id, vendors_path, :id, :code, :name) %>
     </div>
 
-    <div class="col-md-6">
-      <label for="name">PO Description</label>
-      <%= form.text_field :name, class: 'form-control' %>
-    </div>
+<!--    <div class="col-md-6">-->
+<!--      <label for="name">PO Description</label>-->
+      <%#= form.text_field :name, class: 'form-control' %>
+<!--    </div>-->
 
     <div class="col-md-6">
-      <label for="purch_order_type_id">PO Type</label>
+      <label for="purch_order_type_id">Contract Type</label>
       <%= selection(form, :purch_order_type_id, purch_order_types_path, :id, :name) %>
     </div>
 
@@ -72,15 +78,11 @@
       </div>
     </div>
 
-    <div class="col-md-6">
-      <label for="purch_order_type_id">Purchase Requisition</label>
-      <%= selection(form, :purch_reqn_id, purch_reqns_path, :id, :number, :desc, cascade_to: 'prcmt_id') %>
-    </div>
+    <!--    <div class="col-md-6">-->
+    <!--      <label for="purch_order_type_id">Purchase Requisition</label>-->
+    <%#= selection(form, :purch_reqn_id, purch_reqns_path, :id, :number, :desc, cascade_to: 'prcmt_id') %>
+    <!--    </div>-->
 
-    <div class="col-md-6">
-      <label for="purch_order_type_id">Procurement</label>
-      <%= selection(form, :prcmt_id, prcmts_path, :id, :number, :name, fetch_to: new_purch_order_path) %>
-    </div>
 
     <div class="col pt-3">
       <%= turbo_frame_tag :prcmt_items do %>
